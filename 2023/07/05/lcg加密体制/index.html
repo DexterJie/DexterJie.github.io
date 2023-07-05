@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>lcg加密体制 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="江畔何人初见月？江月何年初照人？ 记录笔者学习lcg的过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lcg加密体制">
+<meta property="og:url" content="http://example.com/2023/07/05/lcg%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="江畔何人初见月？江月何年初照人？ 记录笔者学习lcg的过程">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/lcg/1.png">
+<meta property="og:image" content="http://example.com/images/lcg/2.png">
+<meta property="og:image" content="http://example.com/images/lcg/3.png">
+<meta property="og:image" content="http://example.com/images/lcg/4.png">
+<meta property="og:image" content="http://example.com/images/lcg/5.png">
+<meta property="article:published_time" content="2023-07-05T04:51:24.000Z">
+<meta property="article:modified_time" content="2023-07-05T05:06:40.190Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="学习记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/lcg/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-lcg加密体制" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/07/05/lcg%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/" class="article-date">
+  <time class="dt-published" datetime="2023-07-05T04:51:24.000Z" itemprop="datePublished">2023-07-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      lcg加密体制
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>江畔何人初见月？江月何年初照人？</p>
+<p>记录笔者学习lcg的过程</p>
+<span id="more"></span>
+
+<h1 id="lcg-线性同余随机数生成器"><a href="#lcg-线性同余随机数生成器" class="headerlink" title="lcg(线性同余随机数生成器)"></a>lcg(线性同余随机数生成器)</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><strong>很简单，原理就是下面这个公式：</strong></p>
+<p><img src="/../images/lcg/1.png"></p>
+<p><strong>通过原始关系，可以推出以下公式：</strong></p>
+<p><img src="/../images/lcg/2.png"></p>
+<p><img src="/../images/lcg/3.png"></p>
+<h2 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">flag = b&#x27;Spirit&#123;***********************&#125;&#x27;</span><br><span class="line"></span><br><span class="line">plaintext = bytes_to_long(flag)</span><br><span class="line">length = plaintext.bit_length()</span><br><span class="line"></span><br><span class="line">a = getPrime(length)</span><br><span class="line">b = getPrime(length)</span><br><span class="line">n = getPrime(length)</span><br><span class="line"></span><br><span class="line">seed = 33477128523140105764301644224721378964069</span><br><span class="line">print(&quot;seed = &quot;,seed)</span><br><span class="line">for i in range(10):</span><br><span class="line">    seed = (a*seed+b)%n</span><br><span class="line">ciphertext = seed^plaintext</span><br><span class="line">print(&quot;a = &quot;,a)</span><br><span class="line">print(&quot;b = &quot;,b)</span><br><span class="line">print(&quot;n = &quot;,n)</span><br><span class="line">print(&quot;c = &quot;,ciphertext)</span><br><span class="line"></span><br><span class="line"># seed =  33477128523140105764301644224721378964069</span><br><span class="line"># a =  216636540518719887613942270143367229109002078444183475587474655399326769391</span><br><span class="line"># b =  186914533399403414430047931765983818420963789311681346652500920904075344361</span><br><span class="line"># n =  155908129777160236018105193822448288416284495517789603884888599242193844951</span><br><span class="line"># c =  209481865531297761516458182436122824479565806914713408748457524641378381493</span><br></pre></td></tr></table></figure>
+
+<p><strong>求出循环后的seed，然后和ciphertext异或即可得到flag</strong></p>
+<p><strong>这道题已经给出系数a，增量b，模数n，很容易求出最后的seed</strong></p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">a =  <span class="number">216636540518719887613942270143367229109002078444183475587474655399326769391</span></span><br><span class="line">b =  <span class="number">186914533399403414430047931765983818420963789311681346652500920904075344361</span></span><br><span class="line">n =  <span class="number">155908129777160236018105193822448288416284495517789603884888599242193844951</span></span><br><span class="line">seed = <span class="number">33477128523140105764301644224721378964069</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    seed = (a*seed + b)%n</span><br><span class="line"></span><br><span class="line">c = <span class="number">209481865531297761516458182436122824479565806914713408748457524641378381493</span></span><br><span class="line">m = c^seed</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br><span class="line"></span><br><span class="line"><span class="comment">#Spirit&#123;0ops!___you_know__LCG!!&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">flag = b&#x27;Spirit&#123;*****************************&#125;&#x27;</span><br><span class="line"></span><br><span class="line">plaintext = bytes_to_long(flag)</span><br><span class="line">length = plaintext.bit_length()</span><br><span class="line"></span><br><span class="line">a = getPrime(length)</span><br><span class="line">b = getPrime(length)</span><br><span class="line">n = getPrime(length)</span><br><span class="line"></span><br><span class="line">seed = plaintext</span><br><span class="line"></span><br><span class="line">for i in range(10):</span><br><span class="line">    seed = (a*seed+b)%n</span><br><span class="line">ciphertext = seed</span><br><span class="line"></span><br><span class="line">print(&quot;a = &quot;,a)</span><br><span class="line">print(&quot;b = &quot;,b)</span><br><span class="line">print(&quot;n = &quot;,n)</span><br><span class="line">print(&quot;c = &quot;,ciphertext)</span><br><span class="line"></span><br><span class="line"># a =  59398519837969938359106832224056187683937568250770488082448642852427682484407513407602969</span><br><span class="line"># b =  32787000674666987602016858366912565306237308217749461581158833948068732710645816477126137</span><br><span class="line"># n =  43520375935212094874930431059580037292338304730539718469760580887565958566208139467751467</span><br><span class="line"># c =  8594514452808046357337682911504074858048299513743867887936794439125949418153561841842276</span><br></pre></td></tr></table></figure>
+
+<p><strong>应用公式①，已知后一项推出前项</strong></p>
+<p><strong>这道题我们知道X9，系数，增量，模数，要求X0</strong></p>
+<p><strong>首先求a模n的逆元，然后就可以求出前项</strong></p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">a =  <span class="number">59398519837969938359106832224056187683937568250770488082448642852427682484407513407602969</span></span><br><span class="line">b =  <span class="number">32787000674666987602016858366912565306237308217749461581158833948068732710645816477126137</span></span><br><span class="line">n =  <span class="number">43520375935212094874930431059580037292338304730539718469760580887565958566208139467751467</span></span><br><span class="line">c =  <span class="number">8594514452808046357337682911504074858048299513743867887936794439125949418153561841842276</span></span><br><span class="line"></span><br><span class="line">Ani = gmpy2.invert(a,n)</span><br><span class="line">seed = c</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    seed = Ani*(seed-b) % n</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(seed))</span><br><span class="line"><span class="comment"># Spirit&#123;Orzzz__number_the0ry_master!!&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="例题3"><a href="#例题3" class="headerlink" title="例题3"></a>例题3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">flag = b&#x27;Spirit&#123;*********************&#125;&#x27;</span><br><span class="line">plaintext = bytes_to_long(flag)</span><br><span class="line">length = plaintext.bit_length()</span><br><span class="line"></span><br><span class="line">a = getPrime(length)</span><br><span class="line">seed = getPrime(length)</span><br><span class="line">n = getPrime(length)</span><br><span class="line"></span><br><span class="line">b = plaintext</span><br><span class="line"></span><br><span class="line">output = []</span><br><span class="line">for i in range(10):</span><br><span class="line">    seed = (a*seed+b)%n</span><br><span class="line">    output.append(seed)</span><br><span class="line">ciphertext = seed</span><br><span class="line"></span><br><span class="line">print(&quot;a = &quot;,a)</span><br><span class="line">print(&quot;n = &quot;,n)</span><br><span class="line">print(&quot;output1 = &quot;,output[6])</span><br><span class="line">print(&quot;output2 = &quot;,output[7])</span><br><span class="line"></span><br><span class="line"># a =  3227817955364471534349157142678648291258297398767210469734127072571531</span><br><span class="line"># n =  2731559135349690299261470294200742325021575620377673492747570362484359</span><br><span class="line"># output1 =  56589787378668192618096432693925935599152815634076528548991768641673</span><br><span class="line"># output2 =  2551791066380515596393984193995180671839531603273409907026871637002460</span><br></pre></td></tr></table></figure>
+
+<p><strong>这道题需要我们求增量b</strong></p>
+<p>用公式③</p>
+<p><img src="/../images/lcg/4.png"></p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">a =  <span class="number">3227817955364471534349157142678648291258297398767210469734127072571531</span></span><br><span class="line">n =  <span class="number">2731559135349690299261470294200742325021575620377673492747570362484359</span></span><br><span class="line">output1 =  <span class="number">56589787378668192618096432693925935599152815634076528548991768641673</span></span><br><span class="line">output2 =  <span class="number">2551791066380515596393984193995180671839531603273409907026871637002460</span></span><br><span class="line"></span><br><span class="line">b = output2 - a*output1 % n</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(b))</span><br><span class="line"></span><br><span class="line"><span class="comment">#Spirit&#123;Y0u_@r3_g00d_at__math&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="例题4"><a href="#例题4" class="headerlink" title="例题4"></a>例题4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">flag = b&#x27;Spirit&#123;********************************&#125;&#x27;</span><br><span class="line"></span><br><span class="line">plaintext = bytes_to_long(flag)</span><br><span class="line">length = plaintext.bit_length()</span><br><span class="line"></span><br><span class="line">a = getPrime(length)</span><br><span class="line">b = getPrime(length)</span><br><span class="line">n = getPrime(length)</span><br><span class="line"></span><br><span class="line">seed = plaintext</span><br><span class="line">output = []</span><br><span class="line">for i in range(10):</span><br><span class="line">    seed = (a*seed+b)%n</span><br><span class="line">    output.append(seed)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(&quot;n = &quot;,n)</span><br><span class="line">print(&quot;output = &quot;,output)</span><br><span class="line"># n =  714326667532888136341930300469812503108568533171958701229258381897431946521867367344505142446819</span><br><span class="line"># output =  [683884150135567569054700309393082274015273418755015984639210872641629102776137288905334345358223, 285126221039239401347664578761309935673889193236512702131697050766454881029340147180552409870425, 276893085775448203669487661735680485319995668779836512706851431217470824660349740546793492847822, 670041467944152108349892479463033808393249475608933110640580388877206700116661070302382578388629, 122640993538161410588195475312610802051543155060328971488277224112081166784263153107636108815824, 695403107966797625391061914491496301998976621394944936827202540832952594905520247784142392337171, 108297989103402878258100342544600235524390749601427490182149765480916965811652000881230504838949, 3348901603647903020607356217291999644800579775392251732059562193080862524671584235203807354488, 632094372828241320671255647451901056399237760301503199444470380543753167478243100611604222284853, 54758061879225024125896909645034267106973514243188358677311238070832154883782028437203621709276]</span><br></pre></td></tr></table></figure>
+
+<p><strong>这道题需要求初始值，但是题目没给出a和b的值</strong></p>
+<p><img src="/../images/lcg/5.png"></p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">n =  <span class="number">714326667532888136341930300469812503108568533171958701229258381897431946521867367344505142446819</span></span><br><span class="line">output =  [<span class="number">683884150135567569054700309393082274015273418755015984639210872641629102776137288905334345358223</span>, <span class="number">285126221039239401347664578761309935673889193236512702131697050766454881029340147180552409870425</span>, <span class="number">276893085775448203669487661735680485319995668779836512706851431217470824660349740546793492847822</span>, <span class="number">670041467944152108349892479463033808393249475608933110640580388877206700116661070302382578388629</span>, <span class="number">122640993538161410588195475312610802051543155060328971488277224112081166784263153107636108815824</span>, <span class="number">695403107966797625391061914491496301998976621394944936827202540832952594905520247784142392337171</span>, <span class="number">108297989103402878258100342544600235524390749601427490182149765480916965811652000881230504838949</span>, <span class="number">3348901603647903020607356217291999644800579775392251732059562193080862524671584235203807354488</span>, <span class="number">632094372828241320671255647451901056399237760301503199444470380543753167478243100611604222284853</span>, <span class="number">54758061879225024125896909645034267106973514243188358677311238070832154883782028437203621709276</span>]</span><br><span class="line"></span><br><span class="line">p1 = output[<span class="number">9</span>]-output[<span class="number">8</span>]</span><br><span class="line">p2 = output[<span class="number">8</span>]-output[<span class="number">7</span>]</span><br><span class="line"></span><br><span class="line">Ani = gmpy2.invert(p2,n)</span><br><span class="line">a = p1 * Ani % n</span><br><span class="line"></span><br><span class="line">b = (output[<span class="number">9</span>] - a*output[<span class="number">8</span>]) % n</span><br><span class="line"></span><br><span class="line">ani = gmpy2.invert(a,n)</span><br><span class="line"></span><br><span class="line">m = ani * (output[<span class="number">0</span>]-b) % n</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Spirit&#123;Gr3at__J0b!_You_can_be___better!&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="例题5"><a href="#例题5" class="headerlink" title="例题5"></a>例题5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">flag = b&#x27;Spirit&#123;****************************************&#125;&#x27;</span><br><span class="line"></span><br><span class="line">plaintext = bytes_to_long(flag)</span><br><span class="line">length = plaintext.bit_length()</span><br><span class="line"></span><br><span class="line">a = getPrime(length)</span><br><span class="line">b = getPrime(length)</span><br><span class="line">n = getPrime(length)</span><br><span class="line"></span><br><span class="line">seed = plaintext</span><br><span class="line">output = []</span><br><span class="line">for i in range(10):</span><br><span class="line">    seed = (a*seed+b)%n</span><br><span class="line">    output.append(seed)</span><br><span class="line"></span><br><span class="line">print(&quot;output = &quot;,output)</span><br><span class="line"># output =  [9997297986272510947766344959498975323136012075787120721424325775003840341552673589487134830298427997676238039214108, 4943092972488023184271739094993470430272327679424224016751930100362045115374960494124801675393555642497051610643836, 6774612894247319645272578624765063875876643849415903973872536662648051668240882405640569448229188596797636795502471, 9334780454901460926052785252362305555845335155501888087843525321238695716687151256717815518958670595053951084051571, 2615136943375677027346821049033296095071476608523371102901038444464314877549948107134114941301290458464611872942706, 11755491858586722647182265446253701221615594136571038555321378377363341368427070357031882725576677912630050307145062, 7752070270905673490804344757589080653234375679657568428025599872155387643476306575613147681330227562712490805492345, 8402957532602451691327737154745340793606649602871190615837661809359377788072256203797817090151599031273142680590748, 2802440081918604590502596146113670094262600952020687184659605307695151120589816943051322503094363578916773414004662, 5627226318035765837286789021891141596394835871645925685252241680021740265826179768429792645576780380635014113687982]</span><br></pre></td></tr></table></figure>
+
+<p><strong>这道题连模数都没给</strong></p>
+<p><strong>首先求出模，然后求a，再求b</strong></p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">output =  [<span class="number">9997297986272510947766344959498975323136012075787120721424325775003840341552673589487134830298427997676238039214108</span>, <span class="number">4943092972488023184271739094993470430272327679424224016751930100362045115374960494124801675393555642497051610643836</span>, <span class="number">6774612894247319645272578624765063875876643849415903973872536662648051668240882405640569448229188596797636795502471</span>, <span class="number">9334780454901460926052785252362305555845335155501888087843525321238695716687151256717815518958670595053951084051571</span>, <span class="number">2615136943375677027346821049033296095071476608523371102901038444464314877549948107134114941301290458464611872942706</span>, <span class="number">11755491858586722647182265446253701221615594136571038555321378377363341368427070357031882725576677912630050307145062</span>, <span class="number">7752070270905673490804344757589080653234375679657568428025599872155387643476306575613147681330227562712490805492345</span>, <span class="number">8402957532602451691327737154745340793606649602871190615837661809359377788072256203797817090151599031273142680590748</span>, <span class="number">2802440081918604590502596146113670094262600952020687184659605307695151120589816943051322503094363578916773414004662</span>, <span class="number">5627226318035765837286789021891141596394835871645925685252241680021740265826179768429792645576780380635014113687982</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        t1 = output[i+<span class="number">1</span>]-output[i]</span><br><span class="line">        t2 = output[i+<span class="number">2</span>]-output[i+<span class="number">1</span>]</span><br><span class="line">        t3 = output[i+<span class="number">3</span>]-output[i+<span class="number">2</span>]</span><br><span class="line">        t4 = output[i+<span class="number">4</span>]-output[i+<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">        T1 = t1*t3 - t2*t2</span><br><span class="line">        T2 = t2*t4 - t3*t3</span><br><span class="line">        n = gmpy2.gcd(T1,T2)</span><br><span class="line"></span><br><span class="line">        ni = gmpy2.invert(t1,n)</span><br><span class="line">        a = t2 * ni % n</span><br><span class="line"></span><br><span class="line">        Ani = gmpy2.invert(a,n)</span><br><span class="line">        b = (output[i+<span class="number">1</span>] - a*output[i]) % n</span><br><span class="line"></span><br><span class="line">        m = Ani *(output[<span class="number">0</span>]-b) % n</span><br><span class="line">        <span class="built_in">print</span>(long_to_bytes(m))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line"><span class="comment">#Spirit&#123;final__lcg__is__co0m1ing__are_you_ready?&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>做题过程中出现逆元不存在的情况</strong></p>
+<p>官方wp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gcd</span>(<span class="params">a,b</span>): </span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>): </span><br><span class="line">        <span class="keyword">return</span> a </span><br><span class="line">    <span class="keyword">else</span>: </span><br><span class="line">        <span class="keyword">return</span> gcd(b,a%b) </span><br><span class="line">s =  [<span class="number">9997297986272510947766344959498975323136012075787120721424325775003840341552673589487134830298427997676238039214108</span>, <span class="number">4943092972488023184271739094993470430272327679424224016751930100362045115374960494124801675393555642497051610643836</span>, <span class="number">6774612894247319645272578624765063875876643849415903973872536662648051668240882405640569448229188596797636795502471</span>, <span class="number">9334780454901460926052785252362305555845335155501888087843525321238695716687151256717815518958670595053951084051571</span>, <span class="number">2615136943375677027346821049033296095071476608523371102901038444464314877549948107134114941301290458464611872942706</span>, <span class="number">11755491858586722647182265446253701221615594136571038555321378377363341368427070357031882725576677912630050307145062</span>, <span class="number">7752070270905673490804344757589080653234375679657568428025599872155387643476306575613147681330227562712490805492345</span>, <span class="number">8402957532602451691327737154745340793606649602871190615837661809359377788072256203797817090151599031273142680590748</span>, <span class="number">2802440081918604590502596146113670094262600952020687184659605307695151120589816943051322503094363578916773414004662</span>, <span class="number">5627226318035765837286789021891141596394835871645925685252241680021740265826179768429792645576780380635014113687982</span>]</span><br><span class="line">t = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">    t.append(s[i]-s[i-<span class="number">1</span>]) </span><br><span class="line">all_n = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">7</span>):</span><br><span class="line">    all_n.append(gcd((t[i+<span class="number">1</span>]*t[i-<span class="number">1</span>]-t[i]*t[i]), (t[i+<span class="number">2</span>]*t[i]-t[i+<span class="number">1</span>]*t[i+<span class="number">1</span>]))) </span><br><span class="line"></span><br><span class="line">MMI = <span class="keyword">lambda</span> A, n,s=<span class="number">1</span>,t=<span class="number">0</span>,N=<span class="number">0</span>: (n &lt; <span class="number">2</span> <span class="keyword">and</span> t%N <span class="keyword">or</span> MMI(n, A%n, t, s-A//n*t, N <span class="keyword">or</span> n),-<span class="number">1</span>)[n&lt;<span class="number">1</span>] <span class="comment">#逆元计算</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> all_n:</span><br><span class="line">    n=<span class="built_in">abs</span>(n)</span><br><span class="line">    <span class="keyword">if</span> n==<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    a=(s[<span class="number">2</span>]-s[<span class="number">1</span>])*MMI((s[<span class="number">1</span>]-s[<span class="number">0</span>]),n)%n</span><br><span class="line">    ani=MMI(a,n)</span><br><span class="line">    b=(s[<span class="number">1</span>]-a*s[<span class="number">0</span>])%n</span><br><span class="line">    seed = (ani*(s[<span class="number">0</span>]-b))%n</span><br><span class="line">    plaintext=seed</span><br><span class="line">    <span class="built_in">print</span>(long_to_bytes(plaintext))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="例题6"><a href="#例题6" class="headerlink" title="例题6"></a>例题6</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">flag = b&#x27;Spirit&#123;*****************&#125;&#x27;</span><br><span class="line"></span><br><span class="line">plaintext = bytes_to_long(flag)</span><br><span class="line">length = plaintext.bit_length()</span><br><span class="line"></span><br><span class="line">a = getPrime(length)</span><br><span class="line">b = getPrime(length)</span><br><span class="line">n = getPrime(length)</span><br><span class="line"></span><br><span class="line">seed = plaintext</span><br><span class="line"></span><br><span class="line">output = []</span><br><span class="line">for i in range(10):</span><br><span class="line">    seed = (seed*a+b)%n</span><br><span class="line">    output.append(seed&gt;&gt;64)</span><br><span class="line">print(&quot;a = &quot;,a)</span><br><span class="line">print(&quot;b = &quot;,b)</span><br><span class="line">print(&quot;n = &quot;,n)</span><br><span class="line">print(&quot;output = &quot;,output)</span><br><span class="line"># a =  731111971045863129770849213414583830513204814328949766909151</span><br><span class="line"># b =  456671883153709362919394459405008275757410555181682705944711</span><br><span class="line"># n =  666147691257100304060287710111266554526660232037647662561651</span><br><span class="line"># output =  [16985619148410545083429542035273917746612, 32633736473029292963326093326932585135645, 20531875000321097472853248514822638673918, 37524613187648387324374487657224279011, 21531154020699900519763323600774720747179, 1785016578450326289280053428455439687732, 15859114177482712954359285501450873939895, 10077571899928395052806024133320973530689, 30199391683019296398254401666338410561714, 21303634014034358798100587236618579995634]</span><br></pre></td></tr></table></figure>
+
+<p>多了个高位泄露的考点</p>
+<p><strong>没做出来</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/07/05/lcg%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/" data-id="cljpl7pfw0004gsv18gh35cx6" data-title="lcg加密体制" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="tag">学习记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/07/05/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/07/04/LitCTF/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LitCTF</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Wp/">Wp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wp/" rel="tag">Wp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="tag">学习记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Wp/" style="font-size: 10px;">Wp</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/05/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/05/lcg%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/">lcg加密体制</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/04/LitCTF/">LitCTF</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/04/%E6%97%A5%E8%AE%B01/">日记1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
