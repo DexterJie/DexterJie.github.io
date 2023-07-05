@@ -8,7 +8,7 @@
     <link href="/2023/07/05/OPT-%E4%B8%80%E6%AC%A1%E4%B8%80%E5%AF%86-%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F/"/>
     <url>/2023/07/05/OPT-%E4%B8%80%E6%AC%A1%E4%B8%80%E5%AF%86-%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F/</url>
     
-    <content type="html"><![CDATA[<p>ssssssssssssssssssssssj</p><p>简述一下OPT</p><span id="more"></span><p><strong>OPT又叫一次一密加密方式</strong></p><p>简单了解一下该加密方式：<br>$$<br>密文C &#x3D; 密钥K \oplus 明文M<br>$$<br>显而易见，解密方式即是：<br>$$<br>明文M &#x3D; 密钥K \oplus 密文C<br>$$<br><strong>需要注意的是，密钥是一个和密文等长的二进制字符串</strong></p>]]></content>
+    <content type="html"><![CDATA[<p>有些风景只能欣赏，不能收藏。人也是如此，有些人只能当朋友，一旦起了贪念，注定要失去。</p><p>简述一下OPT</p><span id="more"></span><p><strong>OPT又叫一次一密加密方式</strong></p><p>简单了解一下该加密方式：<br>$$<br>密文C &#x3D; 密钥K \oplus 明文M<br>$$<br>显而易见，解密方式即是：<br>$$<br>明文M &#x3D; 密钥K \oplus 密文C<br>$$<br><strong>需要注意的是，密钥是一个和密文等长的二进制字符串</strong></p>]]></content>
     
     
     <categories>
