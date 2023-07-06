@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="记录笔者RSA学习过程 世上无所谓正解">
+    <meta name="description" content="记录笔者RSA学习过程 世上无所谓正解，我们只是在做自己">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RSA">
 <meta property="og:url" content="https://dexterjie.github.io/2023/07/06/RSA/index.html">
 <meta property="og:site_name" content="DexterJie">
-<meta property="og:description" content="记录笔者RSA学习过程 世上无所谓正解">
+<meta property="og:description" content="记录笔者RSA学习过程 世上无所谓正解，我们只是在做自己">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/1.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/2.png">
@@ -55,7 +55,7 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/26.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/27.png">
 <meta property="article:published_time" content="2023-07-06T14:40:40.000Z">
-<meta property="article:modified_time" content="2023-07-06T15:20:04.858Z">
+<meta property="article:modified_time" content="2023-07-06T15:36:39.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="学习记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -305,8 +305,8 @@
             
               <div class="markdown-body">
                 
-                <p>记录笔者RSA学习过程</p>
-<p>世上无所谓正解</p>
+                <p><strong>记录笔者RSA学习过程</strong></p>
+<p>世上无所谓正解，我们只是在做自己</p>
 <span id="more"></span>
 
 <h1 id="RSA算法原理简介"><a href="#RSA算法原理简介" class="headerlink" title="RSA算法原理简介"></a>RSA算法原理简介</h1><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs excel"><span class="hljs-number">1</span>.选择两个大素数p和q，计算模<span class="hljs-built_in">n</span>=p*q<br><span class="hljs-number">2</span>.计算φ(<span class="hljs-built_in">n</span>)=(p-<span class="hljs-number">1</span>)*(q-<span class="hljs-number">1</span>) 这里是因为，素数p的欧拉函数φ(p)=p-<span class="hljs-number">1</span>，同理φ(q)=q-<span class="hljs-number">1</span>，又因为<span class="hljs-built_in">n</span>=p*q，所以φ(<span class="hljs-built_in">n</span>)=(p-<span class="hljs-number">1</span>)*(q-<span class="hljs-number">1</span>)<br><span class="hljs-number">3</span>.取e的模反数为d(逆元)，计算方法：e*d ≡ <span class="hljs-number">1</span>(<span class="hljs-built_in">mod</span> φ(<span class="hljs-built_in">n</span>))<br><span class="hljs-number">4</span>.对明文m进行加密：<br>	密文c = m^e (<span class="hljs-built_in">mod</span> <span class="hljs-built_in">n</span>)<br><br>解密：<br>m = c^d (<span class="hljs-built_in">mod</span> <span class="hljs-built_in">n</span>) <br></code></pre></td></tr></table></figure>
