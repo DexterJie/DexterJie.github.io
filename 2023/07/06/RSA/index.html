@@ -58,8 +58,9 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/29.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/30.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/31.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/RSA/32.png">
 <meta property="article:published_time" content="2023-07-06T14:40:40.000Z">
-<meta property="article:modified_time" content="2023-07-08T11:49:30.058Z">
+<meta property="article:modified_time" content="2023-07-08T12:28:45.500Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="学习记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -256,7 +257,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          178k 字
+          180k 字
         
       </span>
     
@@ -267,7 +268,7 @@
         
         
         
-          1480 分钟
+          1500 分钟
         
       </span>
     
@@ -882,7 +883,11 @@
 
 
 
+<h1 id="二十七、推导能力"><a href="#二十七、推导能力" class="headerlink" title="二十七、推导能力"></a>二十七、推导能力</h1><h2 id="例题-18"><a href="#例题-18" class="headerlink" title="例题"></a>例题</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> libnum<br><span class="hljs-keyword">import</span> gmpy2<br><span class="hljs-keyword">import</span> uuid<br><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br><br>flag = <span class="hljs-string">&quot;flag&#123;&quot;</span> + <span class="hljs-built_in">str</span>(uuid.uuid4()) + <span class="hljs-string">&quot;&#125;&quot;</span><br>m = libnum.s2n(flag)<br><br>e = <span class="hljs-number">65537</span><br>p = getPrime(<span class="hljs-number">1024</span>)<br>q = getPrime(<span class="hljs-number">1024</span>)<br>n = p * q<br>c = <span class="hljs-built_in">pow</span>(m, e, n)<br>hint = <span class="hljs-built_in">pow</span>(<span class="hljs-number">2020</span> * p + <span class="hljs-number">2021</span>, q, n)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;n=<span class="hljs-subst">&#123;n&#125;</span>&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;c=<span class="hljs-subst">&#123;c&#125;</span>&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;hint=<span class="hljs-subst">&#123;hint&#125;</span>&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
+<p><img src="/../images/RSA/32.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>exp:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">import</span> gmpy2<br><br>n = <span class="hljs-number">27020725261160598541077357737650775795182555998856810737571508044949928734067444441660366270392732456051807439301564552672200975582350577967001486740668193835704559129378410828266554536148151615878808327988333060924165410762016082268322936465413880236634083213834739549234631742766416876749808978934944262651307600621868854944164060642189749365967978497831698002669974744487926082412272998646851047638183126945784060957075393737537570645086672473571281053798891685646561828588448040073373363454584468753860529849749093081434144360661566815886630699933232263079413562069476421802192735693386029862725050469209845710383</span><br>c = <span class="hljs-number">10188807385387617708190575473905502994151677148079820873886980571555051900701810208218351138721306416600688313703084580808183634201231599134123549448962443376514560489130860694363901933597676373555599555647232128717993571185822894818704143675318690577221330618533739592165564396729937983659337232822442555504262694675199751730664450120569727835850996566436129543730932040989365233424791093843941154003052950306359994891955336607690065213304872738280674213630736611351982705373394299097653653497017756036211550125607093109216729483090391729134062236908282557149575812220142872855836932590459512028618076264332235518829</span><br>hint = <span class="hljs-number">15179972145975733285419381814235528011288991423484121653543845156913121513320504879647666067298415751234264897435338898933073713420024176276221164394369781676781604128149168834126855517212300158864797800121336042194751965268493010327202598446572764475343894613152062609436699715193914479572113800212525965140106015838636914979735618606768207651697548364440806425770871133439416876157686985836939255598747973339866125864303982956813846287509191028829738926404992619459242904729015823730553526572575372668559669124599614613391797015393641171177282129497503752370800088634017972208535899870704612274473042064675033593148</span><br>e = <span class="hljs-number">65537</span><br><br>p = gmpy2.gcd(<span class="hljs-built_in">pow</span>(<span class="hljs-number">2021</span>,n,n)-hint,n)<br>q = n // p<br>d = gmpy2.invert(e,(p-<span class="hljs-number">1</span>)*(q-<span class="hljs-number">1</span>))<br>m = <span class="hljs-built_in">pow</span>(c,d,n)<br><span class="hljs-built_in">print</span>(long_to_bytes(m))<br></code></pre></td></tr></table></figure>
 
 
 
