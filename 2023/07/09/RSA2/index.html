@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="记录笔者RSA学习过程，继上篇 十五、m高位泄露例题12345678910111213141516import gmpy2import libnumimport uuidflag &#x3D; &quot;flag&amp;#123;&quot; + str(uuid.uuid4()) + &quot;&amp;#125;&quot;print(flag)m &#x3D; libnum.s2n(flag)p &#x3D; libnum.gen">
+    <meta name="description" content="记录笔者RSA学习过程，继上篇 每个黎明都是崭新的开始">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RSA2">
 <meta property="og:url" content="https://dexterjie.github.io/2023/07/09/RSA2/index.html">
 <meta property="og:site_name" content="DexterJie">
-<meta property="og:description" content="记录笔者RSA学习过程，继上篇 十五、m高位泄露例题12345678910111213141516import gmpy2import libnumimport uuidflag &#x3D; &quot;flag&amp;#123;&quot; + str(uuid.uuid4()) + &quot;&amp;#125;&quot;print(flag)m &#x3D; libnum.s2n(flag)p &#x3D; libnum.gen">
+<meta property="og:description" content="记录笔者RSA学习过程，继上篇 每个黎明都是崭新的开始">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="e:/Blog/source/images/RSA/23.png">
 <meta property="og:image" content="e:/Blog/source/images/RSA/24.png">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="e:/Blog/source/images/RSA/32.png">
 <meta property="og:image" content="e:/Blog/source/images/RSA/33.png">
 <meta property="article:published_time" content="2023-07-09T03:21:54.000Z">
-<meta property="article:modified_time" content="2023-07-09T03:23:25.358Z">
+<meta property="article:modified_time" content="2023-07-09T03:29:28.370Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="学习记录">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,6 +286,11 @@
               <div class="markdown-body">
                 
                 <p><strong>记录笔者RSA学习过程，继上篇</strong></p>
+<p><strong>每个黎明都是崭新的开始</strong></p>
+<span id="more"></span>
+
+
+
 <h1 id="十五、m高位泄露"><a href="#十五、m高位泄露" class="headerlink" title="十五、m高位泄露"></a>十五、m高位泄露</h1><h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> gmpy2<br><span class="hljs-keyword">import</span> libnum<br><span class="hljs-keyword">import</span> uuid<br>flag = <span class="hljs-string">&quot;flag&#123;&quot;</span> + <span class="hljs-built_in">str</span>(uuid.uuid4()) + <span class="hljs-string">&quot;&#125;&quot;</span><br><span class="hljs-built_in">print</span>(flag)<br>m = libnum.s2n(flag)<br>p = libnum.generate_prime(<span class="hljs-number">512</span>)<br>q = libnum.generate_prime(<span class="hljs-number">512</span>)<br>n = p * q<br>m1 = ((m &gt;&gt; <span class="hljs-number">12</span>) &lt;&lt; <span class="hljs-number">12</span>)<br>e = <span class="hljs-number">3</span><br>c = <span class="hljs-built_in">pow</span>(m, e, n)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;n=&quot;</span>, n)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;c=&quot;</span>, c)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;e=&quot;</span>, e)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;m1=&quot;</span>, m1)<br></code></pre></td></tr></table></figure>
 
 <p>直接用小明文攻击就能解决</p>
