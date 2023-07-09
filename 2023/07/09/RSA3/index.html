@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="DexterJie">
 <meta property="og:description" content="记录笔者RSA学习过程，继上篇 少年的书桌上没有虚度的光阴">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dexterjie.github.io/images/RSA./35.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/RSA/35.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/36.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/37.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/38.png">
 <meta property="article:published_time" content="2023-07-09T03:30:38.000Z">
-<meta property="article:modified_time" content="2023-07-09T12:14:34.197Z">
+<meta property="article:modified_time" content="2023-07-09T12:16:28.472Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="学习记录">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://dexterjie.github.io/images/RSA./35.png">
+<meta name="twitter:image" content="https://dexterjie.github.io/images/RSA/35.png">
   
   
   
@@ -284,7 +284,7 @@
 
 
 
-<h1 id="二十九、费马分解法"><a href="#二十九、费马分解法" class="headerlink" title="二十九、费马分解法"></a>二十九、费马分解法</h1><p><img src="/../images/RSA./35.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="二十九、费马分解法"><a href="#二十九、费马分解法" class="headerlink" title="二十九、费马分解法"></a>二十九、费马分解法</h1><p><img src="/../images/RSA/35.png" srcset="/img/loading.gif" lazyload></p>
 <p><strong>eg:</strong></p>
 <p><img src="/../images/RSA/36.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="1-n-x3D-p×p1×q×q1"><a href="#1-n-x3D-p×p1×q×q1" class="headerlink" title="1.n &#x3D; p×p1×q×q1"></a>1.n &#x3D; p×p1×q×q1</h2><h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs makefile">from Crypto.Util.number import *<br>import uuid<br>flag = &#x27;flag&#123;&#x27;+str(uuid.uuid4())+<span class="hljs-string">&quot;&#125;&quot;</span><br>flag=flag.encode()<br>import gmpy2<br><br>p = getPrime(512)<br>p1 = gmpy2.next_prime(p)<br>q= getPrime(512)<br>q1= gmpy2.next_prime(q)<br><br>n = p*q*p1*q1<br>e = 0x10001<br>m = bytes_to_long(flag)<br>c = pow(m,e,n)<br>print(<span class="hljs-string">&quot;c=&quot;</span>,c)<br>print(<span class="hljs-string">&quot;n=&quot;</span>,n)<br>c= 9949542934673249601822379710110536682375274333294212429688584989332571435120688962792756767799023906332576991820877786082142174075762351091472858450420524999000438499038246804892307015253501997557003507879115010365751701766309706931191167213901685725286428926861333201965004869326873632404052661985741631906479109023390455968199954361183959446992180809970004376995201084933073767278979855530735756096072840384641334181432769063314242300512881491103946010394543208395998872730145780806025267971492301568490427293141120807461902093932052106811061648537600125019831876736538658644780471805555396705702634885360657660235<br>n= 14775235844515544576473611382698284004133861994231391972299917039113871334718108546717938305388267655285590882177982603418940337565701637106925368292676630781520319110700106306029357476649553934570683454139537943486518666101218072140043084858740684805876092240053196287287330188619164273915005792335974297620475140547828827559062269649682393716241864595363863867012095487700403514116433664086346056485373014640655316422588972338531776150881686013955605480910803097642414475309381073364181798620439167561641939844350252283317699576359402716770493658380425200603092475286870303441165147435503582004675788584686434009043<br></code></pre></td></tr></table></figure>
