@@ -23,15 +23,16 @@
 <meta property="og:site_name" content="DexterJie">
 <meta property="og:description" content="对古典密码学做个粗浅的了解">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/2.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/Ancient/0.jpg">
 <meta property="og:image" content="https://dexterjie.github.io/images/Ancient/1.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/Ancient/0.jpg">
 <meta property="article:published_time" content="2023-07-10T12:16:58.000Z">
-<meta property="article:modified_time" content="2023-07-10T12:35:23.151Z">
+<meta property="article:modified_time" content="2023-07-11T02:35:56.354Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="代换密码">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://dexterjie.github.io/images/Ancient/0.jpg">
+<meta name="twitter:image" content="https://dexterjie.github.io/images/Ancient/2.png">
   
   
   
@@ -224,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k 字
+          4.2k 字
         
       </span>
     
@@ -235,7 +236,7 @@
         
         
         
-          24 分钟
+          36 分钟
         
       </span>
     
@@ -326,15 +327,27 @@ E --&gt; AutokeyCipher
 <li>偏移量为 -5： Cassis （K 6）</li>
 <li>偏移量为 -6： Cassette （K 7）</li>
 </ul>
+<p><strong>加密脚本:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">encrypt_caesar_cipher</span>(<span class="hljs-params">plaintext</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">shift</span>(<span class="hljs-params">text, n</span>):<br>        result = <span class="hljs-string">&quot;&quot;</span><br>        <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> text:<br>            <span class="hljs-keyword">if</span> char.isalpha():<br>                shift = <span class="hljs-built_in">ord</span>(char) + n<br>                <span class="hljs-keyword">if</span> char.islower():<br>                    <span class="hljs-keyword">if</span> shift &gt; <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;z&quot;</span>):<br>                        shift -= <span class="hljs-number">26</span><br>                    <span class="hljs-keyword">elif</span> shift &lt; <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;a&quot;</span>):<br>                        shift += <span class="hljs-number">26</span><br>                <span class="hljs-keyword">elif</span> char.isupper():<br>                    <span class="hljs-keyword">if</span> shift &gt; <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;Z&quot;</span>):<br>                        shift -= <span class="hljs-number">26</span><br>                    <span class="hljs-keyword">elif</span> shift &lt; <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;A&quot;</span>):<br>                        shift += <span class="hljs-number">26</span><br>                result += <span class="hljs-built_in">chr</span>(shift)<br>            <span class="hljs-keyword">else</span>:<br>                result += char<br>        <span class="hljs-keyword">return</span> result<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;尝试所有可能的位移：&quot;</span>)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">26</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;位移 <span class="hljs-subst">&#123;i&#125;</span>: <span class="hljs-subst">&#123;shift(plaintext, +i)&#125;</span>&quot;</span>)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    plaintext = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入凯撒密码的明文：&quot;</span>)<br>    encrypt_caesar_cipher(plaintext)<br></code></pre></td></tr></table></figure>
+
+<p><strong>解密脚本:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">decrypt_caesar_cipher</span>(<span class="hljs-params">ciphertext</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">shift</span>(<span class="hljs-params">text, n</span>):<br>        result = <span class="hljs-string">&quot;&quot;</span><br>        <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> text:<br>            <span class="hljs-keyword">if</span> char.isalpha():<br>                shift = <span class="hljs-built_in">ord</span>(char) + n<br>                <span class="hljs-keyword">if</span> char.islower():<br>                    <span class="hljs-keyword">if</span> shift &gt; <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;z&quot;</span>):<br>                        shift -= <span class="hljs-number">26</span><br>                    <span class="hljs-keyword">elif</span> shift &lt; <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;a&quot;</span>):<br>                        shift += <span class="hljs-number">26</span><br>                <span class="hljs-keyword">elif</span> char.isupper():<br>                    <span class="hljs-keyword">if</span> shift &gt; <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;Z&quot;</span>):<br>                        shift -= <span class="hljs-number">26</span><br>                    <span class="hljs-keyword">elif</span> shift &lt; <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;A&quot;</span>):<br>                        shift += <span class="hljs-number">26</span><br>                result += <span class="hljs-built_in">chr</span>(shift)<br>            <span class="hljs-keyword">else</span>:<br>                result += char<br>        <span class="hljs-keyword">return</span> result<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;尝试所有可能的位移：&quot;</span>)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">26</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;位移 <span class="hljs-subst">&#123;i&#125;</span>: <span class="hljs-subst">&#123;shift(ciphertext, -i)&#125;</span>&quot;</span>)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    ciphertext = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入凯撒密码的密文：&quot;</span>)<br>    decrypt_caesar_cipher(ciphertext)<br></code></pre></td></tr></table></figure>
+
+
+
 <h3 id="2-Atbash-Cipher"><a href="#2-Atbash-Cipher" class="headerlink" title="2.Atbash Cipher"></a>2.Atbash Cipher</h3><p>埃特巴什码(Atbash Cipher)，它使用字母表中的最后一个字母代表第一个字母，倒数第二个字母代表第二个字母。</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">明文：<span class="hljs-variable">A</span> <span class="hljs-variable">B</span> <span class="hljs-built_in">C</span> <span class="hljs-built_in">D</span> <span class="hljs-built_in">E</span> <span class="hljs-variable">F</span> <span class="hljs-variable">G</span> <span class="hljs-variable">H</span> <span class="hljs-built_in">I</span> <span class="hljs-variable">J</span> <span class="hljs-built_in">K</span> <span class="hljs-variable">L</span> <span class="hljs-variable">M</span> <span class="hljs-built_in">N</span> <span class="hljs-built_in">O</span> <span class="hljs-variable">P</span> <span class="hljs-variable">Q</span> <span class="hljs-variable">R</span> <span class="hljs-variable">S</span> <span class="hljs-variable">T</span> <span class="hljs-variable">U</span> <span class="hljs-variable">V</span> <span class="hljs-variable">W</span> <span class="hljs-variable">X</span> <span class="hljs-variable">Y</span> <span class="hljs-variable">Z</span><br>密文：<span class="hljs-variable">Z</span> <span class="hljs-variable">Y</span> <span class="hljs-variable">X</span> <span class="hljs-variable">W</span> <span class="hljs-variable">V</span> <span class="hljs-variable">U</span> <span class="hljs-variable">T</span> <span class="hljs-variable">S</span> <span class="hljs-variable">R</span> <span class="hljs-variable">Q</span> <span class="hljs-variable">P</span> <span class="hljs-built_in">O</span> <span class="hljs-built_in">N</span> <span class="hljs-variable">M</span> <span class="hljs-variable">L</span> <span class="hljs-built_in">K</span> <span class="hljs-variable">J</span> <span class="hljs-built_in">I</span> <span class="hljs-variable">H</span> <span class="hljs-variable">G</span> <span class="hljs-variable">F</span> <span class="hljs-built_in">E</span> <span class="hljs-built_in">D</span> <span class="hljs-built_in">C</span> <span class="hljs-variable">B</span> <span class="hljs-variable">A</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="3-简单替换密码"><a href="#3-简单替换密码" class="headerlink" title="3.简单替换密码"></a>3.简单替换密码</h3><p><strong>加密时，每个明文都有自己对应的密文，而且不是简单的移位，是混乱的</strong></p>
+<p>加密例子：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">明文：the quick <span class="hljs-keyword">brown </span>fox <span class="hljs-keyword">jumps </span>over the lazy dog<br>密文：gsv <span class="hljs-keyword">jfrxp </span>yildm ulc qfnkh levi gsv ozab wlt<br></code></pre></td></tr></table></figure>
+
+<p>工具：<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/classical-era/atbash-cipher/">实用密码学 (practicalcryptography.com)</a></p>
+<h3 id="3-简单替换密码"><a href="#3-简单替换密码" class="headerlink" title="3.简单替换密码"></a>3.简单替换密码</h3><p><strong>加密时，每个明文都有自己对应的密文，而且不是简单的移位，是混乱的。这也使得其破解难度要高于凯撒密码</strong></p>
 <p>eg:</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">明文: abcdefghijklmnopqrstuvwxyz</span><br><span class="hljs-section">密钥: phqgiumeaylnofdxjkrcvstzwb</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs less">明文: <span class="hljs-selector-tag">abcdefghijklmnopqrstuvwxyz</span><br>密钥: <span class="hljs-selector-tag">phqgiumeaylnofdxjkrcvstzwb</span><br><br><span class="hljs-selector-tag">a</span>对应<span class="hljs-selector-tag">p</span>,<span class="hljs-selector-tag">b</span>对应<span class="hljs-selector-tag">h</span><br></code></pre></td></tr></table></figure>
 
 <p>一般用词频分析破解：<a target="_blank" rel="noopener" href="http://quipqiup.com/">quipqiup - cryptoquip and cryptogram solver</a></p>
-<h3 id="4-仿射密码"><a href="#4-仿射密码" class="headerlink" title="4.仿射密码"></a>4.仿射密码</h3><p>$$<br>加密函数：<br>E(x) &#x3D; (ax+b)(mod \quad m)，其中\\<br>x是明文通过某种编码得到的数字\\<br>gcd(a,m) &#x3D; 1\\<br>m是编码系统中字母的数目\\<br>eg:若以26字母表作为编码系统，则m&#x3D;26\\<br>解密函数：D(x) &#x3D; a^{-1}(x-b)(mod \quad m)，其中\\<br>a是模m的逆元<br>$$</p>
+<h3 id="4-仿射密码"><a href="#4-仿射密码" class="headerlink" title="4.仿射密码"></a>4.仿射密码</h3><p><img src="/../images/Ancient/2.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="二、多表代换"><a href="#二、多表代换" class="headerlink" title="二、多表代换"></a>二、多表代换</h2><h3 id="1-Playfair"><a href="#1-Playfair" class="headerlink" title="1.Playfair"></a>1.Playfair</h3><p>原理：</p>
 <ol>
 <li>选取一串英文字母，除去重复出现的字母，将剩下的字母逐个逐个加入 5 × 5 的矩阵内，剩下的空间由未加入的英文字母依 a-z 的顺序加入。注意，将 q 去除，或将 i 和 j 视作同一字。</li>
@@ -351,14 +364,13 @@ E --&gt; AutokeyCipher
 <p>以 playfair example 为密匙，得</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-variable">P</span> <span class="hljs-variable">L</span> <span class="hljs-variable">A</span> <span class="hljs-variable">Y</span> <span class="hljs-variable">F</span><br><span class="hljs-built_in">I</span> <span class="hljs-variable">R</span> <span class="hljs-built_in">E</span> <span class="hljs-variable">X</span> <span class="hljs-variable">M</span><br><span class="hljs-variable">B</span> <span class="hljs-built_in">C</span> <span class="hljs-built_in">D</span> <span class="hljs-variable">G</span> <span class="hljs-variable">H</span><br><span class="hljs-built_in">K</span> <span class="hljs-built_in">N</span> <span class="hljs-built_in">O</span> <span class="hljs-variable">Q</span> <span class="hljs-variable">S</span><br><span class="hljs-variable">T</span> <span class="hljs-variable">U</span> <span class="hljs-variable">V</span> <span class="hljs-variable">W</span> <span class="hljs-variable">Z</span><br></code></pre></td></tr></table></figure>
 
-<p>要加密的讯息为 Hide the gold in the tree stump</p>
+<p><strong>要加密的讯息为 Hide the gold in the tree stump</strong></p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">HI <span class="hljs-keyword">DE</span> TH EG OL <span class="hljs-keyword">DI</span> NT <span class="hljs-keyword">HE</span> TR <span class="hljs-keyword">EX</span> ES TU MP<br></code></pre></td></tr></table></figure>
 
-<p>就会得到</p>
+<p>加密后密文：</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">BM </span>OD ZB XD NA <span class="hljs-keyword">BE </span>KU DM UI XM MO UV IF<br></code></pre></td></tr></table></figure>
 
-
-
+<p><strong>加解密网站：</strong><a target="_blank" rel="noopener" href="http://www.metools.info/code/playfair_186.html">Playfair加密解密_普莱费尔加密解密-ME2在线工具 (metools.info)</a></p>
 <h3 id="2-Polybius"><a href="#2-Polybius" class="headerlink" title="2.Polybius"></a>2.Polybius</h3><p>Polybius 密码又称为棋盘密码</p>
 <p><strong>密码表长这样</strong></p>
 <table>
@@ -474,8 +486,9 @@ E --&gt; AutokeyCipher
 <p><strong>eg:</strong></p>
 <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs llvm">明文：come greatwall<br>密钥：crypto<br><br>先把密钥变成和明文同样长度<br>明文：comegreatwall<br>密钥：cryptocryptoc<br><br>然后查表，<span class="hljs-keyword">cc</span>作为横纵坐标得到e<br>加密后的密文为：efkt zferrltzn<br></code></pre></td></tr></table></figure>
 
-
-
+<p>解密网站：</p>
+<p><strong>未知密钥：<a target="_blank" rel="noopener" href="https://www.mygeocachingprofile.com/codebreaker.vigenerecipher.aspx">My Geocaching Profile.com - Vigenere Cipher Codebreaker</a></strong></p>
+<p><strong>已知密钥：<a target="_blank" rel="noopener" href="http://planetcalc.com/2468/">http://planetcalc.com/2468/</a></strong></p>
 <h3 id="4-Nihilist"><a href="#4-Nihilist" class="headerlink" title="4.Nihilist"></a>4.Nihilist</h3><p><strong>Nihilist 密码又称关键字密码：明文 + 关键字 &#x3D; 密文。</strong></p>
 <p>首先利用密钥构造棋盘矩阵（类似 Polybius 密码），新建一个 5 × 5 矩阵，将字符不重复地依次填入矩阵 ，剩下部分按字母顺序填入 ，字母 i 和 j 等价</p>
 <p><strong>以关键字 helloworld 为例</strong></p>
