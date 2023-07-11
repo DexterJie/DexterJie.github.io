@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>代换密码</title>
+    <link href="/2023/07/10/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81-%E4%BB%A3%E6%8D%A2%E5%AF%86%E7%A0%81/"/>
+    <url>/2023/07/10/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81-%E4%BB%A3%E6%8D%A2%E5%AF%86%E7%A0%81/</url>
+    
+    <content type="html"><![CDATA[<p>对古典密码学做个粗浅的了解</p><span id="more"></span><pre><code class=" mermaid">graph TDA[密码学] --&gt; B --&gt; 置换;B[古典密码学] --&gt;代换;C[现代密码学] --&gt; D[对称密码];A --&gt; C --&gt; E[非对称密码];D --&gt; 块密码;D --&gt; 流密码;E --&gt; 大整数分解;E --&gt; 离散对数;E --&gt; 基于格的计算;</code></pre><pre><code class=" mermaid">graph TDA[代换密码] --&gt; D[单表代换];D --&gt; 凯撒密码; D --&gt; AtbashCipher;D --&gt; 简单替换密码D --&gt; 仿射密码A --&gt; E[多表替换]E --&gt; PlayfairE --&gt; PolybiusE --&gt; VigenereE --&gt; NihilistE --&gt; HillE --&gt; AutokeyCipher</code></pre><p><strong>代换密码分为单表代换和多表代换</strong></p><h2 id="一、单表代换"><a href="#一、单表代换" class="headerlink" title="一、单表代换"></a>一、单表代换</h2><p><strong>在单表替换加密中，所有的加密方式几乎都有一个共性，那就是明密文一一对应。所以说，一般有以下两种方式来进行破解</strong></p><h3 id="1-凯撒密码"><a href="#1-凯撒密码" class="headerlink" title="1.凯撒密码"></a>1.凯撒密码</h3><p>凯撒密码（Caesar）加密时会将明文中的 <strong>每个字母</strong> 都按照其在字母表中的顺序向后（或向前）移动固定数目（<strong>循环移动</strong>）作为密文</p><p><strong>eg：偏移量为3</strong></p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">明文：ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>密文：DEFGHIJKLMNOPQRSTUVWXYZABC<br></code></pre></td></tr></table></figure><p>根据偏移量的不同，还存在<strong>若干特定的恺撒密码名称</strong>：</p><ul><li>偏移量为 10： Avocat （A→K）</li><li>偏移量为 13： <a href="https://zh.wikipedia.org/wiki/ROT13">ROT13</a></li><li>偏移量为 -5： Cassis （K 6）</li><li>偏移量为 -6： Cassette （K 7）</li></ul><h3 id="2-Atbash-Cipher"><a href="#2-Atbash-Cipher" class="headerlink" title="2.Atbash Cipher"></a>2.Atbash Cipher</h3><p>埃特巴什码(Atbash Cipher)，它使用字母表中的最后一个字母代表第一个字母，倒数第二个字母代表第二个字母。</p><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">明文：<span class="hljs-variable">A</span> <span class="hljs-variable">B</span> <span class="hljs-built_in">C</span> <span class="hljs-built_in">D</span> <span class="hljs-built_in">E</span> <span class="hljs-variable">F</span> <span class="hljs-variable">G</span> <span class="hljs-variable">H</span> <span class="hljs-built_in">I</span> <span class="hljs-variable">J</span> <span class="hljs-built_in">K</span> <span class="hljs-variable">L</span> <span class="hljs-variable">M</span> <span class="hljs-built_in">N</span> <span class="hljs-built_in">O</span> <span class="hljs-variable">P</span> <span class="hljs-variable">Q</span> <span class="hljs-variable">R</span> <span class="hljs-variable">S</span> <span class="hljs-variable">T</span> <span class="hljs-variable">U</span> <span class="hljs-variable">V</span> <span class="hljs-variable">W</span> <span class="hljs-variable">X</span> <span class="hljs-variable">Y</span> <span class="hljs-variable">Z</span><br>密文：<span class="hljs-variable">Z</span> <span class="hljs-variable">Y</span> <span class="hljs-variable">X</span> <span class="hljs-variable">W</span> <span class="hljs-variable">V</span> <span class="hljs-variable">U</span> <span class="hljs-variable">T</span> <span class="hljs-variable">S</span> <span class="hljs-variable">R</span> <span class="hljs-variable">Q</span> <span class="hljs-variable">P</span> <span class="hljs-built_in">O</span> <span class="hljs-built_in">N</span> <span class="hljs-variable">M</span> <span class="hljs-variable">L</span> <span class="hljs-built_in">K</span> <span class="hljs-variable">J</span> <span class="hljs-built_in">I</span> <span class="hljs-variable">H</span> <span class="hljs-variable">G</span> <span class="hljs-variable">F</span> <span class="hljs-built_in">E</span> <span class="hljs-built_in">D</span> <span class="hljs-built_in">C</span> <span class="hljs-variable">B</span> <span class="hljs-variable">A</span><br></code></pre></td></tr></table></figure><h3 id="3-简单替换密码"><a href="#3-简单替换密码" class="headerlink" title="3.简单替换密码"></a>3.简单替换密码</h3><p><strong>加密时，每个明文都有自己对应的密文，而且不是简单的移位，是混乱的</strong></p><p>eg:</p><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">明文: abcdefghijklmnopqrstuvwxyz</span><br><span class="hljs-section">密钥: phqgiumeaylnofdxjkrcvstzwb</span><br></code></pre></td></tr></table></figure><p>一般用词频分析破解：<a href="http://quipqiup.com/">quipqiup - cryptoquip and cryptogram solver</a></p><h3 id="4-仿射密码"><a href="#4-仿射密码" class="headerlink" title="4.仿射密码"></a>4.仿射密码</h3><p>$$<br>加密函数：<br>E(x) &#x3D; (ax+b)(mod \quad m)，其中\\<br>x是明文通过某种编码得到的数字\\<br>gcd(a,m) &#x3D; 1\\<br>m是编码系统中字母的数目\\<br>eg:若以26字母表作为编码系统，则m&#x3D;26\\<br>解密函数：D(x) &#x3D; a^{-1}(x-b)(mod \quad m)，其中\\<br>a是模m的逆元<br>$$</p><h2 id="二、多表代换"><a href="#二、多表代换" class="headerlink" title="二、多表代换"></a>二、多表代换</h2><h3 id="1-Playfair"><a href="#1-Playfair" class="headerlink" title="1.Playfair"></a>1.Playfair</h3><p>原理：</p><ol><li>选取一串英文字母，除去重复出现的字母，将剩下的字母逐个逐个加入 5 × 5 的矩阵内，剩下的空间由未加入的英文字母依 a-z 的顺序加入。注意，将 q 去除，或将 i 和 j 视作同一字。</li><li>将要加密的明文分成两个一组。若组内的字母相同，将 X（或 Q）加到该组的第一个字母后，重新分组。若剩下一个字，也加入 X 。</li><li>在每组中，找出两个字母在矩阵中的地方<ul><li>若两个字母不同行也不同列，在矩阵中找出另外两个字母（第一个字母对应行优先），使这四个字母成为一个长方形的四个角。</li><li>若两个字母同行，取这两个字母右方的字母（若字母在最右方则取最左方的字母）</li><li>若两个字母同列，取这两个字母下方的字母（若字母在最下方则取最上方的字母）</li></ul></li></ol><p>新找到的两个字母就是原本的两个字母加密的结果。</p><p><strong>exp:</strong></p><p>以 playfair example 为密匙，得</p><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-variable">P</span> <span class="hljs-variable">L</span> <span class="hljs-variable">A</span> <span class="hljs-variable">Y</span> <span class="hljs-variable">F</span><br><span class="hljs-built_in">I</span> <span class="hljs-variable">R</span> <span class="hljs-built_in">E</span> <span class="hljs-variable">X</span> <span class="hljs-variable">M</span><br><span class="hljs-variable">B</span> <span class="hljs-built_in">C</span> <span class="hljs-built_in">D</span> <span class="hljs-variable">G</span> <span class="hljs-variable">H</span><br><span class="hljs-built_in">K</span> <span class="hljs-built_in">N</span> <span class="hljs-built_in">O</span> <span class="hljs-variable">Q</span> <span class="hljs-variable">S</span><br><span class="hljs-variable">T</span> <span class="hljs-variable">U</span> <span class="hljs-variable">V</span> <span class="hljs-variable">W</span> <span class="hljs-variable">Z</span><br></code></pre></td></tr></table></figure><p>要加密的讯息为 Hide the gold in the tree stump</p><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">HI <span class="hljs-keyword">DE</span> TH EG OL <span class="hljs-keyword">DI</span> NT <span class="hljs-keyword">HE</span> TR <span class="hljs-keyword">EX</span> ES TU MP<br></code></pre></td></tr></table></figure><p>就会得到</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">BM </span>OD ZB XD NA <span class="hljs-keyword">BE </span>KU DM UI XM MO UV IF<br></code></pre></td></tr></table></figure><h3 id="2-Polybius"><a href="#2-Polybius" class="headerlink" title="2.Polybius"></a>2.Polybius</h3><p>Polybius 密码又称为棋盘密码</p><p><strong>密码表长这样</strong></p><table><thead><tr><th align="center"></th><th align="center">1</th><th align="center">2</th><th align="center">3</th><th align="center">4</th><th align="center">5</th></tr></thead><tbody><tr><td align="center">1</td><td align="center">A</td><td align="center">B</td><td align="center">C</td><td align="center">D</td><td align="center">E</td></tr><tr><td align="center">2</td><td align="center">F</td><td align="center">G</td><td align="center">H</td><td align="center">I&#x2F;J</td><td align="center">K</td></tr><tr><td align="center">3</td><td align="center">L</td><td align="center">M</td><td align="center">N</td><td align="center">O</td><td align="center">P</td></tr><tr><td align="center">4</td><td align="center">Q</td><td align="center">R</td><td align="center">S</td><td align="center">T</td><td align="center">U</td></tr><tr><td align="center">5</td><td align="center">V</td><td align="center">W</td><td align="center">X</td><td align="center">Y</td><td align="center">Z</td></tr></tbody></table><p><strong>eg: HELLO加密后 23 15 31 31 34</strong></p><p>另外有种变表：</p><table><thead><tr><th></th><th>A</th><th>D</th><th>F</th><th>G</th><th>X</th></tr></thead><tbody><tr><td>A</td><td>b</td><td>t</td><td>a</td><td>l</td><td>p</td></tr><tr><td>D</td><td>d</td><td>h</td><td>o</td><td>z</td><td>k</td></tr><tr><td>F</td><td>q</td><td>f</td><td>v</td><td>s</td><td>n</td></tr><tr><td>G</td><td>g</td><td>j</td><td>c</td><td>u</td><td>x</td></tr><tr><td>X</td><td>m</td><td>r</td><td>e</td><td>w</td><td>y</td></tr></tbody></table><p>应用这种密码表的加密方式叫<strong>ADFGX加密</strong></p><p><strong>eg:HELLO 加密后得到 DD XF AG AG DF</strong></p><h3 id="3-Vigenere"><a href="#3-Vigenere" class="headerlink" title="3.Vigenere"></a>3.Vigenere</h3><p>维吉尼亚密码（Vigenere）是使用一系列凯撒密码组成密码字母表的加密算法，属于多表密码的一种简单形式。</p><p><img src="/../images/Ancient/0.jpg"></p><p><strong>eg:</strong></p><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs llvm">明文：come greatwall<br>密钥：crypto<br><br>先把密钥变成和明文同样长度<br>明文：comegreatwall<br>密钥：cryptocryptoc<br><br>然后查表，<span class="hljs-keyword">cc</span>作为横纵坐标得到e<br>加密后的密文为：efkt zferrltzn<br></code></pre></td></tr></table></figure><h3 id="4-Nihilist"><a href="#4-Nihilist" class="headerlink" title="4.Nihilist"></a>4.Nihilist</h3><p><strong>Nihilist 密码又称关键字密码：明文 + 关键字 &#x3D; 密文。</strong></p><p>首先利用密钥构造棋盘矩阵（类似 Polybius 密码），新建一个 5 × 5 矩阵，将字符不重复地依次填入矩阵 ，剩下部分按字母顺序填入 ，字母 i 和 j 等价</p><p><strong>以关键字 helloworld 为例</strong></p><p><strong>关键字导出的密码表如下</strong></p><table><thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody><tr><td>1</td><td>h</td><td>e</td><td>l</td><td>o</td><td>w</td></tr><tr><td>2</td><td>r</td><td>d</td><td>a</td><td>b</td><td>c</td></tr><tr><td>3</td><td>f</td><td>g</td><td>i&#x2F;j</td><td>k</td><td>m</td></tr><tr><td>4</td><td>n</td><td>p</td><td>q</td><td>s</td><td>t</td></tr><tr><td>5</td><td>u</td><td>v</td><td>x</td><td>y</td><td>z</td></tr></tbody></table><p><strong>将明文中的每个字母对应横纵坐标就是其密文，例如a加密后是23</strong></p><h3 id="5-Hill"><a href="#5-Hill" class="headerlink" title="5.Hill"></a>5.Hill</h3><p><strong>希尔密码（Hill）使用每个字母在字母表中的顺序作为其对应的数字，即 A&#x3D;0，B&#x3D;1，C&#x3D;2 等等。然后将明文转化为 n 维向量，跟一个 n × n 的矩阵相乘，再将得出的结果模 26。注意用作加密的矩阵（即密匙）在mod26下必须是可逆的，否则就不可能解码。</strong></p><p><strong>只有矩阵的行列式和 26 互质，才是可逆的。</strong></p><p>eg:</p><p><img src="/../images/Ancient/1.png"></p><p><strong>在线解密工具</strong><a href="http://www.practicalcryptography.com/ciphers/hill-cipher/">http://www.practicalcryptography.com/ciphers/hill-cipher/</a></p><h3 id="6-Autokey-Cipher"><a href="#6-Autokey-Cipher" class="headerlink" title="6.Autokey Cipher"></a>6.Autokey Cipher</h3><p><strong>自动密钥密码（Autokey Cipher）也是多表替换密码，与维吉尼亚密码密码类似，但使用不同的方法生成密钥。</strong></p><p><strong>自动密钥密码主要有两种，关键词自动密钥密码和原文自动密钥密码。</strong></p><p><strong>以关键词自动密钥为例</strong></p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">明文：THE QUICK <span class="hljs-keyword">BROWN </span>FOX <span class="hljs-keyword">JUMPS </span>OVER THE LAZY DOG<br>关键词：CULTURE<br></code></pre></td></tr></table></figure><p><strong>以用关键词开始，填充为与明文等长的密钥</strong></p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">明文：THE QUICK <span class="hljs-keyword">BROWN </span>FOX <span class="hljs-keyword">JUMPS </span>OVER THE LAZY DOG<br>关键词：CULTURE THE QUICK <span class="hljs-keyword">BROWN </span>FOX <span class="hljs-keyword">JUMPS </span>OVER THE<br></code></pre></td></tr></table></figure><p><img src="/../images/Ancient/0.jpg"></p><p><strong>和Vigenere同样的码表</strong></p><p>加密后的密文为:<code>VBP JOZGD IVEQV HYY AIICX CSNL FWW ZVDP WVK</code></p><p><strong>原文自动密钥密码，应该是密钥和明文一样进行加密</strong></p><p><strong>当未知关键词（也就是未知密钥的时候）可以用网站解密</strong><a href="http://www.practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-autokey-cipher/">http://www.practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-autokey-cipher/</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>古典密码学</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>代换密码</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>RSA3</title>
     <link href="/2023/07/09/RSA3/"/>
     <url>/2023/07/09/RSA3/</url>
@@ -13,14 +38,14 @@
     
     <categories>
       
-      <category>学习</category>
+      <category>现代密码</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>学习记录</tag>
+      <tag>非对称加密</tag>
       
     </tags>
     
@@ -38,14 +63,14 @@
     
     <categories>
       
-      <category>学习</category>
+      <category>现代密码</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>学习记录</tag>
+      <tag>非对称加密</tag>
       
     </tags>
     
@@ -63,14 +88,14 @@
     
     <categories>
       
-      <category>学习</category>
+      <category>现代密码</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>学习记录</tag>
+      <tag>非对称加密</tag>
       
     </tags>
     
@@ -88,14 +113,14 @@
     
     <categories>
       
-      <category>学习</category>
+      <category>现代密码</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>学习记录</tag>
+      <tag>一次一密</tag>
       
     </tags>
     
@@ -113,14 +138,14 @@
     
     <categories>
       
-      <category>学习</category>
+      <category>现代密码</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>学习记录</tag>
+      <tag>流密码</tag>
       
     </tags>
     

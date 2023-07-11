@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/1.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="对古典密码学做个粗浅的了解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代换密码">
+<meta property="og:url" content="https://dexterjie.github.io/2023/07/10/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81-%E4%BB%A3%E6%8D%A2%E5%AF%86%E7%A0%81/index.html">
+<meta property="og:site_name" content="DexterJie">
+<meta property="og:description" content="对古典密码学做个粗浅的了解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/0.jpg">
+<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/1.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/0.jpg">
+<meta property="article:published_time" content="2023-07-10T12:16:58.000Z">
+<meta property="article:modified_time" content="2023-07-10T12:35:23.151Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="代换密码">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dexterjie.github.io/images/Ancient/0.jpg">
+  
+  
+  
+  <title>代换密码 - DexterJie</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dexterjie.github.io","root":"/","version":"1.9.5","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>DexterJie&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://images.unsplash.com/photo-1686942300971-c8f5d0a3b692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDgzfDZzTVZqVExTa2VRfHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">代换密码</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-10 20:16" pubdate>
+          2023年7月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">代换密码</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>对古典密码学做个粗浅的了解</p>
+<span id="more"></span>
+
+<pre><code class=" mermaid">graph TD
+A[密码学] --&gt; B --&gt; 置换;
+B[古典密码学] --&gt;代换;
+C[现代密码学] --&gt; D[对称密码];
+A --&gt; C --&gt; E[非对称密码];
+D --&gt; 块密码;
+D --&gt; 流密码;
+E --&gt; 大整数分解;
+E --&gt; 离散对数;
+E --&gt; 基于格的计算;
+</code></pre>
+
+
+
+
+
+<pre><code class=" mermaid">graph TD
+
+A[代换密码] --&gt; D[单表代换];
+D --&gt; 凯撒密码; 
+D --&gt; AtbashCipher;
+D --&gt; 简单替换密码
+D --&gt; 仿射密码
+
+A --&gt; E[多表替换]
+E --&gt; Playfair
+E --&gt; Polybius
+E --&gt; Vigenere
+E --&gt; Nihilist
+E --&gt; Hill
+E --&gt; AutokeyCipher
+</code></pre>
+
+<p><strong>代换密码分为单表代换和多表代换</strong></p>
+<h2 id="一、单表代换"><a href="#一、单表代换" class="headerlink" title="一、单表代换"></a>一、单表代换</h2><p><strong>在单表替换加密中，所有的加密方式几乎都有一个共性，那就是明密文一一对应。所以说，一般有以下两种方式来进行破解</strong></p>
+<h3 id="1-凯撒密码"><a href="#1-凯撒密码" class="headerlink" title="1.凯撒密码"></a>1.凯撒密码</h3><p>凯撒密码（Caesar）加密时会将明文中的 <strong>每个字母</strong> 都按照其在字母表中的顺序向后（或向前）移动固定数目（<strong>循环移动</strong>）作为密文</p>
+<p><strong>eg：偏移量为3</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">明文：ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>密文：DEFGHIJKLMNOPQRSTUVWXYZABC<br></code></pre></td></tr></table></figure>
+
+<p>根据偏移量的不同，还存在<strong>若干特定的恺撒密码名称</strong>：</p>
+<ul>
+<li>偏移量为 10： Avocat （A→K）</li>
+<li>偏移量为 13： <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ROT13">ROT13</a></li>
+<li>偏移量为 -5： Cassis （K 6）</li>
+<li>偏移量为 -6： Cassette （K 7）</li>
+</ul>
+<h3 id="2-Atbash-Cipher"><a href="#2-Atbash-Cipher" class="headerlink" title="2.Atbash Cipher"></a>2.Atbash Cipher</h3><p>埃特巴什码(Atbash Cipher)，它使用字母表中的最后一个字母代表第一个字母，倒数第二个字母代表第二个字母。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">明文：<span class="hljs-variable">A</span> <span class="hljs-variable">B</span> <span class="hljs-built_in">C</span> <span class="hljs-built_in">D</span> <span class="hljs-built_in">E</span> <span class="hljs-variable">F</span> <span class="hljs-variable">G</span> <span class="hljs-variable">H</span> <span class="hljs-built_in">I</span> <span class="hljs-variable">J</span> <span class="hljs-built_in">K</span> <span class="hljs-variable">L</span> <span class="hljs-variable">M</span> <span class="hljs-built_in">N</span> <span class="hljs-built_in">O</span> <span class="hljs-variable">P</span> <span class="hljs-variable">Q</span> <span class="hljs-variable">R</span> <span class="hljs-variable">S</span> <span class="hljs-variable">T</span> <span class="hljs-variable">U</span> <span class="hljs-variable">V</span> <span class="hljs-variable">W</span> <span class="hljs-variable">X</span> <span class="hljs-variable">Y</span> <span class="hljs-variable">Z</span><br>密文：<span class="hljs-variable">Z</span> <span class="hljs-variable">Y</span> <span class="hljs-variable">X</span> <span class="hljs-variable">W</span> <span class="hljs-variable">V</span> <span class="hljs-variable">U</span> <span class="hljs-variable">T</span> <span class="hljs-variable">S</span> <span class="hljs-variable">R</span> <span class="hljs-variable">Q</span> <span class="hljs-variable">P</span> <span class="hljs-built_in">O</span> <span class="hljs-built_in">N</span> <span class="hljs-variable">M</span> <span class="hljs-variable">L</span> <span class="hljs-built_in">K</span> <span class="hljs-variable">J</span> <span class="hljs-built_in">I</span> <span class="hljs-variable">H</span> <span class="hljs-variable">G</span> <span class="hljs-variable">F</span> <span class="hljs-built_in">E</span> <span class="hljs-built_in">D</span> <span class="hljs-built_in">C</span> <span class="hljs-variable">B</span> <span class="hljs-variable">A</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-简单替换密码"><a href="#3-简单替换密码" class="headerlink" title="3.简单替换密码"></a>3.简单替换密码</h3><p><strong>加密时，每个明文都有自己对应的密文，而且不是简单的移位，是混乱的</strong></p>
+<p>eg:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">明文: abcdefghijklmnopqrstuvwxyz</span><br><span class="hljs-section">密钥: phqgiumeaylnofdxjkrcvstzwb</span><br></code></pre></td></tr></table></figure>
+
+<p>一般用词频分析破解：<a target="_blank" rel="noopener" href="http://quipqiup.com/">quipqiup - cryptoquip and cryptogram solver</a></p>
+<h3 id="4-仿射密码"><a href="#4-仿射密码" class="headerlink" title="4.仿射密码"></a>4.仿射密码</h3><p>$$<br>加密函数：<br>E(x) &#x3D; (ax+b)(mod \quad m)，其中\\<br>x是明文通过某种编码得到的数字\\<br>gcd(a,m) &#x3D; 1\\<br>m是编码系统中字母的数目\\<br>eg:若以26字母表作为编码系统，则m&#x3D;26\\<br>解密函数：D(x) &#x3D; a^{-1}(x-b)(mod \quad m)，其中\\<br>a是模m的逆元<br>$$</p>
+<h2 id="二、多表代换"><a href="#二、多表代换" class="headerlink" title="二、多表代换"></a>二、多表代换</h2><h3 id="1-Playfair"><a href="#1-Playfair" class="headerlink" title="1.Playfair"></a>1.Playfair</h3><p>原理：</p>
+<ol>
+<li>选取一串英文字母，除去重复出现的字母，将剩下的字母逐个逐个加入 5 × 5 的矩阵内，剩下的空间由未加入的英文字母依 a-z 的顺序加入。注意，将 q 去除，或将 i 和 j 视作同一字。</li>
+<li>将要加密的明文分成两个一组。若组内的字母相同，将 X（或 Q）加到该组的第一个字母后，重新分组。若剩下一个字，也加入 X 。</li>
+<li>在每组中，找出两个字母在矩阵中的地方<ul>
+<li>若两个字母不同行也不同列，在矩阵中找出另外两个字母（第一个字母对应行优先），使这四个字母成为一个长方形的四个角。</li>
+<li>若两个字母同行，取这两个字母右方的字母（若字母在最右方则取最左方的字母）</li>
+<li>若两个字母同列，取这两个字母下方的字母（若字母在最下方则取最上方的字母）</li>
+</ul>
+</li>
+</ol>
+<p>新找到的两个字母就是原本的两个字母加密的结果。</p>
+<p><strong>exp:</strong></p>
+<p>以 playfair example 为密匙，得</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-variable">P</span> <span class="hljs-variable">L</span> <span class="hljs-variable">A</span> <span class="hljs-variable">Y</span> <span class="hljs-variable">F</span><br><span class="hljs-built_in">I</span> <span class="hljs-variable">R</span> <span class="hljs-built_in">E</span> <span class="hljs-variable">X</span> <span class="hljs-variable">M</span><br><span class="hljs-variable">B</span> <span class="hljs-built_in">C</span> <span class="hljs-built_in">D</span> <span class="hljs-variable">G</span> <span class="hljs-variable">H</span><br><span class="hljs-built_in">K</span> <span class="hljs-built_in">N</span> <span class="hljs-built_in">O</span> <span class="hljs-variable">Q</span> <span class="hljs-variable">S</span><br><span class="hljs-variable">T</span> <span class="hljs-variable">U</span> <span class="hljs-variable">V</span> <span class="hljs-variable">W</span> <span class="hljs-variable">Z</span><br></code></pre></td></tr></table></figure>
+
+<p>要加密的讯息为 Hide the gold in the tree stump</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">HI <span class="hljs-keyword">DE</span> TH EG OL <span class="hljs-keyword">DI</span> NT <span class="hljs-keyword">HE</span> TR <span class="hljs-keyword">EX</span> ES TU MP<br></code></pre></td></tr></table></figure>
+
+<p>就会得到</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">BM </span>OD ZB XD NA <span class="hljs-keyword">BE </span>KU DM UI XM MO UV IF<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-Polybius"><a href="#2-Polybius" class="headerlink" title="2.Polybius"></a>2.Polybius</h3><p>Polybius 密码又称为棋盘密码</p>
+<p><strong>密码表长这样</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="center">B</td>
+<td align="center">C</td>
+<td align="center">D</td>
+<td align="center">E</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">F</td>
+<td align="center">G</td>
+<td align="center">H</td>
+<td align="center">I&#x2F;J</td>
+<td align="center">K</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">L</td>
+<td align="center">M</td>
+<td align="center">N</td>
+<td align="center">O</td>
+<td align="center">P</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">Q</td>
+<td align="center">R</td>
+<td align="center">S</td>
+<td align="center">T</td>
+<td align="center">U</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">V</td>
+<td align="center">W</td>
+<td align="center">X</td>
+<td align="center">Y</td>
+<td align="center">Z</td>
+</tr>
+</tbody></table>
+<p><strong>eg: HELLO加密后 23 15 31 31 34</strong></p>
+<p>另外有种变表：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A</th>
+<th>D</th>
+<th>F</th>
+<th>G</th>
+<th>X</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>b</td>
+<td>t</td>
+<td>a</td>
+<td>l</td>
+<td>p</td>
+</tr>
+<tr>
+<td>D</td>
+<td>d</td>
+<td>h</td>
+<td>o</td>
+<td>z</td>
+<td>k</td>
+</tr>
+<tr>
+<td>F</td>
+<td>q</td>
+<td>f</td>
+<td>v</td>
+<td>s</td>
+<td>n</td>
+</tr>
+<tr>
+<td>G</td>
+<td>g</td>
+<td>j</td>
+<td>c</td>
+<td>u</td>
+<td>x</td>
+</tr>
+<tr>
+<td>X</td>
+<td>m</td>
+<td>r</td>
+<td>e</td>
+<td>w</td>
+<td>y</td>
+</tr>
+</tbody></table>
+<p>应用这种密码表的加密方式叫<strong>ADFGX加密</strong></p>
+<p><strong>eg:HELLO 加密后得到 DD XF AG AG DF</strong></p>
+<h3 id="3-Vigenere"><a href="#3-Vigenere" class="headerlink" title="3.Vigenere"></a>3.Vigenere</h3><p>维吉尼亚密码（Vigenere）是使用一系列凯撒密码组成密码字母表的加密算法，属于多表密码的一种简单形式。</p>
+<p><img src="/../images/Ancient/0.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><strong>eg:</strong></p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs llvm">明文：come greatwall<br>密钥：crypto<br><br>先把密钥变成和明文同样长度<br>明文：comegreatwall<br>密钥：cryptocryptoc<br><br>然后查表，<span class="hljs-keyword">cc</span>作为横纵坐标得到e<br>加密后的密文为：efkt zferrltzn<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-Nihilist"><a href="#4-Nihilist" class="headerlink" title="4.Nihilist"></a>4.Nihilist</h3><p><strong>Nihilist 密码又称关键字密码：明文 + 关键字 &#x3D; 密文。</strong></p>
+<p>首先利用密钥构造棋盘矩阵（类似 Polybius 密码），新建一个 5 × 5 矩阵，将字符不重复地依次填入矩阵 ，剩下部分按字母顺序填入 ，字母 i 和 j 等价</p>
+<p><strong>以关键字 helloworld 为例</strong></p>
+<p><strong>关键字导出的密码表如下</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>h</td>
+<td>e</td>
+<td>l</td>
+<td>o</td>
+<td>w</td>
+</tr>
+<tr>
+<td>2</td>
+<td>r</td>
+<td>d</td>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+</tr>
+<tr>
+<td>3</td>
+<td>f</td>
+<td>g</td>
+<td>i&#x2F;j</td>
+<td>k</td>
+<td>m</td>
+</tr>
+<tr>
+<td>4</td>
+<td>n</td>
+<td>p</td>
+<td>q</td>
+<td>s</td>
+<td>t</td>
+</tr>
+<tr>
+<td>5</td>
+<td>u</td>
+<td>v</td>
+<td>x</td>
+<td>y</td>
+<td>z</td>
+</tr>
+</tbody></table>
+<p><strong>将明文中的每个字母对应横纵坐标就是其密文，例如a加密后是23</strong></p>
+<h3 id="5-Hill"><a href="#5-Hill" class="headerlink" title="5.Hill"></a>5.Hill</h3><p><strong>希尔密码（Hill）使用每个字母在字母表中的顺序作为其对应的数字，即 A&#x3D;0，B&#x3D;1，C&#x3D;2 等等。然后将明文转化为 n 维向量，跟一个 n × n 的矩阵相乘，再将得出的结果模 26。注意用作加密的矩阵（即密匙）在mod26下必须是可逆的，否则就不可能解码。</strong></p>
+<p><strong>只有矩阵的行列式和 26 互质，才是可逆的。</strong></p>
+<p>eg:</p>
+<p><img src="/../images/Ancient/1.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>在线解密工具</strong><a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/hill-cipher/">http://www.practicalcryptography.com/ciphers/hill-cipher/</a></p>
+<h3 id="6-Autokey-Cipher"><a href="#6-Autokey-Cipher" class="headerlink" title="6.Autokey Cipher"></a>6.Autokey Cipher</h3><p><strong>自动密钥密码（Autokey Cipher）也是多表替换密码，与维吉尼亚密码密码类似，但使用不同的方法生成密钥。</strong></p>
+<p><strong>自动密钥密码主要有两种，关键词自动密钥密码和原文自动密钥密码。</strong></p>
+<p><strong>以关键词自动密钥为例</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">明文：THE QUICK <span class="hljs-keyword">BROWN </span>FOX <span class="hljs-keyword">JUMPS </span>OVER THE LAZY DOG<br>关键词：CULTURE<br></code></pre></td></tr></table></figure>
+
+<p><strong>以用关键词开始，填充为与明文等长的密钥</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">明文：THE QUICK <span class="hljs-keyword">BROWN </span>FOX <span class="hljs-keyword">JUMPS </span>OVER THE LAZY DOG<br>关键词：CULTURE THE QUICK <span class="hljs-keyword">BROWN </span>FOX <span class="hljs-keyword">JUMPS </span>OVER THE<br></code></pre></td></tr></table></figure>
+
+<p><img src="/../images/Ancient/0.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><strong>和Vigenere同样的码表</strong></p>
+<p>加密后的密文为:<code>VBP JOZGD IVEQV HYY AIICX CSNL FWW ZVDP WVK</code></p>
+<p><strong>原文自动密钥密码，应该是密钥和明文一样进行加密</strong></p>
+<p><strong>当未知关键词（也就是未知密钥的时候）可以用网站解密</strong><a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-autokey-cipher/">http://www.practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-autokey-cipher/</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81%E5%AD%A6/" class="category-chain-item">古典密码学</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%BB%A3%E6%8D%A2%E5%AF%86%E7%A0%81/" class="print-no-link">#代换密码</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>代换密码</div>
+      <div>https://dexterjie.github.io/2023/07/10/古典密码-代换密码/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/09/RSA3/" title="RSA3">
+                        <span class="hidden-mobile">RSA3</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
