@@ -88,14 +88,14 @@
     
     <categories>
       
-      <category>现代密码</category>
+      <category>现代密码-非对称加密</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>非对称加密</tag>
+      <tag>RSA</tag>
       
     </tags>
     
@@ -113,14 +113,14 @@
     
     <categories>
       
-      <category>现代密码</category>
+      <category>现代密码-非对称加密</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>非对称加密</tag>
+      <tag>RSA</tag>
       
     </tags>
     
@@ -138,14 +138,14 @@
     
     <categories>
       
-      <category>现代密码</category>
+      <category>现代密码-非对称加密</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>非对称加密</tag>
+      <tag>RSA</tag>
       
     </tags>
     
@@ -163,14 +163,14 @@
     
     <categories>
       
-      <category>现代密码</category>
+      <category>现代密码-流密码</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>一次一密</tag>
+      <tag>OPT</tag>
       
     </tags>
     
