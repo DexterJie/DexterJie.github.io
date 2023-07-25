@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/0.jpg">
+  <link rel="mask-icon" href="/images/0.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dexterjie.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="复现2023DASCTF暑期挑战赛Crypto方向赛题（没做完）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2023DASCTF暑期挑战赛——Crypto">
+<meta property="og:url" content="https://dexterjie.github.io/2023/07/24/2023DASCTF7%E6%9C%88/index.html">
+<meta property="og:site_name" content="DexterJie&#39;Blog">
+<meta property="og:description" content="复现2023DASCTF暑期挑战赛Crypto方向赛题（没做完）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-24T04:09:05.000Z">
+<meta property="article:modified_time" content="2023-07-24T08:10:33.824Z">
+<meta property="article:author" content="Dexter">
+<meta property="article:tag" content="Wp">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://dexterjie.github.io/2023/07/24/2023DASCTF7%E6%9C%88/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2023/07/24/2023DASCTF7%E6%9C%88/","path":"2023/07/24/2023DASCTF7月/","title":"2023DASCTF暑期挑战赛——Crypto"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2023DASCTF暑期挑战赛——Crypto | DexterJie'Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">DexterJie'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/%E9%A6%96%E9%A1%B5/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/%E5%85%B3%E4%BA%8E/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/%E6%A0%87%E7%AD%BE/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/%E5%88%86%E7%B1%BB/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/%E5%BD%92%E6%A1%A3/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#EzDHKE"><span class="nav-number">1.</span> <span class="nav-text">EzDHKE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EzRSA"><span class="nav-number">2.</span> <span class="nav-text">EzRSA</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dexter"
+      src="/images/0.jpg">
+  <p class="site-author-name" itemprop="name">Dexter</p>
+  <div class="site-description" itemprop="description">一枚Crypto新手</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/%E5%BD%92%E6%A1%A3/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/07/24/2023DASCTF7%E6%9C%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/0.jpg">
+      <meta itemprop="name" content="Dexter">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DexterJie'Blog">
+      <meta itemprop="description" content="一枚Crypto新手">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2023DASCTF暑期挑战赛——Crypto | DexterJie'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2023DASCTF暑期挑战赛——Crypto
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-07-24 12:09:05 / 修改时间：16:10:33" itemprop="dateCreated datePublished" datetime="2023-07-24T12:09:05+08:00">2023-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Wp/" itemprop="url" rel="index"><span itemprop="name">Wp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>复现2023DASCTF暑期挑战赛Crypto方向赛题（没做完）</p>
+<span id="more"></span>
+
+
+
+<h1 id="EzDHKE"><a href="#EzDHKE" class="headerlink" title="EzDHKE"></a>EzDHKE</h1><p>题目</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">from Crypto.Cipher import AES</span><br><span class="line">from hashlib import sha256</span><br><span class="line">from random import randbytes, getrandbits</span><br><span class="line">from flag import flag</span><br><span class="line">def diffie_hellman(g, p, flag):</span><br><span class="line">    alice = getrandbits(1024)</span><br><span class="line">    bob = getrandbits(1024)</span><br><span class="line">    alice_c = pow(g, alice, p)</span><br><span class="line">    bob_c = pow(g, bob, p)</span><br><span class="line">    print(alice_c , bob_c)</span><br><span class="line">    key = sha256(long_to_bytes(pow(bob_c, alice, p))).digest()</span><br><span class="line">    iv = b&quot;dasctfdasctfdasc&quot;</span><br><span class="line">    aes = AES.new(key, AES.MODE_CBC, iv)</span><br><span class="line">    enc = aes.encrypt(flag)</span><br><span class="line">    print(enc)</span><br><span class="line"></span><br><span class="line">def getp():</span><br><span class="line">    p = int(input(&quot;P = &quot;))</span><br><span class="line">    assert isPrime(p)</span><br><span class="line">    assert p.bit_length() &gt;= 1024 and p.bit_length() &lt;= 2048</span><br><span class="line">    g = 2</span><br><span class="line">    diffie_hellman(g, p, flag)</span><br><span class="line"></span><br><span class="line">getp()</span><br></pre></td></tr></table></figure>
+
+<p><strong>flag被ECB加密，已经给出了iv，我们的目的是求key</strong></p>
+<p><strong>而key是关于DH加密的一个值</strong></p>
+<p><code>getp()</code><strong>要求我们传一个1024bit——2048bit的素数p，之后会返回DH加密后的密文</strong></p>
+<p><strong>既然模数p是由我们决定的，那我们传一个很光滑的素数p使得下式可以很快解出来</strong><br>$$<br>g^{Alice} &#x3D; Alice_c \mod p<br>$$<br>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> sympy.ntheory <span class="keyword">import</span> discrete_log</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造一个很光滑的p，即p可以分解成许多小素数之积</span></span><br><span class="line">p = <span class="number">1</span></span><br><span class="line">i = <span class="number">2</span></span><br><span class="line"><span class="keyword">while</span>  isPrime(p+<span class="number">1</span>) ==<span class="literal">False</span> <span class="keyword">or</span> p.bit_length()&lt;<span class="number">1024</span> :</span><br><span class="line">    p *= i</span><br><span class="line">    i = gmpy2.next_prime(i)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(p+1)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 接下来就是解Alice的私钥a</span></span><br><span class="line">g = <span class="number">2</span></span><br><span class="line">p = p+<span class="number">1</span></span><br><span class="line">A = <span class="number">6497613672285956425201511287597625030386480108672286755480826112363203245642148151212994725377254666591461004877010242830011793120730597548153751505160757772485565892716879723968695533469583944347775896608532625158303921475557511270608379047178615651278485591942635948967376062201899549648208278357029126731213145007749394102828405131490762093895807059008547765574826356405482971857911257856639902792877504986919307035949726</span></span><br><span class="line">B = <span class="number">6892121088985539176550813556605471863390995273766116635861764749041016271848611822954736310722897673081939505093515966422841748844230466887689109451140120941395556326881049077033545866417480327268932777262530024548392468111847291103142479432094000792091679519431359554583970331286677886683961473976144527513383303092681236504569767664611631709120184944129897975070357015740122424467791475504388327118892471415926469637241282</span></span><br><span class="line"></span><br><span class="line">enc = <span class="string">b&#x27;`&lt;\xad\x93e\xeez\x8e\x1b\xe2B\xe9\xc7\x166\xc92$\x1a\xda\x86\x12m\x07\xb2\xa5d\x0b.\x13\xee\xa7.y(1\xd0\xf8\xc5\xffL\xf1\xb6_m840&#x27;</span></span><br><span class="line">iv = <span class="string">b&quot;dasctfdasctfdasc&quot;</span></span><br><span class="line">a = discrete_log(p,A,g)</span><br><span class="line"></span><br><span class="line">key = sha256(long_to_bytes(<span class="built_in">pow</span>(B, a, p))).digest()</span><br><span class="line"><span class="comment"># print(a)</span></span><br><span class="line"></span><br><span class="line">aes = AES.new(key, AES.MODE_CBC, iv)</span><br><span class="line">flag = aes.decrypt(enc)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="EzRSA"><a href="#EzRSA" class="headerlink" title="EzRSA"></a>EzRSA</h1><p>题目:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">from secret import secret, flag</span><br><span class="line">def encrypt(m):</span><br><span class="line">    return pow(m, e, n)</span><br><span class="line">assert flag == b&quot;dasctf&#123;&quot; + secret + b&quot;&#125;&quot;</span><br><span class="line">e = 11</span><br><span class="line">p = getPrime(512)</span><br><span class="line">q = getPrime(512)</span><br><span class="line">n = p * q</span><br><span class="line">P = getPrime(512)</span><br><span class="line">Q = getPrime(512)</span><br><span class="line">N = P * Q</span><br><span class="line">gift = P ^ (Q &gt;&gt; 16)</span><br><span class="line"></span><br><span class="line">print(N, gift, pow(n, e, N))</span><br><span class="line">print(encrypt(bytes_to_long(secret)),</span><br><span class="line">    encrypt(bytes_to_long(flag)))</span><br><span class="line"></span><br><span class="line">N = 75000029602085996700582008490482326525611947919932949726582734167668021800854674616074297109962078048435714672088452939300776268788888016125632084529419230038436738761550906906671010312930801751000022200360857089338231002088730471277277319253053479367509575754258003761447489654232217266317081318035524086377</span><br><span class="line">gift = 8006730615575401350470175601463518481685396114003290299131469001242636369747855817476589805833427855228149768949773065563676033514362512835553274555294034</span><br><span class="line">pow(n,e,N) = 14183763184495367653522884147951054630177015952745593358354098952173965560488104213517563098676028516541915855754066719475487503348914181674929072472238449853082118064823835322313680705889432313419976738694317594843046001448855575986413338142129464525633835911168202553914150009081557835620953018542067857943</span><br><span class="line">pow(secret,e,n) = 69307306970629523181683439240748426263979206546157895088924929426911355406769672385984829784804673821643976780928024209092360092670457978154309402591145689825571209515868435608753923870043647892816574684663993415796465074027369407799009929334083395577490711236614662941070610575313972839165233651342137645009</span><br><span class="line">pow(flag,e,n) = 46997465834324781573963709865566777091686340553483507705539161842460528999282057880362259416654012854237739527277448599755805614622531827257136959664035098209206110290879482726083191005164961200125296999449598766201435057091624225218351537278712880859703730566080874333989361396420522357001928540408351500991</span><br></pre></td></tr></table></figure>
+
+<p><strong>首先注意到</strong><code>flag</code><strong>和</strong><code>secret</code><strong>在转成long型之后是有一定差值的，所以想到了相关消息攻击，但是相关消息攻击需要</strong><code>n</code></p>
+<p><strong>已知给了</strong><code>N</code>,<code>P^(Q&gt;&gt;16)</code>,<code>pow(n,e,N)</code><strong>的值，想到把P求出来再解</strong><code>pow(n,e,N)</code></p>
+<p><strong>这里通过爆破的方法求P</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> *</span><br><span class="line">sys.setrecursionlimit(<span class="number">3000</span>)</span><br><span class="line">gift = <span class="number">8006730615575401350470175601463518481685396114003290299131469001242636369747855817476589805833427855228149768949773065563676033514362512835553274555294034</span></span><br><span class="line">N = <span class="number">75000029602085996700582008490482326525611947919932949726582734167668021800854674616074297109962078048435714672088452939300776268788888016125632084529419230038436738761550906906671010312930801751000022200360857089338231002088730471277277319253053479367509575754258003761447489654232217266317081318035524086377</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 低位往高位爆</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">findp</span>(<span class="params">p,q</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(p) == <span class="number">512</span>:</span><br><span class="line">        pp = <span class="built_in">int</span>(p,<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> N % pp == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;p = &quot;</span>,pp)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;q = &quot;</span>,N // pp)</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        l = <span class="built_in">len</span>(p)</span><br><span class="line">        pp = <span class="built_in">int</span>(p,<span class="number">2</span>)</span><br><span class="line">        qq = <span class="built_in">int</span>(q,<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> (pp ^ (qq&gt;&gt;<span class="number">16</span>)) % (<span class="number">2</span> ** l) == gift %(<span class="number">2</span>**l) <span class="keyword">and</span> pp * qq %(<span class="number">2</span> ** l) == N % (<span class="number">2</span>**l):</span><br><span class="line">            findp(<span class="string">&#x27;1&#x27;</span> + p,<span class="string">&#x27;1&#x27;</span> + q)</span><br><span class="line">            findp(<span class="string">&#x27;1&#x27;</span> + p,<span class="string">&#x27;0&#x27;</span> + q)</span><br><span class="line">            findp(<span class="string">&#x27;0&#x27;</span> + p,<span class="string">&#x27;1&#x27;</span> + q)</span><br><span class="line">            findp(<span class="string">&#x27;0&#x27;</span> + p,<span class="string">&#x27;0&#x27;</span> + q)</span><br><span class="line">            </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> trange(<span class="number">2</span>**<span class="number">17</span>,<span class="number">2</span>**<span class="number">16</span>,-<span class="number">1</span>):</span><br><span class="line">    findp(<span class="string">&#x27;1&#x27;</span>,<span class="built_in">bin</span>(i)[<span class="number">2</span>:])</span><br></pre></td></tr></table></figure>
+
+<p><strong>因为不知道Q的低16位是什么，只能爆破一下Q。</strong></p>
+<p><strong>得到</strong></p>
+<p><code>P=8006847171912577069085166877758626954304824756138758266557706391662987806065132448544117840031499707938227955094109779732609035310252723066470330862622641</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">N = <span class="number">75000029602085996700582008490482326525611947919932949726582734167668021800854674616074297109962078048435714672088452939300776268788888016125632084529419230038436738761550906906671010312930801751000022200360857089338231002088730471277277319253053479367509575754258003761447489654232217266317081318035524086377</span></span><br><span class="line">gift = <span class="number">8006730615575401350470175601463518481685396114003290299131469001242636369747855817476589805833427855228149768949773065563676033514362512835553274555294034</span></span><br><span class="line">c = <span class="number">14183763184495367653522884147951054630177015952745593358354098952173965560488104213517563098676028516541915855754066719475487503348914181674929072472238449853082118064823835322313680705889432313419976738694317594843046001448855575986413338142129464525633835911168202553914150009081557835620953018542067857943</span></span><br><span class="line">secret_c = <span class="number">69307306970629523181683439240748426263979206546157895088924929426911355406769672385984829784804673821643976780928024209092360092670457978154309402591145689825571209515868435608753923870043647892816574684663993415796465074027369407799009929334083395577490711236614662941070610575313972839165233651342137645009</span></span><br><span class="line">flag_c = <span class="number">46997465834324781573963709865566777091686340553483507705539161842460528999282057880362259416654012854237739527277448599755805614622531827257136959664035098209206110290879482726083191005164961200125296999449598766201435057091624225218351537278712880859703730566080874333989361396420522357001928540408351500991</span></span><br><span class="line">e = <span class="number">11</span></span><br><span class="line"></span><br><span class="line">P = <span class="number">8006847171912577069085166877758626954304824756138758266557706391662987806065132448544117840031499707938227955094109779732609035310252723066470330862622641</span></span><br><span class="line">Q = N // P</span><br><span class="line">d = gmpy2.invert(e,(P-<span class="number">1</span>)*(Q-<span class="number">1</span>))</span><br><span class="line">n0 = <span class="built_in">pow</span>(c,d,N)</span><br><span class="line"><span class="built_in">print</span>(n0)</span><br><span class="line"><span class="built_in">print</span>(n0.bit_length())</span><br></pre></td></tr></table></figure>
+
+<p><strong>解得</strong></p>
+<p><code>n=8410363083727227985204019150296233995423906412694890252698371563789022268553444336554986979907257458547381598181369620318848637391220240378808211998052306324620364339595355706922325759625785590466818309839146408927226283350419069859849879835884942537531811470537915106995685907400782213608736735862576031042 </code></p>
+<p><strong>检查一下n的位数发现只有1020bit，理论上n应该是1024bit，所以我们手动加上N</strong></p>
+<p><strong>然后就是相关消息攻击解flag</strong></p>
+<p>exp:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line"></span><br><span class="line">def GCD(a,b):</span><br><span class="line">    if b == 0:</span><br><span class="line">        return a.monic()</span><br><span class="line">    else:</span><br><span class="line">        return GCD(b,a%b)</span><br><span class="line">    </span><br><span class="line">n = 83410392685813224685786027640778560521035854332627839979281105731457044069408118952629284089869335506983096270269822559619624906180108256504440296527471536363057103101146262613593336072556587341466840510200003498265457285439149541137127199088938421905041387224795918868443175561632999479925818053898100117419</span><br><span class="line">secret_c = 69307306970629523181683439240748426263979206546157895088924929426911355406769672385984829784804673821643976780928024209092360092670457978154309402591145689825571209515868435608753923870043647892816574684663993415796465074027369407799009929334083395577490711236614662941070610575313972839165233651342137645009</span><br><span class="line">flag_c = 46997465834324781573963709865566777091686340553483507705539161842460528999282057880362259416654012854237739527277448599755805614622531827257136959664035098209206110290879482726083191005164961200125296999449598766201435057091624225218351537278712880859703730566080874333989361396420522357001928540408351500991</span><br><span class="line">e = 11</span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line"></span><br><span class="line">for i in range(100):</span><br><span class="line">    f1 = (bytes_to_long(b&#x27;dasctf&#123;&#x27; + b&#x27;\x00&#x27;*i + b&#x27;&#125;&#x27;) + 256*x)^e - flag_c</span><br><span class="line">    f2 = x^e - secret_c</span><br><span class="line">    if (GCD(f1,f2).coefficients()[0] != 1):</span><br><span class="line">        print(b&#x27;dasctf&#123;&#x27; + long_to_bytes(int(n - GCD(f1,f2).coefficients()[0]))+b&#x27;&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>解释部分代码：</p>
+<ol>
+<li><code>f1 = (bytes_to_long(b&quot;dasctf&#123;&quot; + b&quot;\x00&quot;*i + b&quot;&#125;&quot;) + 256*x)^11 - flag_c</code></li>
+</ol>
+<p><strong>因为</strong><code>dasctf&#123;</code><strong>在高位，所以要补上一些</strong><code>x</code><strong>代表</strong><code>secret</code><strong>的值，因为</strong><code>bytes_to_long()</code><strong>之后是256进制，所以乘上256</strong></p>
+<p><strong>判断条件为：</strong></p>
+<ol start="2">
+<li><code> if (N-GCD(f1,f2).coefficients()[0]) != N-1:</code><strong>是因为如果填充的</strong><code>i</code><strong>个数不对</strong><code>GCD(f1,f2)</code><strong>返回的是1，则</strong></li>
+</ol>
+<p><code>coefficients()</code><strong>返回的也是1了</strong></p>
+<p><strong>值得注意的是</strong></p>
+<p><code>coefficients()</code><strong>这个函数返回的值是多项式中每项的系数，但是是从低次幂往高次幂</strong></p>
+<p>eg:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = x**3 + 2*x**2 + 6*x + 6</span><br><span class="line">f.coefficients() = [6,6,2,1]</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><code>print(long_to_bytes(int(N-GCD(f1,f2).coefficients()[0])))</code></li>
+</ol>
+<p><strong>为什么返回值要在前面加上</strong><code>N-</code></p>
+<p>翻阅大佬博客：</p>
+<p><a target="_blank" rel="noopener" href="https://jayxv.github.io/2020/08/13/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8Bcoppersmith/">密码学学习笔记 之 Coppersmith’s Method | Van1sh的小屋 (jayxv.github.io)</a></p>
+<p><strong>自己弄了一些简单的数进行测试，我的理解是：</strong></p>
+<p><strong>假设</strong></p>
+<p><code>GCD(f1,f2).coefficients()[0]</code><strong>返回的是tmp，而我们要求的</strong> <code>x</code> <strong>和</strong> <code>tmp</code> <strong>满足</strong></p>
+<p><code>x + tmp = n</code></p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Dexter
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://dexterjie.github.io/2023/07/24/2023DASCTF7%E6%9C%88/" title="2023DASCTF暑期挑战赛——Crypto">https://dexterjie.github.io/2023/07/24/2023DASCTF7月/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Wp/" rel="tag"># Wp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/24/%E5%B7%85%E5%B3%B0%E6%9E%81%E5%AE%A22023/" rel="prev" title="巅峰极客2023——Crypto">
+                  <i class="fa fa-chevron-left"></i> 巅峰极客2023——Crypto
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/07/24/%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E5%8D%8F%E8%AE%AE-DH/" rel="next" title="密钥交换协议(DH)">
+                  密钥交换协议(DH) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Dexter</span>
+  </div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>-->
+
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/17/2022 8:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); 
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+        // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
