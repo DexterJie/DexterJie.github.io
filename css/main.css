@@ -1800,6 +1800,15 @@ pre code {
   top: 0;
   width: 100%;
 }
+a:not(.btn) {
+  color: #f89fa0;
+  border-bottom: none;
+}
+a:not(.btn):hover {
+  color: #ff7a7a;
+  font-weight: bold;
+  text-decoration: underline;
+}
 .post-gallery {
   display: flex;
   min-height: 200px;
