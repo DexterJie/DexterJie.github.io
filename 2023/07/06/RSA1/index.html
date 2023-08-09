@@ -39,11 +39,11 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/45.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/0.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/1.png">
-<meta property="og:image" content="d:\Typora\%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9\%E5%AD%A6%E4%B9%A0\Rabin%E4%B8%AD%E7%9A%84%E5%AD%99%E5%AD%90%E5%AE%9A%E7%90%86.jpg">
+<meta property="og:image" content="https://dexterjie.github.io/images/RSA/0.jpg">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/22.png">
-<meta property="og:image" content="d:\Typora\%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9\%E5%AD%A6%E4%B9%A0\1.webp">
+<meta property="og:image" content="https://dexterjie.github.io/images/RSA/1.webp">
 <meta property="article:published_time" content="2023-07-06T14:40:40.000Z">
-<meta property="article:modified_time" content="2023-08-09T06:54:12.059Z">
+<meta property="article:modified_time" content="2023-08-09T07:07:18.506Z">
 <meta property="article:author" content="Dexter">
 <meta property="article:tag" content="RSA">
 <meta name="twitter:card" content="summary">
@@ -246,7 +246,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-08-09 14:54:12" itemprop="dateModified" datetime="2023-08-09T14:54:12+08:00">2023-08-09</time>
+      <time title="修改时间：2023-08-09 15:07:18" itemprop="dateModified" datetime="2023-08-09T15:07:18+08:00">2023-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -317,9 +317,11 @@
 
 <p>证明$m \equiv c^d \mod n$的正确性</p>
 <p>$\because c \equiv m^e \mod n$，$m \equiv c^d \mod  n$</p>
-<p>$\therefore m \equiv (m^e\mod n)^d \mod n \longrightarrow m \equiv (m^e)^d \mod n$根据$(a \mod p)b \mod p \equiv a^b \mod p$</p>
+<p>$\therefore m \equiv (m^e\mod n)^d \mod n \longrightarrow m \equiv (m^e)^d \mod n$</p>
+<p>根据$(a \mod p)b \mod p \equiv a^b \mod p$</p>
 <p>$\therefore m\equiv m^{ed} \mod n$，又$ed \equiv 1 \mod \phi(n) \longrightarrow ed &#x3D; k\phi(n)+1$</p>
-<p>$\therefore m \equiv m ^{k\phi(n)+1} \mod n \longrightarrow m \equiv (m^{\phi(n)})^k×m \mod n$，由费马小定理得$m^{\phi(n)} \equiv 1 \mod n $</p>
+<p>$\therefore m \equiv m ^{k\phi(n)+1} \mod n \longrightarrow m \equiv (m^{\phi(n)})^k×m \mod n$</p>
+<p>由费马小定理得$m^{\phi(n)} \equiv 1 \mod n $</p>
 <p>$\therefore m \equiv 1^k ×m \mod n$，$\therefore m \equiv c^d \mod n$</p>
 <h1 id="一、基于分解n的题目"><a href="#一、基于分解n的题目" class="headerlink" title="一、基于分解n的题目"></a>一、基于分解n的题目</h1><h2 id="1-用yafu分解"><a href="#1-用yafu分解" class="headerlink" title="1.用yafu分解"></a>1.用yafu分解</h2><h2 id="2-网站分解"><a href="#2-网站分解" class="headerlink" title="2.网站分解"></a>2.网站分解</h2><h2 id="3-费马分解"><a href="#3-费马分解" class="headerlink" title="3.费马分解"></a>3.费马分解</h2><h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">n = 12627644643778588563638920097915399454513514338804142285365906525498881036764131263143503359846189659273574532609463345820199502529021505655249992763681092637840409087205147095497477412031460598408163901210084467516709264700724398765301043908384308244747517893224665577128486689416162459250095126318456522046726204794830519283112518017007468770465828497144764208737754275011224549145753948172880930824906241704072415618131966725150546352452195727712056875106693907690990407658130836472884891082069644890044024145259903993177177196801509187283280149791400422260709944706691099262186583269852628892867781015062638406807</span><br><span class="line">e = 65537</span><br><span class="line">c = 3591154430994525075059034292233285219547469362782194889629270181283842636528606554393490851841066761509914849524082427752928544931823147005056532710833510595339404286404496491815089547021604266428940702481584786412593056050015881926826382036205406303525545716475450640777471292475111436226636460600345957363695624982558394414290121846251722500596533341384706714159205414604934501768918663557451374023537565102442827170460775303421150229829840660742855663501969208548706192593969737261023358057081741247088819534013372830024084918363322257487890942468889177188305118367719047889896681307253995123323963920988776643105</span><br></pre></td></tr></table></figure>
 
@@ -722,10 +724,10 @@
 <p>同理$m_q &#x3D; c^{\frac{q+1}{4}}$</p>
 <p>解中国剩余定理</p>
 <p><img src="/../images/RSA/1.png"></p>
-<p><img src="D:\Typora\新建文件夹\学习\Rabin中的孙子定理.jpg" alt="Rabin中的孙子定理"></p>
+<p><img src="/../images/RSA/0.jpg" alt="Rabin中的孙子定理"></p>
 <p> <img src="/../images/RSA/22.png"></p>
 <h2 id="存疑"><a href="#存疑" class="headerlink" title="存疑"></a>存疑</h2><p>m3这个解不太理解，<strong>查了点资料，好像解是通过公式求得的：</strong></p>
-<p><img src="D:\Typora\新建文件夹\学习\1.webp" alt="1"></p>
+<p><img src="/../images/RSA/1.webp" alt="1"></p>
 <h2 id="例题-5"><a href="#例题-5" class="headerlink" title="例题"></a>例题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import gmpy2</span><br><span class="line">import libnum</span><br><span class="line">import random</span><br><span class="line">import uuid</span><br><span class="line"></span><br><span class="line">flag = &quot;flag&#123;&quot; + str(uuid.uuid4()) + &quot;&#125;&quot;</span><br><span class="line">print(flag)</span><br><span class="line">m = libnum.s2n(flag)</span><br><span class="line">p = libnum.generate_prime(512)</span><br><span class="line">q = libnum.generate_prime(512)</span><br><span class="line">n = p * q</span><br><span class="line">e = 2</span><br><span class="line">c = pow(m, e, n)</span><br><span class="line">print(&quot;p=&quot;, p)</span><br><span class="line">print(&quot;q=&quot;, q)</span><br><span class="line">print(&quot;n=&quot;, n)</span><br><span class="line">print(&quot;c=&quot;, c)</span><br><span class="line">print(&quot;e=&quot;, e)</span><br></pre></td></tr></table></figure>
 
 <p>exp:</p>
