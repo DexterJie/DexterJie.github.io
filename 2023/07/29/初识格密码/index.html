@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/Lattice2/8.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/Lattice2/9.png">
 <meta property="article:published_time" content="2023-07-29T08:16:16.000Z">
-<meta property="article:modified_time" content="2023-08-09T13:36:59.940Z">
+<meta property="article:modified_time" content="2023-08-10T05:50:03.770Z">
 <meta property="article:author" content="Dexter">
 <meta property="article:tag" content="Lattice">
 <meta name="twitter:card" content="summary">
@@ -246,7 +246,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-08-09 21:36:59" itemprop="dateModified" datetime="2023-08-09T21:36:59+08:00">2023-08-09</time>
+      <time title="修改时间：2023-08-10 13:50:03" itemprop="dateModified" datetime="2023-08-10T13:50:03+08:00">2023-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -435,8 +435,10 @@
 <p>已知等式： $a \equiv r^{-1}flag (\mod p)$</p>
 <p>$\therefore flag \equiv ar (\mod p)$</p>
 <p>即$flag &#x3D; ar + kp$</p>
-<p>构造格</p>
+<p>$a&#x3D;1023bit$</p>
+<p>构造格$\mathcal{L}$</p>
 <p><img src="/../images/Lattice2/6.png"></p>
+<p>$\vec{v} &#x3D; (flag,k)且||\vec{v}||&lt;\sqrt{2}Det(\mathcal{L})$</p>
 <p>exp:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import libnum</span><br><span class="line"></span><br><span class="line">a = 79047880584807269054505204752966875903807058486141783766561521134845058071995038638934174701175782152417081883728635655442964823110171015637136681101856684888576194849310180873104729087883030291173114003115983405311162152717385429179852150760696213217464522070759438318396222163013306629318041233934326478247</span><br><span class="line">p = 90596199661954314748094754376367411728681431234103196427120607507149461190520498120433570647077910673128371876546100672985278698226714483847201363857703757534255187784953078548908192496602029047268538065300238964884068500561488409356401505220814317044301436585177722826939067622852763442884505234084274439591</span><br><span class="line"></span><br><span class="line">Ge = Matrix(ZZ,[[a,0],[p,1]])</span><br><span class="line"></span><br><span class="line">m,k = Ge.LLL()[0]</span><br><span class="line">m = abs(m)</span><br><span class="line">print(libnum.n2s(int(m)))</span><br></pre></td></tr></table></figure>
 
@@ -542,7 +544,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:07</span>
+    <span title="站点阅读时长">3:11</span>
   </span>
 </div>
 <div class="busuanzi-count">
