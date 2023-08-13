@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/AES/CBC.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/AES/CTR.png">
 <meta property="article:published_time" content="2023-07-23T01:48:01.000Z">
-<meta property="article:modified_time" content="2023-08-07T07:15:56.230Z">
+<meta property="article:modified_time" content="2023-08-13T07:54:01.916Z">
 <meta property="article:author" content="Dexter">
 <meta property="article:tag" content="AES">
 <meta name="twitter:card" content="summary">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECB%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">ECB模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CBC%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">CBC模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HNCTF-2022-WEEK3-AES"><span class="nav-number">2.2.</span> <span class="nav-text">[HNCTF 2022 WEEK3]AES</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CTR%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">CTR模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98-1"><span class="nav-number">3.1.</span> <span class="nav-text">例题</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECB%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">ECB模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CBC%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">CBC模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HNCTF-2022-WEEK3-AES"><span class="nav-number">2.2.</span> <span class="nav-text">[HNCTF 2022 WEEK3]AES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E6%B4%B5%E6%9D%AF-2020-easyaes"><span class="nav-number">2.3.</span> <span class="nav-text">[安洵杯 2020]easyaes</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CTR%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">CTR模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98-1"><span class="nav-number">3.1.</span> <span class="nav-text">例题</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -234,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-08-07 15:15:56" itemprop="dateModified" datetime="2023-08-07T15:15:56+08:00">2023-08-07</time>
+      <time title="修改时间：2023-08-13 15:54:01" itemprop="dateModified" datetime="2023-08-13T15:54:01+08:00">2023-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -260,14 +260,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.8k</span>
+      <span>2.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -297,7 +297,7 @@
 <p><strong>值得注意的是，明文m和密钥key的长度必须是16的倍数</strong></p>
 <h1 id="CBC模式"><a href="#CBC模式" class="headerlink" title="CBC模式"></a>CBC模式</h1><p><strong>密码分组链接模式，CBC(Cipher Block Chaining)</strong></p>
 <p><img src="/../images/AES/CBC.png"></p>
-<p><strong>在CBC模式中，每个明文块先与前一个密文块进行异或后，再进行加密。对于第一块明文，引入初始向量</strong><code>iv</code><strong>这个概念</strong></p>
+<p><strong>在CBC模式中，每个明文块先与前一个密文块进行异或后，再进行ECB加密后得到密文分组。对于第一块明文，引入初始向量</strong><code>iv</code><strong>这个概念</strong></p>
 <p><strong>每个明文块应该是128bit,或者128的倍数</strong></p>
 <p><strong>python实现</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加密</span></span><br><span class="line">iv = random.getrandbits(<span class="number">128</span>)</span><br><span class="line">iv = long_to_bytes(iv)</span><br><span class="line">key = random.getrandbits(<span class="number">128</span>)</span><br><span class="line">key = long_to_bytes(key)</span><br><span class="line"><span class="built_in">print</span>(key,iv,sep=<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">aes = AES.new(key,AES.MODE_CBC,iv)</span><br><span class="line">m = <span class="string">b&#x27;abcdefghijklmnop&#x27;</span></span><br><span class="line">c = aes.encrypt(m)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解密</span></span><br><span class="line">key = <span class="string">b&#x27;\xd4\xc5\x0f\xf3\x89\xd3[\x94\xbc\xde\xacds\xae\xf3\x1b&#x27;</span></span><br><span class="line">iv = <span class="string">b&#x27;\xf0\x90\xd1\x99\r\xb1\xa7\x81\xa8\xae\xbbQ\xec\xaa\xef\x10&#x27;</span></span><br><span class="line">c = <span class="string">b&#x27;\x95&#123;\x80\xffS\x14L^\x9e?\x08~y\nH1&#x27;</span></span><br><span class="line"></span><br><span class="line">decryption = AES.new(key,AES.MODE_CBC,iv)</span><br><span class="line">plaintext = decryption.decrypt(c)</span><br><span class="line"><span class="built_in">print</span>(plaintext)</span><br></pre></td></tr></table></figure>
@@ -320,6 +320,15 @@
 
 <p>对每组明文进行ECB加密，并且将加密后的密文作为下一组加密的密钥。我们除了第一组密文无法解密，其他密文都可以解出</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line">ct = <span class="string">b&#x27;\x179\xb8l\x97\xbew\xc2\xd5f~\x8e\xdc\xf2\x9b\xabR\xa9a\xd2\xf4\xde\xd6|\xd1\x9f\xe9q\x1d\xfcm\xfbj\xe9\x9e\xab\xf5fL\xb3\xb5_\xa5\x16\x8e\x7f\x9fV`\x8b\x16\xa1\xa6)\x08\x97\x91\xbd3\x1d\xeb\\\x86\xa2\xd6\x94&gt;\xf3\xfdt\xd9\x14\xf3\xfc\xe2\x02\xd6\xc4\xcfq&quot;\x1a\x14~2]4\x9f\xc9\x88\xf8\x12\xb6\xa2\xd7\xec\x0b\x7f\xd4d\xdc\xc6\xb4]\x10u\xc6f\x97m\xccA\x82\x02\xa5gh\x85\x85Wz\xd9.\xff\x9bx\x99J\x0e\x86\x16\x90\xad\x1e\x17\x86\x95\xb8S\x17\xea\x93v\xd0&#x27;</span></span><br><span class="line">ct = [ct[i:i+<span class="number">16</span>] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(ct), <span class="number">16</span>)]</span><br><span class="line"></span><br><span class="line">plain = <span class="string">b&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(ct)):</span><br><span class="line">    cipher = AES.new(ct[i-<span class="number">1</span>], AES.MODE_ECB)</span><br><span class="line">    plain += cipher.decrypt(ct[i])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(plain)</span><br></pre></td></tr></table></figure>
+
+<h2 id="安洵杯-2020-easyaes"><a href="#安洵杯-2020-easyaes" class="headerlink" title="[安洵杯 2020]easyaes"></a>[安洵杯 2020]easyaes</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long</span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">from</span> key <span class="keyword">import</span> key</span><br><span class="line"></span><br><span class="line">iv = flag.strip(<span class="string">b&#x27;d0g3&#123;&#x27;</span>).strip(<span class="string">b&#x27;&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">LENGTH = <span class="built_in">len</span>(key)</span><br><span class="line"><span class="keyword">assert</span> LENGTH == <span class="number">16</span></span><br><span class="line"></span><br><span class="line">hint = os.urandom(<span class="number">4</span>) * <span class="number">8</span></span><br><span class="line"><span class="built_in">print</span>(bytes_to_long(hint)^bytes_to_long(key))</span><br><span class="line"></span><br><span class="line">msg = <span class="string">b&#x27;Welcome to this competition, I hope you can have fun today!!!!!!&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypto</span>(<span class="params">message</span>):</span><br><span class="line">    aes = AES.new(key,AES.MODE_CBC,iv)</span><br><span class="line">    <span class="keyword">return</span> aes.encrypt(message)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(binascii.hexlify(encrypto(msg))[-<span class="number">32</span>:])</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">56631233292325412205528754798133970783633216936302049893130220461139160682777</span></span><br><span class="line"><span class="string">b&#x27;3c976c92aff4095a23e885b195077b66&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>求初始向量</p>
+<p>首先注意到$key$和$hint$的长度不符，所以给的$hint$中有一半是原来<code>os.urandom(4)</code>的值。</p>
+<p>可以通过这一特点恢复$key$</p>
+<p>然后依次求前一块密文，最后求得iv</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor <span class="keyword">as</span> xor</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> binascii <span class="keyword">import</span> unhexlify</span><br><span class="line"></span><br><span class="line">tmp = <span class="number">56631233292325412205528754798133970783633216936302049893130220461139160682777</span></span><br><span class="line"><span class="comment">#print(long_to_bytes(tmp))</span></span><br><span class="line">hint = <span class="string">b&#x27;&#125;4$d&#x27;</span>*<span class="number">8</span></span><br><span class="line"></span><br><span class="line">key = long_to_bytes(tmp^bytes_to_long(hint))</span><br><span class="line"></span><br><span class="line">msg = <span class="string">b&#x27;Welcome to this competition, I hope you can have fun today!!!!!!&#x27;</span></span><br><span class="line">cipher = <span class="string">&#x27;3c976c92aff4095a23e885b195077b66&#x27;</span></span><br><span class="line">c4 = <span class="built_in">bytes</span>.fromhex(cipher)</span><br><span class="line"></span><br><span class="line">msgblock = [msg[i*<span class="number">16</span>:(i+<span class="number">1</span>)*<span class="number">16</span>] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(msg)//<span class="number">16</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">c</span>):</span><br><span class="line">    aes = AES.new(key,AES.MODE_ECB)</span><br><span class="line">    <span class="keyword">return</span> aes.decrypt(c)</span><br><span class="line"></span><br><span class="line">c3 = xor(decrypt(c4),msgblock[<span class="number">3</span>])</span><br><span class="line">c2 = xor(decrypt(c3),msgblock[<span class="number">2</span>])</span><br><span class="line">c1 = xor(decrypt(c2),msgblock[<span class="number">1</span>])</span><br><span class="line">flag = <span class="string">b&#x27;NSSCTF&#123;&#x27;</span> + xor(decrypt(c1),msgblock[<span class="number">0</span>]) + <span class="string">b&#x27;&#125;&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -429,13 +438,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">52k</span>
+    <span title="站点总字数">56k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:11</span>
+    <span title="站点阅读时长">3:23</span>
   </span>
 </div>
 <div class="busuanzi-count">

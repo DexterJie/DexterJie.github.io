@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dexterjie.github.io/images/ECC/0.png">
 <meta property="article:published_time" content="2023-07-25T06:48:53.000Z">
-<meta property="article:modified_time" content="2023-07-27T10:44:28.487Z">
+<meta property="article:modified_time" content="2023-08-13T07:13:14.285Z">
 <meta property="article:author" content="Dexter">
 <meta property="article:tag" content="现代密码">
 <meta property="article:tag" content="非对称加密">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF"><span class="nav-number">1.</span> <span class="nav-text">什么是椭圆曲线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFECC%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什么是ECC？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">1.密钥生成：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8A%A0%E5%AF%86"><span class="nav-number">2.2.</span> <span class="nav-text">2.加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%A7%A3%E5%AF%86"><span class="nav-number">2.3.</span> <span class="nav-text">3.解密</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sagemath%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">sagemath实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%B8%8A%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">用上的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.2.</span> <span class="nav-text">加密实例:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%AF%86%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.3.</span> <span class="nav-text">解密实例:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8Crypto%E5%BA%93%E7%94%9F%E6%88%90ECC%E5%AF%86%E9%92%A5"><span class="nav-number">3.4.</span> <span class="nav-text">用Crypto库生成ECC密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E7%A7%8D%E5%85%AC%E5%BC%80%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">3.5.</span> <span class="nav-text">几种公开椭圆曲线的参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">参考文章：</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF"><span class="nav-number">1.</span> <span class="nav-text">什么是椭圆曲线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFECC%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什么是ECC？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">1.密钥生成：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8A%A0%E5%AF%86"><span class="nav-number">2.2.</span> <span class="nav-text">2.加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%A7%A3%E5%AF%86"><span class="nav-number">2.3.</span> <span class="nav-text">3.解密</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sagemath%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">sagemath实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%B8%8A%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">用上的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.2.</span> <span class="nav-text">加密实例:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%AF%86%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.3.</span> <span class="nav-text">解密实例:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8Crypto%E5%BA%93%E7%94%9F%E6%88%90ECC%E5%AF%86%E9%92%A5"><span class="nav-number">3.4.</span> <span class="nav-text">用Crypto库生成ECC密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E7%A7%8D%E5%85%AC%E5%BC%80%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">3.5.</span> <span class="nav-text">几种公开椭圆曲线的参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#watevrCTF-2019-ECC-RSA"><span class="nav-number">4.1.</span> <span class="nav-text">[watevrCTF 2019]ECC-RSA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">参考文章：</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -234,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-27 18:44:28" itemprop="dateModified" datetime="2023-07-27T18:44:28+08:00">2023-07-27</time>
+      <time title="修改时间：2023-08-13 15:13:14" itemprop="dateModified" datetime="2023-08-13T15:13:14+08:00">2023-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -260,14 +260,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
+      <span>1.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -283,12 +283,13 @@
 
 
 <h1 id="什么是椭圆曲线"><a href="#什么是椭圆曲线" class="headerlink" title="什么是椭圆曲线"></a>什么是椭圆曲线</h1><p>书本上椭圆曲线的定义相对复杂。</p>
-<p>定义如下<br>$$<br>一条椭圆曲线是在射影平面上满足威尔斯特拉斯方程（Weierstrass）所有点的集合。<br>$$<br>$$<br>Y^2Z + a_1XYZ + a_3YZ^2 &#x3D; X^3+a_2X^2Z +a_4XZ^2+a_6Z^3<br>$$</p>
-<p>我们讲简化版的Weierstrass方程：<br>$$<br>E：y^2 &#x3D; x^3 + ax + b<br>$$</p>
-<p>$$<br>其中，<br>$$</p>
-<p>$$<br>(1) \Delta &#x3D; − 16 (4a^3 + 27 b) ≠ 0,用来保证曲线是光滑的，即曲线上的所有点都没有两个或者两个以上不同的切线<br>$$</p>
-<p>$$<br>(2) a,b \in K,K为E的基础域<br>$$</p>
-<p>$$<br>(3) 点O_{\infty}是曲线唯一的无穷远点<br>$$</p>
+<p>定义如下</p>
+<p>一条椭圆曲线是在射影平面上满足威尔斯特拉斯方程（Weierstrass）所有点的集合。<br>$$<br>Y^2Z + a_1XYZ + a_3YZ^2 &#x3D; X^3+a_2X^2Z +a_4XZ^2+a_6Z^3<br>$$</p>
+<p>我们讲简化版的Weierstrass方程：<br>$$<br>E：y^2 \equiv x^3 + ax + b \mod p<br>$$</p>
+<p>其中，</p>
+<p>(1)$ \Delta$ &#x3D; − 16 (4a^3 + 27 b) ≠ 0,用来保证曲线是光滑的，即曲线上的所有点都没有两个或者两个以上不同的切线</p>
+<p>(2) a,b $\in$ K,K为E的基础域</p>
+<p>(3) 点$O_{\infty}$是曲线唯一的无穷远点</p>
 <h1 id="什么是ECC？"><a href="#什么是ECC？" class="headerlink" title="什么是ECC？"></a>什么是ECC？</h1><p>ECC全称为椭圆曲线加密(EllipseCurve Cryptography)，是一种基于椭圆曲线数学的公钥密码。</p>
 <p>这里给一个加密实例:</p>
 <p><img src="/../../images/ECC/0.png"></p>
@@ -335,28 +336,17 @@
 
 <h2 id="几种公开椭圆曲线的参数"><a href="#几种公开椭圆曲线的参数" class="headerlink" title="几种公开椭圆曲线的参数"></a>几种公开椭圆曲线的参数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#NIST P-256（Secp256r1）</span><br><span class="line">#p = 2^224(2^32 − 1) + 2^192 + 2^96 − 1</span><br><span class="line">p = 115792089210356248762697446949407573530086143415290314195533631308867097853951</span><br><span class="line">a = 115792089210356248762697446949407573530086143415290314195533631308867097853948</span><br><span class="line">b = 41058363725152142129326129780047268409114441015993725554835256314039467401291</span><br><span class="line"></span><br><span class="line">#Secp256k1（比特币使用）</span><br><span class="line">#p = 2^256 − 2^32 − 2^9 − 2^8 − 2^7 − 2^6 − 2^4 − 1 = 2^256 – 2^32 – 977 </span><br><span class="line">p = 115792089237316195423570985008687907853269984665640564039457584007908834671663</span><br><span class="line">a = 0</span><br><span class="line">b = 7</span><br><span class="line"></span><br><span class="line">#NIST P-384</span><br><span class="line">#p = 2^384 – 2^128 – 2^96 + 2^32 – 1</span><br><span class="line">p = 39402006196394479212279040100143613805079739270465446667948293404245721771496870329047266088258938001861606973112319</span><br><span class="line">a = -3</span><br><span class="line">b = 27580193559959705877849011840389048093056905856361568521428707301988689241309860865136260764883745107765439761230575</span><br><span class="line"></span><br><span class="line">#NIST P-521</span><br><span class="line">p = 6864797660130609714981900799081393217269435300143305409394463459185543183397656052122559640661454554977296311391480858037121987999716643812574028291115057151</span><br><span class="line">a = -3</span><br><span class="line">b = 1093849038073734274511112390766805569936207598951683748994586394495953116150735016013708737573759623248592132296706313309438452531591012912142327488478985984</span><br></pre></td></tr></table></figure>
 
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><h2 id="watevrCTF-2019-ECC-RSA"><a href="#watevrCTF-2019-ECC-RSA" class="headerlink" title="[watevrCTF 2019]ECC-RSA"></a>[watevrCTF 2019]ECC-RSA</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fastecdsa.curve <span class="keyword">import</span> P521 <span class="keyword">as</span> Curve</span><br><span class="line"><span class="keyword">from</span> fastecdsa.point <span class="keyword">import</span> Point</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long, isPrime</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> urandom</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> getrandbits</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gen_rsa_primes</span>(<span class="params">G</span>):</span><br><span class="line">	urand = bytes_to_long(urandom(<span class="number">521</span>//<span class="number">8</span>))</span><br><span class="line">	<span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">		s = getrandbits(<span class="number">521</span>) ^ urand</span><br><span class="line"></span><br><span class="line">		Q = s*G</span><br><span class="line">		<span class="keyword">if</span> isPrime(Q.x) <span class="keyword">and</span> isPrime(Q.y):</span><br><span class="line">			<span class="built_in">print</span>(<span class="string">&quot;ECC Private key:&quot;</span>, <span class="built_in">hex</span>(s))</span><br><span class="line">			<span class="built_in">print</span>(<span class="string">&quot;RSA primes:&quot;</span>, <span class="built_in">hex</span>(Q.x), <span class="built_in">hex</span>(Q.y))</span><br><span class="line">			<span class="built_in">print</span>(<span class="string">&quot;Modulo:&quot;</span>, <span class="built_in">hex</span>(Q.x * Q.y))</span><br><span class="line">			<span class="keyword">return</span> (Q.x, Q.y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">flag = <span class="built_in">int</span>.from_bytes(<span class="built_in">input</span>(), byteorder=<span class="string">&quot;big&quot;</span>)</span><br><span class="line"></span><br><span class="line">ecc_p = Curve.p</span><br><span class="line">a = Curve.a</span><br><span class="line">b = Curve.b</span><br><span class="line"></span><br><span class="line">Gx = Curve.gx</span><br><span class="line">Gy = Curve.gy</span><br><span class="line">G = Point(Gx, Gy, curve=Curve)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">p, q = gen_rsa_primes(G)</span><br><span class="line">n = p*q</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">file_out = <span class="built_in">open</span>(<span class="string">&quot;downloads/ecc-rsa.txt&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line"></span><br><span class="line">file_out.write(<span class="string">&quot;ECC Curve Prime: &quot;</span> + <span class="built_in">hex</span>(ecc_p) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">file_out.write(<span class="string">&quot;Curve a: &quot;</span> + <span class="built_in">hex</span>(a) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">file_out.write(<span class="string">&quot;Curve b: &quot;</span> + <span class="built_in">hex</span>(b) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">file_out.write(<span class="string">&quot;Gx: &quot;</span> + <span class="built_in">hex</span>(Gx) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">file_out.write(<span class="string">&quot;Gy: &quot;</span> + <span class="built_in">hex</span>(Gy) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">file_out.write(<span class="string">&quot;e: &quot;</span> + <span class="built_in">hex</span>(e) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">file_out.write(<span class="string">&quot;p * q: &quot;</span> + <span class="built_in">hex</span>(n) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">c = <span class="built_in">pow</span>(flag, e, n)</span><br><span class="line">file_out.write(<span class="string">&quot;ciphertext: &quot;</span> + <span class="built_in">hex</span>(c) + <span class="string">&quot;\n&quot;</span>)</span><br></pre></td></tr></table></figure>
 
+<p>已知椭圆曲线参数$p,a,b$即椭圆曲线方程为$y^2 \equiv x^3 + ax + b \mod p$</p>
+<p>$\therefore q^2 \equiv p^3 + ap + b \mod p$ 同乘$p^2$得$n^2 \equiv p^5 + ap^3 + bp^2 \mod p$</p>
+<p>解方程求$p$</p>
+<p>exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">ecc_p = <span class="number">0x1ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</span></span><br><span class="line">a = -<span class="number">3</span></span><br><span class="line">b = <span class="number">0x51953eb9618e1c9a1f929a21a0b68540eea2da725b99b315f3b8b489918ef109e156193951ec7e937b1652c0bd3bb1bf073573df883d2c34f1ef451fd46b503f00</span></span><br><span class="line">Gx = <span class="number">0xc6858e06b70404e9cd9e3ecb662395b4429c648139053fb521f828af606b4d3dbaa14b5e77efe75928fe1dc127a2ffa8de3348b3c1856a429bf97e7e31c2e5bd66</span></span><br><span class="line">Gy = <span class="number">0x11839296a789a3bc0045c8a5fb42c7d1bd998f54449579b446817afbd17273e662c97ee72995ef42640c550b9013fad0761353c7086a272c24088be94769fd16650</span></span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">n = <span class="number">0x118aaa1add80bdd0a1788b375e6b04426c50bb3f9cae0b173b382e3723fc858ce7932fb499cd92f5f675d4a2b05d2c575fc685f6cf08a490d6c6a8a6741e8be4572adfcba233da791ccc0aee033677b72788d57004a776909f6d699a0164af514728431b5aed704b289719f09d591f5c1f9d2ed36a58448a9d57567bd232702e9b28f</span></span><br><span class="line">c = <span class="number">0x3862c872480bdd067c0c68cfee4527a063166620c97cca4c99baff6eb0cf5d42421b8f8d8300df5f8c7663adb5d21b47c8cb4ca5aab892006d7d44a1c5b5f5242d88c6e325064adf9b969c7dfc52a034495fe67b5424e1678ca4332d59225855b7a9cb42db2b1db95a90ab6834395397e305078c5baff78c4b7252d7966365afed9e</span></span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = PolynomialRing(Zmod(ecc_p))</span><br><span class="line"></span><br><span class="line">f = x^<span class="number">5</span> + a*x^<span class="number">3</span> + b*x^<span class="number">2</span> - n^<span class="number">2</span></span><br><span class="line"></span><br><span class="line">p = f.roots()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> p:</span><br><span class="line">    t = gcd(Integer(i[<span class="number">0</span>]),n)</span><br><span class="line">    <span class="keyword">if</span> t != <span class="number">1</span>:</span><br><span class="line">        p = t</span><br><span class="line">        q = n // p</span><br><span class="line">        d = gmpy2.invert(e,(p-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">        m = <span class="built_in">pow</span>(c,d,n)</span><br><span class="line">        <span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(m)))</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p>需要注意的是，一般我们在sagemath中赋值的变量都是<code>sage.rings.integer.Integer</code>的数据类型</p>
+<p>而解出来的$p$是<code>sage.rings.finite_rings.integer_mod.IntegerMod_gmp</code></p>
+<p>两个数据类型做gcd运算会获得1，所以我们需要先把$p$转成<code>int</code>或者<code>Integer</code></p>
 <h1 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h1><p>[ECC椭圆曲线加密算法—加解密（SageMath实现） - lnjoy - 博客园 (cnblogs.com)](<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lnjoy/archive/2020/10/12/ecc.html#:~:text=%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BFEp">https://www.cnblogs.com/lnjoy/archive/2020/10/12/ecc.html#:~:text=椭圆曲线Ep</a> (a%2Cb)（p为模数），基点（生成元）G (x%2Cy)，G点的阶数n，私钥k，公钥K (x%2Cy)，随机整数r，明文为一点m (x%2Cy)，密文为两点 c1 (x%2Cy)和 c2,m %3D c1 -k* c2 （%3D c1 -r*K))</p>
 <p>[ECC - CTF Wiki (ctf-wiki.org)](<a target="_blank" rel="noopener" href="https://ctf-wiki.org/crypto/asymmetric/discrete-log/ecc/#:~:text=ECC">https://ctf-wiki.org/crypto/asymmetric/discrete-log/ecc/#:~:text=ECC</a> - CTF Wiki ECC 概述,ECC 全称为椭圆曲线加密，EllipseCurve Cryptography，是一种基于椭圆曲线数学的公钥密码。 与传统的基于大质数因子分解困难性的加密方法不同，ECC 依赖于解决椭圆曲线离散对数问题的困难性。 它的优势主要在于相对于其它方法，它可以在使用较短密钥长度的同时保持相同的密码强度。)</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45198339/article/details/128756070">(10条消息) CTF学习笔记二——ECC加密_ecc加密 代码_457591978的博客-CSDN博客</a></p>
@@ -447,13 +437,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">52k</span>
+    <span title="站点总字数">56k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:11</span>
+    <span title="站点阅读时长">3:23</span>
   </span>
 </div>
 <div class="busuanzi-count">
