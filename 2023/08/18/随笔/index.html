@@ -20,30 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"dexterjie.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="简述一下OPT">
+    <meta name="description" content="今天是2023年8月18日，农历七月初三，正是笔者的生日。 总结一些18岁这一年的经历吧。 先从高考结束讲起。 三天的高考中，第一天语数考的十分不理想，估摸着自己要失败了，晚上并没有复习第二天的科目，和朋友打了几把游戏便睡了。后两天的考试伴随雨天，搞得人怪难受的，除了化学，其他科目和平常感觉差不多。考完政治便急匆匆回了家，没有像其他人一样，朋友家人在门口送花。这一点我无所谓，我把只是把高考当成一次">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OTP(一次一密加密法)">
-<meta property="og:url" content="https://dexterjie.github.io/2023/07/05/%E6%B5%81%E5%AF%86%E7%A0%81/OTP-%E4%B8%80%E6%AC%A1%E4%B8%80%E5%AF%86-%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:title" content="随笔">
+<meta property="og:url" content="https://dexterjie.github.io/2023/08/18/%E9%9A%8F%E7%AC%94/index.html">
 <meta property="og:site_name" content="DexterJie&#39;Blog">
-<meta property="og:description" content="简述一下OPT">
+<meta property="og:description" content="今天是2023年8月18日，农历七月初三，正是笔者的生日。 总结一些18岁这一年的经历吧。 先从高考结束讲起。 三天的高考中，第一天语数考的十分不理想，估摸着自己要失败了，晚上并没有复习第二天的科目，和朋友打了几把游戏便睡了。后两天的考试伴随雨天，搞得人怪难受的，除了化学，其他科目和平常感觉差不多。考完政治便急匆匆回了家，没有像其他人一样，朋友家人在门口送花。这一点我无所谓，我把只是把高考当成一次">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-05T13:31:54.000Z">
-<meta property="article:modified_time" content="2023-07-26T03:41:51.684Z">
+<meta property="article:published_time" content="2023-08-18T00:18:18.000Z">
+<meta property="article:modified_time" content="2023-08-18T01:26:59.384Z">
 <meta property="article:author" content="Dexter">
-<meta property="article:tag" content="现代密码">
-<meta property="article:tag" content="流密码">
-<meta property="article:tag" content="OTP">
+<meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://dexterjie.github.io/2023/07/05/%E6%B5%81%E5%AF%86%E7%A0%81/OTP-%E4%B8%80%E6%AC%A1%E4%B8%80%E5%AF%86-%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F/">
+<link rel="canonical" href="https://dexterjie.github.io/2023/08/18/%E9%9A%8F%E7%AC%94/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2023/07/05/%E6%B5%81%E5%AF%86%E7%A0%81/OTP-%E4%B8%80%E6%AC%A1%E4%B8%80%E5%AF%86-%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F/","path":"2023/07/05/流密码/OTP-一次一密-加密方式/","title":"OTP(一次一密加密法)"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2023/08/18/%E9%9A%8F%E7%AC%94/","path":"2023/08/18/随笔/","title":"随笔"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>OTP(一次一密加密法) | DexterJie'Blog</title>
+<title>随笔 | DexterJie'Blog</title>
   
 
 
@@ -195,7 +193,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/07/05/%E6%B5%81%E5%AF%86%E7%A0%81/OTP-%E4%B8%80%E6%AC%A1%E4%B8%80%E5%AF%86-%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/08/18/%E9%9A%8F%E7%AC%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/0.jpg">
@@ -208,12 +206,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="OTP(一次一密加密法) | DexterJie'Blog">
+      <meta itemprop="name" content="随笔 | DexterJie'Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          OTP(一次一密加密法)
+          随笔
         </h1>
 
         <div class="post-meta-container">
@@ -223,15 +221,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-07-05 21:31:54" itemprop="dateCreated datePublished" datetime="2023-07-05T21:31:54+08:00">2023-07-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-26 11:41:51" itemprop="dateModified" datetime="2023-07-26T11:41:51+08:00">2023-07-26</time>
+      <time title="创建时间：2023-08-18 08:18:18 / 修改时间：09:26:59" itemprop="dateCreated datePublished" datetime="2023-08-18T08:18:18+08:00">2023-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -239,7 +231,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81-%E6%B5%81%E5%AF%86%E7%A0%81/" itemprop="url" rel="index"><span itemprop="name">现代密码-流密码</span></a>
+          <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
         </span>
     </span>
 
@@ -257,14 +249,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>329</span>
+      <span>2.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -274,22 +266,29 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><strong>简述一下OPT</strong></p>
-<span id="more"></span>
-
-
-
-<p><strong>OPT又叫一次一密加密方式</strong></p>
-<p>简单了解一下该加密方式：<br>$$<br>密文C &#x3D; 密钥K \oplus 明文M<br>$$<br>显而易见，解密方式即是：<br>$$<br>明文M &#x3D; 密钥K \oplus 密文C<br>$$<br><strong>需要注意的是，密钥是一个和密文等长的二进制字符串</strong></p>
-<p>这里给出一道例题，来自LitCTF2023——隐晦的消息记录</p>
-<p>题目：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">出题人:6c73d5240a948c86981bc294814d</span><br><span class="line">某不知名收件人：收到消息attack at dawn</span><br><span class="line">出题人:xxxxxxxxxxxxxxxxxxxxxxxxxxxx</span><br><span class="line">某不知名收件人：收到消息Monday or Thur</span><br><span class="line">已知出题人和收件人手中的密钥相同，请解出出题人第二次发送的密文呢（16进制，字母小写，解得的结果记得要加上LitCTF&#123;&#125;哦。）</span><br></pre></td></tr></table></figure>
-
-<p>根据题目提示，知道这是OPT加密，了解一下原理之后就知道该加密方式是通过异或实现的</p>
-<p>只要把密文和密钥进行异或就能得到明文</p>
-<p><strong>首先把 <code>attack at dawn</code>转成16进制，再和<code>6c73d5240a948c86981bc294814d</code>进行异或，即可得到密钥，因为两次密钥相同，所以把<code>Monday or Thur</code>和密钥异或，就是我们要的密文</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ciphertext1 = <span class="number">0x6c73d5240a948c86981bc294814d</span>    <span class="comment">#   attack at dawn转16进制后</span></span><br><span class="line">plaintext1 = <span class="number">0x61747461636b206174206461776e</span></span><br><span class="line"></span><br><span class="line">key = ciphertext1 ^ plaintext1</span><br><span class="line"></span><br><span class="line"><span class="comment">#   key = 0xd07a14569fface7ec3ba6f5f623</span></span><br><span class="line"></span><br><span class="line">plaintext2 = <span class="number">0x4d6f6e646179206f722054687572</span>      <span class="comment">#  Monday or Thur转16进制后</span></span><br><span class="line"></span><br><span class="line">ciphertext2 = key ^ plaintext2</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(ciphertext2))</span><br><span class="line"></span><br><span class="line"><span class="comment">#NSSCTF&#123;4068cf2108868c889e1bf29d8351&#125;</span></span><br></pre></td></tr></table></figure>
-
+    <div class="post-body" itemprop="articleBody"><p>今天是2023年8月18日，农历七月初三，正是笔者的生日。</p>
+<p>总结一些18岁这一年的经历吧。</p>
+<p>先从高考结束讲起。</p>
+<p>三天的高考中，第一天语数考的十分不理想，估摸着自己要失败了，晚上并没有复习第二天的科目，和朋友打了几把游戏便睡了。后两天的考试伴随雨天，搞得人怪难受的，除了化学，其他科目和平常感觉差不多。考完政治便急匆匆回了家，没有像其他人一样，朋友家人在门口送花。这一点我无所谓，我把只是把高考当成一次不太平凡的考试罢了。回到家后便打开电视收看喜欢的综艺，晚饭过后便睡了觉，没有通宵之类的放纵行为。对未来没什么规划，也没打算旅游，在家里玩了几天。高考出分的那一刻，有意外也有惊喜，惊喜的是后两天的科目并没有考砸，反而出乎意料的好，但语文也出乎意料的差，离梦想的学习确实差了几分。剩下的几天便是研究志愿填报的事情了，最后报了本省一所比较好的大学，选了网络空间安全专业（我也不知道为啥我就把他当第一志愿了，也许比较新颖吧）志愿填报确实是件难事。录取结果出来之后加上了新生群，简单了解了一下事宜，接触了CTF（这也许是比较关键的一件事吧）。在剩下的一个多月的时间，瞎玩是占大部分的，也简单学习了一些C语言知识，还学了单车（惊讶吧，18岁才会踩单车）。</p>
+<p>时间来到2023年9月12日，早上6点便起了，几个小时的车程，带着紧张又激动的心情来到学校，到达学校已是中午。在学长引导下，把行李放回宿舍之后边和好朋友一起吃了午饭（挺幸运的，能和朋友在同一所大学），回到宿舍整理了一下内务便和朋友去学校逛了逛。第一次和同学们见面是专业两个班一起举办的一个破冰行动，大家自我介绍，表演才艺，有一说一确实有心动的女生，不过大部分是隔壁班的，当然自己班也有三两个。接下来的一周是新生宣传周，每天有部分时间是集合听课了解学校。第一个周末便和朋友去了图书馆（这一点我也是没想到的，我一个从不看书的人居然会去图书馆。不过谁能想到我之后有时间便是泡在图书馆呢）。</p>
+<p>接下来便是一段学习经历了，有一说一我得提一嘴，为什么会去参加广播操啊，真的是折磨人，大早上起来做操，满身汗去上课，还加上晚自习课后训练，不过好在是熬过去了。也是加了网安协会，毕竟是和专业有关，当时不太懂，便跟风加了进去。</p>
+<p>时间来到第一次参加CTF比赛，具体记不大清了，只记得当时没什么实力，整个人思想也没觉悟，并没有很热爱CTF，更多的课余时间是打游戏，也是跟着室友混了个奖（小比赛）。时间来到12月12日，因为疫情被迫提前回家，当时还感觉挺难过的，因为见不到自己的心动女孩了。回到家后，稍作整顿，每天学点东西再娱乐一会，准备期末考的时间还准备的挺好，因为没把时间花在比赛上，第一个学期的成绩还算不错，在专业第五。</p>
+<p>一个多月的寒假转眼就过，寒假期间也是决定要走密码学方向（我不确定这个方向是否合适），刚开始学习没有人指导什么的，自己瞎学了一些东西就开始做题，在做题中学东西（这个方式对我来说并没有用）。寒假打了西湖论剑，不出意外爆0，现在回头看，以当时的我的能力根本就做不出什么题。</p>
+<p>回到学校，依旧喜欢着那个女孩。新的学期，游戏的时间减少了，更多的时间花在了学习CTF，实力也有所上升，在校赛拿了一等奖，还是挺开心的。值得提的是，“大物实验”这门课是真的把我恶心到了。感觉这个学期时间过得很快，转眼就到了备战期末考的时间。在这之前，有幸认识了星盟战队的师傅，在师傅们的帮助下，有了学习的方向，考完试之后是一段个性化培养周的时间，在这时间里，认认真真的学习了一番，实力有所提升。但第二学期的成绩并不理想，需要调整学习方式了。</p>
+<p>稍微总结一下第二学期吧，多了份羡慕，多了份焦虑，羡慕同届一位CTFer已经赚了大钱，焦虑未来该干嘛，该考研，还是该直接工作呢，我能干些什么呢？他们都说网安人才不愁就业，可怎样才算上人才呢？</p>
+<p>回家前一周搬到了新宿舍，4人间，两个室友早早回了家，偌大的房间显得有些安静，不过我还是每天泡图书馆。</p>
+<p>时间来到2023年7月4日，成功加入星盟，不过是个预备队。</p>
+<p>回到家后参加星盟师傅组织的特训计划，跟着特训学习，自己确实进步了不少，见识也长进了不少。</p>
+<p>时间来到2023年7月25日，成功选上了协会的密码学部长。这确实是件比较开心的事。</p>
+<p>讲完了学习，想讲讲情感。大一这一年，和女生打交道的时间好像真的特别少，让我不得不怀疑计算机类的学生真的难谈到恋爱吗？但室友却在来到学校一个月里就谈上了，喜欢的女生也在放假之间谈了恋爱，想了想也许自己的问题吧，讲到这不得不叹声气。本人就一普通人，长相并不突出，也没什么能吸引人的点，好在身体健康没什么缺陷，性格上憨厚内向，认为自己吸引不到女生（感觉确实如此），现实中很少主动接触女生，只敢在网上聊聊天罢了，根本没有追求女生的勇气。本人是很渴望在大学期间有一段恋爱的，不过也仅局限在“想”，朋友们总说我怂，确实如此，因为没有拿得出手的东西，拿什么来吸引人呢？所以只好等，等一个不知道有没有可能的“可能”，等人来了解我。</p>
+<p>7月底这几天看到协会迎新群里来了很多新生，看到新生对CTF发问，此刻便想起去年的我，虽早早便了解了CTF，可当时的我还是迷茫的，没有铁了心要着手哪个方向。现在的我，有些后悔没有早日下定决心学习，也多少有些犹豫踏上了密码学这条道路，下学期了解到的活动几乎都是攻防演练，似乎证明攻防，渗透，护网才是主流。</p>
+<p>八月初也是在学长的渠道那里报了关于护网的活动，学了一点点基础，没提起兴趣。</p>
+<p>被星盟里的师傅拉去出NSSCTF两周年的密码题，怪紧张的，以我的知识水平，出的题也许随便就给打爆了，而且没什么创新，想到这，不禁担心是不是会被喷烂。</p>
+<p>8月12日，比较开心的一天吧，从预备队提到了主队，如愿和交流比较多的师傅同队了，他们领先我好多，我得花多少时间才能达到他们的水平呢？马上就开学了，还有很多内容没掌握，提到这又开始焦虑了。</p>
+<p>发现从下学期开始，焦虑就常常伴随着我，看到高中同学旅游的旅游，挣钱的挣钱，恋爱的恋爱，难免有些许羡慕，前几天看一位同学的朋友圈，说放假就该躺平，可于我而言，读书读了个半吊子，其他方面也没天赋，又不甘心于摆烂，真的想躺平就躺平吗？</p>
+<p>8月13日，看了NepCTF的赛后复现，感叹这些出题人的水平都好高啊，自己没接触的内容还是太多了。</p>
+<p>总结便做到这里，希望接下来的日子好好加油。</p>
+<p>送给看到这篇文章的人一句话：<strong>保持乐观，心怀希望，成功就在不远处</strong></p>
 
     </div>
 
@@ -317,7 +316,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://dexterjie.github.io/2023/07/05/%E6%B5%81%E5%AF%86%E7%A0%81/OTP-%E4%B8%80%E6%AC%A1%E4%B8%80%E5%AF%86-%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F/" title="OTP(一次一密加密法)">https://dexterjie.github.io/2023/07/05/流密码/OTP-一次一密-加密方式/</a>
+      <a href="https://dexterjie.github.io/2023/08/18/%E9%9A%8F%E7%AC%94/" title="随笔">https://dexterjie.github.io/2023/08/18/随笔/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -326,23 +325,18 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81/" rel="tag"># 现代密码</a>
-              <a href="/tags/%E6%B5%81%E5%AF%86%E7%A0%81/" rel="tag"># 流密码</a>
-              <a href="/tags/OTP/" rel="tag"># OTP</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/07/05/%E6%B5%81%E5%AF%86%E7%A0%81/%E6%B5%81%E5%AF%86%E7%A0%81-LCG/" rel="prev" title="LCG">
-                  <i class="fa fa-chevron-left"></i> LCG
+                <a href="/2023/08/09/Linux%E5%AD%A6%E4%B9%A0/" rel="prev" title="Linux学习">
+                  <i class="fa fa-chevron-left"></i> Linux学习
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/07/06/RSA1/" rel="next" title="RSA1">
-                  RSA1 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
