@@ -20,28 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"dexterjie.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="从HNCTF开始学习沙盒逃逸">
+    <meta name="description" content="刷题过程中偶然涉及到Paillier算法 用博客的形式把他记录下来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="沙盒逃逸">
-<meta property="og:url" content="https://dexterjie.github.io/2023/08/18/%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8/index.html">
+<meta property="og:title" content="Paillier算法">
+<meta property="og:url" content="https://dexterjie.github.io/2023/08/23/Paillier%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="DexterJie&#39;Blog">
-<meta property="og:description" content="从HNCTF开始学习沙盒逃逸">
+<meta property="og:description" content="刷题过程中偶然涉及到Paillier算法 用博客的形式把他记录下来">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-18T07:19:47.000Z">
-<meta property="article:modified_time" content="2023-08-18T07:22:32.943Z">
+<meta property="og:image" content="https://dexterjie.github.io/images/paper/2.png">
+<meta property="article:published_time" content="2023-08-23T07:35:33.000Z">
+<meta property="article:modified_time" content="2023-08-23T08:23:39.043Z">
 <meta property="article:author" content="Dexter">
-<meta property="article:tag" content="jail">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dexterjie.github.io/images/paper/2.png">
 
 
-<link rel="canonical" href="https://dexterjie.github.io/2023/08/18/%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8/">
+<link rel="canonical" href="https://dexterjie.github.io/2023/08/23/Paillier%E7%AE%97%E6%B3%95/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2023/08/18/%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8/","path":"2023/08/18/沙盒逃逸/","title":"沙盒逃逸"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2023/08/23/Paillier%E7%AE%97%E6%B3%95/","path":"2023/08/23/Paillier算法/","title":"Paillier算法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>沙盒逃逸 | DexterJie'Blog</title>
+<title>Paillier算法 | DexterJie'Blog</title>
   
 
 
@@ -141,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#calc-jail-beginner-JAIL"><span class="nav-number">1.</span> <span class="nav-text">calc_jail_beginner(JAIL)</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%8C%E6%80%81%E5%8A%A0%E5%AF%86-HE-%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是同态加密(HE)？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8A%E5%90%8C%E6%80%81%E5%8A%A0%E5%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">半同态加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E5%90%8C%E6%80%81%E5%8A%A0%E5%AF%86"><span class="nav-number">1.2.</span> <span class="nav-text">部分同态加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%90%8C%E6%80%81%E5%8A%A0%E5%AF%86"><span class="nav-number">1.3.</span> <span class="nav-text">全同态加密</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Paillier%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">Paillier算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90"><span class="nav-number">2.1.</span> <span class="nav-text">密钥生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86"><span class="nav-number">2.2.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%AF%86"><span class="nav-number">2.3.</span> <span class="nav-text">解密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%AF%86%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="nav-number">2.4.</span> <span class="nav-text">解密的正确性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%80%81%E5%8A%A0%E6%B3%95%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">2.5.</span> <span class="nav-text">同态加法的性质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NISACTF-2022-public"><span class="nav-number">3.1.</span> <span class="nav-text">[NISACTF 2022]public</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -194,7 +195,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/08/18/%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8/">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/08/23/Paillier%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/0.jpg">
@@ -207,12 +208,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="沙盒逃逸 | DexterJie'Blog">
+      <meta itemprop="name" content="Paillier算法 | DexterJie'Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          沙盒逃逸
+          Paillier算法
         </h1>
 
         <div class="post-meta-container">
@@ -224,7 +225,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-08-18 15:19:47 / 修改时间：15:22:32" itemprop="dateCreated datePublished" datetime="2023-08-18T15:19:47+08:00">2023-08-18</time>
+      <time title="创建时间：2023-08-23 15:35:33 / 修改时间：16:23:39" itemprop="dateCreated datePublished" datetime="2023-08-23T15:35:33+08:00">2023-08-23</time>
     </span>
 
   
@@ -241,14 +242,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>89</span>
+      <span>910</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -258,13 +259,54 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>从HNCTF开始学习沙盒逃逸</p>
+    <div class="post-body" itemprop="articleBody"><p>刷题过程中偶然涉及到Paillier算法</p>
+<p>用博客的形式把他记录下来</p>
 <span id="more"></span>
 
-<h1 id="calc-jail-beginner-JAIL"><a href="#calc-jail-beginner-JAIL" class="headerlink" title="calc_jail_beginner(JAIL)"></a>calc_jail_beginner(JAIL)</h1><p>题目源码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Your goal is to read ./flag.txt</span></span><br><span class="line"><span class="comment">#You can use these payload liked `__import__(&#x27;os&#x27;).system(&#x27;cat ./flag.txt&#x27;)` or `print(open(&#x27;/flag.txt&#x27;).read())`</span></span><br><span class="line"></span><br><span class="line">WELCOME = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">  _     ______      _                              _       _ _ </span></span><br><span class="line"><span class="string"> | |   |  ____|    (_)                            | |     (_) |</span></span><br><span class="line"><span class="string"> | |__ | |__   __ _ _ _ __  _ __   ___ _ __       | | __ _ _| |</span></span><br><span class="line"><span class="string"> | &#x27;_ \|  __| / _` | | &#x27;_ \| &#x27;_ \ / _ \ &#x27;__|  _   | |/ _` | | |</span></span><br><span class="line"><span class="string"> | |_) | |___| (_| | | | | | | | |  __/ |    | |__| | (_| | | |</span></span><br><span class="line"><span class="string"> |_.__/|______\__, |_|_| |_|_| |_|\___|_|     \____/ \__,_|_|_|</span></span><br><span class="line"><span class="string">               __/ |                                           </span></span><br><span class="line"><span class="string">              |___/                                            </span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(WELCOME)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Welcome to the python jail&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Let&#x27;s have an beginner jail of calc&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Enter your expression and I will evaluate it for you.&quot;</span>)</span><br><span class="line">input_data = <span class="built_in">input</span>(<span class="string">&quot;&gt; &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Answer: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">eval</span>(input_data)))</span><br></pre></td></tr></table></figure>
+<p>Paillier算法属于半同态加密算法</p>
+<h1 id="什么是同态加密-HE-？"><a href="#什么是同态加密-HE-？" class="headerlink" title="什么是同态加密(HE)？"></a>什么是同态加密(HE)？</h1><p>同态加密是一种特殊的加密方法，它允许直接对加密数据执行计算，如加法和乘法，而计算过程不会泄露原文的任何信息。计算的结果仍然是加密的，拥有密钥的用户对处理过的密文数据进行解密后，得到的正好是处理后原文的结果。</p>
+<p>根据支持的计算类型和支持程度，同态加密可以分为以下三种类型：<strong>半同态加密</strong>，<strong>部分同态加密</strong>，<strong>全同态加密</strong></p>
+<h2 id="半同态加密"><a href="#半同态加密" class="headerlink" title="半同态加密"></a>半同态加密</h2><p><strong>半同态加密</strong>(Partially Homomorphic Encryption, <strong>PHE</strong>)：只支持加法或乘法中的一种运算。其中，只支持加法运算的又叫加法同态加密（Additive Homomorphic Encryption, AHE），常见的有<strong>RSA</strong>，<strong>Elgamal</strong>，<strong>Paillier</strong></p>
+<h2 id="部分同态加密"><a href="#部分同态加密" class="headerlink" title="部分同态加密"></a>部分同态加密</h2><p><strong>部分同态加密</strong>(Somewhat Homomorphic Encryption, <strong>SWHE</strong>)：可同时支持加法和乘法运算，但支持的计算次数有限</p>
+<h2 id="全同态加密"><a href="#全同态加密" class="headerlink" title="全同态加密"></a>全同态加密</h2><p><strong>全同态加密</strong>(Fully Homomorphic Encryption, <strong>FHE</strong>)：支持任意次的加法和乘法运算</p>
+<p>第一个满足加法和乘法同态的同态加密方法直到2009年才由Craig Gentry提出。目前来说，全同态加密算法性能较差，应用较少。比较常用的是半同态加密算法。</p>
+<h1 id="Paillier算法"><a href="#Paillier算法" class="headerlink" title="Paillier算法"></a>Paillier算法</h1><h2 id="密钥生成"><a href="#密钥生成" class="headerlink" title="密钥生成"></a>密钥生成</h2><ol>
+<li><p>随机选两个大素数$p,q$，满足$gcd(pq,(p-1)(q-1)) &#x3D; 1$，且$p,q$长度相同（安全性高一点）</p>
+</li>
+<li><p>计算$n &#x3D; pq$，以及$\lambda &#x3D; lcm(p-1,q-1)$，即$\lambda$是$p-1$和$q-1$的最小公倍数</p>
+</li>
+<li><p>随机选择$g \in Z_{n^2}^*$，表示$g$为$(0,n^2)$中的正整数，g还需满足$gcd(L(g^{\lambda} \mod n^2),n) &#x3D; 1$。后面发现$g &#x3D; n+1$满足条件，可以直接取$g &#x3D; n+1$</p>
+</li>
+<li><p>定义$L$函数：$L(x) &#x3D; \frac{x-1}{n}$，计算$\mu &#x3D; (L(g^{\lambda}\mod n^2))^{-1} \mod n$</p>
+</li>
+<li><p>公钥为$(n,g)$，私钥为$(\lambda,\mu)$</p>
+</li>
+</ol>
+<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><ol>
+<li><p>明文$m$，满足$m \in Z_n$</p>
+</li>
+<li><p>选择随机数$r$，满足$r \in Z_n^*$</p>
+</li>
+<li><p>计算密文$c &#x3D; g^mr^n \mod n^2$</p>
+</li>
+</ol>
+<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><p>$m &#x3D; L(c^\lambda \mod n^2)×\mu \mod n$即$m &#x3D; \frac{L(c^\lambda \mod n^2)}{L(g^\lambda \mod n^2)} \mod n$</p>
+<h2 id="解密的正确性"><a href="#解密的正确性" class="headerlink" title="解密的正确性"></a>解密的正确性</h2><p>根据二项式定理</p>
+<p><img src="/../images/paper/2.png"></p>
+<p>$\because g &#x3D; n+1,\therefore L(g^\lambda \mod n^2) &#x3D; \lambda$</p>
+<p>$\therefore \mu &#x3D; (L(g^\lambda \mod n^2))^{-1} \mod n &#x3D; \lambda^{-1} \mod n$</p>
+<p>$m&#x3D;L(c^\lambda \mod n^2)×\mu \mod n&#x3D; L((g^mr^n)^\lambda \mod n^2)× \lambda^{-1} \mod n$</p>
+<p>又$\because L((g^mr^n)^\lambda \mod n^2) &#x3D; L(g^{\lambda m}r^{\lambda n} \mod n^2)$</p>
+<p>而这个$\lambda n &#x3D; \frac{(p-1)(q-1)}{k}×pq$，其实就是$\frac{\phi(n^2)}{k}$</p>
+<p>$\therefore L((g^mr^n)^\lambda \mod n^2) &#x3D; L(g^{\lambda m}r^{\lambda n} \mod n^2) &#x3D; \lambda m \mod n^2$</p>
+<p>$\therefore m&#x3D;L(c^\lambda \mod n^2)×\mu \mod n&#x3D; L((g^mr^n)^\lambda \mod n^2)× \lambda^{-1} \mod n &#x3D; \lambda m ×\lambda^{-1} \mod n &#x3D; m$</p>
+<h2 id="同态加法的性质"><a href="#同态加法的性质" class="headerlink" title="同态加法的性质"></a>同态加法的性质</h2><p>对于任意$m_1,m_2 \in Z_n$和任意$r_1,r_2 \in Z_n^*$</p>
+<p>对应密文$c_1 &#x3D; E(m_1,r_1) &#x3D; g^{m_1}r_1^n$，$c_2 &#x3D; E(m_2,r_2) &#x3D; g^{m_2}r_2^{n}$</p>
+<p>把密文作乘法$c &#x3D; c_1×c_2 &#x3D; g^{m_1+m_2}(r_1×r_2)^n \mod n^2$</p>
+<p>把密文c解密得到的是$m_1+m_2$</p>
+<p>即我们得到了：$c_1 × c_2 &#x3D; m_1 + m_2$，即密文乘等于明文加。</p>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><h2 id="NISACTF-2022-public"><a href="#NISACTF-2022-public" class="headerlink" title="[NISACTF 2022]public"></a>[NISACTF 2022]public</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">flag=<span class="string">b&quot;NSSCTF&#123;xxxxxxxxxxxxxxxxxxx&#125;&quot;</span></span><br><span class="line">p = getPrime(<span class="number">2048</span>)</span><br><span class="line">q = getPrime(<span class="number">2048</span>)</span><br><span class="line">n = p*q</span><br><span class="line">g = n+<span class="number">1</span></span><br><span class="line">flag = flag + os.urandom(<span class="number">256</span>)</span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line"><span class="keyword">assert</span> m &lt; n</span><br><span class="line">c=(<span class="built_in">pow</span>(g,p,n*n)*<span class="built_in">pow</span>(m,n,n*n))%(n*n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;c=<span class="subst">&#123;<span class="built_in">str</span>(c)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;n=<span class="subst">&#123;<span class="built_in">str</span>(n)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;hint=<span class="subst">&#123;<span class="built_in">str</span>(<span class="built_in">pow</span>(m,n,n*n))&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># c=</span></span><br><span class="line"><span class="comment"># n=</span></span><br><span class="line"><span class="comment"># hint=</span></span><br></pre></td></tr></table></figure>
 
-<p>了解一下eval函数的特性即可解决</p>
 
     </div>
 
@@ -292,7 +334,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://dexterjie.github.io/2023/08/18/%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8/" title="沙盒逃逸">https://dexterjie.github.io/2023/08/18/沙盒逃逸/</a>
+      <a href="https://dexterjie.github.io/2023/08/23/Paillier%E7%AE%97%E6%B3%95/" title="Paillier算法">https://dexterjie.github.io/2023/08/23/Paillier算法/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -300,22 +342,16 @@
 </ul>
 </div>
 
-          <div class="post-tags">
-              <a href="/tags/jail/" rel="tag"># jail</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/08/18/ECDSA/" rel="prev" title="ECDSA">
-                  <i class="fa fa-chevron-left"></i> ECDSA
+                <a href="/2023/08/18/%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8/" rel="prev" title="沙盒逃逸">
+                  <i class="fa fa-chevron-left"></i> 沙盒逃逸
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/08/23/Paillier%E7%AE%97%E6%B3%95/" rel="next" title="Paillier算法">
-                  Paillier算法 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/lcg/4.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/lcg/5.png">
 <meta property="article:published_time" content="2023-07-05T04:51:24.000Z">
-<meta property="article:modified_time" content="2023-08-09T13:18:12.195Z">
+<meta property="article:modified_time" content="2023-08-21T05:21:37.434Z">
 <meta property="article:author" content="Dexter">
 <meta property="article:tag" content="现代密码">
 <meta property="article:tag" content="流密码">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lcg-%E7%BA%BF%E6%80%A7%E5%90%8C%E4%BD%99%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">lcg(线性同余随机数生成器)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981"><span class="nav-number">1.2.</span> <span class="nav-text">例题1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982-%E5%B7%B2%E7%9F%A5%E5%90%8E%E9%A1%B9%E6%B1%82%E5%89%8D%E9%A1%B9"><span class="nav-number">1.3.</span> <span class="nav-text">例题2(已知后项求前项)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%983-%E6%B1%82%E5%A2%9E%E9%87%8Fb"><span class="nav-number">1.4.</span> <span class="nav-text">例题3(求增量b)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%984-%E6%9C%AA%E7%9F%A5a-b%E6%B1%82seed"><span class="nav-number">1.5.</span> <span class="nav-text">例题4(未知a,b求seed)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%985-%E6%9C%AA%E7%9F%A5a-b-n%E6%B1%82seed%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">例题5(未知a,b,n求seed）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%986-%E6%B1%82%E5%87%BA%E7%9A%84%E6%98%AFk%E5%80%8D%E6%A8%A1%E6%95%B0"><span class="nav-number">1.7.</span> <span class="nav-text">例题6(求出的是k倍模数)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%987-%E8%BE%93%E5%87%BAX0%EF%BC%8CX2%EF%BC%8CX4%EF%BC%8CX6%EF%BC%8CX8"><span class="nav-number">1.8.</span> <span class="nav-text">例题7(输出X0，X2，X4，X6，X8)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%988"><span class="nav-number">1.9.</span> <span class="nav-text">例题8</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lcg-%E7%BA%BF%E6%80%A7%E5%90%8C%E4%BD%99%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">lcg(线性同余随机数生成器)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981"><span class="nav-number">1.2.</span> <span class="nav-text">例题1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982-%E5%B7%B2%E7%9F%A5%E5%90%8E%E9%A1%B9%E6%B1%82%E5%89%8D%E9%A1%B9"><span class="nav-number">1.3.</span> <span class="nav-text">例题2(已知后项求前项)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%983-%E6%B1%82%E5%A2%9E%E9%87%8Fb"><span class="nav-number">1.4.</span> <span class="nav-text">例题3(求增量b)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%984-%E6%9C%AA%E7%9F%A5a-b%E6%B1%82seed"><span class="nav-number">1.5.</span> <span class="nav-text">例题4(未知a,b求seed)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%985-%E6%9C%AA%E7%9F%A5a-b-n%E6%B1%82seed%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">例题5(未知a,b,n求seed）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%986-%E6%B1%82%E5%87%BA%E7%9A%84%E6%98%AFk%E5%80%8D%E6%A8%A1%E6%95%B0"><span class="nav-number">1.7.</span> <span class="nav-text">例题6(求出的是k倍模数)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%987-%E8%BE%93%E5%87%BAX0%EF%BC%8CX2%EF%BC%8CX4%EF%BC%8CX6%EF%BC%8CX8"><span class="nav-number">1.8.</span> <span class="nav-text">例题7(输出X0，X2，X4，X6，X8)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%988"><span class="nav-number">1.9.</span> <span class="nav-text">例题8</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%A0%BC-begin-pmatrix-k-1-k-2-cdots-k-9-L-1-1-end-pmatrix-begin-pmatrix-m-0-cdots-0-0-0-0-m-cdots-0-0-0-vdots-vdots-ddots-vdots-vdots-vdots-0-0-cdots-m-0-0-A-1-A-2-cdots-A-9-1-0-B-1-B-2-cdots-B-9-0-2-64-end-pmatrix"><span class="nav-number">2.</span> <span class="nav-text">构造格$$\begin{pmatrix}k_1 &amp; k_2 &amp;\cdots &amp; k_{9} &amp;L_1 &amp; 1\end{pmatrix}\begin{pmatrix}m &amp; 0 &amp; \cdots &amp; 0 &amp; 0 &amp; 0\0 &amp; m &amp; \cdots &amp; 0 &amp; 0 &amp; 0\\vdots &amp;\vdots &amp; \ddots &amp; \vdots &amp;\vdots &amp; \vdots\0 &amp; 0 &amp; \cdots &amp;m &amp;0 &amp; 0\A_1 &amp; A_2 &amp;\cdots &amp;A_{9} &amp; 1 &amp; 0\B_1 &amp; B_2 &amp; \cdots &amp;B_{9} &amp;0 &amp; 2^{64}\end{pmatrix}</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -236,7 +236,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-08-09 21:18:12" itemprop="dateModified" datetime="2023-08-09T21:18:12+08:00">2023-08-09</time>
+      <time title="修改时间：2023-08-21 13:21:37" itemprop="dateModified" datetime="2023-08-21T13:21:37+08:00">2023-08-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,14 +262,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.9k</span>
+      <span>2.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -372,8 +372,38 @@
 
 <h2 id="例题8"><a href="#例题8" class="headerlink" title="例题8"></a>例题8</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">flag = b&#x27;Spirit&#123;*****************&#125;&#x27;</span><br><span class="line"></span><br><span class="line">plaintext = bytes_to_long(flag)</span><br><span class="line">length = plaintext.bit_length()</span><br><span class="line"></span><br><span class="line">a = getPrime(length)</span><br><span class="line">b = getPrime(length)</span><br><span class="line">n = getPrime(length)</span><br><span class="line"></span><br><span class="line">seed = plaintext</span><br><span class="line"></span><br><span class="line">output = []</span><br><span class="line">for i in range(10):</span><br><span class="line">    seed = (seed*a+b)%n</span><br><span class="line">    output.append(seed&gt;&gt;64)</span><br><span class="line">print(&quot;a = &quot;,a)</span><br><span class="line">print(&quot;b = &quot;,b)</span><br><span class="line">print(&quot;n = &quot;,n)</span><br><span class="line">print(&quot;output = &quot;,output)</span><br><span class="line"># a =  731111971045863129770849213414583830513204814328949766909151</span><br><span class="line"># b =  456671883153709362919394459405008275757410555181682705944711</span><br><span class="line"># n =  666147691257100304060287710111266554526660232037647662561651</span><br><span class="line"># output =  [16985619148410545083429542035273917746612, 32633736473029292963326093326932585135645, 20531875000321097472853248514822638673918, 37524613187648387324374487657224279011, 21531154020699900519763323600774720747179, 1785016578450326289280053428455439687732, 15859114177482712954359285501450873939895, 10077571899928395052806024133320973530689, 30199391683019296398254401666338410561714, 21303634014034358798100587236618579995634]</span><br></pre></td></tr></table></figure>
 
-<p>多了个高位泄露的考点</p>
-<p><strong>没做出来</strong></p>
+<p>已知$X_{n+1} \equiv aX_n + b \mod m$</p>
+<p>把$X_n$拆为高位和低位之和，即$X_n &#x3D; H_n+L_n$</p>
+<p>于是有$H_{n+1}+L_{n+1} \equiv a(H_n+L_n) + b \mod m$</p>
+<p>$\therefore L_{n+1} \equiv aL_n+(aH_n+b-H_{n+1})\mod m$</p>
+<p>因为$L_2 \equiv aL_1 + (aH_1+b-H_2) \mod m$</p>
+<p>$L_3 \equiv a(aL_1 + aH_1+b-H_2)+aH_2+b-H_3 \mod m$，即$L_3 \equiv a^2L_1+(aH_2+b-H_3+a^2H_1+b-H_2)$</p>
+<p>于是能得到$L_i$与$L_1$的关系</p>
+<p>则有$L_{i} \equiv A_iL_1 +B_i \mod m$，即$L_{i+1} &#x3D; A_iL_1 + B_i + k_{i}m$</p>
+<h1 id="构造格-begin-pmatrix-k-1-k-2-cdots-k-9-L-1-1-end-pmatrix-begin-pmatrix-m-0-cdots-0-0-0-0-m-cdots-0-0-0-vdots-vdots-ddots-vdots-vdots-vdots-0-0-cdots-m-0-0-A-1-A-2-cdots-A-9-1-0-B-1-B-2-cdots-B-9-0-2-64-end-pmatrix"><a href="#构造格-begin-pmatrix-k-1-k-2-cdots-k-9-L-1-1-end-pmatrix-begin-pmatrix-m-0-cdots-0-0-0-0-m-cdots-0-0-0-vdots-vdots-ddots-vdots-vdots-vdots-0-0-cdots-m-0-0-A-1-A-2-cdots-A-9-1-0-B-1-B-2-cdots-B-9-0-2-64-end-pmatrix" class="headerlink" title="构造格$$\begin{pmatrix}k_1 &amp; k_2 &amp;\cdots &amp; k_{9} &amp;L_1 &amp; 1\end{pmatrix}\begin{pmatrix}m &amp; 0 &amp; \cdots &amp; 0 &amp; 0 &amp; 0\0 &amp; m &amp; \cdots &amp; 0 &amp; 0 &amp; 0\\vdots &amp;\vdots &amp; \ddots &amp; \vdots &amp;\vdots &amp; \vdots\0 &amp; 0 &amp; \cdots &amp;m &amp;0 &amp; 0\A_1 &amp; A_2 &amp;\cdots &amp;A_{9} &amp; 1 &amp; 0\B_1 &amp; B_2 &amp; \cdots &amp;B_{9} &amp;0 &amp; 2^{64}\end{pmatrix}"></a>构造格<br>$$<br>\begin{pmatrix}<br>k_1 &amp; k_2 &amp;\cdots &amp; k_{9} &amp;L_1 &amp; 1<br>\end{pmatrix}<br>\begin{pmatrix}<br>m &amp; 0 &amp; \cdots &amp; 0 &amp; 0 &amp; 0\<br>0 &amp; m &amp; \cdots &amp; 0 &amp; 0 &amp; 0\<br>\vdots &amp;\vdots &amp; \ddots &amp; \vdots &amp;\vdots &amp; \vdots\<br>0 &amp; 0 &amp; \cdots &amp;m &amp;0 &amp; 0\<br>A_1 &amp; A_2 &amp;\cdots &amp;A_{9} &amp; 1 &amp; 0\<br>B_1 &amp; B_2 &amp; \cdots &amp;B_{9} &amp;0 &amp; 2^{64}<br>\end{pmatrix}</h1><p>\begin{pmatrix}<br>L_2 &amp; L_3 &amp; \cdots &amp;L_{10} &amp; L_1 &amp;2^{64}<br>\end{pmatrix}<br>$$<br>因为$L_i &#x3D; 64bit$，所以最后调一个$2^{64}$</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sage</span></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">a =  <span class="number">731111971045863129770849213414583830513204814328949766909151</span></span><br><span class="line">b =  <span class="number">456671883153709362919394459405008275757410555181682705944711</span></span><br><span class="line">m =  <span class="number">666147691257100304060287710111266554526660232037647662561651</span></span><br><span class="line">c =  [<span class="number">0</span>,<span class="number">16985619148410545083429542035273917746612</span>, <span class="number">32633736473029292963326093326932585135645</span>, <span class="number">20531875000321097472853248514822638673918</span>, <span class="number">37524613187648387324374487657224279011</span>, <span class="number">21531154020699900519763323600774720747179</span>, <span class="number">1785016578450326289280053428455439687732</span>, <span class="number">15859114177482712954359285501450873939895</span>, <span class="number">10077571899928395052806024133320973530689</span>, <span class="number">30199391683019296398254401666338410561714</span>, <span class="number">21303634014034358798100587236618579995634</span>]</span><br><span class="line"><span class="comment">#0是seed的高位</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(c)):</span><br><span class="line">    c[i] = c[i] &lt;&lt; <span class="number">64</span></span><br><span class="line"></span><br><span class="line">A = [<span class="number">1</span>]</span><br><span class="line">B = [<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(c)-<span class="number">1</span>):</span><br><span class="line">    Ai = a*A[i-<span class="number">1</span>] % m</span><br><span class="line">    Bi = (a*B[i-<span class="number">1</span>] + a*c[i]+b-c[i+<span class="number">1</span>]) % m</span><br><span class="line">    A.append(Ai)</span><br><span class="line">    B.append(Bi)</span><br><span class="line"></span><br><span class="line">A = A[<span class="number">1</span>:]</span><br><span class="line">B = B[<span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line">M = Matrix(<span class="number">11</span>,<span class="number">11</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">    M[i,i] = m</span><br><span class="line">    M[-<span class="number">1</span>,i] = B[i]</span><br><span class="line">    M[-<span class="number">2</span>,i] = A[i]</span><br><span class="line">M[-<span class="number">1</span>,-<span class="number">1</span>] = <span class="number">2</span>^<span class="number">64</span></span><br><span class="line">M[-<span class="number">2</span>,-<span class="number">2</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> M.LLL():</span><br><span class="line">    <span class="keyword">if</span> i[-<span class="number">1</span>] == <span class="number">2</span>^<span class="number">64</span>:</span><br><span class="line">        L1 = i[-<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">seed1 = c[<span class="number">1</span>] + L1</span><br><span class="line"></span><br><span class="line">inv = gmpy2.invert(a,m)</span><br><span class="line">seed = inv * (seed1 - b) % m</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(seed)))</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </div>
 
@@ -457,13 +487,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">61k</span>
+    <span title="站点总字数">66k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:42</span>
+    <span title="站点阅读时长">3:59</span>
   </span>
 </div>
 <div class="busuanzi-count">
