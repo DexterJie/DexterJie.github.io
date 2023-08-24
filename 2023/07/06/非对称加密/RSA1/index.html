@@ -22,8 +22,8 @@
 
     <meta name="description" content="世上无所谓正解，我们只是在做自己">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RSA1">
-<meta property="og:url" content="https://dexterjie.github.io/2023/07/06/RSA1/index.html">
+<meta property="og:title" content="RSA(一)">
+<meta property="og:url" content="https://dexterjie.github.io/2023/07/06/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/RSA1/index.html">
 <meta property="og:site_name" content="DexterJie&#39;Blog">
 <meta property="og:description" content="世上无所谓正解，我们只是在做自己">
 <meta property="og:locale" content="zh_CN">
@@ -43,21 +43,23 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/22.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/RSA/1.webp">
 <meta property="article:published_time" content="2023-07-06T14:40:40.000Z">
-<meta property="article:modified_time" content="2023-08-19T08:30:14.893Z">
+<meta property="article:modified_time" content="2023-08-24T14:37:34.938Z">
 <meta property="article:author" content="Dexter">
+<meta property="article:tag" content="现代密码">
+<meta property="article:tag" content="非对称加密">
 <meta property="article:tag" content="RSA">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://dexterjie.github.io/images/RSA/8.png">
 
 
-<link rel="canonical" href="https://dexterjie.github.io/2023/07/06/RSA1/">
+<link rel="canonical" href="https://dexterjie.github.io/2023/07/06/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/RSA1/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2023/07/06/RSA1/","path":"2023/07/06/RSA1/","title":"RSA1"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2023/07/06/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/RSA1/","path":"2023/07/06/非对称加密/RSA1/","title":"RSA(一)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>RSA1 | DexterJie'Blog</title>
+<title>RSA(一) | DexterJie'Blog</title>
   
 
 
@@ -183,7 +185,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -210,7 +212,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/07/06/RSA1/">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/07/06/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/RSA1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/0.jpg">
@@ -223,12 +225,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="RSA1 | DexterJie'Blog">
+      <meta itemprop="name" content="RSA(一) | DexterJie'Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          RSA1
+          RSA(一)
         </h1>
 
         <div class="post-meta-container">
@@ -246,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-08-19 16:30:14" itemprop="dateModified" datetime="2023-08-19T16:30:14+08:00">2023-08-19</time>
+      <time title="修改时间：2023-08-24 22:37:34" itemprop="dateModified" datetime="2023-08-24T22:37:34+08:00">2023-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -446,7 +448,7 @@
 <p><strong>exp:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line">n = [n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19]</span><br><span class="line">c = [c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(n)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(n)):</span><br><span class="line">        <span class="keyword">if</span> (i!=j):</span><br><span class="line">            t = gmpy2.gcd(n[i],n[j])</span><br><span class="line">            <span class="keyword">if</span> t != <span class="number">1</span>:</span><br><span class="line">                p = t</span><br><span class="line">                q = n[i] // p</span><br><span class="line">                d = gmpy2.invert(e,(p-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">                m = <span class="built_in">pow</span>(c[i],d,n[i])</span><br><span class="line">                <span class="built_in">print</span>(long_to_bytes(m))</span><br><span class="line">                </span><br><span class="line"><span class="comment">#flag&#123;abdcbe5fd94e23b3de429223ab9c2fdf&#125;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="第二种情况-孙子定理"><a href="#第二种情况-孙子定理" class="headerlink" title="第二种情况 孙子定理"></a>第二种情况 孙子定理</h2><p><img src="/../images/RSA/8.png"></p>
+<h2 id="第二种情况-孙子定理"><a href="#第二种情况-孙子定理" class="headerlink" title="第二种情况 孙子定理"></a>第二种情况 孙子定理</h2><p><img src="/../../images/RSA/8.png"></p>
 <p><strong>在张秀平老师那里学的方法是列个表</strong></p>
 <table>
 <thead>
@@ -498,10 +500,10 @@
 <p><strong>答数</strong>：各总之和</p>
 <p><strong>最小答数：</strong>答数对最小公倍数的余数，eg:<br>$$<br>233 \equiv x \mod 105<br>$$<br><strong>其中x&#x3D;23</strong></p>
 <h3 id="关于孙子定理的求解"><a href="#关于孙子定理的求解" class="headerlink" title="关于孙子定理的求解"></a>关于孙子定理的求解</h3><p>推广到一般情况</p>
-<p><img src="/../images/RSA/9.png"></p>
+<p><img src="/../../images/RSA/9.png"></p>
 <p>用同样的方法列个表</p>
-<p><img src="/../images/RSA/%E5%88%97%E8%A1%A8%E8%A7%A3%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86.jpg"></p>
-<p><img src="/../images/RSA/10.png"></p>
+<p><img src="/../../images/RSA/%E5%88%97%E8%A1%A8%E8%A7%A3%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86.jpg"></p>
+<p><img src="/../../images/RSA/10.png"></p>
 <p><strong>代码实现：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Get_Mi</span>(<span class="params">m_list,m</span>):               <span class="comment">#求衍数</span></span><br><span class="line">    M_list = []</span><br><span class="line">    <span class="keyword">for</span> mi <span class="keyword">in</span> m_list:</span><br><span class="line">        M_list.append(m // mi)</span><br><span class="line">    <span class="keyword">return</span> M_list</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Get_resMi</span>(<span class="params">M_list,m_list</span>):       <span class="comment">#求乘率</span></span><br><span class="line">    resM_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(M_list)):</span><br><span class="line">        resM_list.append(gmpy2.invert(M_list[i],m_list[i]))</span><br><span class="line">    <span class="keyword">return</span> resM_list</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Get_result</span>(<span class="params">a_list</span>):				<span class="comment">#求答数</span></span><br><span class="line">    M_list = Get_Mi(m_list,m)</span><br><span class="line">    resM_list = Get_resMi(M_list,m_list)</span><br><span class="line">    result = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(M_list)):</span><br><span class="line">        result += M_list[i]*resM_list[i]*a_list[i]</span><br><span class="line">    result %= m						<span class="comment">#最小答数</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">m_list = [...]</span><br><span class="line">a_list = [...]</span><br><span class="line"></span><br><span class="line">m = <span class="number">1</span>								<span class="comment">#求最小公倍数</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> m_list:</span><br><span class="line">    m *= i</span><br><span class="line"></span><br><span class="line">result = Get_result(a_list)</span><br></pre></td></tr></table></figure>
 
@@ -588,13 +590,13 @@
 
 
 <h4 id="关于m-pow-c-dp-p-的证明"><a href="#关于m-pow-c-dp-p-的证明" class="headerlink" title="关于m &#x3D; pow(c,dp,p)的证明"></a>关于m &#x3D; pow(c,dp,p)的证明</h4><p>关于用dp和e也能解密做一个证明：</p>
-<p><img src="/../images/RSA/13.png"><br>$$<br>即c^{dp}(mod \quad p)&#x3D;m<br>$$</p>
+<p><img src="/../../images/RSA/13.png"><br>$$<br>即c^{dp}(mod \quad p)&#x3D;m<br>$$</p>
 <h1 id="九、dp-dq泄露"><a href="#九、dp-dq泄露" class="headerlink" title="九、dp,dq泄露"></a>九、dp,dq泄露</h1><h2 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h2><p>该题型的前提是m&lt;p，m&lt;q</p>
-<h2 id="原理推导-1"><a href="#原理推导-1" class="headerlink" title="原理推导"></a>原理推导</h2><p><img src="/../images/RSA/14.png"><br>$$<br>\therefore m &#x3D; [((m_{2}-m_{1})×p^{-1}(mod \quad q))×p+m_{1}](mod \quad n)<br>$$</p>
+<h2 id="原理推导-1"><a href="#原理推导-1" class="headerlink" title="原理推导"></a>原理推导</h2><p><img src="/../../images/RSA/14.png"><br>$$<br>\therefore m &#x3D; [((m_{2}-m_{1})×p^{-1}(mod \quad q))×p+m_{1}](mod \quad n)<br>$$</p>
 <p>接下来的问题是如何通过dp,dq求m1,m2</p>
-<p><img src="/../images/RSA/15.png"></p>
+<p><img src="/../../images/RSA/15.png"></p>
 <p><strong>归纳一下所得条件</strong></p>
-<p><img src="/../images/RSA/16.png"></p>
+<p><img src="/../../images/RSA/16.png"></p>
 <p>接下来就是写代码了</p>
 <h3 id="例题1-3"><a href="#例题1-3" class="headerlink" title="例题1"></a>例题1</h3><p>题目：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import gmpy2</span><br><span class="line">import libnum</span><br><span class="line">import uuid</span><br><span class="line"></span><br><span class="line">flag = &quot;flag&#123;&quot; + str(uuid.uuid4()) + &quot;&#125;&quot;</span><br><span class="line">print(flag)</span><br><span class="line">m = libnum.s2n(flag)</span><br><span class="line">p = libnum.generate_prime(256)</span><br><span class="line">q = libnum.generate_prime(256)</span><br><span class="line">e = 65537</span><br><span class="line">n = p * q</span><br><span class="line">phi = (p - 1) * (q - 1)</span><br><span class="line">d = gmpy2.invert(e, phi)</span><br><span class="line">print(&quot;d=&quot;, d)</span><br><span class="line">dp = d % (p - 1)</span><br><span class="line">dq = d % (q - 1)</span><br><span class="line">c = pow(m, e, n)</span><br><span class="line"></span><br><span class="line">print(&quot;p=&quot;, p)</span><br><span class="line">print(&quot;q=&quot;, q)</span><br><span class="line">print(&quot;c=&quot;, c)</span><br><span class="line">print(&quot;dp=&quot;, dp)</span><br><span class="line">print(&quot;dq=&quot;, dq)</span><br></pre></td></tr></table></figure>
@@ -673,7 +675,7 @@
 <p>看似白给，其实$e$和$\phi(n)$不互素</p>
 <p>而且在flag前面填充了一些数据，导致$m^e &gt; n$，所以直接开根号也不可取</p>
 <p><strong>看到e&#x3D;2，应该是类似rabin，一般的rabin是两个素数，这里有5个，说明会有32个解</strong></p>
-<p><img src="/../images/RSA/19.png"></p>
+<p><img src="/../../images/RSA/19.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">from sympy.ntheory.modular import crt</span><br><span class="line">import gmpy2</span><br><span class="line">from Crypto.Util.number import *</span><br><span class="line"></span><br><span class="line">p = 145332367700944303747548912160113939198078051436029477960348968315913956664143693347226702600438608693933768134575289286283267810723137895903153829001826223446477799895493265422562348917012216790077395795861238257357035152687833639085415763850743538206986781418939737511715957738982536382066693822159860701263</span><br><span class="line">q = 116660458253067608044065523310547233337730583902133756095473339390057738510707447906971188577217274861047379404014140178165569604404468897712846876108444468370709141219302291601408652742006268186059762087155933131837323952675627966299810891805398890428420575425160696531236660480933905879208166090591482794763</span><br><span class="line">r = 157931722402853245421436270609912823260313730941283152856444641969403238646482562190531038393124087232554754746464603598717356255570166081501573727336977292059427220330169044611674973569766966838498453232642731737958791706086957762244686953294662693939604300864961637325536379321027705854708492453330690705531</span><br><span class="line">s = 100973451687449518854742673778783266158999451072058606348222018797891147675959983616210003484476577612134482311993701677242007759556951494382833070563369964294544839433671087037596159753825249018950693369209927951667775267086896180395776150188902057785214767230658487267587289809918132337927575673868568976679</span><br><span class="line">t = 93960345071948255233882121683650797512129333868351496468898834736770441398743300745703393838320587998953678254272245400344928586394089488734271897540051673996675973642347859306921527430850673334243441180183460927865980713929789963587608547554858491264614271309608925634272282292964002897650355047792764365447</span><br><span class="line">c = 9144597920381774885442906257311149465702295057238600973973598305004391534618770363098565074541384771979931799878381439264848137810353858418200992191234142740194489573540381681161219332611454834544291634628456257670178843484698324641739324687497388018406214041657278323855749902661752448796122517061920880552011343608609622885787617238758769398972009949575526258430282648817039091284796330585349957724522615105102735930258969562103112238020133587096826386028128471852377225525357348919204333121695432662339443004327748973224423132988376298843862056631045488285859621661802413201793962883794915513510467912312842687601478117040419013468059983777273699192408773551806581458197324620065210523913467414181480875280203580147077789063808832356486197271376615883221558265591069223727607585313240243619515521180600435114131162272519949101464089935441251751426683447701142156416866113627126765919641034042927519834229168536331952275698122511502745177547569813354280565828372968703810158857859460406828090199683324760956105682902577189283246483314689365570862217407333103243336691401424548702387876409228977278498691200028282744239512091373110111792177228979867318546462714521296256938374618636206565791541769138267080789842400796973226733816939794717596194090232425688504890234304977612220790858557639246367437740975495450011676714198668471438814299689325208882261918460708833888406187912527346628912894921059735420931656953236560178909180587372589456926690219114173193202048332172538564489660440225377822914097420807957784201785024166011709377791129</span><br><span class="line">e = 2</span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = PolynomialRing(Zmod(p))</span><br><span class="line">f = x^e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">res1 = f.roots()</span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = PolynomialRing(Zmod(q))</span><br><span class="line">f = x^e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">res2 = f.roots()</span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = PolynomialRing(Zmod(r))</span><br><span class="line">f = x^e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">res3 = f.roots()</span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = PolynomialRing(Zmod(s))</span><br><span class="line">f = x^e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">res4 = f.roots()</span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = PolynomialRing(Zmod(t))</span><br><span class="line">f = x^e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">res5 = f.roots()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for i in res1:</span><br><span class="line">    for j in res2:</span><br><span class="line">        for k in res3:</span><br><span class="line">            for a in res4:</span><br><span class="line">                for b in res5:</span><br><span class="line">                    m_list = [int(i[0]),int(j[0]),int(k[0]),int(a[0]),int(b[0])]</span><br><span class="line">                    a_list= [p,q,r,s,t]</span><br><span class="line">                    solve = CRT_list(m_list,a_list)</span><br><span class="line">                    flag = long_to_bytes(solve)</span><br><span class="line">                    if b&#x27;ctfshow&#x27; in flag:</span><br><span class="line">                    	print(flag)</span><br><span class="line"># ctfshow&#123;D0_y0u_R3aLly_Kn0w_Ra8IN_alg0RI7HM?&#125;</span><br></pre></td></tr></table></figure>
 
 <p>需要遍历$res1——res5$的所有组合</p>
@@ -684,7 +686,7 @@
 <p>$\therefore m^t \equiv c^d \mod n$</p>
 <p>如果$t$不大的话，我们可以直接开根求得$m$，但是这题$t&#x3D;14$，所以我们考虑用中国剩余定理</p>
 <p>于是我们有</p>
-<p><img src="/../images/RSA/45.png"></p>
+<p><img src="/../../images/RSA/45.png"></p>
 <p>用中国剩余定理解出其特解$res$，即$res \equiv m^{14} \mod lcm(n_1,n_2) \longrightarrow res \equiv m^{14} \mod pq_1q_2$</p>
 <p>把它当作一个$e&#x3D;14$的RSA加密</p>
 <p>然后重新走一遍上一步的过程，发现还是没解出来</p>
@@ -718,16 +720,16 @@
 <h2 id="加密过程"><a href="#加密过程" class="headerlink" title="加密过程"></a>加密过程</h2><p>$$<br>c \equiv  m^2(mod \quad n)<br>$$</p>
 <h2 id="解密过程"><a href="#解密过程" class="headerlink" title="解密过程"></a>解密过程</h2><p>$\because c \equiv m^2 \mod n$</p>
 <p>即</p>
-<p><img src="/../images/RSA/0.png"></p>
+<p><img src="/../../images/RSA/0.png"></p>
 <p>根据二次剩余得</p>
 <p>$c^{\frac{p-1}{2}} \equiv 1 \mod p$同乘c得：$c^{\frac{p+1}{2}} \equiv c \mod p$，开根号得$c^{\frac{p+1}{4}} \mod p$，所以$m_p &#x3D;c^{\frac{p+1}{4}}$</p>
 <p>同理$m_q &#x3D; c^{\frac{q+1}{4}}$</p>
 <p>解中国剩余定理</p>
-<p><img src="/../images/RSA/1.png"></p>
-<p><img src="/../images/RSA/0.jpg" alt="Rabin中的孙子定理"></p>
-<p> <img src="/../images/RSA/22.png"></p>
+<p><img src="/../../images/RSA/1.png"></p>
+<p><img src="/../../images/RSA/0.jpg" alt="Rabin中的孙子定理"></p>
+<p> <img src="/../../images/RSA/22.png"></p>
 <h2 id="存疑"><a href="#存疑" class="headerlink" title="存疑"></a>存疑</h2><p>m3这个解不太理解，<strong>查了点资料，好像解是通过公式求得的：</strong></p>
-<p><img src="/../images/RSA/1.webp" alt="1"></p>
+<p><img src="/../../images/RSA/1.webp" alt="1"></p>
 <h2 id="例题-5"><a href="#例题-5" class="headerlink" title="例题"></a>例题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import gmpy2</span><br><span class="line">import libnum</span><br><span class="line">import random</span><br><span class="line">import uuid</span><br><span class="line"></span><br><span class="line">flag = &quot;flag&#123;&quot; + str(uuid.uuid4()) + &quot;&#125;&quot;</span><br><span class="line">print(flag)</span><br><span class="line">m = libnum.s2n(flag)</span><br><span class="line">p = libnum.generate_prime(512)</span><br><span class="line">q = libnum.generate_prime(512)</span><br><span class="line">n = p * q</span><br><span class="line">e = 2</span><br><span class="line">c = pow(m, e, n)</span><br><span class="line">print(&quot;p=&quot;, p)</span><br><span class="line">print(&quot;q=&quot;, q)</span><br><span class="line">print(&quot;n=&quot;, n)</span><br><span class="line">print(&quot;c=&quot;, c)</span><br><span class="line">print(&quot;e=&quot;, e)</span><br></pre></td></tr></table></figure>
 
 <p>exp:</p>
@@ -770,7 +772,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://dexterjie.github.io/2023/07/06/RSA1/" title="RSA1">https://dexterjie.github.io/2023/07/06/RSA1/</a>
+      <a href="https://dexterjie.github.io/2023/07/06/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/RSA1/" title="RSA(一)">https://dexterjie.github.io/2023/07/06/非对称加密/RSA1/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -779,6 +781,8 @@
 </div>
 
           <div class="post-tags">
+              <a href="/tags/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81/" rel="tag"># 现代密码</a>
+              <a href="/tags/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/" rel="tag"># 非对称加密</a>
               <a href="/tags/RSA/" rel="tag"># RSA</a>
           </div>
 
@@ -791,8 +795,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/07/09/RSA2/" rel="next" title="RSA2">
-                  RSA2 <i class="fa fa-chevron-right"></i>
+                <a href="/2023/07/09/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/RSA2/" rel="next" title="RSA(二)">
+                  RSA(二) <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
