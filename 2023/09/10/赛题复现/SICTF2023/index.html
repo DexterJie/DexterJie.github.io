@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/0.jpg">
+  <link rel="mask-icon" href="/images/0.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dexterjie.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="SICTF2023 #Round2 Crypto方向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SICTF2023">
+<meta property="og:url" content="https://dexterjie.github.io/2023/09/10/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/SICTF2023/index.html">
+<meta property="og:site_name" content="DexterJie&#39;Blog">
+<meta property="og:description" content="SICTF2023 #Round2 Crypto方向">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-10T11:01:00.000Z">
+<meta property="article:modified_time" content="2023-09-10T11:02:10.061Z">
+<meta property="article:author" content="DexterJie">
+<meta property="article:tag" content="Wp">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://dexterjie.github.io/2023/09/10/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/SICTF2023/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2023/09/10/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/SICTF2023/","path":"2023/09/10/赛题复现/SICTF2023/","title":"SICTF2023"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SICTF2023 | DexterJie'Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">DexterJie'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1456890009&auto=1&height=66"></iframe>
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%A4%E5%85%B8%E5%A4%A7%E6%9D%82%E7%83%A9"><span class="nav-number">1.</span> <span class="nav-text">古典大杂烩</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Radio"><span class="nav-number">2.</span> <span class="nav-text">Radio</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MingTianPao"><span class="nav-number">3.</span> <span class="nav-text">MingTianPao</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Easy-CopperSmith"><span class="nav-number">4.</span> <span class="nav-text">Easy_CopperSmith</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AD%BE%E5%88%B0%E9%A2%98%E6%9D%A5%E5%92%AF"><span class="nav-number">5.</span> <span class="nav-text">签到题来咯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#small-e"><span class="nav-number">6.</span> <span class="nav-text">small_e</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#easy-math"><span class="nav-number">7.</span> <span class="nav-text">easy_math</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="DexterJie"
+      src="/images/0.jpg">
+  <p class="site-author-name" itemprop="name">DexterJie</p>
+  <div class="site-description" itemprop="description">一枚Crypto新手</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/09/10/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/SICTF2023/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/0.jpg">
+      <meta itemprop="name" content="DexterJie">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DexterJie'Blog">
+      <meta itemprop="description" content="一枚Crypto新手">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SICTF2023 | DexterJie'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SICTF2023
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-09-10 19:01:00 / 修改时间：19:02:10" itemprop="dateCreated datePublished" datetime="2023-09-10T19:01:00+08:00">2023-09-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Wp/" itemprop="url" rel="index"><span itemprop="name">Wp</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>SICTF2023 #Round2 Crypto方向</p>
+<span id="more"></span>
+
+<h1 id="古典大杂烩"><a href="#古典大杂烩" class="headerlink" title="古典大杂烩"></a>古典大杂烩</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">🐩👃🐪🐼👅🐯🐩👈👇👭👟👝🐺🐭👉👙👤👋👚🐪🐫👍👢👮👱🐼👢👨👠👭🐽🐰🐻👚👂👧👠👥👛👮👯👮👬🐾👐👛👌👚👞🐨👏👉👆🐿👆👘👇🐺👦🐸👃🐭👟👑👪👃👁🐻🐻👜🐧👇👊🐧🐾🐼👇🐫🐺👐👆👪🐼👋👌👧🐻👐🐩🐺👥🐽👋👉🐰👎👠👠👣🐧🐫👧🐭👢🐯👑👑🐮👂👏🐻👥👚🐮👋👬👌👥👁👣👅👧👯👦👌👌👍👠👌🐽👉👃👊🐫👉🐨🐮👩👆🐪🐯👘👏👏🐼👩👍👊👍👡👀👰👋👣👨👧👍👜👐👛🐮👘👅👠🐿👂👰👄👈👝👠👤👃👛👘🐭👅👱👆👬👫👥👆🐽👁👐👥👊👇👉👊👩👌👭🐫🐫👬👱🐯👇🐺👁👞👑👙🐮👜👋👘👪👩👚👦👨👀👩👐👉👃🐾👥👀🐫👝👍🐩🐧👰👆👇👨🐪👃🐭👦🐫👱</span><br></pre></td></tr></table></figure>
+
+<p>base家族</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">base100 --&gt; base62 --&gt; base64 --&gt; base58 --&gt; base32 --&gt; base62</span><br><span class="line"><span class="comment">#SICTF&#123;fe853b49-8730-462e-86f5-fc8e9789f077&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Radio"><a href="#Radio" class="headerlink" title="Radio"></a>Radio</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> flag</span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">p = getPrime(<span class="number">1024</span>)</span><br><span class="line">q = getPrime(<span class="number">1024</span>)</span><br><span class="line">n1 = p * q</span><br><span class="line">p = getPrime(<span class="number">1024</span>)</span><br><span class="line">q = getPrime(<span class="number">1024</span>)</span><br><span class="line">n2 = p * q</span><br><span class="line">p = getPrime(<span class="number">1024</span>)</span><br><span class="line">q = getPrime(<span class="number">1024</span>)</span><br><span class="line">n3 = p * q</span><br><span class="line">e = <span class="number">17</span></span><br><span class="line">c1 = <span class="built_in">pow</span>(m,e,n1)</span><br><span class="line">c2 = <span class="built_in">pow</span>(m,e,n2)</span><br><span class="line">c3 = <span class="built_in">pow</span>(m,e,n3)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n1 =&quot;</span>,n1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n2 =&quot;</span>,n2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n3 =&quot;</span>,n3)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c1 =&quot;</span>,c1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c2 =&quot;</span>,c2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c3 =&quot;</span>,c3)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">n1 = 14628911682936716611458501697007036859460044243525290515096052103585430459755335375005202100114469571371360084664887335211277585652711111523095037589648375630146039444071400098427638768750755153219974194380355807078158427824557754939604018020265955042573660474772006646525311705184431094905718137297923127124517126579859336516891364853724635334011666814712424599592662398013241607855160919361308195967978220182785816761656927836373944699635667244275310680450562446433724968942835275279255823144471582249379035668825437133182865600026935116686574740844588839352146024513673500770611055698030333734066230166111140083923 </span></span><br><span class="line"><span class="string">n2 = 16756694748293603983474688536179571665757862433174984877308316444468003022266277794769268134195205510197588585566270416339902269736376811449830775290335951504698137924773942880807921752691668522662285163130340474205633998154849689387759453003838730282756734975490180702422176361373516245372635401939755527017589503572550811648345570775428936487145892225736625411540461653083957762795820510109891180906709827194217045059033312564525916136573856999724346161896146703174418039344166251503310869772735585554127509732135494936119159784702673291794381095696332128950979288440758815310482211285712819274848744478643590996499 </span></span><br><span class="line"><span class="string">n3 = 12023158079717019193506148537498877243668782424904061914991928068483879707115315968983829360560644394409575645736275352836086080024994045582242629571839276759393418303915955798990522990081795218822313146157773272844272865701134880180795342597049645358985187689813369428579614193015028249821853347208001645148169449968882591709833452960545988520048722323580338213590245476892223967673180144525106292453573842357322398199104132677638909964034937501684668442732786408572501007756270725934445316827054687741612177409932320532825182104820899546084015733164816993674100635828218335112393003462442685677115798304835391938681 </span></span><br><span class="line"><span class="string">c1 = 786426913645332991929803636719878643130489430090701482974255190570111407517277263761161970232982615374753982050075781017755721714929721429185828101898786972242994012456972241276851428750970754773002966788642795040933520662931514953660571657013642671173456750800960592586345219252277575624120271330470724245201080094330964145796872211627254805407394764183615099525852600855622089361965086460279057625205099471122036599934609091062009161119885692567925924978687256063116915630947838112126347748759078024890458539541208153526564434483654508834147071166870006117573542198238493913144419569943131642262575848786399020602    </span></span><br><span class="line"><span class="string">c2 = 14269311999815379511888097227418748728398011595172649708273598243317106830139061994801598925448165045032084910971094414749744701731066555194159863759072739031915833091715422787808666326235589236328864675164322734119047182014621724868200908222400504845559290620275973427127376594365043386362821355037781568524903149101953873768462097165128186788759111090267131443645126715520994688945363059795513931799317608292977574376954729552861360597103229877031117089231816770880909815561950691603994439997197261395452797893557057320175747162837857668062550646101714062365530246698404923128445182100334335447738834779014705114350  </span></span><br><span class="line"><span class="string">c3 = 3204718091370324153305164801961074660508922478706979436653573192321723216725523523538914956544950802616295043619768261075799875855502834749045520466140056621489305006966280527055668378303630674311102581232313032585389907028715671091914904062961720585667564982641321454541632782484415075257140508738041786400512095949826279576159569786734978545737717138115729502475357594151593143140355121154223614868465202149338507796306863351134218879326031985027900678671697876083351974546516576983143592764763925335805465720148057651958521255276602933604064541840892578409973858867533575728482926007556060584654853884046046420855 </span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>中国剩余定理</p>
+<p>exp:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">from</span> sympy.ntheory.modular <span class="keyword">import</span> crt</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">n1 =   </span><br><span class="line">n2 =   </span><br><span class="line">n3 =   </span><br><span class="line">c1 =     </span><br><span class="line">c2 =   </span><br><span class="line">c3 =  </span><br><span class="line"> </span><br><span class="line">m_list = [n1,n2,n3]</span><br><span class="line">a_list = [c1,c2,c3]</span><br><span class="line"></span><br><span class="line">x = crt(m_list,a_list)[<span class="number">0</span>]</span><br><span class="line">e = <span class="number">17</span></span><br><span class="line">m = gmpy2.iroot(x,e)</span><br><span class="line"><span class="keyword">if</span> m[<span class="number">1</span>]:</span><br><span class="line">    <span class="built_in">print</span>(long_to_bytes(m[<span class="number">0</span>]))</span><br><span class="line"><span class="comment">#SICTF&#123;fdc0afb5-1c81-46b9-a28a-241f5f64419d&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="MingTianPao"><a href="#MingTianPao" class="headerlink" title="MingTianPao"></a>MingTianPao</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag, message</span><br><span class="line"><span class="comment"># message is a Classic English Story</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    tmp = (message[i*<span class="number">30</span>:(i+<span class="number">1</span>)*<span class="number">30</span>].encode())</span><br><span class="line">    <span class="built_in">print</span>(binascii.hexlify(strxor(tmp,flag)).decode())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1f2037202a1e6d06353b61263d050a0538493b3018544e14171d2b1c4218</span></span><br><span class="line"><span class="comment"># 3769373b66142f31297f291126410e042b01162d59103a0c005221075013</span></span><br><span class="line"><span class="comment"># 37242c202e1e3f743c36371130410c1e2b491a31574406014505291a550e</span></span><br><span class="line"><span class="comment"># 7f6922742e1a213270372e01264105193004532b1f554e120c1e2a145618</span></span><br><span class="line"><span class="comment"># 7d69143c23156d18392b35183141310e3b49213613590003453a291a555d</span></span><br><span class="line"><span class="comment"># 36273731341e297424372454230e0c0f2c49127f005f020245112718545d</span></span><br><span class="line"><span class="comment"># 26396320295b2531227161273c04430f360d533118444e0f0b1d31554615</span></span><br><span class="line"><span class="comment"># 323d6335660c24373b3a2554350f0a063e05533712101905165e66145f19</span></span><br><span class="line"><span class="comment"># 733e222766152220703e27063508074b300f53371e5d40444735291a555d</span></span><br><span class="line"><span class="comment"># 37283a7432146d2d3f2a6d541808171f330c530d12544e360c162f1b565d</span></span><br></pre></td></tr></table></figure>
+
+<p>MTP</p>
+<p>网上找个脚本</p>
+<p>需要改动一点东西</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Crypto.Util.strxor <span class="keyword">as</span> xo</span><br><span class="line"><span class="keyword">import</span> libnum, codecs, numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">isChr</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) &lt;= x <span class="keyword">and</span> x &lt;= <span class="built_in">ord</span>(<span class="string">&#x27;z&#x27;</span>): <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>) &lt;= x <span class="keyword">and</span> x &lt;= <span class="built_in">ord</span>(<span class="string">&#x27;Z&#x27;</span>): <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">infer</span>(<span class="params">index, pos</span>):</span><br><span class="line">    <span class="keyword">if</span> msg[index, pos] != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    msg[index, pos] = <span class="built_in">ord</span>(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(c)):</span><br><span class="line">        <span class="keyword">if</span> x != index:</span><br><span class="line">            msg[x][pos] = xo.strxor(c[x], c[index])[pos] ^ <span class="built_in">ord</span>(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">know</span>(<span class="params">index, pos, ch</span>):</span><br><span class="line">    msg[index, pos] = <span class="built_in">ord</span>(ch)</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(c)):</span><br><span class="line">        <span class="keyword">if</span> x != index:</span><br><span class="line">            msg[x][pos] = xo.strxor(c[x], c[index])[pos] ^ <span class="built_in">ord</span>(ch)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dat = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getSpace</span>():</span><br><span class="line">    <span class="keyword">for</span> index, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(c):</span><br><span class="line">        res = [xo.strxor(x, y) <span class="keyword">for</span> y <span class="keyword">in</span> c <span class="keyword">if</span> x!=y]</span><br><span class="line">        f = <span class="keyword">lambda</span> pos: <span class="built_in">len</span>(<span class="built_in">list</span>(<span class="built_in">filter</span>(isChr, [s[pos] <span class="keyword">for</span> s <span class="keyword">in</span> res])))</span><br><span class="line">        cnt = [f(pos) <span class="keyword">for</span> pos <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(x))]</span><br><span class="line">        <span class="keyword">for</span> pos <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(x)):</span><br><span class="line">            dat.append((f(pos), index, pos))</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里传密文</span></span><br><span class="line">c = [codecs.decode(x.strip().encode(), <span class="string">&#x27;hex&#x27;</span>) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">open</span>(<span class="string">&#x27;0.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>).readlines()]</span><br><span class="line"></span><br><span class="line">msg = np.zeros([<span class="built_in">len</span>(c), <span class="built_in">len</span>(c[<span class="number">0</span>])], dtype=<span class="built_in">int</span>)</span><br><span class="line"></span><br><span class="line">getSpace()</span><br><span class="line"></span><br><span class="line">dat = <span class="built_in">sorted</span>(dat)[::-<span class="number">1</span>]</span><br><span class="line"><span class="keyword">for</span> w, index, pos <span class="keyword">in</span> dat:</span><br><span class="line">    infer(index, pos)</span><br><span class="line"></span><br><span class="line">know(<span class="number">0</span>, <span class="number">24</span>, <span class="string">&#x27;r&#x27;</span>)	<span class="comment">#如果需要修正， 传入所在被改字母所在行和列，再输入替代的字母,例如alwa s 改为always</span></span><br><span class="line">know(<span class="number">1</span>, <span class="number">10</span>, <span class="string">&#x27;h&#x27;</span>)</span><br><span class="line">know(<span class="number">1</span>, <span class="number">12</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">know(<span class="number">2</span>, <span class="number">16</span>, <span class="string">&#x27;t&#x27;</span>)</span><br><span class="line">know(<span class="number">2</span>, <span class="number">28</span>, <span class="string">&#x27;d&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>.join([<span class="string">&#x27;&#x27;</span>.join([<span class="built_in">chr</span>(c) <span class="keyword">for</span> c <span class="keyword">in</span> x]) <span class="keyword">for</span> x <span class="keyword">in</span> msg]))</span><br><span class="line"></span><br><span class="line">key = xo.strxor(c[<span class="number">0</span>], <span class="string">&#x27;&#x27;</span>.join([<span class="built_in">chr</span>(c) <span class="keyword">for</span> c <span class="keyword">in</span> msg[<span class="number">0</span>]]).encode())</span><br><span class="line"><span class="built_in">print</span>(key)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Easy-CopperSmith"><a href="#Easy-CopperSmith" class="headerlink" title="Easy_CopperSmith"></a>Easy_CopperSmith</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> flag</span><br><span class="line">p = getPrime(<span class="number">512</span>)</span><br><span class="line">q = getPrime(<span class="number">512</span>)</span><br><span class="line">n = p * q</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">leak = p &gt;&gt; <span class="number">230</span></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">c = <span class="built_in">pow</span>(m,e,n)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="built_in">print</span>(leak)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">114007680041157617250208809154392208683967639953423906669116998085115503737001019559692895227927818755160444076128820965038044269092587109196557720941716578025622244634385547194563001079609897387390680250570961313174656874665690193604984942452581886657386063927035039087208310041149977622001887997061312418381</span></span><br><span class="line"><span class="string">6833525680083767201563383553257365403889275861180069149272377788671845720921410137177</span></span><br><span class="line"><span class="string">87627846271126693177889082381507430884663777705438987267317070845965070209704910716182088690758208915234427170455157948022843849997441546596567189456637997191173043345521331111329110083529853409188141263211030032553825858341099759209550785745319223409181813931086979471131074015406202979668575990074985441810</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>一般情况下需要已知286位才能求解512的p</p>
+<p>但是把<code>small_roots(epsilon = 0.01)</code>改动epsilon参数为0.01可以在已知264位的情况下求解p</p>
+<p>题目给出高282，修改参数epsilon即可求解</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sage</span></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">n = </span><br><span class="line">c = </span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">high_p = <span class="number">6833525680083767201563383553257365403889275861180069149272377788671845720921410137177</span></span><br><span class="line">high_p = high_p &lt;&lt; <span class="number">230</span></span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = high_p + x</span><br><span class="line">roots = f.small_roots(X = <span class="number">2</span>^<span class="number">230</span>,beta = <span class="number">0.4</span>,epsilon=<span class="number">0.01</span>)</span><br><span class="line"><span class="keyword">if</span> roots:</span><br><span class="line">    p = high_p + <span class="built_in">int</span>(roots[<span class="number">0</span>])</span><br><span class="line">    q = n // p</span><br><span class="line">    d = gmpy2.invert(e,(p-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">    m = <span class="built_in">pow</span>(c,d,n)</span><br><span class="line">    <span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(m)))</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="签到题来咯"><a href="#签到题来咯" class="headerlink" title="签到题来咯"></a>签到题来咯</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">from</span>  Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">p = getPrime(<span class="number">1024</span>)</span><br><span class="line">q = getPrime(<span class="number">1024</span>)</span><br><span class="line">e = getPrime(<span class="number">10</span>)</span><br><span class="line">n = p*q</span><br><span class="line">c1 = <span class="built_in">pow</span>(<span class="number">114</span>*m+<span class="number">2333</span>,e,n)</span><br><span class="line">c2 = <span class="built_in">pow</span>(<span class="number">514</span>*m+<span class="number">4555</span>,e,n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;n = <span class="subst">&#123;n&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;c1 = <span class="subst">&#123;c1&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;c2 = <span class="subst">&#123;c2&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">n = 18993579800590288733556762316465854395650778003397512624355925069287661487515652428099677335464809283955351330659278915073219733930542167360381688856732762552737791137784222098296804826261681852699742456526979985201331982720936091963830799430264680941164508709453794113576607749669278887105809727027129736803614327631979056934906547015919204770702496676692691248702461766117271815398943842909579917102217310779431999448597899109808086655029624478062317317442297276087073653945439820988375066353157221370129064423613949039895822016206336117081475698987326594199181180346821431242733826487765566154350269651592993856883</span></span><br><span class="line"><span class="string">c1 = 3089900890429368903963127778258893993015616003863275300568951378177309984878857933740319974151823410060583527905656182419531008417050246901514691111335764182779077027419410717272164998075313101695833565450587029584857433998627248705518025411896438130004108810308599666206694770859843696952378804678690327442746359836105117371144846629293505396610982407985241783168161504309420302314102538231774470927864959064261347913286659384383565379900391857812482728653358741387072374314243068833590379370244368317200796927931678203916569721211768082289529948017340699194622234734381555103898784827642197721866114583358940604520</span></span><br><span class="line"><span class="string">c2 = 6062491672599671503583327431533992487890060173533816222838721749216161789662841049274959778509684968479022417053571624473283543736981267659104310293237792925201009775193492423025040929132360886500863823523629213703533794348606076463773478200331006341206053010168741302440409050344170767489936681627020501853981450212305108039373119567034948781143698613084550376070802084805644270376620484786155554275798939105737707005991882264123315436368611647275530607811665999620394422672764116158492214128572456571553281799359243174598812137554860109807481900330449364878168308833006964726761878461761560543284533578701661413931</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>相关消息攻击，遍历所有e</p>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/XiongSiqi_blog/article/details/130978226">Franklin-Reiter相关消息攻击_Emmaaaaaaaaaa的博客-CSDN博客</a></p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sage</span></span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">n = </span><br><span class="line">c1 = </span><br><span class="line">c2 = </span><br><span class="line">E = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>^<span class="number">9</span>,<span class="number">2</span>^<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">if</span> isPrime(i):</span><br><span class="line">        E.append(i)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">franklinReiter</span>(<span class="params">n,e,c1,c2</span>):</span><br><span class="line">    PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">    g1 = (<span class="number">114</span>*x + <span class="number">2333</span>)^e - c1</span><br><span class="line">    g2 = (<span class="number">514</span>*x + <span class="number">4555</span>)^e - c2</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gcd</span>(<span class="params">g1, g2</span>):</span><br><span class="line">        <span class="keyword">while</span> g2:</span><br><span class="line">            g1, g2 = g2, g1 % g2</span><br><span class="line">        <span class="keyword">return</span> g1.monic()</span><br><span class="line">    <span class="keyword">return</span> -gcd(g1, g2)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(E)</span></span><br><span class="line"><span class="keyword">for</span> e <span class="keyword">in</span> E:</span><br><span class="line">    m = franklinReiter(n,e,c1,c2)</span><br><span class="line">    flag = long_to_bytes(<span class="built_in">int</span>(m))</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;SICTF&#x27;</span> <span class="keyword">in</span> flag:</span><br><span class="line">        <span class="built_in">print</span>(flag)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="small-e"><a href="#small-e" class="headerlink" title="small_e"></a>small_e</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line">flag=<span class="string">&quot;SICTF&#123;&quot;</span>+<span class="built_in">str</span>(uuid.uuid4())+<span class="string">&quot;&#125;&quot;</span></span><br><span class="line">m=libnum.s2n(flag)</span><br><span class="line">p=getPrime(<span class="number">1024</span>)</span><br><span class="line">q=getPrime(<span class="number">1024</span>)</span><br><span class="line">n=p*q</span><br><span class="line">e=<span class="number">3</span></span><br><span class="line">c=<span class="built_in">pow</span>(m,e,n)</span><br><span class="line">m1=((m&gt;&gt;<span class="number">60</span>)&lt;&lt;<span class="number">60</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n=&quot;</span>,n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;e=&quot;</span>,e)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c=&quot;</span>,c)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;((m&gt;&gt;60)&lt;&lt;60)=&quot;</span>,m1)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">n= 23407088262641313744603678186127228163189328033499381357614318160776774708961658114505773173784501557046914457908828086210961235530240151825359345210845219656000760996670856300710703016947799649686427460688236465568188205550456293373157997725204643414082796492333552579250010906010553831060540937802882205118399938918764313169385349293602085310111289583058965780887097301702677087443291977479125263301000328313103296364864396361278863921717374909215078711198899810620522933994481419395021233240234478331179727351050575360886334237633420906629984625441302945112631166021776379103081857393866576659121443879590011160797</span></span><br><span class="line"><span class="string">e= 3</span></span><br><span class="line"><span class="string">c= 1584727211980974717747362694412040878682966138197627512650829607105625096823456063149392973232737929737200028676411430124019573130595696272668927725536797627059576270068695792221537212669276826952363636924278717182163166234322320044764324434683614360641636360301452618063418349310497430566465329766916213742181</span></span><br><span class="line"><span class="string">((m&gt;&gt;60)&lt;&lt;60)= 11658736990073967239197168945911788935424691658202162501032766529463315401599017877851823976178979438592</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>小e秒出</p>
+<p>exp1:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">n= </span><br><span class="line">e= <span class="number">3</span></span><br><span class="line">c= </span><br><span class="line">k = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t = gmpy2.iroot(c,e)</span><br><span class="line"><span class="keyword">if</span> t[<span class="number">1</span>]:</span><br><span class="line">    <span class="built_in">print</span>(long_to_bytes(t[<span class="number">0</span>]))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        m = gmpy2.iroot(k*n+c,e)</span><br><span class="line">        <span class="keyword">if</span> m[<span class="number">1</span>]:</span><br><span class="line">            <span class="built_in">print</span>(m[<span class="number">0</span>])</span><br><span class="line">            <span class="built_in">print</span>(long_to_bytes(m[<span class="number">0</span>]))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            k += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>预期考点应该是m高位泄露</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sage</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"></span><br><span class="line">n= </span><br><span class="line">e= <span class="number">3</span></span><br><span class="line">c= </span><br><span class="line">m_high= <span class="number">11658736990073967239197168945911788935424691658202162501032766529463315401599017877851823976178979438592</span></span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">m = m_high + x</span><br><span class="line">f = m^e - c</span><br><span class="line">x = f.small_roots(X = <span class="number">2</span>^<span class="number">60</span>,beta = <span class="number">0.4</span>)</span><br><span class="line"><span class="keyword">if</span> x:</span><br><span class="line">	m = m_high + x[<span class="number">0</span>]</span><br><span class="line">	<span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(m)))</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="easy-math"><a href="#easy-math" class="headerlink" title="easy_math"></a>easy_math</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">from</span>  Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">p = getPrime(<span class="number">512</span>)</span><br><span class="line">q = getPrime(<span class="number">512</span>)</span><br><span class="line">n = p * q</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">hint1 = getPrime(<span class="number">13</span>)*p+getPrime(<span class="number">256</span>)*q</span><br><span class="line">hint2 = getPrime(<span class="number">13</span>)*p+getPrime(<span class="number">256</span>)*q</span><br><span class="line">c = <span class="built_in">pow</span>(m,e,n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;n = <span class="subst">&#123;n&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;hint1 = <span class="subst">&#123;hint1&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;hint2 = <span class="subst">&#123;hint2&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;c = <span class="subst">&#123;c&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">n = 68123067052840097285002963401518347625939222208495512245264898037784706226045178539672509359795737570458454279990340789711761542570505016930986418403583534761200927746744298082254959321108829717070206277856970403191060311901559017372393931121345743640657503994132925993800497309703877076541759570410784984067</span></span><br><span class="line"><span class="string">hint1 = 564294243979930441832363430202216879765636227726919016842676871868826273613344463155168512928428069316237289920953421495330355385445649203238665802121198919543532254290185502622234014832349396422316629991217252686524462096711723580</span></span><br><span class="line"><span class="string">hint2 = 484307144682854466149980416084532076579378210225500554261260145338511061452958092407101769145891750844383042274498826787696953308289632616886162073232218214504005935332891893378072083589751354946391146889055039887781077066257013110</span></span><br><span class="line"><span class="string">c = 57751903193610662622957432730720223801836323458721550133101805763463060486486266309568004721657732742899781400754207249733137375171400440423755473421971160000575072519031824740691618617905549725344323721903857290320737224300672847773455169809689188843070599176261204013341324705808617411345132933937680951713</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>$hint_1 &#x3D; a_1p+b_1q$，$hint_2 &#x3D; a_2p+b_2q$</p>
+<p>则$a_2hint_1 &#x3D; a_1a_2p+b_1a_2q$，$a_1hint_2 &#x3D; a_1a_2p + b_2a_1q$</p>
+<p>两式相减得$a_2hint_1-a_1hint_2 &#x3D; (b_1a_2-b_2a_1)q$</p>
+<p>于是$q &#x3D; gcd(n,a_2hint1-a_1hint_2)$，可以做检验</p>
+<p>$a_1,a_2$不大，可以爆破</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n = </span><br><span class="line">hint1 = </span><br><span class="line">hint2 = </span><br><span class="line">c = </span><br><span class="line"></span><br><span class="line">hints = [hint1,hint2]</span><br><span class="line">A = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>**<span class="number">12</span>,<span class="number">2</span>**<span class="number">13</span>):</span><br><span class="line">    <span class="keyword">if</span> isPrime(i):</span><br><span class="line">        A.append(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> a1, a2 <span class="keyword">in</span> tqdm(<span class="built_in">list</span>(product(A, repeat=<span class="number">2</span>))):</span><br><span class="line">    kq = gmpy2.gcd(a1 * hints[<span class="number">0</span>] - a2 * hints[<span class="number">1</span>], n)</span><br><span class="line">    <span class="keyword">if</span> <span class="number">1</span> &lt; kq &lt; n:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;ffind!&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;kq=&quot;</span>,kq)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;a1=&quot;</span>,a1)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;a2=&quot;</span>,a2)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">q = kq</span><br><span class="line">p = n // kq</span><br><span class="line">d = gmpy2.invert(<span class="number">65537</span>,(p-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">m = <span class="built_in">pow</span>(c, d, n)</span><br><span class="line">flag = long_to_bytes(m)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="https://github.com/DownUnderCTF/Challenges_2023_Public/blob/main/crypto/apbq-rsa-i/solve/solv.py">Challenges_2023_Public&#x2F;crypto&#x2F;apbq-rsa-i&#x2F;solve&#x2F;solv.py at main · DownUnderCTF&#x2F;Challenges_2023_Public (github.com)</a></p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>DexterJie
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://dexterjie.github.io/2023/09/10/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/SICTF2023/" title="SICTF2023">https://dexterjie.github.io/2023/09/10/赛题复现/SICTF2023/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Wp/" rel="tag"># Wp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/07/%E6%8C%A8%E6%89%93%E6%97%A5%E8%AE%B0/" rel="prev" title="挨打日记">
+                  <i class="fa fa-chevron-left"></i> 挨打日记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DexterJie</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">93k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:39</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>-->
+
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+<div class="busuanzi-count">
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+  
+  <span class="site-uv" title="总访客量">
+    访客量<span id="busuanzi_value_site_uv"></span>
+  </span>
+
+  <span class="site-pv" title="总访问量">
+    经过<span id="busuanzi_value_site_pv"></span>次回眸与你相遇
+  </span>
+</div>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right"},"mobile":{"show":true}});</script></body>
+
+</html>

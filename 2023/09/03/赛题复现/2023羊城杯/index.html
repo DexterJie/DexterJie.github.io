@@ -32,9 +32,10 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF/1.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF/2.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF/3.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF/4.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF/0.png">
 <meta property="article:published_time" content="2023-09-03T09:12:16.000Z">
-<meta property="article:modified_time" content="2023-09-05T10:40:19.563Z">
+<meta property="article:modified_time" content="2023-09-07T14:59:46.188Z">
 <meta property="article:author" content="DexterJie">
 <meta property="article:tag" content="Wp">
 <meta name="twitter:card" content="summary">
@@ -148,7 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Danger-RSA"><span class="nav-number">1.</span> <span class="nav-text">Danger_RSA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Easy-3L"><span class="nav-number">2.</span> <span class="nav-text">Easy_3L</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#signinCrypto"><span class="nav-number">3.</span> <span class="nav-text">signinCrypto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#esyRSA%E2%80%94%E2%80%94%E5%A4%8D%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">esyRSA——复现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%A0%BC-begin-pmatrix-e-k-end-pmatrix-begin-pmatrix-2-512-d-0-n-end-pmatrix"><span class="nav-number">5.</span> <span class="nav-text">构造格$$\begin{pmatrix}-e &amp; k\end{pmatrix}\begin{pmatrix}2^{512} &amp; d\0 &amp; n\end{pmatrix}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MCeorpkpleer"><span class="nav-number">6.</span> <span class="nav-text">MCeorpkpleer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XOR%E8%B4%AF%E7%A9%BF%E5%A7%8B%E7%BB%88"><span class="nav-number">7.</span> <span class="nav-text">XOR贯穿始终</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Danger-RSA"><span class="nav-number">1.</span> <span class="nav-text">Danger_RSA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Easy-3L"><span class="nav-number">2.</span> <span class="nav-text">Easy_3L</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#signinCrypto"><span class="nav-number">3.</span> <span class="nav-text">signinCrypto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#esyRSA%E2%80%94%E2%80%94%E5%A4%8D%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">esyRSA——复现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MCeorpkpleer"><span class="nav-number">5.</span> <span class="nav-text">MCeorpkpleer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XOR%E8%B4%AF%E7%A9%BF%E5%A7%8B%E7%BB%88"><span class="nav-number">6.</span> <span class="nav-text">XOR贯穿始终</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -163,7 +164,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -241,7 +242,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-05 18:40:19" itemprop="dateModified" datetime="2023-09-05T18:40:19+08:00">2023-09-05</time>
+      <time title="修改时间：2023-09-07 22:59:46" itemprop="dateModified" datetime="2023-09-07T22:59:46+08:00">2023-09-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -365,7 +366,9 @@
 <p>$\therefore ed &#x3D; kphi + 1 \longrightarrow ed &#x3D; k(n - p - q + 1) + 1$</p>
 <p>$ed &#x3D; kn - k(p+q-1)+1$</p>
 <p>$k(p+q-1)-1 &#x3D; kn -ed$</p>
-<h1 id="构造格-begin-pmatrix-e-k-end-pmatrix-begin-pmatrix-2-512-d-0-n-end-pmatrix"><a href="#构造格-begin-pmatrix-e-k-end-pmatrix-begin-pmatrix-2-512-d-0-n-end-pmatrix" class="headerlink" title="构造格$$\begin{pmatrix}-e &amp; k\end{pmatrix}\begin{pmatrix}2^{512} &amp; d\0 &amp; n\end{pmatrix}"></a>构造格<br>$$<br>\begin{pmatrix}<br>-e &amp; k<br>\end{pmatrix}<br>\begin{pmatrix}<br>2^{512} &amp; d\<br>0 &amp; n<br>\end{pmatrix}</h1><p>\begin{pmatrix}<br>-e×2^{512} &amp; k(p+q-1)-1<br>\end{pmatrix}<br>$$<br>规约后能得到e，再求<code>k(p+q-1)</code>和<code>ed - 1</code>的公因数得到k</p>
+<p>构造格</p>
+<p><img src="/../../images/2023%E7%BE%8A%E5%9F%8E%E6%9D%AF/4.png"></p>
+<p>规约后能得到e，再求<code>k(p+q-1)</code>和<code>ed - 1</code>的公因数得到k</p>
 <p>exp:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">n = <span class="number">80642592772746398646558097588687958541171131704233319344980232942965050635113860017117519166348100569115174644678997805783380130114530824798808098237628247236574959152847903491509751809336988273823686988619679739640305091291330211169194377552925908412183162787327977125388852329089751737463948165202565859373</span></span><br><span class="line">d = <span class="number">14218766449983537783699024084862960813708451888387858392014856544340557703876299258990323621963898510226357248200187173211121827541826897886277531706124228848229095880229718049075745233893843373402201077890407507625110061976931591596708901741146750809962128820611844426759462132623616118530705745098783140913</span></span><br><span class="line"></span><br><span class="line">Ge = Matrix(ZZ,[</span><br><span class="line">    [<span class="number">2</span>^<span class="number">512</span> , d],</span><br><span class="line">    [<span class="number">0</span> , n]]</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">L = Ge.LLL()[<span class="number">0</span>]</span><br><span class="line">e = <span class="built_in">abs</span>(L[<span class="number">0</span>]) // <span class="number">2</span>^<span class="number">512</span></span><br><span class="line"></span><br><span class="line">k = gcd(e*d - <span class="number">1</span>,L[<span class="number">1</span>]+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">p_q = (L[<span class="number">1</span>]+<span class="number">1</span>) // k + <span class="number">1</span></span><br><span class="line">flag = <span class="string">&quot;DASCTF&#123;&quot;</span> + hashlib.md5(<span class="built_in">str</span>(p_q).encode()).hexdigest() + <span class="string">&#x27;&#125;&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
 
@@ -461,6 +464,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2023/09/07/%E6%8C%A8%E6%89%93%E6%97%A5%E8%AE%B0/" rel="next" title="挨打日记">
+                  挨打日记 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -491,13 +497,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">90k</span>
+    <span title="站点总字数">93k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:28</span>
+    <span title="站点阅读时长">5:39</span>
   </span>
 </div>
 <div class="busuanzi-count">
