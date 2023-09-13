@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/lcg/6.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/lcg/7.png">
 <meta property="article:published_time" content="2023-07-05T04:51:24.000Z">
-<meta property="article:modified_time" content="2023-09-06T13:47:55.409Z">
+<meta property="article:modified_time" content="2023-09-13T12:16:58.423Z">
 <meta property="article:author" content="DexterJie">
 <meta property="article:tag" content="现代密码">
 <meta property="article:tag" content="流密码">
@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lcg-%E7%BA%BF%E6%80%A7%E5%90%8C%E4%BD%99%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">lcg(线性同余随机数生成器)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981"><span class="nav-number">1.2.</span> <span class="nav-text">例题1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982-%E5%B7%B2%E7%9F%A5%E5%90%8E%E9%A1%B9%E6%B1%82%E5%89%8D%E9%A1%B9"><span class="nav-number">1.3.</span> <span class="nav-text">例题2(已知后项求前项)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%983-%E6%B1%82%E5%A2%9E%E9%87%8Fb"><span class="nav-number">1.4.</span> <span class="nav-text">例题3(求增量b)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%984-%E6%9C%AA%E7%9F%A5a-b%E6%B1%82seed"><span class="nav-number">1.5.</span> <span class="nav-text">例题4(未知a,b求seed)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%985-%E6%9C%AA%E7%9F%A5a-b-n%E6%B1%82seed%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">例题5(未知a,b,n求seed）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%986-%E6%B1%82%E5%87%BA%E7%9A%84%E6%98%AFk%E5%80%8D%E6%A8%A1%E6%95%B0"><span class="nav-number">1.7.</span> <span class="nav-text">例题6(求出的是k倍模数)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%987-%E8%BE%93%E5%87%BAX0%EF%BC%8CX2%EF%BC%8CX4%EF%BC%8CX6%EF%BC%8CX8"><span class="nav-number">1.8.</span> <span class="nav-text">例题7(输出X0，X2，X4，X6，X8)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%988-%E7%BB%99%E5%87%BA%E9%AB%98%E4%BD%8D"><span class="nav-number">1.9.</span> <span class="nav-text">例题8(给出高位)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%989-Linear"><span class="nav-number">1.10.</span> <span class="nav-text">题9 Linear</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lcg-%E7%BA%BF%E6%80%A7%E5%90%8C%E4%BD%99%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">lcg(线性同余随机数生成器)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981"><span class="nav-number">1.2.</span> <span class="nav-text">例题1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982-%E5%B7%B2%E7%9F%A5%E5%90%8E%E9%A1%B9%E6%B1%82%E5%89%8D%E9%A1%B9"><span class="nav-number">1.3.</span> <span class="nav-text">例题2(已知后项求前项)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%983-%E6%B1%82%E5%A2%9E%E9%87%8Fb"><span class="nav-number">1.4.</span> <span class="nav-text">例题3(求增量b)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%984-%E6%9C%AA%E7%9F%A5a-b%E6%B1%82seed"><span class="nav-number">1.5.</span> <span class="nav-text">例题4(未知a,b求seed)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%985-%E6%9C%AA%E7%9F%A5a-b-n%E6%B1%82seed%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">例题5(未知a,b,n求seed）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%986-%E6%B1%82%E5%87%BA%E7%9A%84%E6%98%AFk%E5%80%8D%E6%A8%A1%E6%95%B0"><span class="nav-number">1.7.</span> <span class="nav-text">例题6(求出的是k倍模数)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%987-%E8%BE%93%E5%87%BAX0%EF%BC%8CX2%EF%BC%8CX4%EF%BC%8CX6%EF%BC%8CX8"><span class="nav-number">1.8.</span> <span class="nav-text">例题7(输出X0，X2，X4，X6，X8)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%988-%E7%BB%99%E5%87%BA%E9%AB%98%E4%BD%8D"><span class="nav-number">1.9.</span> <span class="nav-text">例题8(给出高位)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%989-Linear"><span class="nav-number">1.10.</span> <span class="nav-text">题9 Linear</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A9%E7%94%A8Grobner%E5%9F%BA"><span class="nav-number">2.</span> <span class="nav-text">利用Gröbner基</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -244,7 +244,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-06 21:47:55" itemprop="dateModified" datetime="2023-09-06T21:47:55+08:00">2023-09-06</time>
+      <time title="修改时间：2023-09-13 20:16:58" itemprop="dateModified" datetime="2023-09-13T20:16:58+08:00">2023-09-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,7 +270,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.3k</span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -407,18 +407,13 @@
 
 
 
+<h1 id="利用Grobner基"><a href="#利用Grobner基" class="headerlink" title="利用Gröbner基"></a>利用Gröbner基</h1><p>当a和n互素的时候可以利用下面脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sage</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">result =  [...]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建一个多项式环，包含两个变量a和b，系数在整数域ZZ上</span></span><br><span class="line">P.&lt;a,b&gt; = PolynomialRing(ZZ)</span><br><span class="line"><span class="comment"># 定义了四个多项式方程f1,f2,f3,f4,其中result是一个包含数值的列表。</span></span><br><span class="line"><span class="comment"># 所以这构建了一个线性方程组</span></span><br><span class="line">f1 = result[<span class="number">0</span>]*a + b - result[<span class="number">1</span>]</span><br><span class="line">f2 = result[<span class="number">1</span>]*a + b - result[<span class="number">2</span>]</span><br><span class="line">f3 = result[<span class="number">2</span>]*a + b - result[<span class="number">3</span>]</span><br><span class="line">f4 = result[<span class="number">3</span>]*a + b - result[<span class="number">4</span>]</span><br><span class="line"><span class="comment"># 将四个方程存储在列表F中</span></span><br><span class="line">F = [f1,f2,f3,f4]</span><br><span class="line"><span class="comment"># 使用F构建一个理想的Ideal。</span></span><br><span class="line">Ideal = Ideal(F)</span><br><span class="line"><span class="comment"># # 计算Ideal的Gröbner基I</span></span><br><span class="line">I = Ideal.groebner_basis()</span><br><span class="line"><span class="built_in">print</span>(I)</span><br><span class="line"></span><br><span class="line">a = ZZ(-I[<span class="number">0</span>].univariate_polynomial()(<span class="number">0</span>))</span><br><span class="line">b = ZZ(-I[<span class="number">1</span>].univariate_polynomial()(<span class="number">0</span>))</span><br><span class="line">p = ZZ(I[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">m = (result[<span class="number">0</span>]-b)*a^-<span class="number">1</span> % p</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(m)))</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-
-
-
-
-
-
+<p>原理不太懂</p>
+<p>给出一篇<strong>Gröbner</strong>的知识分享：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24452817">(11 封私信) 介绍一下Grobner基的概念和应用？谢谢 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.scholarpedia.org/article/Groebner_basis">Groebner basis - Scholarpedia</a></p>
+<p>参考：[<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/363648238">CTF秀] 密码挑战 个人writeup - 知乎 (zhihu.com)</a></p>
 
     </div>
 
@@ -502,13 +497,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">96k</span>
+    <span title="站点总字数">97k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:49</span>
+    <span title="站点阅读时长">5:52</span>
   </span>
 </div>
 <div class="busuanzi-count">
