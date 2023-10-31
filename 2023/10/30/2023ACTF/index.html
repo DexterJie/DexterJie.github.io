@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/0.jpg">
+  <link rel="mask-icon" href="/images/0.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dexterjie.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="赛题很难，呜呜呜">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2023ACTF">
+<meta property="og:url" content="https://dexterjie.github.io/2023/10/30/2023ACTF/index.html">
+<meta property="og:site_name" content="DexterJie&#39;Blog">
+<meta property="og:description" content="赛题很难，呜呜呜">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="d:\Typora\%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9\%E7%8E%84%E6%9C%BA\%E5%91%A8%E6%8A%A5\2023%E5%B9%B410%E6%9C%88\0.png">
+<meta property="article:published_time" content="2023-10-30T10:08:03.000Z">
+<meta property="article:modified_time" content="2023-10-30T10:15:17.048Z">
+<meta property="article:author" content="DexterJie">
+<meta property="article:tag" content="Wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:\Typora\%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9\%E7%8E%84%E6%9C%BA\%E5%91%A8%E6%8A%A5\2023%E5%B9%B410%E6%9C%88\0.png">
+
+
+<link rel="canonical" href="https://dexterjie.github.io/2023/10/30/2023ACTF/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2023/10/30/2023ACTF/","path":"2023/10/30/2023ACTF/","title":"2023ACTF"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2023ACTF | DexterJie'Blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="waline-five-mocha.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">DexterJie'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1456890009&auto=1&height=66"></iframe>
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MDH"><span class="nav-number">1.</span> <span class="nav-text">MDH</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#claw-crane"><span class="nav-number">2.</span> <span class="nav-text">claw crane</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E7%AD%94"><span class="nav-number">2.1.</span> <span class="nav-text">我的解答</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="DexterJie"
+      src="/images/0.jpg">
+  <p class="site-author-name" itemprop="name">DexterJie</p>
+  <div class="site-description" itemprop="description">一枚Crypto新手</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/10/30/2023ACTF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/0.jpg">
+      <meta itemprop="name" content="DexterJie">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DexterJie'Blog">
+      <meta itemprop="description" content="一枚Crypto新手">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2023ACTF | DexterJie'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2023ACTF
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-10-30 18:08:03 / 修改时间：18:15:17" itemprop="dateCreated datePublished" datetime="2023-10-30T18:08:03+08:00">2023-10-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Wp/" itemprop="url" rel="index"><span itemprop="name">Wp</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/10/30/2023ACTF/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/10/30/2023ACTF/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>赛题很难，呜呜呜</p>
+<span id="more"></span>
+
+<h1 id="MDH"><a href="#MDH" class="headerlink" title="MDH"></a>MDH</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line">r = <span class="number">128</span></span><br><span class="line">c = <span class="number">96</span></span><br><span class="line">p = <span class="number">308955606868885551120230861462612873078105583047156930179459717798715109629</span></span><br><span class="line">Fp = GF(p)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gen</span>():</span><br><span class="line">    a1 = random_matrix(Fp, r, c)</span><br><span class="line">    a2 = random_matrix(Fp, r, c)</span><br><span class="line">    A = a1 * a2.T</span><br><span class="line">    <span class="keyword">return</span> (a1, a2), A</span><br><span class="line"></span><br><span class="line">sk_alice, pk_alice = gen()</span><br><span class="line">sk_bob, pk_bob = gen()</span><br><span class="line">shared = (sk_alice[<span class="number">0</span>].T * pk_bob * sk_alice[<span class="number">1</span>]).trace()</span><br><span class="line">ct = <span class="built_in">int</span>(sha256(<span class="built_in">str</span>(<span class="built_in">int</span>(shared)).encode()).hexdigest(), <span class="number">16</span>) ^^ <span class="built_in">int</span>.from_bytes(flag, <span class="string">&#x27;big&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;output.txt&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="built_in">str</span>(ct).encode() + <span class="string">b&#x27;\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="built_in">str</span>(<span class="built_in">list</span>(pk_alice)).encode() + <span class="string">b&#x27;\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="built_in">str</span>(<span class="built_in">list</span>(pk_bob)).encode() + <span class="string">b&#x27;\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>shared = (sk_alice[0].T * pk_bob * sk_alice[1]).trace()</code></p>
+<p>即$shared &#x3D; (a_1^T \times b_1\times b_2^T \times a_2).trace()$</p>
+<p>我们已知<code>Pk_alice</code> &#x3D; $a_1\times a_2^T$和<code>Pk_bob</code> &#x3D; $b_1\times b_2^T$</p>
+<p>根据矩阵迹的性质$Tr(A) &#x3D; Tr(A^T)$，$Tr(AB) &#x3D; Tr(BA)$，参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43660703/article/details/108686621">矩阵的迹(Trace)及相关性质证明_矩阵迹的性质及证明-CSDN博客</a></p>
+<p>于是我们可以把<code>shared</code>改写成</p>
+<p>$shared &#x3D; (a_1^T\times a_2 \times b_1\times b_2^T).trace()$</p>
+<p>即<code>shared = (Pk_alice.T * Pk_bob).trace()</code></p>
+<p>exp:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"></span><br><span class="line">p = <span class="number">308955606868885551120230861462612873078105583047156930179459717798715109629</span></span><br><span class="line">Fq = GF(p)</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;output.txt&quot;</span>,<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">data = f.readlines()</span><br><span class="line"></span><br><span class="line">ct = <span class="built_in">eval</span>(data[<span class="number">0</span>])</span><br><span class="line">pk_alice = <span class="built_in">eval</span>(data[<span class="number">1</span>])</span><br><span class="line">pk_bob = <span class="built_in">eval</span>(data[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">pk_alice = Matrix(Fp,pk_alice)</span><br><span class="line">pk_bob = Matrix(Fq,pk_bob)</span><br><span class="line"></span><br><span class="line">shared = (pk_alice.T * pk_bob).trace()</span><br><span class="line"></span><br><span class="line">m = <span class="built_in">int</span>(sha256(<span class="built_in">str</span>(<span class="built_in">int</span>(shared)).encode()).hexdigest(), <span class="number">16</span>) ^^ ct</span><br><span class="line">flag = <span class="built_in">bytes</span>.fromhex(<span class="built_in">hex</span>(m)[<span class="number">2</span>:])</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># ACTF&#123;do_you_know_f0rm2l1n_1s_4w3s0m3!&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="claw-crane"><a href="#claw-crane" class="headerlink" title="claw crane"></a>claw crane</h1><p>赛时没有做出来，但是赛后，趁靶机还开着的时候试了一下。下面分享一下自己的想法，肯定不是正解</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> (</span><br><span class="line">    bytes_to_long, long_to_bytes</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> md5</span><br><span class="line"><span class="keyword">import</span> os, signal</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">BITS = <span class="number">128</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ClawCrane</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.seed = bytes_to_long(os.urandom(BITS//<span class="number">8</span>))</span><br><span class="line">        self.bless = <span class="number">0</span></span><br><span class="line">        self.score = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_input</span>(<span class="params">self, prompt=<span class="string">&quot;&gt; &quot;</span></span>):</span><br><span class="line">        <span class="built_in">print</span>(prompt, end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">        sys.stdout.flush()</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">input</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">check_pos</span>(<span class="params">self, pos, moves</span>):</span><br><span class="line">        col, row = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> move <span class="keyword">in</span> moves:</span><br><span class="line">            <span class="keyword">if</span> move == <span class="string">&quot;W&quot;</span>:</span><br><span class="line">                <span class="keyword">if</span> row &lt; <span class="number">15</span>: row += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> move == <span class="string">&quot;S&quot;</span>:</span><br><span class="line">                <span class="keyword">if</span> row &gt; <span class="number">0</span>: row -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> move == <span class="string">&quot;A&quot;</span>:</span><br><span class="line">                <span class="keyword">if</span> col &gt; <span class="number">0</span>: col -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> move == <span class="string">&quot;D&quot;</span>:</span><br><span class="line">                <span class="keyword">if</span> col &lt; <span class="number">15</span>: col += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(col, row)</span><br><span class="line">        <span class="keyword">return</span> pos == [col, row]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gen_chaos</span>(<span class="params">self, inp</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">mapping</span>(<span class="params">x</span>):</span><br><span class="line">            <span class="keyword">if</span> x==<span class="string">&#x27;W&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;0&quot;</span></span><br><span class="line">            <span class="keyword">if</span> x==<span class="string">&#x27;S&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;1&quot;</span></span><br><span class="line">            <span class="keyword">if</span> x==<span class="string">&#x27;A&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;2&quot;</span></span><br><span class="line">            <span class="keyword">if</span> x==<span class="string">&#x27;D&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;3&quot;</span></span><br><span class="line">        vs = <span class="built_in">int</span>(<span class="string">&quot;&quot;</span>.join(<span class="built_in">map</span>(mapping, inp)), <span class="number">4</span>)</span><br><span class="line">        chaos = bytes_to_long(md5(</span><br><span class="line">                    long_to_bytes((self.seed + vs) % <span class="built_in">pow</span>(<span class="number">2</span>,BITS))</span><br><span class="line">                ).digest())</span><br><span class="line">        self.seed = (self.seed + chaos + <span class="number">1</span>) % <span class="built_in">pow</span>(<span class="number">2</span>,BITS)</span><br><span class="line">        <span class="keyword">return</span> chaos</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">destiny_claw</span>(<span class="params">self, delta</span>):</span><br><span class="line">        bits = <span class="built_in">bin</span>(delta)[<span class="number">2</span>:]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(bits) &lt; <span class="number">128</span>+self.bless:</span><br><span class="line">            bits += <span class="string">&quot;0&quot;</span>*(<span class="number">128</span>+self.bless - <span class="built_in">len</span>(bits))</span><br><span class="line">        c = random.choice(bits)</span><br><span class="line">        <span class="keyword">if</span> c==<span class="string">&#x27;0&#x27;</span>: <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        pos = [random.randrange(<span class="number">1</span>,<span class="number">16</span>), random.randrange(<span class="number">1</span>,<span class="number">16</span>)]</span><br><span class="line">        moves = self.get_input(<span class="string">f&quot;i am at <span class="subst">&#123;pos&#125;</span>, claw me.\nYour moves: &quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(moves) &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;too many steps&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.check_pos(pos, moves):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;sorry, clawed nothing&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        r = self.gen_chaos(moves[:<span class="number">64</span>])</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;choas: <span class="subst">&#123;r&#125;</span>&quot;</span>)</span><br><span class="line">        p, q = <span class="built_in">map</span>(<span class="built_in">int</span>, self.get_input(<span class="string">f&quot;give me your claw using p,q and p,q in [0, 18446744073709551615] (e.g.: 1,1): &quot;</span>).split(<span class="string">&quot;,&quot;</span>))</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (p&gt;<span class="number">0</span> <span class="keyword">and</span> p&lt;<span class="built_in">pow</span>(<span class="number">2</span>,BITS//<span class="number">2</span>) <span class="keyword">and</span> q&gt;<span class="number">0</span> <span class="keyword">and</span> q&lt;<span class="built_in">pow</span>(<span class="number">2</span>,BITS//<span class="number">2</span>)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;not in range&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        delta = <span class="built_in">abs</span>(r*q - p*<span class="built_in">pow</span>(<span class="number">2</span>,BITS))</span><br><span class="line">        <span class="keyword">if</span> self.destiny_claw(delta):</span><br><span class="line">            self.score += <span class="number">10</span></span><br><span class="line">            self.bless = <span class="number">0</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;you clawed it&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.bless += <span class="number">16</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;sorry, clawed nothing&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_proof_of_work</span>(<span class="params">size,difficulty</span>):</span><br><span class="line">    target = os.urandom(size).<span class="built_in">hex</span>()</span><br><span class="line">    hash_value = hashlib.sha1(target.encode()).hexdigest()</span><br><span class="line">    <span class="keyword">return</span> target[difficulty:],hash_value</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_proof_of_work</span>(<span class="params">prefix,suffix,expected</span>):</span><br><span class="line">    <span class="keyword">return</span> hashlib.sha1(<span class="string">f&#x27;<span class="subst">&#123;prefix&#125;</span><span class="subst">&#123;suffix&#125;</span>&#x27;</span>.encode()).hexdigest()==expected</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">proof</span>():</span><br><span class="line">    POW_SIZE=<span class="number">32</span></span><br><span class="line">    POW_DIFFICULTY=<span class="number">6</span></span><br><span class="line">    suff,hs=generate_proof_of_work(POW_SIZE,POW_DIFFICULTY)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;sha1(prefix+&quot;<span class="subst">&#123;suff&#125;</span>&quot;)==<span class="subst">&#123;hs&#125;</span>&#x27;</span>)</span><br><span class="line">    pref=<span class="built_in">input</span>(<span class="string">&quot;prefix = ?\n&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> check_proof_of_work(pref,suff,hs):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;PoW error&quot;</span>)</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    signal.alarm(<span class="number">600</span>)</span><br><span class="line">    proof()</span><br><span class="line">    cc = ClawCrane()</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            cc.run()</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;your score: <span class="subst">&#123;cc.score&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;abort&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> cc.score &gt;= <span class="number">2220</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;flag: <span class="subst">&#123;<span class="built_in">open</span>(<span class="string">&#x27;/flag.txt&#x27;</span>).read()&#125;</span>&quot;</span>)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>比赛中途加了个<code>proof</code>验证</p>
+<p>首先是抓到娃娃，我们其实位置是<code>(0,0)</code>，根据它的位置，输入<code>W</code>和<code>D</code>就可以了</p>
+<p>这题关键是让我们的得分达到<code>2220</code></p>
+<p>关键在于下面两段代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">destiny_claw</span>(<span class="params">self, delta</span>):</span><br><span class="line">    bits = <span class="built_in">bin</span>(delta)[<span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(bits) &lt; <span class="number">128</span>+self.bless:</span><br><span class="line">        bits += <span class="string">&quot;0&quot;</span>*(<span class="number">128</span>+self.bless - <span class="built_in">len</span>(bits))</span><br><span class="line">    c = random.choice(bits)</span><br><span class="line">    <span class="keyword">if</span> c==<span class="string">&#x27;0&#x27;</span>: <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>: <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">r = self.gen_chaos(moves[:<span class="number">64</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;choas: <span class="subst">&#123;r&#125;</span>&quot;</span>)</span><br><span class="line">p, q = <span class="built_in">map</span>(<span class="built_in">int</span>, self.get_input(<span class="string">f&quot;give me your claw using p,q and p,q in [0, 18446744073709551615] (e.g.: 1,1): &quot;</span>).split(<span class="string">&quot;,&quot;</span>))</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> (p&gt;<span class="number">0</span> <span class="keyword">and</span> p&lt;<span class="built_in">pow</span>(<span class="number">2</span>,BITS//<span class="number">2</span>) <span class="keyword">and</span> q&gt;<span class="number">0</span> <span class="keyword">and</span> q&lt;<span class="built_in">pow</span>(<span class="number">2</span>,BITS//<span class="number">2</span>)):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;not in range&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">delta = <span class="built_in">abs</span>(r*q - p*<span class="built_in">pow</span>(<span class="number">2</span>,BITS))</span><br><span class="line"><span class="keyword">if</span> self.destiny_claw(delta):</span><br><span class="line">    self.score += <span class="number">10</span></span><br><span class="line">    self.bless = <span class="number">0</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;you clawed it&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    self.bless += <span class="number">16</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;sorry, clawed nothing&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>总之是要在$p,q$在一个范围内取值，然后让<code>delta = r*q - p*2^128</code>尽可能含有更多的0</p>
+<p>于是想到固定$q &#x3D; 2^{63}$，这样<code>r*q</code>就意味着把$r$左移动63位，于是低63位全都是0了</p>
+<p>右边<code>p*2^128</code>意味着把$p$左移128位</p>
+<p>我们可以令p等于r的第2位到第63位，这样保证<code>delta</code>的第一位是1</p>
+<p>这样子<code>delta</code>中0的数目占了80%以上，我们得分的概率就有了80%</p>
+<p><img src="D:\Typora\新建文件夹\玄机\周报\2023年10月\0.png" alt="0"></p>
+<p>本地测试的时候把<code>chaos</code>默认为128bit的情况，但实际上<code>chaos</code>还有很多情况</p>
+<p>对于<code>chaos</code>大小的测试（尽可能模拟了当时的情况）：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os, signal</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> md5</span><br><span class="line"></span><br><span class="line">BITS = <span class="number">128</span></span><br><span class="line">seed = bytes_to_long(os.urandom(BITS//<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_chaos</span>(<span class="params">seed,inp</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mapping</span>(<span class="params">x</span>):</span><br><span class="line">        <span class="keyword">if</span> x==<span class="string">&#x27;W&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;0&quot;</span></span><br><span class="line">        <span class="keyword">if</span> x==<span class="string">&#x27;S&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;1&quot;</span></span><br><span class="line">        <span class="keyword">if</span> x==<span class="string">&#x27;A&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;2&quot;</span></span><br><span class="line">        <span class="keyword">if</span> x==<span class="string">&#x27;D&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;3&quot;</span></span><br><span class="line">    vs = <span class="built_in">int</span>(<span class="string">&quot;&quot;</span>.join(<span class="built_in">map</span>(mapping, inp)), <span class="number">4</span>)</span><br><span class="line">    chaos = bytes_to_long(md5(long_to_bytes((seed + vs) % <span class="built_in">pow</span>(<span class="number">2</span>,BITS))).digest())</span><br><span class="line">    seed = (seed + chaos + <span class="number">1</span>) % <span class="built_in">pow</span>(<span class="number">2</span>,BITS)</span><br><span class="line">    <span class="keyword">return</span> chaos</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    inp = <span class="string">&quot;W&quot;</span> * random.randint(<span class="number">1</span>,<span class="number">16</span>) + <span class="string">&quot;D&quot;</span> * random.randint(<span class="number">1</span>,<span class="number">16</span>)</span><br><span class="line">    r = get_chaos(seed,inp)</span><br><span class="line">    <span class="built_in">print</span>(r.bit_length())</span><br></pre></td></tr></table></figure>
+
+<p>最后对<code>chaos</code>的不同大小， 对p进行不同处理，最后都要保证<code>delta</code>中的0尽可能多</p>
+<p>处理方式是<code>p = (r &gt;&gt; (65)) &amp; ((1 &lt;&lt; (r.bit_length() - 63 - 3)) - 1)</code></p>
+<p>最终的代码</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os, signal</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> md5</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">destiny_claw</span>(<span class="params">delta</span>):</span><br><span class="line">    bits = <span class="built_in">bin</span>(delta)[<span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(bits) &lt; <span class="number">128</span> + <span class="number">0</span>:</span><br><span class="line">        bits += <span class="string">&quot;0&quot;</span>*(<span class="number">128</span> + <span class="number">0</span> - <span class="built_in">len</span>(bits))</span><br><span class="line">    c = random.choice(bits)</span><br><span class="line">    <span class="keyword">if</span> c==<span class="string">&#x27;0&#x27;</span>: <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">BITS = <span class="number">128</span></span><br><span class="line">seed = bytes_to_long(os.urandom(BITS//<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_chaos</span>(<span class="params">seed,inp</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mapping</span>(<span class="params">x</span>):</span><br><span class="line">        <span class="keyword">if</span> x==<span class="string">&#x27;W&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;0&quot;</span></span><br><span class="line">        <span class="keyword">if</span> x==<span class="string">&#x27;S&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;1&quot;</span></span><br><span class="line">        <span class="keyword">if</span> x==<span class="string">&#x27;A&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;2&quot;</span></span><br><span class="line">        <span class="keyword">if</span> x==<span class="string">&#x27;D&#x27;</span>: <span class="keyword">return</span> <span class="string">&quot;3&quot;</span></span><br><span class="line">    vs = <span class="built_in">int</span>(<span class="string">&quot;&quot;</span>.join(<span class="built_in">map</span>(mapping, inp)), <span class="number">4</span>)</span><br><span class="line">    chaos = bytes_to_long(md5(long_to_bytes((seed + vs) % <span class="built_in">pow</span>(<span class="number">2</span>,BITS))).digest())</span><br><span class="line">    seed = (seed + chaos + <span class="number">1</span>) % <span class="built_in">pow</span>(<span class="number">2</span>,BITS)</span><br><span class="line">    <span class="keyword">return</span> chaos</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    scores = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        inp = <span class="string">&quot;W&quot;</span> * random.randint(<span class="number">1</span>,<span class="number">16</span>) + <span class="string">&quot;D&quot;</span> * random.randint(<span class="number">1</span>,<span class="number">16</span>)</span><br><span class="line">        r = get_chaos(seed,inp)</span><br><span class="line">        q = <span class="number">2</span> ** <span class="number">63</span></span><br><span class="line">        p = (r &gt;&gt; (<span class="number">65</span>)) &amp; ((<span class="number">1</span> &lt;&lt; (r.bit_length() - <span class="number">63</span> - <span class="number">3</span>)) - <span class="number">1</span>)</span><br><span class="line">        delta = (r * q) - (p*(<span class="number">2</span>**<span class="number">128</span>))</span><br><span class="line">        c = destiny_claw(delta)</span><br><span class="line">        <span class="keyword">if</span> c == <span class="literal">True</span>:</span><br><span class="line">            scores += <span class="number">10</span></span><br><span class="line">    <span class="keyword">if</span> scores &gt;= <span class="number">2220</span>:</span><br><span class="line">        <span class="built_in">print</span>(scores)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;跑了&quot;</span>+<span class="built_in">str</span>(_+<span class="number">1</span>)+<span class="string">&quot;次&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>比较难受的是，连靶机一直跑不到2220分</strong>，我的猜测是疏忽了未得分的时候，<code>bless += 16</code></p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>DexterJie
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://dexterjie.github.io/2023/10/30/2023ACTF/" title="2023ACTF">https://dexterjie.github.io/2023/10/30/2023ACTF/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Wp/" rel="tag"># Wp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/30/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2023SHCTF/" rel="prev" title="2023SHCTF">
+                  <i class="fa fa-chevron-left"></i> 2023SHCTF
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DexterJie</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">143k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">8:42</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>-->
+
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+<div class="busuanzi-count">
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+  
+  <span class="site-uv" title="总访客量">
+    访客量<span id="busuanzi_value_site_uv"></span>
+  </span>
+
+  <span class="site-pv" title="总访问量">
+    经过<span id="busuanzi_value_site_pv"></span>次回眸与你相遇
+  </span>
+</div>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline-five-mocha.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":null,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2023/10/30/2023ACTF/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right"},"mobile":{"show":true}});</script></body>
+
+</html>
