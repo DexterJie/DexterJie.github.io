@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -186,6 +186,136 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2024/01/13/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/0.jpg">
+      <meta itemprop="name" content="DexterJie">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DexterJie'Blog">
+      <meta itemprop="description" content="一枚Crypto新手">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | DexterJie'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/01/13/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round16/" class="post-title-link" itemprop="url">NSSCTF Round16</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-01-13 15:17:48 / 修改时间：15:22:56" itemprop="dateCreated datePublished" datetime="2024-01-13T15:17:48+08:00">2024-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Wp/" itemprop="url" rel="index"><span itemprop="name">Wp</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2024/01/13/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round16/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2024/01/13/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round16/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>255</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="pr"><a href="#pr" class="headerlink" title="pr"></a>pr</h1><blockquote>
+<p>task</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">flag=plaintext = <span class="string">&#x27;NSSCTF&#123;****************&#125;&#x27;</span></span><br><span class="line">charset = <span class="string">&#x27;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#x27;</span></span><br><span class="line">padding_length = <span class="number">100</span> - <span class="built_in">len</span>(plaintext)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(padding_length):</span><br><span class="line">    plaintext += random.choice(charset)</span><br><span class="line"></span><br><span class="line">public_exponent = <span class="number">31413537523</span></span><br><span class="line">message = bytes_to_long(plaintext.encode())</span><br><span class="line"><span class="keyword">assert</span> message &gt; (<span class="number">1</span> &lt;&lt; <span class="number">512</span>)</span><br><span class="line"><span class="keyword">assert</span> message &lt; (<span class="number">1</span> &lt;&lt; <span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">prime_p = getPrime(<span class="number">512</span>)</span><br><span class="line">prime_q = getPrime(<span class="number">512</span>)</span><br><span class="line">prime_r = getPrime(<span class="number">512</span>)</span><br><span class="line">n1 = prime_p * prime_q</span><br><span class="line">n2 = prime_q * prime_r</span><br><span class="line">ciphertext1 = <span class="built_in">pow</span>(message, public_exponent, n1)</span><br><span class="line">ciphertext2 = <span class="built_in">pow</span>(message, public_exponent, n2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;c1=&#x27;</span>, ciphertext1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;c2=&#x27;</span>, ciphertext2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;p=&#x27;</span>, prime_p)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;r=&#x27;</span>, prime_r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">c1= 36918910341116680090654563538246204134840776220077189276689868322808977412566781872132517635399441578464309667998925236488280867210758507758915311644529399878185776345227817559234605958783077866016808605942558810445187434690812992072238407431218047312484354859724174751718700409405142819140636116559320641695</span></span><br><span class="line"><span class="string">c2= 15601788304485903964195122196382181273808496834343051747331984997977255326224514191280515875796224074672957848566506948553165091090701291545031857563686815297483181025074113978465751897596411324331847008870832527695258040104858667684793196948970048750296571273364559767074262996595282324974180754813257013752</span></span><br><span class="line"><span class="string">p= 12101696894052331138951718202838643670037274599483776996203693662637821825873973767235442427190607145999472731101517998719984942030184683388441121181962123</span></span><br><span class="line"><span class="string">r= 10199001137987151966640837133782537428248507382360655526592866939552984259171772190788036403425837649697437126360866173688083643144865107648483668545682383</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>p,r都给了，在模p和模r下各求解一次，然后中国剩余定理组合即可</p>
+<blockquote>
+<p>Exp</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">e = <span class="number">31413537523</span></span><br><span class="line">c1= </span><br><span class="line">c2= </span><br><span class="line">p= </span><br><span class="line">r= </span><br><span class="line"></span><br><span class="line">dp = gmpy2.invert(e,p-<span class="number">1</span>)</span><br><span class="line">dr = gmpy2.invert(e,r-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">mp = <span class="built_in">pow</span>(c1,dp,p)</span><br><span class="line">mr = <span class="built_in">pow</span>(c2,dr,r)</span><br><span class="line"></span><br><span class="line">m = CRT_list([<span class="built_in">int</span>(mp),<span class="built_in">int</span>(mr)],[p,r])</span><br><span class="line">flag = long_to_bytes(<span class="built_in">int</span>(m))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># NSSCTF&#123;yUanshEnx1ncHun2o23!&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="break"><a href="#break" class="headerlink" title="break"></a>break</h1><p>私钥文件缺失</p>
+<p>因为$c \approx 2046bit$，可以推断出$n \approx 2048bit$</p>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/luochen2436/article/details/132138412?spm=1001.2014.3001.5502">CTF Crypto — 七八月份比赛杂题记录_ctf替换了部分模型权重-CSDN博客</a>中的<strong>”你懂RSA吗“</strong></p>
+<p>再根据数据长度可以获得$q,d_p,d_q$</p>
+<p>exp:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">q = <span class="number">0xe26146b07b963eacf6c585538c541f190727cc6b82e37920dd676de3106bf29411d27b2bc5090ab7212504e349350f65e699e69930bddad67527e8e448586686da985cc2b58b911ea7b9b5666f54094b38339851c69cbe7a2870726710fdaba0cf07ea3a8065adf3fe9d741976348654ff56ed74f420a237c05d7245cd1f7645</span></span><br><span class="line">dp = <span class="number">0xbbaa507453b9b653815d1bd79e95277e59228d515965640b878e2ee3821ecec7a2daf713799a2199d72bcfe38c97db5f0e27d662d3ca3abc8acce848a5e392b34ed1a6e22b889fc08ca68c7ee5e52da31cafc5af6bb365aef8845937dcc2304fa9faa23cfd31b6edd2320f3b1d80da9c528f044a5b3bb96e7f14403b6d84c289</span></span><br><span class="line">dq = <span class="number">0xbbd4ac9b781fa4674ce57c8762f2d54ea5e23eb9a1c36dd877fbfe701d4b03de199f83b5406a0d2aff6440d6f901fe81b54152d51e5d18bb423fd7fbb98f279a92bb429407a002cbe5acafb78b7db5ac64b86294cf6f7497d4ffdfdc667ba3b0ecb68b80f8d1e4f082fd4fbc64989630e61fd12c6df6b9c1fa694e8c5df2d1e5</span></span><br><span class="line">inv = <span class="number">0x3fec91f745c465b184793a535992dbb20cf6324d83dc4bcf99f1ce4a8f3e12e7fab760208b93b90b6ffbe7848c43fefbb655d74ae0e7229525dfdbc72f07d8837b690a3b9195ae9474d00d9305c203a19f4bba825262faa0bc6d6cd80c5390485ad8f57437bf028cb29aa6fbaf7bc4cf9d3145b42cc2faa1413d663122018ff9</span></span><br><span class="line">c = <span class="number">6081370370545409218106271903400346695565292992689150366474451604281551878507114813906275593034729563149286993189430514737137534129570304832172520820901940874698337733991868650159489601159238582002010625666203730677577976307606665760650563172302688129824842780090723167480409842707790983962415315804311334507726664838464859751689906850572044873633896253285381878416855505301919877714965930289139921111644393144686543207867970807469735534838601255712764863973853116693691206791007433101433703535127367245739289103650669095061417223994665200039533840922696282929063608853551346533188464573323230476645532002621795338655</span></span><br><span class="line"></span><br><span class="line">m = <span class="built_in">pow</span>(c,dq,q)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br><span class="line"><span class="comment"># flag&#123;oi!_you_find___what_i_Wa1t_talK_y0n!!!&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -231,7 +361,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-11 20:25:56" itemprop="dateModified" datetime="2024-01-11T20:25:56+08:00">2024-01-11</time>
+      <time title="修改时间：2024-01-12 12:27:36" itemprop="dateModified" datetime="2024-01-12T12:27:36+08:00">2024-01-12</time>
     </span>
 
   
@@ -1285,122 +1415,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/11/04/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/20230xGame/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/0.jpg">
-      <meta itemprop="name" content="DexterJie">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DexterJie'Blog">
-      <meta itemprop="description" content="一枚Crypto新手">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | DexterJie'Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/04/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/20230xGame/" class="post-title-link" itemprop="url">20230xGame</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-11-04 15:41:31" itemprop="dateCreated datePublished" datetime="2023-11-04T15:41:31+08:00">2023-11-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-05 14:06:40" itemprop="dateModified" datetime="2023-11-05T14:06:40+08:00">2023-11-05</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2023/11/04/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/20230xGame/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2023/11/04/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/20230xGame/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>9.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>34 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>20230xGame——Crypto——Wp</p>
-<p>！！！看看密码题的解答就好，其他方向是瞎做的</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/11/04/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/20230xGame/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-<div>
-  
-</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1424,13 +1438,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">187k</span>
+    <span title="站点总字数">188k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:22</span>
+    <span title="站点阅读时长">11:23</span>
   </span>
 </div>
 <div class="busuanzi-count">
