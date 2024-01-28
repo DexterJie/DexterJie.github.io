@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/0.jpg">
+  <link rel="mask-icon" href="/images/0.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dexterjie.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="NSSCTF————Round17————Crypto题解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSSCTF-Round17">
+<meta property="og:url" content="https://dexterjie.github.io/2024/01/28/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round17/index.html">
+<meta property="og:site_name" content="DexterJie&#39;Blog">
+<meta property="og:description" content="NSSCTF————Round17————Crypto题解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dexterjie.github.io/images/2023CBCTF/autorsa.png">
+<meta property="article:published_time" content="2024-01-28T06:22:05.000Z">
+<meta property="article:modified_time" content="2024-01-28T06:29:39.574Z">
+<meta property="article:author" content="DexterJie">
+<meta property="article:tag" content="Wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dexterjie.github.io/images/2023CBCTF/autorsa.png">
+
+
+<link rel="canonical" href="https://dexterjie.github.io/2024/01/28/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round17/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2024/01/28/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round17/","path":"2024/01/28/赛题复现/NSSCTF-Round17/","title":"NSSCTF-Round17"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NSSCTF-Round17 | DexterJie'Blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="waline-five-mocha.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">DexterJie'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1456890009&auto=1&height=66"></iframe>
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-1"><span class="nav-number">1.</span> <span class="nav-text">Level 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#level-2"><span class="nav-number">2.</span> <span class="nav-text">level 2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#level-3"><span class="nav-number">3.</span> <span class="nav-text">level 3</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="DexterJie"
+      src="/images/0.jpg">
+  <p class="site-author-name" itemprop="name">DexterJie</p>
+  <div class="site-description" itemprop="description">一枚Crypto新手</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2024/01/28/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round17/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/0.jpg">
+      <meta itemprop="name" content="DexterJie">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DexterJie'Blog">
+      <meta itemprop="description" content="一枚Crypto新手">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NSSCTF-Round17 | DexterJie'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NSSCTF-Round17
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-01-28 14:22:05 / 修改时间：14:29:39" itemprop="dateCreated datePublished" datetime="2024-01-28T14:22:05+08:00">2024-01-28</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2024/01/28/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round17/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2024/01/28/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round17/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>468</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>NSSCTF————Round17————Crypto题解</p>
+<span id="more"></span>
+
+<h1 id="Level-1"><a href="#Level-1" class="headerlink" title="Level 1"></a>Level 1</h1><blockquote>
+<p>task.py</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#真签到题</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long, getPrime</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> getflag</span><br><span class="line"></span><br><span class="line">e1 = getPrime(<span class="number">1024</span>)</span><br><span class="line">e2 = getPrime(<span class="number">1024</span>)</span><br><span class="line">n = e1 * e2</span><br><span class="line">m = bytes_to_long(getflag().encode())</span><br><span class="line">c1 = <span class="built_in">pow</span>(m, e1, n)</span><br><span class="line">c2 = <span class="built_in">pow</span>(m, e2, n)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="built_in">print</span>(c1)</span><br><span class="line"><span class="built_in">print</span>(c2)</span><br><span class="line"><span class="built_in">print</span>(e1)</span><br><span class="line"><span class="built_in">print</span>(e2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># n = 22517647586235353449147432825948355885962082318127038138351524894369583539246623545565501496312996556897362735789505076324197072008392656511657262430676945685471397862981216472634785622155317188784494912316440866051402627470561626691472280850273482836308002341429493460677206562201947000047718275995355772707947408688836667011206588727438261189233517003341094758634490421007907582147392858070623641389171229435187248184443645883661560636995548332475573072064240073037558031928639832259001407585962782698021735648128101459118863015844905452823095147248865104102562991382119836061161756978764495337874807458182581421229</span></span><br><span class="line"><span class="comment"># c1 = 1432393096266401187029059077791766305797845826173887492889260179348416733820890797101745501984437201566364579129066414005659742104885321270122634155922766503333859812540068278962999824043206496595825886026095484801291802992082454776271149083516187121160475839108002133113254134626407840182541809478892306748590016896975053434021666376203540725254480252049443975835307793528287818262102688334515632062552114342619781840154202525919769192765621085008206581226486157149883898548933475155236509073675387541466324512294079413938239828341890576923100769181401944289365386552139418728492565319685207500539721582552448971814</span></span><br><span class="line"><span class="comment"># c2 = 13299679392897297864252207869444022461237574801991239380909482153705185317634241850084078027230394830079554676426505967970943836811048777462696506309466535820372917756458083553031417406403895116557560548183674144457502601887632495739472178857537011190162283185735114683172731936834993707871636782206418680404006299140864001776588991141011500807549645227520128216130966268810165946959810884593793452437010902774726405217517557763322690215690606067996057037379898630878638483268362526985225092000670251641184960698506349245915816808028210142606700394584541282682338561482561343076218115042099753144875658666459825545602</span></span><br><span class="line"><span class="comment"># e1 = 155861690390761931560700906834977917646203451142415617638229284868013723431003139974975998354830978765979365632120896717380895021936387027045347260400512396388028781862427862974453223157509702913026222541667006325100878113871620322023188372501930117363623076837619478555007555970810681502521309925774889678793</span></span><br><span class="line"><span class="comment"># e2 = 144471983652821947847253052623701746810204736865723159569786739658583884214397562204788127484897909964898113250509653721265240138487697822089282456150238116811225975640330930854549232972314642221382625614304415750165289831040623741828600283778523993251940904896081111235859249916040849697146542311990869696453</span></span><br></pre></td></tr></table></figure>
+
+<p>很基础的共模攻击</p>
+<blockquote>
+<p>exp</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">n = <span class="number">22517647586235353449147432825948355885962082318127038138351524894369583539246623545565501496312996556897362735789505076324197072008392656511657262430676945685471397862981216472634785622155317188784494912316440866051402627470561626691472280850273482836308002341429493460677206562201947000047718275995355772707947408688836667011206588727438261189233517003341094758634490421007907582147392858070623641389171229435187248184443645883661560636995548332475573072064240073037558031928639832259001407585962782698021735648128101459118863015844905452823095147248865104102562991382119836061161756978764495337874807458182581421229</span></span><br><span class="line">c1 = <span class="number">1432393096266401187029059077791766305797845826173887492889260179348416733820890797101745501984437201566364579129066414005659742104885321270122634155922766503333859812540068278962999824043206496595825886026095484801291802992082454776271149083516187121160475839108002133113254134626407840182541809478892306748590016896975053434021666376203540725254480252049443975835307793528287818262102688334515632062552114342619781840154202525919769192765621085008206581226486157149883898548933475155236509073675387541466324512294079413938239828341890576923100769181401944289365386552139418728492565319685207500539721582552448971814</span></span><br><span class="line">c2 = <span class="number">13299679392897297864252207869444022461237574801991239380909482153705185317634241850084078027230394830079554676426505967970943836811048777462696506309466535820372917756458083553031417406403895116557560548183674144457502601887632495739472178857537011190162283185735114683172731936834993707871636782206418680404006299140864001776588991141011500807549645227520128216130966268810165946959810884593793452437010902774726405217517557763322690215690606067996057037379898630878638483268362526985225092000670251641184960698506349245915816808028210142606700394584541282682338561482561343076218115042099753144875658666459825545602</span></span><br><span class="line">e1 = <span class="number">155861690390761931560700906834977917646203451142415617638229284868013723431003139974975998354830978765979365632120896717380895021936387027045347260400512396388028781862427862974453223157509702913026222541667006325100878113871620322023188372501930117363623076837619478555007555970810681502521309925774889678793</span></span><br><span class="line">e2 = <span class="number">144471983652821947847253052623701746810204736865723159569786739658583884214397562204788127484897909964898113250509653721265240138487697822089282456150238116811225975640330930854549232972314642221382625614304415750165289831040623741828600283778523993251940904896081111235859249916040849697146542311990869696453</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dec</span>(<span class="params">n,e1,e2,c1,c2</span>):</span><br><span class="line">    t = gmpy2.gcd(e1,e2)</span><br><span class="line">    <span class="keyword">if</span> t == <span class="number">1</span>:</span><br><span class="line">        s,x,y = gmpy2.gcdext(e1,e2)</span><br><span class="line">        m = (<span class="built_in">pow</span>(c1,x,n)*<span class="built_in">pow</span>(c2,y,n))%n</span><br><span class="line">        flag = long_to_bytes(m)</span><br><span class="line">        <span class="keyword">return</span> flag</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        s,x,y = gmpy2.gcdext(e1,e2)</span><br><span class="line">        k = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">            m = gmpy2.iroot((<span class="built_in">pow</span>(c1,x,n)*<span class="built_in">pow</span>(c2,y,n)+k*n)%n,t)</span><br><span class="line">            <span class="keyword">if</span> m[<span class="number">1</span>]:</span><br><span class="line">                <span class="built_in">print</span>(long_to_bytes(m[<span class="number">0</span>]))</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                k += <span class="number">1</span></span><br><span class="line">flag = dec(n,e1,e2,c1,c2)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># NSSCTF&#123;Y0u_Hav3_S01v3d_Crypt0_Leve1_i&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h1><blockquote>
+<p>task.py</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 猜猜我是谁 猜对了直接秒出flag喔</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long, getPrime</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> getflag</span><br><span class="line"></span><br><span class="line">p = ***</span><br><span class="line">q = getPrime(<span class="number">1024</span>)</span><br><span class="line">e = you guess!</span><br><span class="line">n = p * q</span><br><span class="line">m = bytes_to_long(getflag().encode())</span><br><span class="line">c=<span class="built_in">pow</span>(m, e, n)</span><br><span class="line"><span class="built_in">print</span>(q)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"></span><br><span class="line"><span class="comment">#p=one of ps</span></span><br><span class="line"><span class="comment">#q=145721736470529261146573065574028992352505611489859183763269215489708531333597694809923949026781460438320576519639268582565188719134157402292313959218961804213310847081787824780075530751842057663327444602428455144829447776271394663729996984613471623158126083062443634493708467568220146024273763894704649472957</span></span><br><span class="line"><span class="comment">#c=17441814714407189483380175736850663249578989775568187792928771544069162420510939242665830363276698262009780462912108642025299275146709817979705069095332726251759039923303627023610865046363171692163473939115438686877494878334016463787558794121885354719336139401336137097548305393030069499625065664884238710759260231321106291200849044147840392021931720902340003746946851806025722944795391356835342258387797980787437188976704677008092850181043891802072500430200735973581081228711070923822341261809453662427341958883142789220800541626034573952425948295446202775198692920613709157662831071515700549093766182579873408465779</span></span><br><span class="line"><span class="comment">#flag=NSSCTF&#123;*&#125;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ps.txt</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一堆p的值，数据量挺大的，就不放上来了</span><br></pre></td></tr></table></figure>
+
+<p>猜测flag不长，直接把q当模解了</p>
+<blockquote>
+<p>exp</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">q=<span class="number">145721736470529261146573065574028992352505611489859183763269215489708531333597694809923949026781460438320576519639268582565188719134157402292313959218961804213310847081787824780075530751842057663327444602428455144829447776271394663729996984613471623158126083062443634493708467568220146024273763894704649472957</span></span><br><span class="line">c=<span class="number">17441814714407189483380175736850663249578989775568187792928771544069162420510939242665830363276698262009780462912108642025299275146709817979705069095332726251759039923303627023610865046363171692163473939115438686877494878334016463787558794121885354719336139401336137097548305393030069499625065664884238710759260231321106291200849044147840392021931720902340003746946851806025722944795391356835342258387797980787437188976704677008092850181043891802072500430200735973581081228711070923822341261809453662427341958883142789220800541626034573952425948295446202775198692920613709157662831071515700549093766182579873408465779</span></span><br><span class="line">d = gmpy2.invert(<span class="number">65537</span>,q-<span class="number">1</span>)</span><br><span class="line">m = <span class="built_in">pow</span>(c,d,q)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br><span class="line"><span class="comment"># NSSCTF&#123;Y0u_g0t_1t!!!&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h1><blockquote>
+<p>题目</p>
+</blockquote>
+<p><img src="/../../images/2023CBCTF/autorsa.png"></p>
+<p>解666次共模攻击即可</p>
+<blockquote>
+<p>exp</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dec</span>(<span class="params">n,e1,e2,c1,c2</span>):</span><br><span class="line">    t = gmpy2.gcd(e1,e2)</span><br><span class="line">    <span class="keyword">if</span> t == <span class="number">1</span>:</span><br><span class="line">        s,x,y = gmpy2.gcdext(e1,e2)</span><br><span class="line">        m = (<span class="built_in">pow</span>(c1,x,n)*<span class="built_in">pow</span>(c2,y,n))%n</span><br><span class="line">        flag = long_to_bytes(m)</span><br><span class="line">        <span class="keyword">return</span> flag</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        s,x,y = gmpy2.gcdext(e1,e2)</span><br><span class="line">        k = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">            m = gmpy2.iroot((<span class="built_in">pow</span>(c1,x,n)*<span class="built_in">pow</span>(c2,y,n)+k*n)%n,t)</span><br><span class="line">            <span class="keyword">if</span> m[<span class="number">1</span>]:</span><br><span class="line">                <span class="built_in">print</span>(long_to_bytes(m[<span class="number">0</span>]))</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                k += <span class="number">1</span></span><br><span class="line">sh = remote(<span class="string">&quot;host&quot;</span>,port)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> trange(<span class="number">666</span>):</span><br><span class="line">    data = sh.recvuntil(<span class="string">b&quot; y0u J01n In th3 NSS t3am?\n             py?\n&quot;</span>)</span><br><span class="line">    n = <span class="built_in">eval</span>(sh.recvline().decode().strip().split(<span class="string">&quot;=&quot;</span>)[-<span class="number">1</span>])</span><br><span class="line">    e1 = <span class="built_in">eval</span>(sh.recvline().decode().strip().split(<span class="string">&quot;=&quot;</span>)[-<span class="number">1</span>])</span><br><span class="line">    e2 = <span class="built_in">eval</span>(sh.recvline().decode().strip().split(<span class="string">&quot;=&quot;</span>)[-<span class="number">1</span>])</span><br><span class="line">    c1 = <span class="built_in">eval</span>(sh.recvline().decode().strip().split(<span class="string">&quot;=&quot;</span>)[-<span class="number">1</span>])</span><br><span class="line">    c2 = <span class="built_in">eval</span>(sh.recvline().decode().strip().split(<span class="string">&quot;=&quot;</span>)[-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    flag = dec(n,e1,e2,c1,c2)</span><br><span class="line">    sh.sendlineafter(<span class="string">b&quot;[+] Pl Give Me flaag :&quot;</span>,flag)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>DexterJie
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://dexterjie.github.io/2024/01/28/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round17/" title="NSSCTF-Round17">https://dexterjie.github.io/2024/01/28/赛题复现/NSSCTF-Round17/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Wp/" rel="tag"># Wp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/01/27/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2023%E6%98%A5%E7%A7%8B%E6%9D%AF%E5%86%AC%E5%AD%A3%E8%B5%9B/" rel="prev" title="2023春秋杯冬季赛">
+                  <i class="fa fa-chevron-left"></i> 2023春秋杯冬季赛
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DexterJie</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">189k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:28</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>-->
+
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+<div class="busuanzi-count">
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+  
+  <span class="site-uv" title="总访客量">
+    访客量<span id="busuanzi_value_site_uv"></span>
+  </span>
+
+  <span class="site-pv" title="总访问量">
+    经过<span id="busuanzi_value_site_pv"></span>次回眸与你相遇
+  </span>
+</div>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline-five-mocha.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":null,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2024/01/28/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/NSSCTF-Round17/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right"},"mobile":{"show":true}});</script></body>
+
+</html>
