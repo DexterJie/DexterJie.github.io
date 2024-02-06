@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/%E6%9D%82/6.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/%E6%9D%82/6.png">
 <meta property="article:published_time" content="2024-01-30T11:30:42.000Z">
-<meta property="article:modified_time" content="2024-02-06T04:50:11.363Z">
+<meta property="article:modified_time" content="2024-02-06T04:51:21.082Z">
 <meta property="article:author" content="DexterJie">
 <meta property="article:tag" content="Wp">
 <meta name="twitter:card" content="summary">
@@ -241,7 +241,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-06 12:50:11" itemprop="dateModified" datetime="2024-02-06T12:50:11+08:00">2024-02-06</time>
+      <time title="修改时间：2024-02-06 12:51:21" itemprop="dateModified" datetime="2024-02-06T12:51:21+08:00">2024-02-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,7 +281,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.7k</span>
+      <span>1.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -389,7 +389,7 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line">a=[getPrime(<span class="number">32</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>)]</span><br><span class="line">p=random.getrandbits(<span class="number">32</span>)</span><br><span class="line"><span class="keyword">assert</span> <span class="built_in">len</span>(<span class="built_in">bin</span>(p)[<span class="number">2</span>:])==<span class="number">32</span></span><br><span class="line">bag=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    temp=p%<span class="number">2</span></span><br><span class="line">    bag+=temp*i</span><br><span class="line">    p=p&gt;&gt;<span class="number">1</span></span><br><span class="line"></span><br><span class="line">enc=bytes_to_long(flag)^p</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;enc=<span class="subst">&#123;enc&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;a=<span class="subst">&#123;a&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;bag=<span class="subst">&#123;bag&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">enc=871114172567853490297478570113449366988793760172844644007566824913350088148162949968812541218339</span></span><br><span class="line"><span class="string">a=[3245882327, 3130355629, 2432460301, 3249504299, 3762436129, 3056281051, 3484499099, 2830291609, 3349739489, 2847095593, 3532332619, 2406839203, 4056647633, 3204059951, 3795219419, 3240880339, 2668368499, 4227862747, 2939444527, 3375243559]</span></span><br><span class="line"><span class="string">bag=45893025064</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>背包密码一把梭，👉<a href="https://dexterjie.github.io/2023/08/02/%E8%83%8C%E5%8C%85%E5%AF%86%E7%A0%81/?highlight=%E8%83%8C%E5%8C%85">背包密码 | DexterJie’Blog</a></p>
-<p>出题人的失误导致最后求的p只有20bit，就算p有32bit的话，亦或对于flag的影响也不大，所以直接<code>long_to_bytes(enc)</code>也能把flag大部分的信息求出</p>
+<p>因为p移位之后才与flag亦或，移位后的p只有12bit，对flag的影响很小，所以可以直接<code>long_to_bytes(enc)</code>得到flag的大部分信息</p>
 <blockquote>
 <p>exp</p>
 </blockquote>
