@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/0.jpg">
+  <link rel="mask-icon" href="/images/0.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dexterjie.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="记录2024VNCTF——Crypto部分题解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VNCTF2024">
+<meta property="og:url" content="https://dexterjie.github.io/2024/02/20/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/VNCTF2024/index.html">
+<meta property="og:site_name" content="DexterJie&#39;Blog">
+<meta property="og:description" content="记录2024VNCTF——Crypto部分题解">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-20T10:57:19.000Z">
+<meta property="article:modified_time" content="2024-02-20T11:43:34.634Z">
+<meta property="article:author" content="DexterJie">
+<meta property="article:tag" content="Wp">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://dexterjie.github.io/2024/02/20/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/VNCTF2024/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2024/02/20/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/VNCTF2024/","path":"2024/02/20/赛题复现/VNCTF2024/","title":"VNCTF2024"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VNCTF2024 | DexterJie'Blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="waline-five-mocha.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">DexterJie'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1456890009&auto=1&height=66"></iframe>
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#basiccry"><span class="nav-number">1.</span> <span class="nav-text">basiccry</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">我的解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%A7%A3%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">其他解法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="DexterJie"
+      src="/images/0.jpg">
+  <p class="site-author-name" itemprop="name">DexterJie</p>
+  <div class="site-description" itemprop="description">一枚Crypto新手</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2024/02/20/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/VNCTF2024/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/0.jpg">
+      <meta itemprop="name" content="DexterJie">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DexterJie'Blog">
+      <meta itemprop="description" content="一枚Crypto新手">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VNCTF2024 | DexterJie'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VNCTF2024
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-02-20 18:57:19 / 修改时间：19:43:34" itemprop="dateCreated datePublished" datetime="2024-02-20T18:57:19+08:00">2024-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Wp/" itemprop="url" rel="index"><span itemprop="name">Wp</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2024/02/20/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/VNCTF2024/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2024/02/20/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/VNCTF2024/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>记录2024VNCTF——Crypto部分题解</p>
+<span id="more"></span>
+
+<h1 id="basiccry"><a href="#basiccry" class="headerlink" title="basiccry"></a>basiccry</h1><blockquote>
+<p>task.py</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random </span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">flag = <span class="string">b&#x27;********************************&#x27;</span></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line"></span><br><span class="line">rr = matrix(ZZ,[random_vector(ZZ,<span class="number">256</span>,<span class="number">0</span>,<span class="number">2</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>)])</span><br><span class="line">mm = matrix(GF(<span class="number">2</span>),[<span class="built_in">list</span>(<span class="built_in">bin</span>(m)[<span class="number">2</span>:].rjust(<span class="number">256</span>,<span class="string">&#x27;0&#x27;</span>))]*<span class="number">256</span>)</span><br><span class="line">cc = mm+rr</span><br><span class="line">ii = vector(ZZ,<span class="built_in">input</span>(<span class="string">&quot;Undoubtedly, this is a backdoor left for you: &quot;</span>).split(<span class="string">&quot;,&quot;</span>))</span><br><span class="line">dd = rr*ii</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(cc)</span><br><span class="line"><span class="built_in">print</span>(dd)</span><br></pre></td></tr></table></figure>
+
+<h2 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h2><p>rr是个$256\times 256$的矩阵，其元素只有0和1<br>$$<br>cc &#x3D;<br>\begin{pmatrix}<br>m_1+r_{1,1} &amp; m_2 + r_{1,2} &amp; … &amp; m_{256}+r_{1,256}\<br>m_1+r_{2,1} &amp; m_2 + r_{2,2} &amp; … &amp; m_{256}+r_{2,256}\<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>m_1+r_{256,1} &amp; m_2 + r_{256,2} &amp; … &amp; m_{256}+r_{256,256}\<br>\end{pmatrix}<br>$$<br>我这里用的是一个不太聪明的方式，分析如下：</p>
+<p>假如我们要求m的第一位，只需令<br>$$<br>ii &#x3D;<br>\begin{pmatrix}<br>1\0\ \vdots \ 0<br>\end{pmatrix}<br>$$<br>此时<br>$$<br>dd &#x3D;<br>\begin{pmatrix}<br>r_{1,1} \ 0 \ \vdots \ 0<br>\end{pmatrix}<br>$$<br>这样我们可以求得$r_{1,1}$，又因$cc$已知，便可求得$m_1 &#x3D; c_{1,1} - r_{1,1}$</p>
+<p>同理，因为flag是不会变的，一次nc确定一个m的值，只需要256次nc即可完成求解</p>
+<blockquote>
+<p>exp</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line">m = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> trange(<span class="number">256</span>):</span><br><span class="line">    sh = remote(<span class="string">&quot;manqiu.top&quot;</span>,port)</span><br><span class="line">    sh.recvuntil(<span class="string">b&quot;Undoubtedly, this is a backdoor left for you:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Ok&quot;</span>)</span><br><span class="line">    msg = <span class="string">&quot;0,&quot;</span> * i + <span class="string">&quot;1,&quot;</span> + <span class="string">&quot;0,&quot;</span> * (<span class="number">254</span>-i) + <span class="string">&quot;0&quot;</span></span><br><span class="line">    sh.sendline(msg.encode())</span><br><span class="line">    cc = []</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        c = sh.recvline().decode().strip().split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">        cc.append(c)</span><br><span class="line">    dd = <span class="built_in">eval</span>(sh.recvline().decode())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;1&quot;</span> <span class="keyword">in</span> cc[i][i]:</span><br><span class="line">        mm = <span class="number">1</span> ^ <span class="built_in">int</span>(dd[i])</span><br><span class="line">        m.append(<span class="built_in">str</span>(mm))</span><br><span class="line">        <span class="built_in">print</span>(m)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;0&quot;</span> <span class="keyword">in</span> cc[i][i]:</span><br><span class="line">        mm = <span class="number">0</span> ^ <span class="built_in">int</span>(dd[i])</span><br><span class="line">        m.append(<span class="built_in">str</span>(mm))</span><br><span class="line">        <span class="built_in">print</span>(m)</span><br><span class="line">        </span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line">tmp = <span class="string">&quot;&quot;</span>.join(m)</span><br><span class="line">flag = <span class="built_in">int</span>(tmp,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(flag))</span><br></pre></td></tr></table></figure>
+
+<p>我的预期是一次脚本就能把flag打出来，不过实际情况是脚本运行一段时间会出现卡顿，而且不运行下去，所以我分了几次跑。</p>
+<p>然后把m拼接起来</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">a = [<span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>]</span><br><span class="line">b = [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>]</span><br><span class="line">c = [<span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>]</span><br><span class="line">d = [<span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>]</span><br><span class="line">e = [<span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>]</span><br><span class="line">f = [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>]</span><br><span class="line">g = [<span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>]</span><br><span class="line">h = [<span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>]</span><br><span class="line">i = [<span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>]</span><br><span class="line">j = [<span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;0&#x27;</span>]</span><br><span class="line"></span><br><span class="line">m = a + b + c + d + e + f + g + h + i + j</span><br><span class="line">mm = <span class="string">&quot;&quot;</span>.join(m) + <span class="string">&quot;1&quot;</span>                 <span class="comment"># 前面是255位的m,最后一位是0或1</span></span><br><span class="line"></span><br><span class="line">mm = <span class="built_in">int</span>(mm,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(libnum.n2s(mm))</span><br><span class="line"><span class="comment"># VNCTF&#123;H4__1ngw__ght_simp0__4nt!&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="其他解法"><a href="#其他解法" class="headerlink" title="其他解法"></a>其他解法</h2><p>因为对$ii$没有数值上的限制，可以输入一个超递增序列，然后解背包密码把$rr$求出来，再通过$cc$求解m</p>
+<p>因没有复现环境，我自己跑了一组数据如下</p>
+<p>输入ii</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1396</span>, <span class="number">4208</span>, <span class="number">9033</span>, <span class="number">18993</span>, <span class="number">49667</span>, <span class="number">105450</span>, <span class="number">330619</span>, <span class="number">593253</span>, <span class="number">1876818</span>, <span class="number">3550691</span>, <span class="number">9529612</span>, <span class="number">28591711</span>, <span class="number">51988472</span>, <span class="number">132843784</span>, <span class="number">320774929</span>, <span class="number">598312683</span>, <span class="number">2181437722</span>, <span class="number">4514448112</span>, <span class="number">11033914127</span>, <span class="number">24717468900</span>, <span class="number">57170894226</span>, <span class="number">109232241484</span>, <span class="number">217765824089</span>, <span class="number">669361628365</span>, <span class="number">1537769405756</span>, <span class="number">5238736260364</span>, <span class="number">11517060106926</span>, <span class="number">33274554775748</span>, <span class="number">52987052874846</span>, <span class="number">200874642992442</span>, <span class="number">440036893056103</span>, <span class="number">1279532450657230</span>, <span class="number">2525383946646219</span>, <span class="number">6487425614066993</span>, <span class="number">18090859843634092</span>, <span class="number">33581802921810381</span>, <span class="number">67951262646090810</span>, <span class="number">236029764230241520</span>, <span class="number">371434770115377698</span>, <span class="number">1257356244869475435</span>, <span class="number">3256303138070771505</span>, <span class="number">7067073561936850474</span>, <span class="number">24127867434321267748</span>, <span class="number">60985644584045221455</span>, <span class="number">119966599001522700855</span>, <span class="number">323715115282447495963</span>, <span class="number">563638038251886152718</span>, <span class="number">1562758955137275436637</span>, <span class="number">4366897987962052857035</span>, <span class="number">10931883236137883071726</span>, <span class="number">22686730558819138388996</span>, <span class="number">68605157560030178338054</span>, <span class="number">147917636495124746879227</span>, <span class="number">439116283382708998463813</span>, <span class="number">1197370602526820848441882</span>, <span class="number">3526401183696005886706582</span>, <span class="number">9780886784726593647258031</span>, <span class="number">23108659457238292179141175</span>, <span class="number">50733650552337768257690350</span>, <span class="number">114047294672048167498357666</span>, <span class="number">343008530546716755443530729</span>, <span class="number">883065601710941166781920126</span>, <span class="number">1951735126256282162170890480</span>, <span class="number">3549294884090502286274162644</span>, <span class="number">12599090863023551555481356271</span>, <span class="number">22998501751026727274146362616</span>, <span class="number">75978819003210302788599527890</span>, <span class="number">184548098836386683631848249076</span>, <span class="number">362344598107921025881522365102</span>, <span class="number">1014540318649307346637507848227</span>, <span class="number">1724457743393683313892130153903</span>, <span class="number">3752021494648065847971667929160</span>, <span class="number">8751622531619676588802561141481</span>, <span class="number">21977521599899609397641556442745</span>, <span class="number">56967704655700565063507079582980</span>, <span class="number">130371146527115144972409118267261</span>, <span class="number">243940139195902064533590252835795</span>, <span class="number">504570175577858094170375658937401</span>, <span class="number">1724511362392632498069058434711317</span>, <span class="number">3175099681336126602307008601348384</span>, <span class="number">10766204612360101724080196876607024</span>, <span class="number">16852475506881520590161083280762900</span>, <span class="number">53627091171327834847005188824109238</span>, <span class="number">103561772296183675403952616457563989</span>, <span class="number">280026711851882808277765000086222626</span>, <span class="number">832910897579720658130004851924081363</span>, <span class="number">2023056473488121160945235651347869598</span>, <span class="number">5140555576735963362065957728276228493</span>, <span class="number">12645261191963611409256836348958880872</span>, <span class="number">38970952821426753891922880457616419362</span>, <span class="number">112842641108831754496521607659053791991</span>, <span class="number">226059631047279992651963964581729383372</span>, <span class="number">499628479648525277160451012145684475364</span>, <span class="number">1634950128476283254658756732538710073958</span>, <span class="number">4980395749000950620147743331684852327696</span>, <span class="number">10335453136180383147726205775759422895057</span>, <span class="number">19581332191317789908858753007087798921746</span>, <span class="number">39271215750319956436652373144379930411091</span>, <span class="number">100299643665664037163864768482253817359309</span>, <span class="number">246711383907850112229895867306471360562125</span>, <span class="number">659085788316744039471630164044941884580361</span>, <span class="number">1342383412223478867109569635929355655178877</span>, <span class="number">3183564035353894971423498947298281425469680</span>, <span class="number">6768961673865891723895059730064281706558792</span>, <span class="number">22140899671677402725807155257971240138886647</span>, <span class="number">65025814347530831297856724241218445844606709</span>, <span class="number">158626562691102593573919802703303965966900008</span>, <span class="number">405703178014513779902935604939052476404166632</span>, <span class="number">889783655242092473917914007377236047753162753</span>, <span class="number">2524771500590706096628247117655643561807433001</span>, <span class="number">4809685812091056451551423022288481965312117348</span>, <span class="number">13239034685098667988749044271345583171496780850</span>, <span class="number">27524985564892165868433157488875597649623380634</span>, <span class="number">58181836477172146276129852254435214620092584903</span>, <span class="number">110776737127202123072986976555115993410791454009</span>, <span class="number">254644089079357270019337865768698383189822043875</span>, <span class="number">623407507890594787639116324870725343406891807320</span>, <span class="number">1148793984731041978118136713837698836327882770797</span>, <span class="number">4087525652629843896766642135369600318893283784390</span>, <span class="number">9501068493863263682124944114777688508233668273420</span>, <span class="number">16629817170684466595505142295834036764908800859591</span>, <span class="number">40585163068514106417601809718068965504666394607912</span>, <span class="number">73617772169671271835826702629619993340070531996911</span>, <span class="number">224287533751078360583119827295823831400613980935009</span>, <span class="number">675454501297081806472980735293175693673331409583101</span>, <span class="number">1948424009539449362634985284321716255713031696809208</span>, <span class="number">5165924169549103078633555828696318421669501467077712</span>, <span class="number">15085526245609282031296558421648059435097206092412006</span>, <span class="number">27742725389037350446063660700423871789119957993662659</span>, <span class="number">74545054727451665407298035339270062917448215715381213</span>, <span class="number">201095158143046025148091208858720669100329869164722374</span>, <span class="number">517408115941707826996333553183210762099301710953203258</span>, <span class="number">1215860628641208373263960554358961852408725204335705656</span>, <span class="number">2654463570394906727196918545888042969753893082657862533</span>, <span class="number">7681022079627192503711156508760941066966325378185006591</span>, <span class="number">23013409522283546253799760953566246670119241043617591148</span>, <span class="number">63041022340388791607715952422971788763103966600404960549</span>, <span class="number">136118404665740917095029813853107313081064638944700649213</span>, <span class="number">444587265193875538344927650738980799534360182304040710333</span>, <span class="number">1094357761377718955537119975880349183873280543277596462260</span>, <span class="number">3450240054956124129710703405499009396656007378839062390091</span>, <span class="number">10209891896332339356030894124220861278668982815714128714576</span>, <span class="number">23064629583679521046483284866922804816353086304919998046346</span>, <span class="number">53800485907674446517137155096176902419153156507895442316580</span>, <span class="number">94938091647480556185173978850115238563185984992821915703136</span>, <span class="number">237018569884986183368856854061219384846573933420773970547637</span>, <span class="number">657034639440607458278193394927064207219732424874893288946723</span>, <span class="number">1986409584362267803630879282886865794904809854213270814598743</span>, <span class="number">5479555994470480976655157200378064978168240516967450342380270</span>, <span class="number">14028289842392460609314835100170682639027408282271967503501170</span>, <span class="number">43299640894866943409276932020279268246939906817298689024656187</span>, <span class="number">112008650531795992470538743246931031660469521104648058970172838</span>, <span class="number">256841167436075244654255600143138251703821673576743531259082198</span>, <span class="number">807502397701618218228927970764211170260611798959823551585216424</span>, <span class="number">1553548649694472662683768574008307685427817581266197612771248890</span>, <span class="number">3871581519809598477383461773083798139959661282123587280598568006</span>, <span class="number">12306372113499020019461392592648561836400035980327794522853142395</span>, <span class="number">35164787142454221307678561232946811153556210708112634293927580891</span>, <span class="number">99676752887622990620803966887696014281729180914435363186928642600</span>, <span class="number">187274443220683244592106305274818083316587901975054486960973190867</span>, <span class="number">514672460820049425594272397215632274315262932047802767310996194025</span>, <span class="number">1451445287606709203239645683797393286278494416348034514239761447758</span>, <span class="number">4545237132890480594199888930545580064256717464472819684566374839712</span>, <span class="number">8733806927824923268179548705169906162124844033045353745867314131106</span>, <span class="number">23508327099213710924374118129318034691079620574420355572642602563248</span>, <span class="number">64169484233107273069687718622993735689816613698275669061856648326812</span>, <span class="number">193800286160324528275217968716492996741953713190592244227245650275713</span>, <span class="number">300693933233365189914578527501457407617219233866651809346379549364496</span>, <span class="number">1063692878425981962862003278851844320614814486100147670662991626073163</span>, <span class="number">3292764323071081008157348761943500422582760458919351272862564755514328</span>, <span class="number">9854898053603986628900471050355061693018463464318902078969263841629827</span>, <span class="number">19491277392284263583409282556242664211492528273443441864516484522489692</span>, <span class="number">42162033947673464764591511766088777801599677413566738002708480129807895</span>, <span class="number">117999083106948001841902855986345682211441130802669968220017482276329843</span>, <span class="number">267400499515132937974019379180832975171764571483833779552598959217700363</span>, <span class="number">665929477975355057167044016795735252545506257497524808919475243048916946</span>, <span class="number">2090265018279850066893555555683226002631179739039566523724006893262704831</span>, <span class="number">4380087119828936820064940449726495597566358411993944860249066588467634367</span>, <span class="number">9302772118294473595467871339398001259659494520163782913777854350975309626</span>, <span class="number">26810270108999858670097631542384173452068118719038918882231114077750545199</span>, <span class="number">82956705039684723262478108973218126268564917814839345960860172000348283107</span>, <span class="number">244314689464730976405103973869640517259192834792012055610290496112844352498</span>, <span class="number">486946039289592872270110838236870768011124178185680401559097863527462677328</span>, <span class="number">1524403572056072758875269541786470760119425031226712991652119922056919068541</span>, <span class="number">4717693348968875808558416616339444736664394879149393002760222774379876534080</span>, <span class="number">11811210065385332505005018217011752947179752457845768841304402707275070095153</span>, <span class="number">27674815416990001674722330071247357021158950065804890901937999613928921000169</span>, <span class="number">50600450228729208399023812649812702084226012934974690643941648555360964450337</span>, <span class="number">129135076350773962562831284743064485820923981895676857107786633133662015256732</span>, <span class="number">385474108830013063399724503223968643774996980466866050045934726372989436094211</span>, <span class="number">1073972775376973890291287147158782007940781800239412873205529623243947084487382</span>, <span class="number">3026321900735861551530643076273790317430346518004598316273739400250714755501102</span>, <span class="number">8808564708245806164185386459205693876352822962950029860675920124403460619481586</span>, <span class="number">21289361469159862801975921997929932314917063196567060982169728918595911920233584</span>, <span class="number">47593454785239361287636766853909821738834509731779740290602137534795617625380899</span>, <span class="number">107885966877928840772362801611407770126627207379093998531699586813951970512624095</span>, <span class="number">378006145797383163113741497647226878741296952446150101884957466609041441843730839</span>, <span class="number">735064477320058688010077904642464696633772745609861205097851177824811247543089119</span>, <span class="number">2173701545664788939097738002795355418607061668801393448437527697449425013057958027</span>, <span class="number">4426369577763864454657195263581632901587082282230018877966226883085072371325380531</span>, <span class="number">8086290890753394233187420309155944807521331215862173116193314619137727050931542177</span>, <span class="number">29025484571612755829340179010324615354578730414170724617438437314481184648375434752</span>, <span class="number">68721970782980336031223510741560622708217861440769986855749119465893825242134835757</span>, <span class="number">210118953599975274542117334084644221761792428382746913795949244646643512249388789354</span>, <span class="number">341729432791517123058656497058849546221427854445130775789931806169747086970907339633</span>, <span class="number">1255087084927522350008153229778246395721935482770603157086138211580281326245476235990</span>, <span class="number">2910886948077374071828254513295256573141216006128492235842622692597630336642708036664</span>, <span class="number">5819709449653395387173177865277316829587268289729382133990571422055782023763084680074</span>, <span class="number">18254288327325259155322113251694714398772626025792186547988234845006979267833759150404</span>, <span class="number">47900867400302605970375108164796962168695967591150236707628531516665424493129807082999</span>, <span class="number">77479987551980516509148040996692980612342453310720546569524540637809930194632408285543</span>, <span class="number">215094201979798150057609162626301120613027396324513287451395995543336126054101845633335</span>, <span class="number">401482490482526700923662992856593321572433811088603437487229414577110166778430218795974</span>, <span class="number">925301165625120168237218861455924995228312429172102811427042815975954214474015923942520</span>, <span class="number">3148982916163888486282415722374034486491027540163958513646321893155595906794358605307100</span>, <span class="number">8821925580810847345434287808119040402476588923988279141485232087798468043870869756293984</span>, <span class="number">22287448826612734381691104388114834082235100246468068115293984158933011989430113965631581</span>, <span class="number">70521924884046115262927097999519900944065523742602182831538063628409845107584704690586721</span>, <span class="number">144168655507996893750155308590356882707304622671545211428519603955672901605857074956406444</span>, <span class="number">483058856835537827927931455385081967380016118669386876103186899775565293760859099805249905</span>, <span class="number">1341758243389282450564430609835244876417265065258116251706032604712069420703915539866503806</span>, <span class="number">3191585461364311155937948405492435654646188894504373173479750878809188276967084113157942064</span>, <span class="number">8080827103226255730867511151238940132016248515119779639367372683825316390906397691681252028</span>, <span class="number">14733797313773801107633302751046108842926907396956387202332906587432311010045391191440705047</span>, <span class="number">28249946931132442734053968790198383016123430769118179369226132446794741094309169329994088093</span>, <span class="number">110105345663043725619892519261685449301606107473014230647951487191656799936162697287654779735</span>, <span class="number">259462666625865005417224160166433604159955676990653598791590003920881950294125908527924810003</span>, <span class="number">612687669170439357514289486254557289422883445734024106079932208517446227751779248458773360366</span>, <span class="number">1044561566609347331288934270150898902117799451069900947736335685270484166967434778016851014695</span>, <span class="number">3354961827318183563311602181813482186826501088510635678604778441854371725525755277821822993113</span>, <span class="number">7447079969782857166270843577833420896010891504666715192507902492956138657545322594176456416288</span>, <span class="number">17415859995221030134437801673466872940040033560375759220564957965900090585941609157615031285960</span>, <span class="number">36794796189628198177255130676172787332671551579150458960096924052241835364171040295310097898386</span>, <span class="number">107915668472647429714078206951122028724413330893805539866211772445531289491217740346972368961342</span>, <span class="number">313170344771157987231360749803058023402820894866005664625571056064040966958520921094369827624879</span>, <span class="number">761903295933749580741175398799385249548884372898754366263986856072054166167795327827049210299870</span>, <span class="number">1489770819349942046462718373796175558687478047222486034991716709317867333143368368934483330500043</span>, <span class="number">3746520279068929145998035845012213721541817054513208351365961296449805613463288472802093110963411</span>, <span class="number">7628307216832111145743761091788686434244051331261674356745689279142162301727207887604921225836494</span>, <span class="number">17779792434338331127100610651545265266672124709811778812631206298698893300225618961624384999294089</span>, <span class="number">49223547532685765294266665604894143417978409709111181507034393546688099522581051555263869480661466</span>, <span class="number">145993621650016470176185717460995956637537560987740522007226097824863166935930645037806402817459156</span>, <span class="number">379042096053773104431459351467030516955004685593877345564046362472678091749403392570157167654902788</span>, <span class="number">775386004206754322768735188408655495305399839236379875401863294138521727184489354109718388734229925</span>, <span class="number">1612181488198834206052286261825139194705918604267063574527541202511977052400119461497482113730803754</span>, <span class="number">3131570630599143164695483580944133657516138814366996188560018659079192612390844819594441303570021961</span>, <span class="number">6633304058164339372805722801608656708308578253080137862393089792251234187799766578644149183173964996</span>, <span class="number">15379894142120235873858473283800206923249528144468195240123051080299809067158007207213425564563672003</span>, <span class="number">46529957385169040318484505470831327645925221683432207134836677670262087316702164483452826481084968963</span>, <span class="number">124271370153616999150303585449283172789342840531703923694368156547437372371315582173540280582373615233</span>, <span class="number">384349915889731767580323409780622332557978896828472100639132827842554723219721099958143122535428571545</span>, <span class="number">865761204863099789471062207889443517360907444794670718829686071526294635593738795906513498863423287846</span>, <span class="number">1715311138716981034265475755284384343633723979133320734721525157971729225130115014114455413341793483582</span>, <span class="number">5563392198988884145093813185808371687596040932844400119615411076776375727765194364480006126887585784032</span>, <span class="number">9487867567222420578180315147593921763707326987309974561205930341626893787368890376233824638621964232460</span>, <span class="number">27292067536638309915878711259377268785797442758770179990797733185545584229834829696415309714227221857723</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>exp</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">flag = <span class="string">b&quot;VNCTF&#123;H4__1ngw__ght_simp0__4nt!&#125;&quot;</span></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line"></span><br><span class="line">rr = matrix(ZZ,[random_vector(ZZ,<span class="number">256</span>,<span class="number">0</span>,<span class="number">2</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>)])</span><br><span class="line">mm = matrix(GF(<span class="number">2</span>),[<span class="built_in">list</span>(<span class="built_in">bin</span>(m)[<span class="number">2</span>:].rjust(<span class="number">256</span>,<span class="string">&#x27;0&#x27;</span>))]*<span class="number">256</span>)</span><br><span class="line">cc = mm+rr</span><br><span class="line">ii = vector(ZZ,<span class="built_in">input</span>(<span class="string">&quot;Undoubtedly, this is a backdoor left for you: &quot;</span>).split(<span class="string">&quot;,&quot;</span>))</span><br><span class="line">dd = rr*ii</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下是求解过程</span></span><br><span class="line">key = <span class="built_in">list</span>(ii)	<span class="comment">#手动输</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_rr</span>(<span class="params">S</span>):</span><br><span class="line">    m = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">reversed</span>(key):</span><br><span class="line">        <span class="keyword">if</span> S &gt; i:</span><br><span class="line">            m.append(<span class="number">1</span>)</span><br><span class="line">            S -= i</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            m.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line"></span><br><span class="line">rr = get_rr(<span class="built_in">int</span>(dd[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line">rr = vector(ZZ,rr[::-<span class="number">1</span>])</span><br><span class="line">mm = cc[<span class="number">0</span>] - rr</span><br><span class="line"></span><br><span class="line">m = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> mm:</span><br><span class="line">    m += <span class="built_in">str</span>(i)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(m,<span class="number">2</span>)))</span><br><span class="line"><span class="comment"># \xd6NCTF&#123;H4__1ngw__ght_simp0__4nt!&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>有点瑕疵不知道为什么头不对</p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>DexterJie
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://dexterjie.github.io/2024/02/20/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/VNCTF2024/" title="VNCTF2024">https://dexterjie.github.io/2024/02/20/赛题复现/VNCTF2024/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Wp/" rel="tag"># Wp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/16/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/SICTFround3/" rel="prev" title="SICTFround3">
+                  <i class="fa fa-chevron-left"></i> SICTFround3
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DexterJie</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">201k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">12:12</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>-->
+
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+<div class="busuanzi-count">
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+  
+  <span class="site-uv" title="总访客量">
+    访客量<span id="busuanzi_value_site_uv"></span>
+  </span>
+
+  <span class="site-pv" title="总访问量">
+    经过<span id="busuanzi_value_site_pv"></span>次回眸与你相遇
+  </span>
+</div>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline-five-mocha.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":null,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2024/02/20/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/VNCTF2024/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right"},"mobile":{"show":true}});</script></body>
+
+</html>
