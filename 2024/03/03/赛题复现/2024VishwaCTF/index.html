@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/0.jpg">
+  <link rel="mask-icon" href="/images/0.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dexterjie.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="第一次打国际赛，记录一下做出的题目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2024VishwaCTF">
+<meta property="og:url" content="https://dexterjie.github.io/2024/03/03/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024VishwaCTF/index.html">
+<meta property="og:site_name" content="DexterJie&#39;Blog">
+<meta property="og:description" content="第一次打国际赛，记录一下做出的题目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dexterjie.github.io/..%5Cimages%5C%E6%9D%82%5C10.png">
+<meta property="og:image" content="https://dexterjie.github.io/....%5Cimages%5C%E6%9D%82%5C11.png">
+<meta property="og:image" content="https://dexterjie.github.io/....%5Cimages%5C%E6%9D%82%5C12.png">
+<meta property="og:image" content="https://dexterjie.github.io/....%5Cimages%5C%E6%9D%82%5C13.png">
+<meta property="og:image" content="https://dexterjie.github.io/....%5Cimages%5C%E6%9D%82%5C14.png">
+<meta property="article:published_time" content="2024-03-03T11:00:15.000Z">
+<meta property="article:modified_time" content="2024-03-03T11:03:24.611Z">
+<meta property="article:author" content="DexterJie">
+<meta property="article:tag" content="Wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dexterjie.github.io/..%5Cimages%5C%E6%9D%82%5C10.png">
+
+
+<link rel="canonical" href="https://dexterjie.github.io/2024/03/03/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024VishwaCTF/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2024/03/03/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024VishwaCTF/","path":"2024/03/03/赛题复现/2024VishwaCTF/","title":"2024VishwaCTF"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2024VishwaCTF | DexterJie'Blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="waline-five-mocha.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">DexterJie'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1456890009&auto=1&height=66"></iframe>
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#poly-fun"><span class="nav-number">1.</span> <span class="nav-text">poly fun</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intellectual-Heir"><span class="nav-number">2.</span> <span class="nav-text">Intellectual Heir</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BitBane"><span class="nav-number">3.</span> <span class="nav-text">BitBane</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lets-smother-the-King"><span class="nav-number">4.</span> <span class="nav-text">Lets smother the King!</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="DexterJie"
+      src="/images/0.jpg">
+  <p class="site-author-name" itemprop="name">DexterJie</p>
+  <div class="site-description" itemprop="description">一枚Crypto新手</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2024/03/03/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024VishwaCTF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/0.jpg">
+      <meta itemprop="name" content="DexterJie">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DexterJie'Blog">
+      <meta itemprop="description" content="一枚Crypto新手">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2024VishwaCTF | DexterJie'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2024VishwaCTF
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-03 19:00:15 / 修改时间：19:03:24" itemprop="dateCreated datePublished" datetime="2024-03-03T19:00:15+08:00">2024-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Wp/" itemprop="url" rel="index"><span itemprop="name">Wp</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2024/03/03/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024VishwaCTF/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2024/03/03/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024VishwaCTF/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>第一次打国际赛，记录一下做出的题目</p>
+<span id="more"></span>
+
+<h1 id="poly-fun"><a href="#poly-fun" class="headerlink" title="poly fun"></a>poly fun</h1><blockquote>
+<p>题目描述：</p>
+<p>Its a simple symmetric key encryption, I am sure you will be able to solve it (what do you mean the key looks weird)</p>
+</blockquote>
+<blockquote>
+<p>task.py</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">polyc = [<span class="number">4</span>,<span class="number">3</span>,<span class="number">7</span>]</span><br><span class="line">poly = np.poly1d(polyc)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_random_number</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        num = random.randint(<span class="number">100</span>, <span class="number">999</span>)</span><br><span class="line">        first_digit = num // <span class="number">100</span></span><br><span class="line">        last_digit = num % <span class="number">10</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(first_digit - last_digit) &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> num</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_random_number_again</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        num = random.randint(<span class="number">1000</span>, <span class="number">9999</span>)</span><br><span class="line">        <span class="keyword">if</span> num % <span class="number">1111</span> != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> num</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">transform</span>(<span class="params">num</span>):</span><br><span class="line">    number = random.randint(<span class="number">1</span>, <span class="number">100000</span>)</span><br><span class="line">    org = number</span><br><span class="line">    number *= <span class="number">2</span></span><br><span class="line">    number += <span class="number">15</span></span><br><span class="line">    number *= <span class="number">3</span></span><br><span class="line">    number += <span class="number">33</span></span><br><span class="line">    number /= <span class="number">6</span></span><br><span class="line">    number -= org</span><br><span class="line">    <span class="keyword">if</span> number == <span class="number">13</span>:</span><br><span class="line">        num1 = random.randint(<span class="number">1</span>, <span class="number">6</span>)</span><br><span class="line">        num2 = random.randint(<span class="number">1</span>, <span class="number">6</span>)</span><br><span class="line">        number = num1 * <span class="number">2</span></span><br><span class="line">        number += <span class="number">5</span></span><br><span class="line">        number *= <span class="number">5</span></span><br><span class="line">        number += num2</span><br><span class="line">        number -= <span class="number">25</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(number / <span class="number">10</span>) == num1 <span class="keyword">and</span> number % <span class="number">10</span> == num2:</span><br><span class="line">            number = generate_random_number()</span><br><span class="line">            num1 = <span class="built_in">int</span>(<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">sorted</span>(<span class="built_in">str</span>(number), reverse=<span class="literal">True</span>)))</span><br><span class="line">            num2 = <span class="built_in">int</span>(<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">sorted</span>(<span class="built_in">str</span>(number))))</span><br><span class="line">            diff = <span class="built_in">abs</span>(num1 - num2)</span><br><span class="line">            rev_diff = <span class="built_in">int</span>(<span class="built_in">str</span>(diff)[::-<span class="number">1</span>])</span><br><span class="line">            number = diff + rev_diff</span><br><span class="line">            <span class="keyword">if</span> number == <span class="number">1088</span>:</span><br><span class="line">                org = num</span><br><span class="line">                num *= <span class="number">2</span></span><br><span class="line">                num /= <span class="number">3</span></span><br><span class="line">                num += <span class="number">5</span></span><br><span class="line">                num *= <span class="number">4</span></span><br><span class="line">                num -= <span class="number">9</span></span><br><span class="line">                num -= org</span><br><span class="line">                <span class="keyword">return</span> num</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                number = generate_random_number_again()</span><br><span class="line">                i = <span class="number">0</span></span><br><span class="line">                <span class="keyword">while</span> number != <span class="number">6174</span>:</span><br><span class="line">                    digits = [<span class="built_in">int</span>(d) <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">str</span>(number)]</span><br><span class="line">                    digits.sort()</span><br><span class="line">                    smallest = <span class="built_in">int</span>(<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, digits)))</span><br><span class="line">                    digits.reverse()</span><br><span class="line">                    largest = <span class="built_in">int</span>(<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, digits)))</span><br><span class="line">                    number = largest - smallest</span><br><span class="line">                    i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> i &lt;= <span class="number">7</span>:</span><br><span class="line">                    org = num</span><br><span class="line">                    num *= <span class="number">2</span></span><br><span class="line">                    num += <span class="number">7</span></span><br><span class="line">                    num += <span class="number">5</span></span><br><span class="line">                    num -= <span class="number">12</span></span><br><span class="line">                    num -= org</span><br><span class="line">                    num += <span class="number">4</span></span><br><span class="line">                    num *= <span class="number">2</span></span><br><span class="line">                    num -= <span class="number">8</span></span><br><span class="line">                    num -= org</span><br><span class="line">                    <span class="keyword">return</span> num</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    org = num</span><br><span class="line">                    num **= <span class="number">4</span></span><br><span class="line">                    num /= <span class="number">9</span></span><br><span class="line">                    num += <span class="number">55</span></span><br><span class="line">                    num *= <span class="number">6</span></span><br><span class="line">                    num += <span class="number">5</span></span><br><span class="line">                    num -= <span class="number">23</span></span><br><span class="line">                    num -= org</span><br><span class="line">                    <span class="keyword">return</span> num</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            org = num</span><br><span class="line">            num *= <span class="number">10</span></span><br><span class="line">            num += <span class="number">12</span></span><br><span class="line">            num **= <span class="number">3</span></span><br><span class="line">            num -= <span class="number">6</span></span><br><span class="line">            num += <span class="number">5</span></span><br><span class="line">            num -= org</span><br><span class="line">            <span class="keyword">return</span> num</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        org = num</span><br><span class="line">        num += <span class="number">5</span></span><br><span class="line">        num -= <span class="number">10</span></span><br><span class="line">        num *= <span class="number">2</span></span><br><span class="line">        num += <span class="number">12</span></span><br><span class="line">        num -= <span class="number">20</span></span><br><span class="line">        num -= org</span><br><span class="line">        <span class="keyword">return</span> num</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">p,key</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">chr</span>(p(transform(i))) <span class="keyword">for</span> i <span class="keyword">in</span> key)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">key = <span class="built_in">open</span>(<span class="string">&#x27;key.txt&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>).read()</span><br><span class="line">enc = encrypt(poly,key)</span><br><span class="line"><span class="built_in">print</span>(enc)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>enc_key</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">☞➭⥄⫣Ⲋ⸹⿰ㆯ㍶☞⒗☞☞☞➭☞⥄☞⫣☞Ⲋ☞⸹☞⿰☞ㆯ☞㍶➭⒗➭</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>enc_flag</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u5FUKxDUxH9y8yxvfaaU+GSXDwvJS6QxlN/3udOEzpU6fIVUExjDLsB3LKqUTz/x</span><br></pre></td></tr></table></figure>
+
+<p>花近一小时琢磨后发现这个<code>transform</code>函数并无作用，就是说<code>transform(number) = number</code></p>
+<p>key的每位字符进行了多项式运算：</p>
+<p>$enckey_i &#x3D; 4\times key^2 + 3\times key + 7$</p>
+<p>解这个方程即可获得key的每位字符</p>
+<p>解出来后<code>key = 12345678910111213141516171819202</code></p>
+<p>根据题目描述的，这是个简单的对称加密，于是找了个AES的解密网站<a target="_blank" rel="noopener" href="https://www.mklab.cn/utils/aes">AES在线加密解密工具 - MKLab在线工具</a></p>
+<p><img src="/../..%5Cimages%5C%E6%9D%82%5C10.png" alt="10"></p>
+<h1 id="Intellectual-Heir"><a href="#Intellectual-Heir" class="headerlink" title="Intellectual Heir"></a>Intellectual Heir</h1><blockquote>
+<p>task.py</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># my secret to hide the combination of my safe in fornt of all without anyone getting a clue what it is ;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#some boring python function for conversion nothing new</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">str_to_ass</span>(<span class="params">input_string</span>):</span><br><span class="line">    ass_values = []</span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> input_string:</span><br><span class="line">        ass_values.append(<span class="built_in">str</span>(<span class="built_in">ord</span>(char)))</span><br><span class="line">    ass_str = <span class="string">&#x27;&#x27;</span>.join(ass_values)</span><br><span class="line">    <span class="keyword">return</span> ass_str</span><br><span class="line"></span><br><span class="line">input_string = <span class="built_in">input</span>(<span class="string">&quot;Enter the Combination: &quot;</span>)</span><br><span class="line">result = str_to_ass(input_string)</span><br><span class="line">msg = <span class="built_in">int</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#not that easy, you figure out yourself what the freck is a &amp; z</span></span><br><span class="line">a = </span><br><span class="line">z = </span><br><span class="line"></span><br><span class="line">f = (? * ?) <span class="comment">#cant remember what goes in the question mark</span></span><br><span class="line">e = <span class="comment">#what is usually used</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ohh yaa!! now you cant figure out $h!t</span></span><br><span class="line">encrypted = <span class="built_in">pow</span>(msg, e, f)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>(encrypted))</span><br><span class="line"></span><br><span class="line"><span class="comment">#bamm!! protection for primes</span></span><br><span class="line">number = </span><br><span class="line"><span class="built_in">bin</span> = <span class="built_in">bin</span>(number)[<span class="number">2</span>:]</span><br><span class="line"></span><br><span class="line"><span class="comment">#bamm!! bamm!! double protection for primes</span></span><br><span class="line">bin_arr = np.array(<span class="built_in">list</span>(<span class="built_in">bin</span>), dtype=<span class="built_in">int</span>)</span><br><span class="line">result = np.sin(bin_arr)</span><br><span class="line">result = np.cos(bin_arr)</span><br><span class="line">np.savetxt(<span class="string">&quot;file1&quot;</span>, result)</span><br><span class="line">np.savetxt(<span class="string">&quot;file2&quot;</span>, result)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>file.txt</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4400037514278889258479265625258024039636437755883377709505596356049534358755375772484057042989024750972247184288820831886430459963472328358741858934783775986591400972020736548834642094922678189447202173710409868474198821576627330424767999152339702779346380</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>file1.txt</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5.403023058681397650e-01</span><br><span class="line">1.000000000000000000e+00</span><br><span class="line">5.403023058681397650e-01</span><br><span class="line">1.000000000000000000e+00</span><br><span class="line">5.403023058681397650e-01</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>file2.txt</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">8.414709848078965049e-01</span><br><span class="line">0.000000000000000000e+00</span><br><span class="line">0.000000000000000000e+00</span><br><span class="line">0.000000000000000000e+00</span><br><span class="line">0.000000000000000000e+00</span><br><span class="line">8.414709848078965049e-01</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+<p><code>file1.txt</code>和<code>file2.txt</code>内容蛮多的，就不贴全了</p>
+<p><code>str_to_ass()</code>函数的作用就是把输入的字符变成ASCII码，再转成str，eg:输入<code>A</code>，则<code>str_to_ass(&#39;A&#39;) = 65</code></p>
+<p>a,z其实不用管，看了后面<code>encrypted</code>知道这大概是RSA加密，然后猜f应该就是模，e说了是最常用的，所以是65537</p>
+<p>然后下面给了两组三角函数的值，分别放在了两个文件里面。</p>
+<p>只需要知道<code>np.sin()</code>这个函数的作用就是算<code>bin_arr</code>里面每个元素的正弦值，比如<code>bin_arr = [1 0]</code>，那么返回的就是<code>[sin 1, 0]</code></p>
+<p>不知道也没关系，自己跑一下脚本也可以看出规律</p>
+<p>同理<code>np,cos()</code>也就明白了</p>
+<p><code>file.txt</code>放的就是c，<code>file1.txt</code>放的是<code>np.cos()</code>,<code>file2.txt</code>放的是<code>np.sin()</code></p>
+<p>这时候我们只需要根据两个文件的内容来恢复<code>number</code></p>
+<p>拿<code>file1.txt</code>来说，如果此时的值是0，就说明当前二进制的值是<code>0</code>，否则当前二进制为<code>1</code></p>
+<p><code>file2.txt</code>同理，此时的值为1的时候，当前二进制的值是<code>0</code>，否则当前二进制的值是<code>1</code></p>
+<p>通过两个文件，可以得到两个素数，而且都是426bit，再根据c的大小是850bit，说明思路并没有问题，然后解密即可</p>
+<p>不过需要注意的是最后得到的m应该做一个对<code>str_to_ass()</code>的逆向</p>
+<blockquote>
+<p>exp</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">c = <span class="number">4400037514278889258479265625258024039636437755883377709505596356049534358755375772484057042989024750972247184288820831886430459963472328358741858934783775986591400972020736548834642094922678189447202173710409868474198821576627330424767999152339702779346380</span></span><br><span class="line"></span><br><span class="line">number = <span class="string">&quot;&quot;</span></span><br><span class="line">lines = <span class="built_in">open</span>(<span class="string">&quot;file1.txt&quot;</span>,<span class="string">&#x27;rb&#x27;</span>).readlines()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(lines)):</span><br><span class="line">    data = <span class="built_in">eval</span>(lines[i])</span><br><span class="line">    <span class="keyword">if</span> data == <span class="number">1</span>:</span><br><span class="line">        number += <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        number += <span class="string">&#x27;1&#x27;</span></span><br><span class="line"></span><br><span class="line">number1 = <span class="string">&quot;&quot;</span></span><br><span class="line">lines = <span class="built_in">open</span>(<span class="string">&quot;file2.txt&quot;</span>,<span class="string">&#x27;rb&#x27;</span>).readlines()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(lines)):</span><br><span class="line">    data = <span class="built_in">eval</span>(lines[i])</span><br><span class="line">    <span class="keyword">if</span> data == <span class="number">0</span>:</span><br><span class="line">        number1 += <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        number1 += <span class="string">&#x27;1&#x27;</span></span><br><span class="line"></span><br><span class="line">p = <span class="built_in">int</span>(number,<span class="number">2</span>)</span><br><span class="line">q = <span class="built_in">int</span>(number1,<span class="number">2</span>)</span><br><span class="line">n = p*q</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">d = gmpy2.invert(e,(p-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">m = <span class="built_in">pow</span>(c,d,n)</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="comment"># 8948859564825195843551958748828435899579709551</span></span><br><span class="line">msg = <span class="built_in">str</span>(m)</span><br><span class="line">flag = <span class="string">&quot;VishwaCTF&#123;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(msg),<span class="number">2</span>):</span><br><span class="line">    mm = <span class="built_in">int</span>(msg[i:i+<span class="number">2</span>])</span><br><span class="line">    flag += <span class="built_in">chr</span>(mm)</span><br><span class="line">flag += <span class="string">&quot;&#125;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># VishwaCTF&#123;Y0U_@R3_T#3_W0RT#Y_OF_3&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="BitBane"><a href="#BitBane" class="headerlink" title="BitBane"></a>BitBane</h1><blockquote>
+<p>task.cpp</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">createTopping</span><span class="params">(<span class="type">int</span> curr, <span class="type">int</span> idx, <span class="type">int</span> &amp;not_remainder)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> temp = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> num = <span class="number">1</span>;</span><br><span class="line">    num = num &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (curr)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> remainder = curr % idx;</span><br><span class="line">        <span class="keyword">if</span> (remainder)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = temp * <span class="number">10</span> + remainder;</span><br><span class="line">            curr = curr - remainder;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            num = num | <span class="number">1</span>;</span><br><span class="line">            curr = curr / idx;</span><br><span class="line">        &#125;</span><br><span class="line">        num = num &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    temp = temp &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    temp = temp | <span class="number">1</span>;</span><br><span class="line">    not_remainder = temp;</span><br><span class="line">    <span class="keyword">return</span> num | <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">createBase</span><span class="params">(<span class="type">int</span> not_remainder)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">30</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (not_remainder)</span><br><span class="line">        &#123;</span><br><span class="line">            num = num | (not_remainder &amp; <span class="number">1</span>);</span><br><span class="line">            not_remainder = not_remainder &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        num = num &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">create</span><span class="params">(<span class="type">int</span> curr, <span class="type">int</span> idx)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> not_remainder = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> topping = <span class="built_in">createTopping</span>(curr, idx, not_remainder);</span><br><span class="line">    <span class="type">int</span> base = <span class="built_in">createBase</span>(not_remainder);</span><br><span class="line">    <span class="type">int</span> num = base | topping;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">checkValidity</span><span class="params">(<span class="type">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i * i &lt; num; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (num % i == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">extraSecurity</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;encryption)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n = encryption.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> idx = i + <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">checkValidity</span>(idx))</span><br><span class="line">        &#123;</span><br><span class="line">            encryption[i] = ~encryption[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">encode</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;encryption, <span class="type">const</span> string &amp;data, string &amp;key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> len = data.<span class="built_in">length</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> curr = data[i];</span><br><span class="line">        <span class="type">int</span> idx = (i % <span class="number">8</span>) + <span class="number">2</span>;</span><br><span class="line">        <span class="type">int</span> num = <span class="built_in">create</span>(curr, idx);</span><br><span class="line">        encryption.<span class="built_in">push_back</span>(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">applyKey</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;encryption, string &amp;key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n = key.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> curr = key[i];</span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> cpy = curr;</span><br><span class="line">        <span class="keyword">while</span> (cpy)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (cpy &amp; <span class="number">1</span>)</span><br><span class="line">                ++cnt;</span><br><span class="line">            cpy = cpy &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        curr = curr &lt;&lt; (i + <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">while</span> (cnt--)</span><br><span class="line">        &#123;</span><br><span class="line">            curr = curr &lt;&lt; <span class="number">1</span>;</span><br><span class="line">            curr = curr ^ <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> k = encryption.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; k; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            encryption[j] = encryption[j] ^ curr;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">writeToFile</span><span class="params">(<span class="type">const</span> vector&lt;<span class="type">int</span>&gt; &amp;encryption)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">ofstream <span class="title">outfile</span><span class="params">(<span class="string">&quot;Encrypted.txt&quot;</span>)</span></span>;</span><br><span class="line">    string data;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> ele : encryption)</span><br><span class="line">    &#123;</span><br><span class="line">        data += <span class="built_in">to_string</span>(ele);</span><br><span class="line">        data += <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    outfile &lt;&lt; data;</span><br><span class="line">    outfile.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fstream file;</span><br><span class="line">    file.<span class="built_in">open</span>(<span class="string">&quot;Flag.txt&quot;</span>);</span><br><span class="line">    string data;</span><br><span class="line">    file &gt;&gt; data;</span><br><span class="line">    file.<span class="built_in">close</span>();</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; encryption;</span><br><span class="line">    string key = <span class="string">&quot;VishwaCTF&quot;</span>;</span><br><span class="line">    <span class="built_in">encode</span>(encryption, data, key);</span><br><span class="line">    <span class="built_in">applyKey</span>(encryption, key);</span><br><span class="line">    <span class="built_in">extraSecurity</span>(encryption);</span><br><span class="line">    <span class="built_in">writeToFile</span>(encryption);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题有点逆向的感觉</p>
+<p>先看主函数，先把flag进行了加密，然后用<code>applyKey</code>对密文进行处理，然后再用<code>extraSecurity</code>对密文再次处理</p>
+<p>在看<code>extraSecurity</code>这个函数之前，先看一下<code>checkValidity(x)</code>这个函数，作用就是判断x是否是素数</p>
+<p>然后就很好理解<code>extraSecurity(encryption)</code>这个函数的作用就是，是根据目前索引值<code>i</code>再加2的值，即<code>i+2</code>是否是素数，决定是否对<code>encryption[i]</code>取反。这个我们很容易就可以逆回去。</p>
+<p>再看完<code>applyKey</code>这个函数，具体细节我就不说了，说不太清楚。总之可以发现，既然我们有了<code>key</code>，完全可以把原来的<code>encryption</code>恢复，(可以自己测试一下)。</p>
+<p>最后就是<code>encode()</code>函数，看了很久发现没什么可以利用的点</p>
+<p>最后想了想，因为有了key，完全可以通过爆破的方式来求解flag，前面的理解完全都不用看了。</p>
+<blockquote>
+<p>exp.py</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">create_topping</span>(<span class="params">curr, idx</span>):</span><br><span class="line">    temp = <span class="number">0</span></span><br><span class="line">    num = <span class="number">1</span></span><br><span class="line">    num = num &lt;&lt; <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> curr:</span><br><span class="line">        remainder = curr % idx</span><br><span class="line">        <span class="keyword">if</span> remainder:</span><br><span class="line">            temp = temp * <span class="number">10</span> + remainder</span><br><span class="line">            curr = curr - remainder</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            num = num | <span class="number">1</span></span><br><span class="line">            curr = curr // idx</span><br><span class="line">        num = num &lt;&lt; <span class="number">1</span></span><br><span class="line">    temp = temp &lt;&lt; <span class="number">1</span></span><br><span class="line">    temp = temp | <span class="number">1</span></span><br><span class="line">    not_remainder = temp</span><br><span class="line">    <span class="keyword">return</span> num | <span class="number">1</span>, not_remainder</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_base</span>(<span class="params">not_remainder</span>):</span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>):</span><br><span class="line">        <span class="keyword">if</span> not_remainder:</span><br><span class="line">            num = num | (not_remainder &amp; <span class="number">1</span>)</span><br><span class="line">            not_remainder = not_remainder &gt;&gt; <span class="number">1</span></span><br><span class="line">        num = num &lt;&lt; <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> num</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create</span>(<span class="params">curr, idx</span>):</span><br><span class="line">    not_remainder = <span class="number">0</span></span><br><span class="line">    topping, not_remainder = create_topping(curr, idx)</span><br><span class="line">    base = create_base(not_remainder)</span><br><span class="line">    num = base | topping</span><br><span class="line">    <span class="keyword">return</span> num</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_validity</span>(<span class="params">num</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(num ** <span class="number">0.5</span>) + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> num % i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">extra_security</span>(<span class="params">encryption</span>):</span><br><span class="line">    n = <span class="built_in">len</span>(encryption)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        idx = i + <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> check_validity(idx):</span><br><span class="line">            encryption[i] = ~encryption[i]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encode</span>(<span class="params">encryption, data, key</span>):</span><br><span class="line">    len_data = <span class="built_in">len</span>(data)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(len_data):</span><br><span class="line">        curr = <span class="built_in">ord</span>(data[i])</span><br><span class="line">        idx = (i % <span class="number">8</span>) + <span class="number">2</span></span><br><span class="line">        num = create(curr, idx)</span><br><span class="line">        encryption.append(num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">apply_key</span>(<span class="params">encryption, key</span>):</span><br><span class="line">    n = <span class="built_in">len</span>(key)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        curr = <span class="built_in">ord</span>(key[i])</span><br><span class="line">        cnt = <span class="number">0</span></span><br><span class="line">        cpy = curr</span><br><span class="line">        <span class="keyword">while</span> cpy:</span><br><span class="line">            <span class="keyword">if</span> cpy &amp; <span class="number">1</span>:</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">            cpy = cpy &gt;&gt; <span class="number">1</span></span><br><span class="line">        curr = curr &lt;&lt; (i + <span class="number">10</span>)</span><br><span class="line">        <span class="keyword">while</span> cnt &gt; <span class="number">0</span>:</span><br><span class="line">            curr = curr &lt;&lt; <span class="number">1</span></span><br><span class="line">            curr = curr ^ <span class="number">1</span></span><br><span class="line">            cnt -= <span class="number">1</span></span><br><span class="line">        k = <span class="built_in">len</span>(encryption)</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">            encryption[j] = encryption[j] ^ curr</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">write_to_file</span>(<span class="params">encryption</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;Encrypted.txt&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> outfile:</span><br><span class="line">        data = <span class="string">&quot; &quot;</span>.join(<span class="built_in">str</span>(ele) <span class="keyword">for</span> ele <span class="keyword">in</span> encryption)</span><br><span class="line">        outfile.write(data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    enc = [-<span class="number">1934298443</span>,-<span class="number">1728250251</span>,-<span class="number">2103640211</span>,-<span class="number">1153630219</span>,<span class="number">1775435890</span>,-<span class="number">1670578291</span>,<span class="number">2009268234</span>,-<span class="number">2009268235</span>,<span class="number">1950549658</span>,-<span class="number">1992754035</span>,<span class="number">1673724026</span>,-<span class="number">1398997107</span>,<span class="number">1405288466</span>,<span class="number">1824718858</span>,<span class="number">2131951730</span>,-<span class="number">1765998643</span>,<span class="number">1934298490</span>,-<span class="number">1330315635</span>,<span class="number">2063794322</span>,<span class="number">1889730674</span>,<span class="number">1124270194</span>,-<span class="number">2059599891</span>,<span class="number">1086521394</span>,-<span class="number">1858273331</span>,<span class="number">1909484170</span>,<span class="number">1229390194</span>,<span class="number">1757609994</span>,-<span class="number">1275265139</span>,<span class="number">1201864818</span>,-<span class="number">1892876403</span>,<span class="number">1673723922</span>,<span class="number">2009268234</span>,<span class="number">1950549402</span>,<span class="number">1229390194</span>,<span class="number">1947140466</span>,-<span class="number">1942159371</span>,<span class="number">1849884786</span>,<span class="number">1703084146</span>,<span class="number">1824718858</span>,-<span class="number">1665335347</span>,<span class="number">1909484170</span>,-<span class="number">1229390195</span>,<span class="number">1757609994</span>,<span class="number">1170407434</span>,<span class="number">1124270194</span>,-<span class="number">1918042227</span>,<span class="number">2038628466</span>,-<span class="number">1982005363</span>,<span class="number">1950549834</span>,<span class="number">1124270322</span>,<span class="number">1782775922</span>,-<span class="number">1738735731</span>,<span class="number">1768095858</span>,<span class="number">1842544754</span>,<span class="number">2127757426</span>]</span><br><span class="line">    enc[<span class="number">23</span>] = ~enc[<span class="number">23</span>]</span><br><span class="line">    enc[<span class="number">47</span>] = ~enc[<span class="number">47</span>]</span><br><span class="line">    key = <span class="string">&quot;VishwaCTF&quot;</span></span><br><span class="line">    know = <span class="string">&quot;VishwaCTF&#123;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(enc) - <span class="built_in">len</span>(know)):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">33</span>,<span class="number">128</span>):</span><br><span class="line">            encryption = []</span><br><span class="line">            encode(encryption,know + <span class="built_in">chr</span>(i),key)</span><br><span class="line">            apply_key(encryption,key)</span><br><span class="line">            extra_security(encryption)</span><br><span class="line">            <span class="keyword">if</span> (enc[<span class="number">10</span>+j] == encryption[<span class="number">10</span>+j]):</span><br><span class="line">                know += <span class="built_in">chr</span>(i)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># else:</span></span><br><span class="line">            <span class="comment">#     print(f&quot;第&#123;10+j&#125;处出错&quot;)</span></span><br><span class="line">        <span class="built_in">print</span>(know)</span><br><span class="line">        <span class="comment"># VishwaCTF&#123;BIT5_3NCRYPT3D_D3CRYPTED_M1ND5_D33PLY_TE5T3D&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>爆破的时候出了点小问题，慢慢调试了之后找到问题在于<code>enc[23]</code>和<code>enc[47]</code>没取反，所以对<code>enc[23]，enc[47]</code>进行了手动取反</p>
+<h1 id="Lets-smother-the-King"><a href="#Lets-smother-the-King" class="headerlink" title="Lets smother the King!"></a>Lets smother the King!</h1><blockquote>
+<p>题目描述:</p>
+<p>In my friend circle, Mr. Olmstead and Mr. Ben always communicate with each other through a secret code language that they created, which we never understand. Here is one of the messages Mr. Ben sent to Mr. Olmstead, which I somehow managed to hack and extract it from Ben’s PC. However, it’s encrypted, and I don’t comprehend their programming language. Besides being proficient programmers, they are also professional chess players. It appears that this is a forced mate in a 4-move chess puzzle, but the information needs to be decrypted to solve it. Help me out here to solve the chess puzzle and get the flag.</p>
+<p>Flag format: VishwaCTF{move1ofWhite_move1ofBlack_move2ofWhite_move2ofBlack_move3ofWhite_move3ofBlack_move4ofWhite}.</p>
+<p>Note: Please use proper chess notations while writing any move.</p>
+</blockquote>
+<blockquote>
+<p>code.txt</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D&#x27;`A_9!7&#125;;|jE7TBRdQbqM(n&amp;JlGGE3feB@!x=v&lt;)\r8YXtsl2Sonmf,jLKa&#x27;edFEa`_X|?UTx;WPUTMqKPONGFjJ,HG@d&#x27;=BA@?&gt;7[;4z21U54ts10/.&#x27;K+$j(!Efe#z@a&#125;vut:[Zvutsrqj0ngOe+Lbg`edc\&quot;CBXW&#123;[TSRvP8TMq4JONGFj-IBGF?c=a$@9]=6|:3W10543,P*/.&#x27;&amp;%$Hi&#x27;&amp;%$&#123;z@a&#125;vut:xqp6nVrqpoh.fedcb(IHdcba`_X|V[ZYXWPOsMLKJINGkKJI+G@dDCBA#&quot;8=6Z4z21U5ut,P0)(-&amp;J*)&quot;!E&#125;e#&quot;!x&gt;|uzs9qvo5srkpingf,Mchg`_%cbaZBXW&#123;&gt;=YXWPOs65KPImMLEDIBf)(D=a$:?&gt;7&lt;54X210/43,Pqp(&#x27;,+*#G&#x27;gf|B&quot;y?&#125;v^tsr8vuWsrqpi/POkdibgf_%]b[Z_X|?&gt;TYRQu8TMqQPIHGkEJIBA@dD&amp;B;@?8\&lt;5&#123;3W70/.-Q10/on,%Ij(&#x27;~&#125;|B&quot;!~&#125;_u;y[Zponm3qpoQg-kjihgfeG]#aCBXW&#123;[ZYX:Pt7SRQJONMLEiIHA@?cCB$@9]~&lt;;:921U543,10/.-&amp;J*j(&#x27;~&#125;$&#123;A!~&#125;vuzs9Zponm3qpihmf,jihgfeG]#n</span><br></pre></td></tr></table></figure>
+
+<p>密文很怪，没什么线索。根据题目描述搜了下<code>Ben</code>和<code>Olmstead</code>，分开搜也没有线索，合起来搜以后了解到Malbolge这个编程语言</p>
+<p><img src="/....%5Cimages%5C%E6%9D%82%5C11.png" alt="11"></p>
+<p>然后找个在线网站运行一下<a target="_blank" rel="noopener" href="https://www.w3cschool.cn/tryrun/runcode?lang=malbolge">malbolge在线运行,在线工具，在线编译IDE_w3cschool</a></p>
+<p>得到结果</p>
+<p><img src="/....%5Cimages%5C%E6%9D%82%5C12.png" alt="12"></p>
+<p>再结合一下GPT得知，这是一个残局，这些符号的信息如下：</p>
+<p><img src="/....%5Cimages%5C%E6%9D%82%5C13.png" alt="13"></p>
+<p>然后再找个网站分析一下残局，寻找白棋4步绝杀的方法</p>
+<p><a target="_blank" rel="noopener" href="https://chessdb.cn/queryc/">国际象棋云库查询 (chessdb.cn)</a></p>
+<p>使用的时候把在线计算关了，会快一点。</p>
+<p><img src="/....%5Cimages%5C%E6%9D%82%5C14.png" alt="14"></p>
+<p>得到解法之后拼接flag即可</p>
+<p><code>VishwaCTF&#123;Nc7+_Kb8_Na6+_Ka8_Qb8+_Rxb8_Nc7#&#125;</code></p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>DexterJie
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://dexterjie.github.io/2024/03/03/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024VishwaCTF/" title="2024VishwaCTF">https://dexterjie.github.io/2024/03/03/赛题复现/2024VishwaCTF/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Wp/" rel="tag"># Wp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/29/%E6%9D%82%E8%AE%B0-%E4%BA%8C/" rel="prev" title="杂记(二)">
+                  <i class="fa fa-chevron-left"></i> 杂记(二)
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DexterJie</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">211k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">12:46</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>-->
+
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+<div class="busuanzi-count">
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+  
+  <span class="site-uv" title="总访客量">
+    访客量<span id="busuanzi_value_site_uv"></span>
+  </span>
+
+  <span class="site-pv" title="总访问量">
+    经过<span id="busuanzi_value_site_pv"></span>次回眸与你相遇
+  </span>
+</div>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline-five-mocha.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":null,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2024/03/03/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024VishwaCTF/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right"},"mobile":{"show":true}});</script></body>
+
+</html>

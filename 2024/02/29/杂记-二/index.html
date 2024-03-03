@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/%E6%9D%82/9.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/%E6%9D%82/8.png">
 <meta property="article:published_time" content="2024-02-29T13:59:02.000Z">
-<meta property="article:modified_time" content="2024-03-01T15:34:13.864Z">
+<meta property="article:modified_time" content="2024-03-03T11:00:55.106Z">
 <meta property="article:author" content="DexterJie">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://dexterjie.github.io/images/%E6%9D%82/9.png">
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -238,7 +238,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-01 23:34:13" itemprop="dateModified" datetime="2024-03-01T23:34:13+08:00">2024-03-01</time>
+      <time title="修改时间：2024-03-03 19:00:55" itemprop="dateModified" datetime="2024-03-03T19:00:55+08:00">2024-03-03</time>
     </span>
 
   
@@ -441,8 +441,6 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> gcd,invert</span><br><span class="line"></span><br><span class="line">g = []</span><br><span class="line">lines = <span class="built_in">open</span>(<span class="string">&quot;output.txt&quot;</span>, <span class="string">&quot;rb&quot;</span>).readlines()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(lines)):</span><br><span class="line">    g.append(<span class="built_in">int</span>(lines[i].strip()[-<span class="number">4</span>:].decode(),<span class="number">16</span>))</span><br><span class="line"></span><br><span class="line">know = <span class="string">b&quot;flag&#123;&quot;</span></span><br><span class="line">gmax = <span class="built_in">max</span>(g)</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> <span class="built_in">range</span>(gmax+<span class="number">1</span>,<span class="number">2</span>**<span class="number">16</span>):</span><br><span class="line">    k14 = g[<span class="number">0</span>]</span><br><span class="line">    k24 = g[<span class="number">1</span>]</span><br><span class="line">    k34 = g[<span class="number">2</span>]</span><br><span class="line">    k44 = g[<span class="number">3</span>]</span><br><span class="line">    k54 = g[<span class="number">4</span>]</span><br><span class="line">    <span class="comment"># if gcd(know[0],p) == 1 and gcd(know[1],p) == 1 and gcd(know[2],p) == 1 and gcd(know[3],p) == 1 and gcd(know[4],p) == 1:</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> isPrime(p):</span><br><span class="line">        <span class="comment"># step1</span></span><br><span class="line">        k53 = k54 * invert(k44,p) % p</span><br><span class="line">        <span class="comment"># step2</span></span><br><span class="line">        k43 = k44 * invert(k34,p) % p</span><br><span class="line">        k52 = k53 * invert(k43,p) % p</span><br><span class="line">        <span class="comment"># step3</span></span><br><span class="line">        k33 = k34 * invert(k24,p) % p</span><br><span class="line">        k42 = k43 * invert(k33,p) % p</span><br><span class="line">        k51 = k52 * invert(k42,p) % p</span><br><span class="line">        <span class="comment"># step4 </span></span><br><span class="line">        k23 = k24 * invert(k14,p) % p</span><br><span class="line">        k32 = k33 * invert(k23,p) % p</span><br><span class="line">        k41 = k42 * invert(k32,p) % p </span><br><span class="line">        k50 = k51 * invert(k41,p) % p</span><br><span class="line">        </span><br><span class="line">        k = [k50,k51,k52,k53,k54]</span><br><span class="line">        flag = <span class="string">&#x27;flag&#123;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>,<span class="built_in">len</span>(g)):</span><br><span class="line">            _k = k[<span class="number">0</span>]*k[<span class="number">1</span>]*k[<span class="number">2</span>]*k[<span class="number">3</span>]*k[<span class="number">4</span>]</span><br><span class="line">            </span><br><span class="line">            m = g[i] * invert(_k,p) % p</span><br><span class="line">            </span><br><span class="line">            flag += <span class="built_in">chr</span>(m)</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">                k[j] = m = m * k[j] % p</span><br><span class="line">        <span class="keyword">if</span> flag.endswith(<span class="string">&#x27;&#125;&#x27;</span>):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;p = <span class="subst">&#123;p&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="built_in">print</span>(flag)</span><br><span class="line">            <span class="comment"># flag&#123;749d39d4-78db-4c55-b4ff-bca873d0f18e&#125;</span></span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
 
 
-
-
     </div>
 
     
@@ -487,6 +485,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/03/03/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024VishwaCTF/" rel="next" title="2024VishwaCTF">
+                  2024VishwaCTF <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -518,13 +519,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">208k</span>
+    <span title="站点总字数">211k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:37</span>
+    <span title="站点阅读时长">12:46</span>
   </span>
 </div>
 <div class="busuanzi-count">
