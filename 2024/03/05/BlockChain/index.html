@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/0.jpg">
+  <link rel="mask-icon" href="/images/0.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dexterjie.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="记录一点CTF中区块链的题目吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BlockChain">
+<meta property="og:url" content="https://dexterjie.github.io/2024/03/05/BlockChain/index.html">
+<meta property="og:site_name" content="DexterJie&#39;Blog">
+<meta property="og:description" content="记录一点CTF中区块链的题目吧">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/0.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/2.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/1.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/3.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/4.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/5.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/letter.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/letter1.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/6.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/7.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/8.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/9.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/10.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/11.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/12.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/13.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/14.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/15.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/16.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/17.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/18.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/19.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/20.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/ETH/21.png">
+<meta property="article:published_time" content="2024-03-05T08:06:20.000Z">
+<meta property="article:modified_time" content="2024-03-07T14:59:35.812Z">
+<meta property="article:author" content="DexterJie">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dexterjie.github.io/images/ETH/0.png">
+
+
+<link rel="canonical" href="https://dexterjie.github.io/2024/03/05/BlockChain/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2024/03/05/BlockChain/","path":"2024/03/05/BlockChain/","title":"BlockChain"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>BlockChain | DexterJie'Blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="waline-five-mocha.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">DexterJie'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1456890009&auto=1&height=66"></iframe>
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NSSRound-4-SWPU-Bridge"><span class="nav-number">1.</span> <span class="nav-text">[NSSRound#4 SWPU]Bridge</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GKCTF%E2%80%94%E2%80%94%E5%85%B6%E7%96%BE%E5%A6%82%E9%A3%8E"><span class="nav-number">2.</span> <span class="nav-text">GKCTF——其疾如风</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GKCTF%E2%80%94%E2%80%94%E4%BE%B5%E7%95%A5%E5%A6%82%E7%81%AB"><span class="nav-number">3.</span> <span class="nav-text">GKCTF——侵略如火</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GKCTF%E2%80%94%E2%80%94%E5%85%B6%E5%BE%90%E5%A6%82%E6%9E%97"><span class="nav-number">4.</span> <span class="nav-text">GKCTF——其徐如林</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GKCTF%E2%80%94%E2%80%94%E4%B8%8D%E5%8A%A8%E5%A6%82%E5%B1%B1"><span class="nav-number">5.</span> <span class="nav-text">GKCTF——不动如山</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="DexterJie"
+      src="/images/0.jpg">
+  <p class="site-author-name" itemprop="name">DexterJie</p>
+  <div class="site-description" itemprop="description">一枚Crypto新手</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2024/03/05/BlockChain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/0.jpg">
+      <meta itemprop="name" content="DexterJie">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DexterJie'Blog">
+      <meta itemprop="description" content="一枚Crypto新手">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="BlockChain | DexterJie'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BlockChain
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-05 16:06:20" itemprop="dateCreated datePublished" datetime="2024-03-05T16:06:20+08:00">2024-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-07 22:59:35" itemprop="dateModified" datetime="2024-03-07T22:59:35+08:00">2024-03-07</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2024/03/05/BlockChain/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2024/03/05/BlockChain/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>记录一点CTF中区块链的题目吧</p>
+<span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://blockchain-ctf.securityinnovation.com/">blockchain-ctf.securityinnovation.com</a></p>
+<p>从大佬那里问了个网站，现在似乎进不去，太可惜了</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/2303_79193185/article/details/136534150?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22136534150%22,%22source%22:%222303_79193185%22%7D&fromshare=blogdetail&shareId=14&sharetype=hot">https://blog.csdn.net/2303_79193185/article/details/136534150?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22136534150%22%2C%22source%22%3A%222303_79193185%22%7D&amp;fromshare=blogdetail&amp;shareId=14&amp;sharetype=hot</a></p>
+<h1 id="NSSRound-4-SWPU-Bridge"><a href="#NSSRound-4-SWPU-Bridge" class="headerlink" title="[NSSRound#4 SWPU]Bridge"></a>[NSSRound#4 SWPU]Bridge</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OKC 地址 0x26eD1a5Ce072aB407C9d24b434f9be43b9ADDCe5 发生了大额快进快出，经过溯源可以找到他来源于一个 BSC 地址，请找出该 Bridge 在 BSC 上的交易tx</span><br><span class="line">NSSCTF&#123;0x****************************************************************&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题学到的是，善用工具<a target="_blank" rel="noopener" href="https://www.oklink.com/cn">区块链浏览器查询 | 欧科云链 OKLink</a></p>
+<p>先打开关于OKC的工具</p>
+<p><img src="/../images/ETH/0.png"></p>
+<p>首页上方输入地址<code>0x26eD1a5Ce072aB407C9d24b434f9be43b9ADDCe5</code></p>
+<p><img src="/../images/ETH/2.png"></p>
+<p>根据交易数量和交易时间，打开<code>DeFi tracker</code>工具</p>
+<p><img src="/../images/ETH/1.png"></p>
+<p>然后筛选</p>
+<p><img src="/../images/ETH/3.png"></p>
+<p>下一步根据题目要求，打开<code>BNB Chain</code>，再打开<code>DeFi tracker</code></p>
+<p><img src="/../images/ETH/4.png"></p>
+<p>同样的条件再筛选一次</p>
+<p><img src="/../images/ETH/5.png"></p>
+<p>这个交易哈希就是答案</p>
+<p><code>NSSCTF&#123;0xf787c44151fe21da13c213e3adaa7796176e09b9364eb6f52aa43e387ce4b455&#125;</code></p>
+<h1 id="GKCTF——其疾如风"><a href="#GKCTF——其疾如风" class="headerlink" title="GKCTF——其疾如风"></a>GKCTF——其疾如风</h1><blockquote>
+<p>题目描述:</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">My letter has been maliciously tampered with, and now I can&#x27;t find my wallet address of goerli testnet!</span><br><span class="line">Change flag&#123;&#125; to NSSCTF&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>附件是这样一个残缺的二维码</p>
+<p><img src="/../images/ETH/letter.png"></p>
+<p>先把二维码补全，参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/ATFWUS/article/details/107354157">【CTF-MISC】图片隐写中补全二维码定位角的注意事项【详细步骤】_misc二维码缺失-CSDN博客</a></p>
+<p>补成这样即可</p>
+<p><img src="/../images/ETH/letter1.png"></p>
+<p>扫码得到这样的内容：<code>ethereum: 0x57F1b45c28eDaC71d0A9Ffb54B7d8d2733E8d599</code></p>
+<p>根据题目描述中的<code>goerli testnet</code></p>
+<p>打开<a target="_blank" rel="noopener" href="https://www.oklink.com/cn">区块链浏览器查询 | 欧科云链 OKLink</a></p>
+<p><img src="/../images/ETH/6.png"></p>
+<p>查询这个地址</p>
+<p>在某条交易记录中有flag的16进制形式</p>
+<p><img src="/../images/ETH/7.png"></p>
+<h1 id="GKCTF——侵略如火"><a href="#GKCTF——侵略如火" class="headerlink" title="GKCTF——侵略如火"></a>GKCTF——侵略如火</h1><blockquote>
+<p>题目描述</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">challenge 111.229.224.125:15000</span><br><span class="line">geth 111.229.224.125:15001</span><br><span class="line">faucet 111.229.224.125:15002</span><br></pre></td></tr></table></figure>
+
+<p>先<code>nc 111.229.224.125 15000</code> </p>
+<p><img src="/../images/ETH/8.png"></p>
+<p>输入4，先看一下源码</p>
+<p><img src="/../images/ETH/9.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">contracts/Example.sol</span><br><span class="line">// SPDX-License-Identifier: UNLICENSED</span><br><span class="line">pragma solidity 0.8.9;</span><br><span class="line"></span><br><span class="line">contract Greeter &#123;</span><br><span class="line">    string greeting;</span><br><span class="line"></span><br><span class="line">    constructor(string memory _greeting) &#123;</span><br><span class="line">        greeting = _greeting;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function greet() public view returns (string memory) &#123;</span><br><span class="line">        return greeting;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function setGreeting(string memory _greeting) public &#123;</span><br><span class="line">        greeting = _greeting;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function isSolved() public view returns (bool) &#123;</span><br><span class="line">        string memory expected = &quot;HelloFAFUer&quot;;</span><br><span class="line">        return keccak256(abi.encodePacked(expected)) == keccak256(abi.encodePacked(greeting));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使得<code>isSolved</code>返回True，再输入3即可获得flag</p>
+<p>此时，我们再次nc靶机，输入1</p>
+<p><img src="/../images/ETH/10.png"></p>
+<p>获得了一个账户,以及我们的token。</p>
+<p>题目要求我们先给这个账户转0.001测试币才能进入下一步</p>
+<p>我们需要先有一个钱包账户，用MetaMask即可创建</p>
+<p>然后像这样连接到题目给的RPC中</p>
+<p><img src="/../images/ETH/11.png"></p>
+<p>链的ID先随便输，会自动跳出正确的ID</p>
+<p>有了钱包之后，我们访问<code>111.229.224.125:15002</code>获取测试币</p>
+<p>然后转账到题目给的账户</p>
+<p>之后我们再次nc 靶机，并输入2，再输入题目给的token</p>
+<p><img src="/../images/ETH/12.png"></p>
+<p>这时候我们获得了一个合约地址</p>
+<p>此时我们打开网站-&gt;</p>
+<p>把题目给的源码复制近来，然后调整版本，进行编译</p>
+<p><img src="/../images/ETH/13.png"></p>
+<p>完成编译之后，我们来到这个页面</p>
+<p><img src="/../images/ETH/14.png"></p>
+<p>先把环境换成MetaMask，并核对账户</p>
+<p>往下拖，找到</p>
+<p><img src="/../images/ETH/15.png"></p>
+<p>输入<code>HelloFAFUer</code>，并点击<code>setGreeting</code>，此时MetaMask会跳出支付页面，支付完成后依次点击<code>greet</code>，<code>isSolved</code></p>
+<p>然后nc 靶机，输入3，再输入自己的token即可获得flag</p>
+<p><img src="/../images/ETH/16.png"></p>
+<h1 id="GKCTF——其徐如林"><a href="#GKCTF——其徐如林" class="headerlink" title="GKCTF——其徐如林"></a>GKCTF——其徐如林</h1><blockquote>
+<p>题目描述</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">你给我邮箱，我给你flag。</span><br><span class="line">合约部署在sepolia测试网上。</span><br><span class="line">contract&#x27;s address:0x521BF58Dd54663063a779b365CAe9FC974f47047</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>task.sol</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.8.9;</span><br><span class="line"></span><br><span class="line">contract Testcontract &#123;</span><br><span class="line">    mapping(address=&gt;uint) _flag;</span><br><span class="line"></span><br><span class="line">    event sendflag(string email,string tokens);</span><br><span class="line"></span><br><span class="line">    function test() public &#123;</span><br><span class="line">        _flag[msg.sender] = 1;</span><br><span class="line">    &#125;</span><br><span class="line">    function payforflag(string memory _base64Email,string memory _token) public &#123;</span><br><span class="line">        require(_flag[msg.sender] == 1);</span><br><span class="line">        emit sendflag(_base64Email , _token);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>mapping</code>函数可以理解为，每个钱包地址都有个变量<code>_flag</code></p>
+<p>有个事件<code>sendflag</code></p>
+<p><code>test()</code>函数的作用是把调用者的<code>_flag</code>更改为1</p>
+<p><code>payforflag()</code>需要两个参数，分别是base64编码后的邮箱地址，以及token，还要求调用者的<code>_flag</code>值为1</p>
+<p>根据代码，本题思路就是先调用<code>test()</code>函数把<code>_flag</code>值变为1，再调用<code>payforflag</code>，然后估计就会把flag发送到我们的邮箱</p>
+<p>这里需要先在sepolia测试网中获取一点测试币，需要在网上自行寻找水龙头获取。</p>
+<p>然后就是编写脚本(不太明白原理，先存着，当个脚本小子先)。</p>
+<blockquote>
+<p>exp.py</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> web3 <span class="keyword">import</span> Web3</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">w3 = Web3(Web3.HTTPProvider(<span class="string">&#x27;https://rpc2.sepolia.org&#x27;</span>)) <span class="comment"># Sepolia RPC</span></span><br><span class="line"></span><br><span class="line">wallet = <span class="string">&#x27;0x...&#x27;</span> <span class="comment"># 钱包地址</span></span><br><span class="line">key = <span class="string">&#x27;0x...&#x27;</span> <span class="comment"># 钱包私钥</span></span><br><span class="line"></span><br><span class="line">target = <span class="string">&#x27;0x...&#x27;</span> <span class="comment"># 合约地址</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;contract_abi.json&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> abi_file:</span><br><span class="line">    contract_abi = json.load(abi_file) <span class="comment"># 读取合约 ABI（在Remix编译后获取,可以用在线网站）</span></span><br><span class="line"></span><br><span class="line">contract = w3.eth.contract(address=target, abi=contract_abi)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[CONTRACT] 加载了一个合约，其地址为：<span class="subst">&#123;target&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send_transaction</span>(<span class="params">transaction, private_key</span>):</span><br><span class="line">    signed_transaction = w3.eth.account.sign_transaction(</span><br><span class="line">        transaction, private_key)</span><br><span class="line">    transaction_hash = w3.eth.send_raw_transaction(</span><br><span class="line">        signed_transaction.rawTransaction)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[TRANSACTION] 发送了一个交易，其哈希为：<span class="subst">&#123;transaction_hash.<span class="built_in">hex</span>()&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[TRANSACTION] 正在等待交易确认......&quot;</span>)</span><br><span class="line"></span><br><span class="line">    w3.eth.wait_for_transaction_receipt(transaction_hash)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[TRANSACTION] 交易已被确认。&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> transaction_hash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>():</span><br><span class="line">    <span class="keyword">return</span> send_transaction(contract.functions.test().build_transaction(&#123;</span><br><span class="line">        <span class="string">&quot;chainId&quot;</span>: <span class="number">11155111</span>,</span><br><span class="line">        <span class="string">&quot;maxFeePerGas&quot;</span>: w3.to_wei(<span class="number">1.000000014</span>, <span class="string">&#x27;gwei&#x27;</span>),</span><br><span class="line">        <span class="string">&quot;maxPriorityFeePerGas&quot;</span>: w3.to_wei(<span class="number">1</span>, <span class="string">&#x27;gwei&#x27;</span>),</span><br><span class="line">        <span class="string">&quot;gas&quot;</span>: <span class="number">0x200000</span>,</span><br><span class="line">        <span class="string">&quot;value&quot;</span>: w3.to_wei(<span class="number">0</span>, <span class="string">&#x27;ether&#x27;</span>),</span><br><span class="line">        <span class="string">&quot;nonce&quot;</span>: w3.eth.get_transaction_count(wallet),</span><br><span class="line">    &#125;), key)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">payforflag</span>(<span class="params">email: <span class="built_in">str</span>, token: <span class="built_in">str</span></span>):</span><br><span class="line">    <span class="keyword">return</span> send_transaction(contract.functions.payforflag(</span><br><span class="line">        base64.b64encode(email.encode()).decode(), token</span><br><span class="line">    ).build_transaction(&#123;</span><br><span class="line">        <span class="string">&quot;chainId&quot;</span>: <span class="number">11155111</span>,</span><br><span class="line">        <span class="string">&quot;maxFeePerGas&quot;</span>: w3.to_wei(<span class="number">1.000000014</span>, <span class="string">&#x27;gwei&#x27;</span>),</span><br><span class="line">        <span class="string">&quot;maxPriorityFeePerGas&quot;</span>: w3.to_wei(<span class="number">1</span>, <span class="string">&#x27;gwei&#x27;</span>),</span><br><span class="line">        <span class="string">&quot;gas&quot;</span>: <span class="number">0x200000</span>,</span><br><span class="line">        <span class="string">&quot;value&quot;</span>: w3.to_wei(<span class="number">0</span>, <span class="string">&#x27;ether&#x27;</span>),</span><br><span class="line">        <span class="string">&quot;nonce&quot;</span>: w3.eth.get_transaction_count(wallet),</span><br><span class="line">    &#125;), key)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 要传入的参数</span></span><br><span class="line">    email = <span class="string">&quot;&quot;</span>		<span class="comment"># 你希望接收flag的邮箱</span></span><br><span class="line">    token = uuid.uuid4().<span class="built_in">hex</span>	<span class="comment">#作用不大，随机生成一个即可</span></span><br><span class="line"></span><br><span class="line">    test() <span class="comment"># 调用 test</span></span><br><span class="line">    payforflag(email, token) <span class="comment"># 调用 payforflag</span></span><br></pre></td></tr></table></figure>
+
+<p>运行完之后，大概30分钟收到了flag:<code>NSSCTF&#123;Step2_contract_st1ll_E4sy_fOr_y0u!&#125;</code></p>
+<h1 id="GKCTF——不动如山"><a href="#GKCTF——不动如山" class="headerlink" title="GKCTF——不动如山"></a>GKCTF——不动如山</h1><blockquote>
+<p>题目描述</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">challenge 111.229.224.125:16000</span><br><span class="line">geth 111.229.224.125:16001</span><br><span class="line">faucet 111.229.224.125:16002</span><br></pre></td></tr></table></figure>
+
+<p>先nc查源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// contracts/Example.sol</span><br><span class="line">// SPDX-License-Identifier: UNLICENSED</span><br><span class="line">pragma solidity 0.8.9;</span><br><span class="line"></span><br><span class="line">contract GiveMeETH&#123;</span><br><span class="line">    constructor() &#123;</span><br><span class="line">        //no function to transfer......</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function isSolved() public view returns(bool) &#123;</span><br><span class="line">        return address(this).balance &gt;= 0.66 ether;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>题目还是要求让<code>isSolved()</code>返回True，这里就是要让合约的余额不小于0.66</p>
+<p>先输入1获得部署合约的账户</p>
+<p><img src="/../images/ETH/17.png"></p>
+<p>并且转账超过0.001进入下一步</p>
+<p><img src="/../images/ETH/18.png"></p>
+<p>输入2获得合约地址以及交易哈希</p>
+<p>一开始试了直接转账，但是失败了。上网查找有没有什么其他转账的方法</p>
+<p><a target="_blank" rel="noopener" href="https://blog.riskivy.com/%e6%99%ba%e8%83%bd%e5%90%88%e7%ba%a6ctf%ef%bc%9aethernaut-writeup-part-2/#7Force">https://blog.riskivy.com/%e6%99%ba%e8%83%bd%e5%90%88%e7%ba%a6ctf%ef%bc%9aethernaut-writeup-part-2/#7Force</a></p>
+<p>在remix上写个脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: UNLICENSED</span><br><span class="line">pragma solidity 0.8.9;</span><br><span class="line"></span><br><span class="line">contract Selfdestruct&#123;</span><br><span class="line">    constructor() payable &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function attack() public &#123;</span><br><span class="line">        address payable addr = payable(address(0x801b7361AbA8FDd63c4Bb741E4E89b4d948b22a6));</span><br><span class="line">        selfdestruct(addr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再使用remix交互</p>
+<p><img src="/../images/ETH/19.png"></p>
+<p>这些地方记得修改，再点击部署，会跳出支付页面，支付后即可交互</p>
+<p><img src="/../images/ETH/20.png"></p>
+<p>点击attack，再次支付即可</p>
+<p><img src="/../images/ETH/21.png"></p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>DexterJie
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://dexterjie.github.io/2024/03/05/BlockChain/" title="BlockChain">https://dexterjie.github.io/2024/03/05/BlockChain/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/03/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024VishwaCTF/" rel="prev" title="2024VishwaCTF">
+                  <i class="fa fa-chevron-left"></i> 2024VishwaCTF
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DexterJie</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">218k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">13:12</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>-->
+
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+<div class="busuanzi-count">
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+  
+  <span class="site-uv" title="总访客量">
+    访客量<span id="busuanzi_value_site_uv"></span>
+  </span>
+
+  <span class="site-pv" title="总访问量">
+    经过<span id="busuanzi_value_site_pv"></span>次回眸与你相遇
+  </span>
+</div>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline-five-mocha.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":null,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2024/03/05/BlockChain/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right"},"mobile":{"show":true}});</script></body>
+
+</html>
