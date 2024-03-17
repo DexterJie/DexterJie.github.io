@@ -31,10 +31,13 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dexterjie.github.io/images/Lattice/25.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/Lattice2/13.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/Lattice2/37.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/Lattice2/38.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/Lattice2/39.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/Lattice2/16.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/Lattice2/17.png">
 <meta property="article:published_time" content="2023-08-02T12:51:37.000Z">
-<meta property="article:modified_time" content="2023-08-25T09:10:28.532Z">
+<meta property="article:modified_time" content="2024-03-13T13:27:19.691Z">
 <meta property="article:author" content="DexterJie">
 <meta property="article:tag" content="Lattice">
 <meta name="twitter:card" content="summary">
@@ -163,7 +166,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -241,7 +244,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-08-25 17:10:28" itemprop="dateModified" datetime="2023-08-25T17:10:28+08:00">2023-08-25</time>
+      <time title="修改时间：2024-03-13 21:27:19" itemprop="dateModified" datetime="2024-03-13T21:27:19+08:00">2024-03-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,14 +284,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.4k</span>
+      <span>3.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>12 分钟</span>
+      <span>13 分钟</span>
     </span>
 </div>
 
@@ -361,9 +364,15 @@
 <p>而$||\vec{t}||&#x3D;1$,$det(\mathcal{L})&#x3D;S^{\frac{1}{n+1}}$</p>
 <p>根据$Hermite$定理，$||\vec{t}||&lt;\sqrt{n+1}\times det(\mathcal{L})$</p>
 <p>所以$\vec{t}$是格$\mathcal{L}$的最短向量，可以用LLL算法解决</p>
+<p>其实就是说会存在一个线性组合：</p>
+<p><img src="/../images/Lattice2/37.png"></p>
+<p>进行优化，使用这个格</p>
+<p><img src="/../images/Lattice2/38.png"></p>
+<p>这个对应的线性组合是</p>
+<p><img src="/../images/Lattice2/39.png"></p>
 <p>理解不一定到位，大家可以翻看参考文章</p>
 <p><strong>sage代码实现</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">M = []														#公钥序列</span><br><span class="line">S = 														#密文</span><br><span class="line"></span><br><span class="line">n = len(M)									</span><br><span class="line">Ge = Matrix.identity(n)										#创建n维的单位阵</span><br><span class="line">last_row = [0 for x in range(n)]					</span><br><span class="line">Ge_last_row = Matrix(ZZ, 1, len(last_row), last_row)</span><br><span class="line"></span><br><span class="line">last_col = M[:]									</span><br><span class="line">last_col.append(S)											#格最后一列为公钥序列加密文S</span><br><span class="line">Ge_last_col = Matrix(ZZ, len(last_col), 1, last_col)</span><br><span class="line"></span><br><span class="line">Ge = Ge.stack(Ge_last_row)									#在矩阵Ge下面添加一行</span><br><span class="line">Ge = Ge.augment(Ge_last_col)								#在矩阵Ge右边添加一列</span><br><span class="line"></span><br><span class="line">X = Ge.LLL()</span><br><span class="line">#print(X)</span><br><span class="line">for t in X:</span><br><span class="line">    tmp = t[:-1]</span><br><span class="line">    ans = [str(abs(k)) for k in tmp]</span><br><span class="line">    try:</span><br><span class="line">        flag = int(&#x27;&#x27;.join(ans), 2)</span><br><span class="line">        print(libnum.n2s(flag))</span><br><span class="line">    except:</span><br><span class="line">        pass</span><br><span class="line">print(&#x27;0ver&#x27;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">M = []														<span class="comment">#公钥序列</span></span><br><span class="line">S = 														<span class="comment">#密文</span></span><br><span class="line"></span><br><span class="line">n = <span class="built_in">len</span>(M)									</span><br><span class="line">Ge = Matrix.identity(n)										<span class="comment">#创建n维的单位阵</span></span><br><span class="line">last_row = [<span class="number">0</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(n)]					</span><br><span class="line">Ge_last_row = Matrix(ZZ, <span class="number">1</span>, <span class="built_in">len</span>(last_row), last_row)</span><br><span class="line"></span><br><span class="line">last_col = M[:]									</span><br><span class="line">last_col.append(S)											<span class="comment">#格最后一列为公钥序列加密文S</span></span><br><span class="line">Ge_last_col = Matrix(ZZ, <span class="built_in">len</span>(last_col), <span class="number">1</span>, last_col)</span><br><span class="line"></span><br><span class="line">Ge = Ge.stack(Ge_last_row)									<span class="comment">#在矩阵Ge下面添加一行</span></span><br><span class="line">Ge = Ge.augment(Ge_last_col)								<span class="comment">#在矩阵Ge右边添加一列</span></span><br><span class="line"></span><br><span class="line">X = Ge.LLL()</span><br><span class="line"><span class="comment">#print(X)</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> X:</span><br><span class="line">    tmp = t[:-<span class="number">1</span>]</span><br><span class="line">    ans = [<span class="built_in">str</span>(<span class="built_in">abs</span>(k)) <span class="keyword">for</span> k <span class="keyword">in</span> tmp]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        flag = <span class="built_in">int</span>(<span class="string">&#x27;&#x27;</span>.join(ans), <span class="number">2</span>)</span><br><span class="line">        <span class="built_in">print</span>(libnum.n2s(flag))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;0ver&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 <p><code>Ge_last_row = Matrix(ZZ, 1, len(last_row), last_row)</code>：这行代码的作用是创建一个矩阵对象 <code>M_last_row</code>，使用整数环（<code>ZZ</code>）作为矩阵的元素类型，矩阵的维度为1行和<code>last_row</code> 的长度，矩阵的行向量由 <code>last_row</code> 列表提供。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">M = []</span><br><span class="line">S = </span><br><span class="line"></span><br><span class="line">n = len(M)									</span><br><span class="line">Ge = Matrix.identity(n)</span><br><span class="line">last_row = [0 for x in range(n)]					</span><br><span class="line">Ge_last_row = Matrix(ZZ, 1, len(last_row), last_row)</span><br><span class="line"></span><br><span class="line">last_col = M[:]									</span><br><span class="line">last_col.append(S)	</span><br><span class="line">Ge_last_col = Matrix(ZZ, len(last_col), 1, last_col)</span><br><span class="line"></span><br><span class="line">Ge = Ge.stack(Ge_last_row)	</span><br><span class="line">Ge = Ge.augment(Ge_last_col)</span><br><span class="line"></span><br><span class="line">X = Ge.LLL()[0]</span><br><span class="line">print(X)</span><br></pre></td></tr></table></figure>
@@ -497,13 +506,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">220k</span>
+    <span title="站点总字数">222k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">13:18</span>
+    <span title="站点阅读时长">13:26</span>
   </span>
 </div>
 <div class="busuanzi-count">
