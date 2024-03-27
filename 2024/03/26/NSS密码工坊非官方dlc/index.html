@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/%E6%9D%82/40.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/%E6%9D%82/41.png">
 <meta property="article:published_time" content="2024-03-26T12:15:24.000Z">
-<meta property="article:modified_time" content="2024-03-26T14:24:34.219Z">
+<meta property="article:modified_time" content="2024-03-27T10:50:17.155Z">
 <meta property="article:author" content="DexterJie">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://dexterjie.github.io/images/%E6%9D%82/36.png">
@@ -149,7 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#easy-mod"><span class="nav-number">1.</span> <span class="nav-text">easy_mod</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#easy-mod"><span class="nav-number">1.</span> <span class="nav-text">easy_mod</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#easy-mod2"><span class="nav-number">2.</span> <span class="nav-text">easy_mod2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%A0%BC-begin-pmatrix-x-0-x-1-%E2%80%A6-x-i-%E2%80%A6-x-79-1-k-end-pmatrix-begin-pmatrix-1-0-%E2%80%A6-0-%E2%80%A6-0-0-256-80-0-1-%E2%80%A6-0-%E2%80%A6-0-0-256-79-vdots-vdots-ddots-vdots-ddots-vdots-vdots-vdots-0-0-%E2%80%A6-1-%E2%80%A6-0-0-256-80-i-vdots-vdots-ddots-vdots-ddots-vdots-vdots-vdots-0-0-%E2%80%A6-0-%E2%80%A6-1-0-256-0-0-0-%E2%80%A6-0-%E2%80%A6-0-1-temp-c-0-0-%E2%80%A6-0-%E2%80%A6-0-0-p-end-pmatrix"><span class="nav-number">3.</span> <span class="nav-text">构造格$$\begin{pmatrix}x_0 &amp; x_1 &amp; … &amp; x_i &amp; … &amp; x_{79} &amp; 1 &amp; k\end{pmatrix}\begin{pmatrix}1 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 0&amp;256^{80}\0 &amp; 1 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 0&amp;256^{79}\\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \ddots &amp; \vdots &amp;\vdots &amp; \vdots\0 &amp; 0 &amp; … &amp; 1 &amp; … &amp; 0 &amp; 0 &amp; 256^{80-i}\\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots &amp; \vdots\0 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 1 &amp; 0 &amp; 256^0\0 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 1 &amp; temp - c\0 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 0 &amp; p\end{pmatrix}</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -234,9 +234,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-03-26 20:15:24 / 修改时间：22:24:34" itemprop="dateCreated datePublished" datetime="2024-03-26T20:15:24+08:00">2024-03-26</time>
+      <time title="创建时间：2024-03-26 20:15:24" itemprop="dateCreated datePublished" datetime="2024-03-26T20:15:24+08:00">2024-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-27 18:50:17" itemprop="dateModified" datetime="2024-03-27T18:50:17+08:00">2024-03-27</time>
     </span>
 
   
@@ -267,14 +273,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>415</span>
+      <span>883</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -294,14 +300,15 @@
 
 <p>已知<br>$$<br>m \equiv c \mod p<br>$$<br>一开始以$m$为目标构造格：</p>
 <p><img src="/../images/%E6%9D%82/36.png"></p>
-<p>经过配平发现并不能规约出$m$</p>
+<p>经过配平发现，当目标向量第一个元素为0的时候，其他元素只能达到328bit，意味着无法规约出$m$</p>
 <p>于是转换目标，以$k$为目标构造格，这样把目标向量从$623bit$降低到$300bit$:</p>
 <p><img src="/../images/%E6%9D%82/37.png"></p>
-<p>经过配平还是规约不出k</p>
+<p>这个格甚至规约不出k</p>
 <p>于是转变思路，把每一个$m_i$作为未知量，构造格</p>
 <p><img src="/../images/%E6%9D%82/38.png"></p>
-<p>这样可以把目标向量从$300bit$降低到$8bit$</p>
-<p>尝试配平还是规约不出想要的结果</p>
+<p>这样可以把目标向量从$300bit$降低到$6bit$</p>
+<p>尝试配系数(配系数的作用是为了让这一列最后的结果是0，当这一列的结果为0的时候，无论怎么扩大行列式，对于规约结果已经没有作用)</p>
+<p>配上大系数之后的规约结果在30以下，而$m_i$的值在48~56，说明目标向量还是太大了</p>
 <p>经鸡块师傅指导</p>
 <p>因为<code>flag = b&quot;NSSCTF&#123;&quot; + &quot;&quot;.join([choice(table) for i in range(70)]).encode() + b&quot;&#125;&quot;</code></p>
 <p>我们可以把他写成这样的形式：</p>
@@ -314,11 +321,30 @@
 <p>其中</p>
 <p><img src="/../images/%E6%9D%82/41.png"></p>
 <p>因为目标向量中每个元素为$0-7$，所以在倒数第二行第二列设为4或3，是为了规约目标向量大小，提高规约成功率</p>
+<p>用LLL算法规约的结果还是有比较大的值，选择用BKZ算法</p>
 <blockquote>
 <p>exp</p>
 </blockquote>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">p = <span class="number">501785758961383005891491265699612686883993041794260611346802080899615437298977076093878384543577171</span></span><br><span class="line">c = <span class="number">327005346153237517234971706274055111857447948791422192829214537757745905845319188257204611848165263</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Ge = Matrix(ZZ,<span class="number">72</span>,<span class="number">72</span>)</span><br><span class="line"></span><br><span class="line">temp = bytes_to_long(<span class="string">b&quot;NSSCTF&#123;&quot;</span>) * <span class="number">256</span>^<span class="number">71</span> + bytes_to_long(<span class="string">b&quot;&#125;&quot;</span>) </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">70</span>):</span><br><span class="line">    temp += <span class="number">48</span>*<span class="number">256</span>^(<span class="number">70</span>-i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">70</span>):</span><br><span class="line">    Ge[i,i] = <span class="number">1</span></span><br><span class="line">    Ge[i,-<span class="number">1</span>] = <span class="number">256</span>^(<span class="number">70</span>-i)</span><br><span class="line">    </span><br><span class="line">Ge[-<span class="number">2</span>,-<span class="number">2</span>] = <span class="number">3</span></span><br><span class="line">Ge[-<span class="number">2</span>,-<span class="number">1</span>] = temp - c</span><br><span class="line">Ge[-<span class="number">1</span>,-<span class="number">1</span>] = p</span><br><span class="line"></span><br><span class="line">m = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> Ge.BKZ(block_size=<span class="number">16</span>):</span><br><span class="line">    <span class="keyword">if</span> line[-<span class="number">1</span>] == <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">abs</span>(line[-<span class="number">2</span>]) == <span class="number">3</span>:</span><br><span class="line">        <span class="built_in">print</span>(line)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> line[:-<span class="number">2</span>]:</span><br><span class="line">            m += <span class="built_in">str</span>(<span class="built_in">abs</span>(i))</span><br><span class="line"></span><br><span class="line">flag = <span class="string">&quot;NSSCTF&#123;&quot;</span> + m + <span class="string">&quot;&#125;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># NSSCTF&#123;5036541772751046406531362142757356307107252723754051320011253505562041&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = <span class="number">501785758961383005891491265699612686883993041794260611346802080899615437298977076093878384543577171</span></span><br><span class="line">c = <span class="number">327005346153237517234971706274055111857447948791422192829214537757745905845319188257204611848165263</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Ge = Matrix(ZZ,<span class="number">72</span>,<span class="number">72</span>)</span><br><span class="line"></span><br><span class="line">temp = bytes_to_long(<span class="string">b&quot;NSSCTF&#123;&quot;</span>) * <span class="number">256</span>^<span class="number">71</span> + bytes_to_long(<span class="string">b&quot;&#125;&quot;</span>) </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">70</span>):</span><br><span class="line">    temp += <span class="number">48</span>*<span class="number">256</span>^(<span class="number">70</span>-i)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">70</span>):</span><br><span class="line">    Ge[i,i] = <span class="number">1</span></span><br><span class="line">    Ge[i,-<span class="number">1</span>] = <span class="number">256</span>^(<span class="number">70</span>-i)</span><br><span class="line">    </span><br><span class="line">Ge[-<span class="number">2</span>,-<span class="number">2</span>] = <span class="number">3</span></span><br><span class="line">Ge[-<span class="number">2</span>,-<span class="number">1</span>] = (temp - c)</span><br><span class="line">Ge[-<span class="number">1</span>,-<span class="number">1</span>] = p</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> Ge.BKZ():</span><br><span class="line">    m = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> line[-<span class="number">1</span>] == <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">abs</span>(line[-<span class="number">2</span>]) == <span class="number">3</span>:</span><br><span class="line">        <span class="built_in">print</span>(line)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> line[:-<span class="number">2</span>]:</span><br><span class="line">            m += <span class="built_in">str</span>(<span class="built_in">abs</span>(i))</span><br><span class="line">        flag = <span class="string">&quot;NSSCTF&#123;&quot;</span> + m + <span class="string">&quot;&#125;&quot;</span></span><br><span class="line">        <span class="built_in">print</span>(flag)</span><br><span class="line"></span><br><span class="line"><span class="comment"># NSSCTF&#123;5036541772751046406531362142757356307107252723754051320011253505562041&#125;</span></span><br></pre></td></tr></table></figure>
 
+
+
+<h1 id="easy-mod2"><a href="#easy-mod2" class="headerlink" title="easy_mod2"></a>easy_mod2</h1><blockquote>
+<p>task.py</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">table = <span class="string">&quot;01234567&quot;</span></span><br><span class="line">p = getPrime(<span class="number">328</span>)</span><br><span class="line">flag = <span class="string">b&quot;NSSCTF&#123;&quot;</span> + <span class="string">&quot;&quot;</span>.join([choice(table) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">80</span>)]).encode() + <span class="string">b&quot;&#125;&quot;</span></span><br><span class="line">c = bytes_to_long(flag) % p</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;p =&quot;</span>,p)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c =&quot;</span>,c)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">p = 324556397741108806830285502585098109678766437252172614832253074632331911859471735318636292671562523</span></span><br><span class="line"><span class="string">c = 141624663734155235543198856069652171779130720945875442624943917912062658275440028763836569215230250</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>和上题的区别是flag长度变长了，但p的数量级没变。</p>
+<p>沿用上题的格发现规约的结果存在很多<code>0-7</code>范围之外的值</p>
+<p>于是想到，减去52，这样<code>0,1,2,3,4,5,6,7</code>就可以用$-4,-3,-2,-1,0,1,2,3$表示</p>
+<p>又一次把目标向量的值缩小</p>
+<h1 id="构造格-begin-pmatrix-x-0-x-1-…-x-i-…-x-79-1-k-end-pmatrix-begin-pmatrix-1-0-…-0-…-0-0-256-80-0-1-…-0-…-0-0-256-79-vdots-vdots-ddots-vdots-ddots-vdots-vdots-vdots-0-0-…-1-…-0-0-256-80-i-vdots-vdots-ddots-vdots-ddots-vdots-vdots-vdots-0-0-…-0-…-1-0-256-0-0-0-…-0-…-0-1-temp-c-0-0-…-0-…-0-0-p-end-pmatrix"><a href="#构造格-begin-pmatrix-x-0-x-1-…-x-i-…-x-79-1-k-end-pmatrix-begin-pmatrix-1-0-…-0-…-0-0-256-80-0-1-…-0-…-0-0-256-79-vdots-vdots-ddots-vdots-ddots-vdots-vdots-vdots-0-0-…-1-…-0-0-256-80-i-vdots-vdots-ddots-vdots-ddots-vdots-vdots-vdots-0-0-…-0-…-1-0-256-0-0-0-…-0-…-0-1-temp-c-0-0-…-0-…-0-0-p-end-pmatrix" class="headerlink" title="构造格$$\begin{pmatrix}x_0 &amp; x_1 &amp; … &amp; x_i &amp; … &amp; x_{79} &amp; 1 &amp; k\end{pmatrix}\begin{pmatrix}1 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 0&amp;256^{80}\0 &amp; 1 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 0&amp;256^{79}\\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \ddots &amp; \vdots &amp;\vdots &amp; \vdots\0 &amp; 0 &amp; … &amp; 1 &amp; … &amp; 0 &amp; 0 &amp; 256^{80-i}\\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots &amp; \vdots\0 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 1 &amp; 0 &amp; 256^0\0 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 1 &amp; temp - c\0 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 0 &amp; p\end{pmatrix}"></a>构造格<br>$$<br>\begin{pmatrix}<br>x_0 &amp; x_1 &amp; … &amp; x_i &amp; … &amp; x_{79} &amp; 1 &amp; k<br>\end{pmatrix}<br>\begin{pmatrix}<br>1 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 0&amp;256^{80}\<br>0 &amp; 1 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 0&amp;256^{79}\<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \ddots &amp; \vdots &amp;\vdots &amp; \vdots\<br>0 &amp; 0 &amp; … &amp; 1 &amp; … &amp; 0 &amp; 0 &amp; 256^{80-i}\<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots &amp; \vdots\<br>0 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 1 &amp; 0 &amp; 256^0\<br>0 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 1 &amp; temp - c\<br>0 &amp; 0 &amp; … &amp; 0 &amp; … &amp; 0 &amp; 0 &amp; p<br>\end{pmatrix}</h1><p>\begin{pmatrix}<br>x_0 &amp; x_1 &amp; … &amp; x_i &amp; … &amp; x_{79} &amp; 1 &amp; 0<br>\end{pmatrix}<br>$$<br>其中<code>temp = bytes_to_long(b&#39;NSSCTF&#123;&#39;) * 256^&#123;81&#125; + bytes_to_long(b&#39;&#125;&#39;) </code>+$\sum_{i&#x3D;0}^{80}52\times 256^{80-i}$</p>
+<blockquote>
+<p>exp</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = <span class="number">324556397741108806830285502585098109678766437252172614832253074632331911859471735318636292671562523</span></span><br><span class="line">c = <span class="number">141624663734155235543198856069652171779130720945875442624943917912062658275440028763836569215230250</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Ge = Matrix(ZZ,<span class="number">82</span>,<span class="number">82</span>)</span><br><span class="line"></span><br><span class="line">temp = bytes_to_long(<span class="string">b&quot;NSSCTF&#123;&quot;</span>) * <span class="number">256</span>^<span class="number">81</span> + bytes_to_long(<span class="string">b&quot;&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">80</span>):</span><br><span class="line">    temp += <span class="number">52</span>*<span class="number">256</span>^(<span class="number">80</span>-i)</span><br><span class="line"></span><br><span class="line">T = <span class="number">2</span>^<span class="number">100</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">80</span>):</span><br><span class="line">    Ge[i,i] = <span class="number">1</span></span><br><span class="line">    Ge[i,-<span class="number">1</span>] = <span class="number">256</span>^(<span class="number">80</span>-i) * T</span><br><span class="line"></span><br><span class="line">Ge[-<span class="number">2</span>,-<span class="number">2</span>] = <span class="number">1</span></span><br><span class="line">Ge[-<span class="number">2</span>,-<span class="number">1</span>] = (temp - c) * T</span><br><span class="line">Ge[-<span class="number">1</span>,-<span class="number">1</span>] = p * T</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> Ge.BKZ(block_size=<span class="number">16</span>):</span><br><span class="line">    m = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> line[-<span class="number">1</span>] == <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">abs</span>(line[-<span class="number">2</span>]) == <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(line)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> line[:-<span class="number">2</span>]:</span><br><span class="line">            m += <span class="built_in">chr</span>((<span class="number">52</span> + i))</span><br><span class="line">        flag = <span class="string">&quot;NSSCTF&#123;&quot;</span> + m + <span class="string">&quot;&#125;&quot;</span></span><br><span class="line">        <span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># NSSCTF&#123;25350625451533421162474265547571536103420331260232652121722452361537257541460235&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>配大系数为了规约出0，用<code>BKZ(size_block=16)</code>是为了更精确</p>
 
     </div>
 
@@ -395,13 +421,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">224k</span>
+    <span title="站点总字数">225k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">13:36</span>
+    <span title="站点阅读时长">13:37</span>
   </span>
 </div>
 <div class="busuanzi-count">
