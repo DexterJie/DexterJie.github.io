@@ -29,8 +29,8 @@
 <meta property="og:site_name" content="DexterJie&#39;Blog">
 <meta property="og:description" content="记录2024XYCTF——Crypto题解">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dexterjie.github.io/....%5Cimages%5CTPCTF%5C17.png">
-<meta property="og:image" content="https://dexterjie.github.io/....%5Cimages%5CTPCTF%5Coutput.bmp">
+<meta property="og:image" content="https://dexterjie.github.io/images/TPCTF/17.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/TPCTF/output.bmp">
 <meta property="og:image" content="https://dexterjie.github.io/images/TPCTF/19.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/TPCTF/20.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/TPCTF/21.png">
@@ -42,11 +42,11 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/TPCTF/27.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/TPCTF/29.png">
 <meta property="article:published_time" content="2024-04-26T08:40:14.000Z">
-<meta property="article:modified_time" content="2024-04-28T10:42:22.854Z">
+<meta property="article:modified_time" content="2024-04-28T10:48:20.169Z">
 <meta property="article:author" content="DexterJie">
 <meta property="article:tag" content="Wp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dexterjie.github.io/....%5Cimages%5CTPCTF%5C17.png">
+<meta name="twitter:image" content="https://dexterjie.github.io/images/TPCTF/17.png">
 
 
 <link rel="canonical" href="https://dexterjie.github.io/2024/04/26/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2024XYCTF/">
@@ -249,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-04-28 18:42:22" itemprop="dateModified" datetime="2024-04-28T18:42:22+08:00">2024-04-28</time>
+      <time title="修改时间：2024-04-28 18:48:20" itemprop="dateModified" datetime="2024-04-28T18:48:20+08:00">2024-04-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -381,7 +381,7 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">flag = <span class="string">b&#x27;XYCTF&#123;*****&#125;&#x27;</span></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gainPrime</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        x = random.getrandbits(<span class="number">256</span>)</span><br><span class="line">        y = random.getrandbits(<span class="number">256</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> y % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        p = x ** <span class="number">3</span> + <span class="number">3</span> * y ** <span class="number">3</span></span><br><span class="line">        <span class="keyword">if</span> p.bit_length() == <span class="number">768</span> <span class="keyword">and</span> p % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">and</span> isPrime(p):</span><br><span class="line">            <span class="keyword">return</span> p</span><br><span class="line"></span><br><span class="line">p, q = gainPrime(), gainPrime()</span><br><span class="line">N = p * q</span><br><span class="line">phi = (p ** <span class="number">2</span> + p + <span class="number">1</span>) * (q ** <span class="number">2</span> + q + <span class="number">1</span>)</span><br><span class="line">d = getPrime(<span class="number">320</span>)</span><br><span class="line">e = inverse(d, phi)</span><br><span class="line">c = d**<span class="number">2</span>^m</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;N: <span class="subst">&#123;N&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;e: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;c: <span class="subst">&#123;c&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">N: <span class="number">913125842482770239379848062277162627509794409924607555622246822717218133091223291889541294440266178282194506242444509803611492259403578922020590849630191477864719052980160940803309686069818208833547621252544423652489179493083138385424424384165228024273745733240109761707533778691158938848158094054261174692601673435971526522219273943464877956131040249169850420336023942653021547841666224446678539579529590840999008107782784268926145671962239929431694391039559247</span></span><br><span class="line">e: <span class="number">494518390582436635999115147756676313570637682518235195828939117782099618734167908630788943568232122157772909140885391963441876427590731524706959546524212914108888799081844320513851526790475333924396837458796755678072486028072639014677580265244176441153444956871730684233063789931539669072735599696830757690822185323538738397827461580678488181113667710378657058297572328491762536595872579603698945272140918157163640403488075948987156585480146162739943419183496337465468187233821931312507662218106713861638334075899266373256620752680354704533272722692596941861606161634082613228896420520465402725359166156632884432690715903666803067996854084671477445131853993177110154928274312496230096270510089973592664248613332000290545537840595645944390047611474888693558676781309912289044962293014118087259307560444929227407113819165713213046898243995956550944640168932947118400215917515277554126694376415569909534496134700668701465649939</span></span><br><span class="line">c: <span class="number">4450931337369461482106945992542133557585962894030505065110870389112565329875502952762182372926117037373210509516570958483606566274369840551132381128665744266165792377925899683228751870742727716</span></span><br></pre></td></tr></table></figure>
 
 <p>参考论文：<a target="_blank" rel="noopener" href="https://eprint.iacr.org/2021/1160.pdf">1160.pdf (iacr.org)</a></p>
-<p><img src="/....%5Cimages%5CTPCTF%5C17.png" alt="17"></p>
+<p><img src="/../../images/TPCTF/17.png" alt="17"></p>
 <p>攻击条件是：$ed \equiv 1 \mod (p^2+p+1)(q^2+q+1)$，$e &#x3D; N^{\alpha},\frac{3}{2}&lt;\alpha&lt;\frac{5}{2}$，$d &#x3D; N^{\delta},\delta &lt; \frac{5}{4} -\frac{1}{2}\alpha$</p>
 <p>本题$\alpha \approx 1.999$，$\delta &#x3D; 0.208$，满足式子$\delta &lt; \frac{5}{4}-\frac{1}{2}\alpha$</p>
 <p>只需要把$\phi(n_0)$用论文中提到的式子代替，然后连分数展开，我们就可以得到d</p>
@@ -473,7 +473,7 @@
 <p>运用到多项式快速插值的知识，可以参考：<a target="_blank" rel="noopener" href="https://cekavis.github.io/fast-polynomial-evaluation-and-interpolation/">多项式的多点求值和快速插值 - Cekavis’s notes</a></p>
 <p>不过这道题来自picoCTF2024的flag_printer，找遍互联网只找到了一个wp<a target="_blank" rel="noopener" href="https://github.com/PetePriority/picoctf-2024">GitHub - PetePriority&#x2F;picoctf-2024: picoCTF 2024 writeups</a></p>
 <p>这个exp对于原题需要6-7小时，本题跑了2-3小时就出了</p>
-<p><img src="/....%5Cimages%5CTPCTF%5Coutput.bmp" alt="output"></p>
+<p><img src="/../../images/TPCTF/output.bmp" alt="output"></p>
 <p><code>flag&#123;1A2Q3E71528AP49Q0RT&#125;</code></p>
 <h2 id="fakeRSA"><a href="#fakeRSA" class="headerlink" title="fakeRSA"></a>fakeRSA</h2><blockquote>
 <p>task.py</p>
