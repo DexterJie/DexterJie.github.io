@@ -35,11 +35,13 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/CISCN/2.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/CISCN/%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%972.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/CISCN/%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%97.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/CISCN/9.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/CISCN/10.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/CISCN/4.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/CISCN/7.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/CISCN/8.png">
 <meta property="article:published_time" content="2024-05-18T12:36:33.000Z">
-<meta property="article:modified_time" content="2024-05-19T11:56:31.348Z">
+<meta property="article:modified_time" content="2024-05-19T12:06:52.426Z">
 <meta property="article:author" content="DexterJie">
 <meta property="article:tag" content="Wp">
 <meta name="twitter:card" content="summary">
@@ -153,7 +155,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">用户信息访问控制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash%E2%80%94%E2%80%94%E5%A4%8D%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">hash——复现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#myagcd%E2%80%94%E2%80%94%E7%B4%A7%E6%80%A5%E4%B8%8B%E7%BA%BF%E7%9A%84%E9%A2%98%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">myagcd——紧急下线的题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#begin-pmatrix-r-0-r-1-1-k-end-pmatrix-begin-pmatrix-1-0-0-q-1-0-1-0-q-0-0-0-2-128-b-1q-0-b-0q-1-0-0-0-p-end-pmatrix"><span class="nav-number">4.</span> <span class="nav-text">$$\begin{pmatrix}r_0 &amp; r_1 &amp; 1 &amp; k\end{pmatrix}\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; q_1\0 &amp; 1 &amp; 0 &amp; -q_0\0 &amp; 0 &amp; 2^{128} &amp; b_1q_0-b_0q_1\0 &amp; 0 &amp; 0 &amp;p\end{pmatrix}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%B3-0-2-127-1-q-1-2-127-1-q-0-b-0q-1-b-1q-0-kp-%E6%9E%84%E9%80%A0%E6%A0%BC-begin-pmatrix-r-0-r-1-1-k-end-pmatrix-begin-pmatrix-1-0-0-2-times-q-1-0-1-0-2-times-q-0-0-0-2-126-b-1q-0-b-0q-1-2-127-1-q-1-2-127-1-q-0-0-0-0-p-end-pmatrix"><span class="nav-number">5.</span> <span class="nav-text">即$$0 &#x3D; (2^{127} + 1)q_1 - (2^{127}+1)q_0 + b_0q_1 - b_1q_0 + kp$$构造格$$\begin{pmatrix}r_0 &amp; r_1 &amp; 1 &amp; k\end{pmatrix}\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 2\times q_1\0 &amp; 1 &amp; 0 &amp; -2\times q_0\0 &amp; 0 &amp; 2^{126} &amp; b_1q_0-b_0q_1 + (2^{127}+1)q_1-(2^{127}+1)q_0\0 &amp; 0 &amp; 0 &amp;p\end{pmatrix}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OvO"><span class="nav-number">6.</span> <span class="nav-text">OvO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81"><span class="nav-number">7.</span> <span class="nav-text">古典密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ezrsa%E2%80%94%E2%80%94%E5%A4%8D%E7%8E%B0"><span class="nav-number">8.</span> <span class="nav-text">ezrsa——复现</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">用户信息访问控制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash%E2%80%94%E2%80%94%E5%A4%8D%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">hash——复现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#myagcd%E2%80%94%E2%80%94%E7%B4%A7%E6%80%A5%E4%B8%8B%E7%BA%BF%E7%9A%84%E9%A2%98%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">myagcd——紧急下线的题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OvO"><span class="nav-number">4.</span> <span class="nav-text">OvO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">古典密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ezrsa%E2%80%94%E2%80%94%E5%A4%8D%E7%8E%B0"><span class="nav-number">6.</span> <span class="nav-text">ezrsa——复现</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -246,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-19 19:56:31" itemprop="dateModified" datetime="2024-05-19T19:56:31+08:00">2024-05-19</time>
+      <time title="修改时间：2024-05-19 20:06:52" itemprop="dateModified" datetime="2024-05-19T20:06:52+08:00">2024-05-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -286,7 +288,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.8k</span>
+      <span>2.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -377,10 +379,13 @@
 <p>作推导可以得到<br>$$<br>b_0q_1 \equiv xq_0q_1 + r_0q_1 \mod p\<br>b_1q_0 \equiv xq_1q_0 + r_1q_0 \mod p<br>$$</p>
 <p>$$<br>b_0q_1 - b_1q_0 \equiv r_0q_1 - r_1q_0 \mod p<br>$$</p>
 <p>$$<br>0 &#x3D; r_0q_1 - r_1q_0 + b_0q_1 - b_1q_0 + kp<br>$$</p>
-<h1 id="begin-pmatrix-r-0-r-1-1-k-end-pmatrix-begin-pmatrix-1-0-0-q-1-0-1-0-q-0-0-0-2-128-b-1q-0-b-0q-1-0-0-0-p-end-pmatrix"><a href="#begin-pmatrix-r-0-r-1-1-k-end-pmatrix-begin-pmatrix-1-0-0-q-1-0-1-0-q-0-0-0-2-128-b-1q-0-b-0q-1-0-0-0-p-end-pmatrix" class="headerlink" title="$$\begin{pmatrix}r_0 &amp; r_1 &amp; 1 &amp; k\end{pmatrix}\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; q_1\0 &amp; 1 &amp; 0 &amp; -q_0\0 &amp; 0 &amp; 2^{128} &amp; b_1q_0-b_0q_1\0 &amp; 0 &amp; 0 &amp;p\end{pmatrix}"></a>$$<br>\begin{pmatrix}<br>r_0 &amp; r_1 &amp; 1 &amp; k<br>\end{pmatrix}<br>\begin{pmatrix}<br>1 &amp; 0 &amp; 0 &amp; q_1\<br>0 &amp; 1 &amp; 0 &amp; -q_0\<br>0 &amp; 0 &amp; 2^{128} &amp; b_1q_0-b_0q_1\<br>0 &amp; 0 &amp; 0 &amp;p<br>\end{pmatrix}</h1><p>\begin{pmatrix}<br>r_0 &amp; r_1 &amp;2^{128} &amp; 0<br>\end{pmatrix}<br>$$<br>最后一列需要乘一个大数，大概$2^{128}$，实际上会卡界</p>
+<p><img src="/../../images/CISCN/9.png"></p>
+<p>最后一列需要乘一个大数，大概$2^{128}$，实际上会卡界</p>
 <p>因为r是128bit的素数，所以r的最高位和最低位是1，可以把r写成$2^{127} + r_0 + 1$</p>
 <p>这样的话，等式写为<br>$$<br>0 &#x3D; (2^{127} + r_0\times 2 + 1)q_1 - (2^{127} + r_1\times 2+1)q_0 + b_0q_1 - b_1q_0 + kp<br>$$</p>
-<h1 id="即-0-2-127-1-q-1-2-127-1-q-0-b-0q-1-b-1q-0-kp-构造格-begin-pmatrix-r-0-r-1-1-k-end-pmatrix-begin-pmatrix-1-0-0-2-times-q-1-0-1-0-2-times-q-0-0-0-2-126-b-1q-0-b-0q-1-2-127-1-q-1-2-127-1-q-0-0-0-0-p-end-pmatrix"><a href="#即-0-2-127-1-q-1-2-127-1-q-0-b-0q-1-b-1q-0-kp-构造格-begin-pmatrix-r-0-r-1-1-k-end-pmatrix-begin-pmatrix-1-0-0-2-times-q-1-0-1-0-2-times-q-0-0-0-2-126-b-1q-0-b-0q-1-2-127-1-q-1-2-127-1-q-0-0-0-0-p-end-pmatrix" class="headerlink" title="即$$0 &#x3D; (2^{127} + 1)q_1 - (2^{127}+1)q_0 + b_0q_1 - b_1q_0 + kp$$构造格$$\begin{pmatrix}r_0 &amp; r_1 &amp; 1 &amp; k\end{pmatrix}\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 2\times q_1\0 &amp; 1 &amp; 0 &amp; -2\times q_0\0 &amp; 0 &amp; 2^{126} &amp; b_1q_0-b_0q_1 + (2^{127}+1)q_1-(2^{127}+1)q_0\0 &amp; 0 &amp; 0 &amp;p\end{pmatrix}"></a>即<br>$$<br>0 &#x3D; (2^{127} + 1)q_1 - (2^{127}+1)q_0 + b_0q_1 - b_1q_0 + kp<br>$$<br>构造格<br>$$<br>\begin{pmatrix}<br>r_0 &amp; r_1 &amp; 1 &amp; k<br>\end{pmatrix}<br>\begin{pmatrix}<br>1 &amp; 0 &amp; 0 &amp; 2\times q_1\<br>0 &amp; 1 &amp; 0 &amp; -2\times q_0\<br>0 &amp; 0 &amp; 2^{126} &amp; b_1q_0-b_0q_1 + (2^{127}+1)q_1-(2^{127}+1)q_0\<br>0 &amp; 0 &amp; 0 &amp;p<br>\end{pmatrix}</h1><p>\begin{pmatrix}<br>r_0 &amp; r_1 &amp;2^{126} &amp; 0<br>\end{pmatrix}<br>$$<br>还是需要在最后一列乘上大数</p>
+<p>即<br>$$<br>0 &#x3D; (2^{127} + 1)q_1 - (2^{127}+1)q_0 + b_0q_1 - b_1q_0 + kp<br>$$<br>构造格</p>
+<p><img src="/../../images/CISCN/10.png"></p>
+<p>还是需要在最后一列乘上大数</p>
 <blockquote>
 <p>exp</p>
 </blockquote>
