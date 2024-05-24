@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/CISCN/7.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/CISCN/8.png">
 <meta property="article:published_time" content="2024-05-18T12:36:33.000Z">
-<meta property="article:modified_time" content="2024-05-21T14:00:36.252Z">
+<meta property="article:modified_time" content="2024-05-22T09:29:38.039Z">
 <meta property="article:author" content="DexterJie">
 <meta property="article:tag" content="Wp">
 <meta name="twitter:card" content="summary">
@@ -170,7 +170,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -248,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-21 22:00:36" itemprop="dateModified" datetime="2024-05-21T22:00:36+08:00">2024-05-21</time>
+      <time title="修改时间：2024-05-22 17:29:38" itemprop="dateModified" datetime="2024-05-22T17:29:38+08:00">2024-05-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -336,7 +336,7 @@
 
 <p>这题赛后在鸡块师傅指导下复现的</p>
 <p>首先查源码：<a target="_blank" rel="noopener" href="https://pypi.org/project/py27hash/#files">py27hash · PyPI</a></p>
-<p>比赛的时候，从官网查的源码是c语言，菜在看不太懂C语言。不过也别打马后炮，就算查到python的，我也写不出中间相遇攻击</p>
+<p>比赛的时候，从官网查的源码是c语言，不太懂指针导致没理解hash的过程。这方面还得练</p>
 <p>得知hash实现如下：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hash</span>(<span class="params">s</span>):</span><br><span class="line">    mask = <span class="number">0xffffffffffffffff</span></span><br><span class="line">    s = s.encode()</span><br><span class="line">    x = s[<span class="number">0</span>] &lt;&lt; <span class="number">7</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">        x = (<span class="number">1000003</span> * x) &amp; mask ^ char</span><br><span class="line">    x ^= <span class="built_in">len</span>(s) &amp; mask</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
 
@@ -365,7 +365,7 @@
 <p>exp</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> trange</span><br><span class="line"></span><br><span class="line">mask = <span class="number">0xffffffffffffffff</span></span><br><span class="line">inv = inverse(<span class="number">1000003</span>,<span class="number">2</span>**<span class="number">64</span>)</span><br><span class="line">x7 = <span class="number">7457312583301101235</span></span><br><span class="line">cipher = <span class="number">13903983817893117249931704406959869971132956255130487015289848690577655239262013033618370827749581909492660806312017</span></span><br><span class="line"></span><br><span class="line">table = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> trange(<span class="number">256</span>):</span><br><span class="line">    <span class="comment"># 这是第一个字符</span></span><br><span class="line">    <span class="keyword">for</span> tmp <span class="keyword">in</span> product([i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>)],repeat=<span class="number">3</span>):</span><br><span class="line">        <span class="comment"># 下面便是hash的实现,但是我们只乘上3个字符</span></span><br><span class="line">        x = (i &lt;&lt; <span class="number">7</span>) &amp; mask                       </span><br><span class="line">        x = (<span class="number">1000003</span> * x) &amp; mask ^ i</span><br><span class="line">        pre = <span class="built_in">list</span>(tmp)</span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> pre:</span><br><span class="line">            x = (<span class="number">1000003</span> * x) &amp; mask ^ char</span><br><span class="line">        </span><br><span class="line">        table[x] = pre</span><br><span class="line">        <span class="comment"># 记录下来</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> tmp <span class="keyword">in</span> product([i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>)],repeat=<span class="number">3</span>):</span><br><span class="line">        tail = <span class="built_in">list</span>(tmp)</span><br><span class="line">        x7 = (x7 ^ <span class="number">7</span>) &amp; mask</span><br><span class="line">        x6 = (x7 ^ tail[-<span class="number">1</span>]) * inv &amp; mask</span><br><span class="line">        x5 = (x6 ^ tail[-<span class="number">2</span>]) * inv &amp; mask</span><br><span class="line">        x4 = (x5 ^ tail[-<span class="number">3</span>]) * inv &amp; mask</span><br><span class="line">        <span class="keyword">if</span> x4 <span class="keyword">in</span> table.keys():</span><br><span class="line">            <span class="built_in">print</span>(i,table[x4],tail)</span><br><span class="line">            <span class="comment"># 93 [140, 240, 63] [90, 8, 82]</span></span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
 
-<p>整个程序差不多2.5小时，问了鸡块正确的是93，最后<code>key = </code></p>
+<p>整个程序差不多2.5小时，没跑全，问了鸡块师傅。正确的是93，最后<code>key = [93,140,240,63,90,8,82]</code></p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line">m = [<span class="number">93</span>,<span class="number">140</span>,<span class="number">240</span>,<span class="number">63</span>,<span class="number">90</span>,<span class="number">8</span>,<span class="number">82</span>]</span><br><span class="line">key = <span class="string">b&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> m:</span><br><span class="line">    key += long_to_bytes(i)</span><br><span class="line"></span><br><span class="line">flag = long_to_bytes(<span class="built_in">int</span>(hashlib.sha384(binascii.hexlify(key)).hexdigest(), <span class="number">16</span>) ^ cipher) </span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># flag&#123;bdb537aa-87ef-4e95-bea4-2f79259bdd07&#125;</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="myagcd——紧急下线的题目"><a href="#myagcd——紧急下线的题目" class="headerlink" title="myagcd——紧急下线的题目"></a>myagcd——紧急下线的题目</h1><blockquote>
@@ -443,7 +443,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3082025c02010002818100a18f011bebacceda1c6812730b9e62720d3cbd6857af2cf8431860f5dc83c5520f242f3be7c9e96d7f96b41898ff000fdb7e43ef6f1e717b2b7900f35660a21d1b16b51849be97a0b0f7cbcf5cfe0f00370cce6193fefa1fed97b37bd367a673565162ce17b0225708c032961d175bbc2c829bf2e16eabc7e0881feca0975c810203010001</span><br><span class="line"></span><br><span class="line">6a033064c5a0dffc8f2363b340e502405f152c429871a7acdd28be1b643b4652800b88a3d23cc57477d75dd5555b635167616ef5c609d69ce3c2aedcb03b62f929bbcd891cadc0ba031ae6fec8a2116d0808080808080808</span><br></pre></td></tr></table></figure>
 
 <p>再根据私钥格式提取<code>n,e,dq,inv</code></p>
-<p>因为本题中中间部分的私钥文件确实，而且加密是cbc的，所以enc2第一块解密的结果错误，需要去掉，也就是说正确的dq只有48bit</p>
+<p>因为本题中中间部分的私钥文件缺失，而且加密是cbc的，导致enc2第一块解密的结果错误，需要去掉，也就是说正确的dq只有48bit</p>
 <p>因此得到</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n = 0xa18f011bebacceda1c6812730b9e62720d3cbd6857af2cf8431860f5dc83c5520f242f3be7c9e96d7f96b41898ff000fdb7e43ef6f1e717b2b7900f35660a21d1b16b51849be97a0b0f7cbcf5cfe0f00370cce6193fefa1fed97b37bd367a673565162ce17b0225708c032961d175bbc2c829bf2e16eabc7e0881feca0975c81</span><br><span class="line">e = 65537</span><br><span class="line">dq_leak= 0x8f2363b340e5</span><br><span class="line">inv = 0x5f152c429871a7acdd28be1b643b4652800b88a3d23cc57477d75dd5555b635167616ef5c609d69ce3c2aedcb03b62f929bbcd891cadc0ba031ae6fec8a2116d</span><br></pre></td></tr></table></figure>
 
@@ -537,13 +537,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">245k</span>
+    <span title="站点总字数">243k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">14:50</span>
+    <span title="站点阅读时长">14:42</span>
   </span>
 </div>
 <div class="busuanzi-count">
