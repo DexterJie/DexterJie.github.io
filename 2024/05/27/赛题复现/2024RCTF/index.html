@@ -38,8 +38,9 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/2024RCTF/3.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/2024RCTF/2.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/2024RCTF/1.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/2024RCTF/10.png">
 <meta property="article:published_time" content="2024-05-27T04:42:41.000Z">
-<meta property="article:modified_time" content="2024-05-28T11:04:12.785Z">
+<meta property="article:modified_time" content="2024-05-28T16:47:31.803Z">
 <meta property="article:author" content="DexterJie">
 <meta property="article:tag" content="Wp">
 <meta name="twitter:card" content="summary">
@@ -153,7 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SignSystem"><span class="nav-number">1.</span> <span class="nav-text">SignSystem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E7%9A%84%E5%B0%9D%E8%AF%95"><span class="nav-number">1.1.</span> <span class="nav-text">初始的尝试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hello-XCTF"><span class="nav-number">2.</span> <span class="nav-text">Hello,XCTF!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-3"><span class="nav-number">3.</span> <span class="nav-text">D^3</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SignSystem"><span class="nav-number">1.</span> <span class="nav-text">SignSystem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E7%9A%84%E5%B0%9D%E8%AF%95"><span class="nav-number">1.1.</span> <span class="nav-text">初始的尝试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hello-XCTF"><span class="nav-number">2.</span> <span class="nav-text">Hello,XCTF!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-3%E2%80%94%E2%80%94%E5%A4%8D%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">D^3——复现</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -246,7 +247,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-28 19:04:12" itemprop="dateModified" datetime="2024-05-28T19:04:12+08:00">2024-05-28</time>
+      <time title="修改时间：2024-05-29 00:47:31" itemprop="dateModified" datetime="2024-05-29T00:47:31+08:00">2024-05-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -286,14 +287,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.4k</span>
+      <span>2.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
+      <span>10 分钟</span>
     </span>
 </div>
 
@@ -377,7 +378,8 @@
 <p>或者把数据打印出来手动连靶机</p>
 <p><img src="/../../images/2024RCTF/2.png"></p>
 <p><img src="/../../images/2024RCTF/1.png"></p>
-<h1 id="D-3"><a href="#D-3" class="headerlink" title="D^3"></a>D^3</h1><blockquote>
+<h1 id="D-3——复现"><a href="#D-3——复现" class="headerlink" title="D^3——复现"></a>D^3——复现</h1><p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41626232/article/details/139236775">RCTF2024 Crypto-CSDN博客</a></p>
+<blockquote>
 <p>main.py</p>
 </blockquote>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> isPrime, getRandomNBitInteger, GCD</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">from</span> D3 <span class="keyword">import</span> arbiter</span><br><span class="line"></span><br><span class="line">e = <span class="number">3</span></span><br><span class="line">P_SIZE = <span class="number">1024</span></span><br><span class="line">DIFFICULTY = <span class="number">8</span></span><br><span class="line"></span><br><span class="line">is_lucky_prime = (</span><br><span class="line">    <span class="keyword">lambda</span> num: isPrime(num)</span><br><span class="line">    <span class="keyword">and</span> num.bit_length() == P_SIZE</span><br><span class="line">    <span class="keyword">and</span> <span class="built_in">bin</span>(<span class="built_in">int</span>.from_bytes(sha256(<span class="built_in">str</span>(num).encode()).digest(), <span class="string">&quot;big&quot;</span>)).endswith(</span><br><span class="line">        <span class="string">&quot;0&quot;</span> * DIFFICULTY</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">and</span> GCD(num - <span class="number">1</span>, e) == <span class="number">1</span></span><br><span class="line">)</span><br><span class="line">is_lucky_modulus = <span class="keyword">lambda</span> p, q: p != q <span class="keyword">and</span> is_lucky_prime(p) <span class="keyword">and</span> is_lucky_prime(q)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">task</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[RCTF2024] Give me a lucky modulus to break me! 🤯&quot;</span>)</span><br><span class="line">    p, q = [<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">f&quot;<span class="subst">&#123;num&#125;</span> (<span class="subst">&#123;P_SIZE&#125;</span>-bit lucky prime): &quot;</span>)) <span class="keyword">for</span> num <span class="keyword">in</span> <span class="string">&quot;pq&quot;</span>]</span><br><span class="line">    <span class="keyword">if</span> is_lucky_modulus(p, q):</span><br><span class="line">        output = arbiter(msg=getRandomNBitInteger(<span class="number">1997</span>), e=e, p=p, q=q)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[ARBITER OUTPUT] <span class="subst">&#123;output&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[RCTF2024] DO NOT TRICK ME! 🤬&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    task()</span><br></pre></td></tr></table></figure>
@@ -396,15 +398,29 @@
 <blockquote>
 <p>case “Garbled-State-1”</p>
 </blockquote>
-<p><code>rctf-pow()</code>这个函数，指数是固定的。所以$d \equiv e^{exp} \mod \phi(n)$<br>$$<br>\therefore ed \equiv e^{exp+1} \mod \phi(n)<br>$$<br>返回的$m \equiv m^{ed} \equiv m^{e^{exp+1} \mod \phi(n)} \mod n$</p>
+<p><code>rctf-pow()</code>这个函数，指数是固定的。所以$d \equiv e^{exp} \mod (p-1)(q-1)$<br>$$<br>\therefore ed \equiv e^{exp+1} \mod \phi(n)<br>$$<br>返回的$m \equiv m^{ed} \equiv m^{e^{exp+1} \mod (p-1)(q-1)} \mod n$</p>
 <blockquote>
 <p>case “Garbled-State-2”</p>
 </blockquote>
 <p>最后返回的$m \equiv m^{ed}\equiv m^{e^{exp+1} \mod lcm(p-1.q-1)} \mod n$</p>
 <p><code>arbiter(msg,e,p,q)</code>函数就是对上面3种情况进行解密，要求成功恢复m，而且3个d要不同。</p>
-<p>接下来的思路就是如何让<br>$$<br>m^{e^{exp +1} \mod \phi(n)} \mod n &#x3D; m<br>$$</p>
+<p>思路就是让p,q同时满足下面两个式子<br>$$<br>m^{e^{exp +1} \mod (p-1)(q-1)} \mod n &#x3D; m<br>$$</p>
 <p>$$<br>m^{e^{exp+1}\mod lcm(p-1,q-1)} \mod n &#x3D; m<br>$$</p>
-<p>也就是让$e^{}$</p>
+<p>即$e^{exp + 1} \equiv 1 \mod (p-1)(q-1)$，$e^{exp + 1} \equiv 1 \mod lcm(p-1,q-1)$</p>
+<p>很显然，满足$e^{exp + 1}\equiv 1 \mod lcm(p-1,q-1)$就能满足$e^{exp + 1}\equiv 1 \mod (p-1)(q-1)$</p>
+<p>所以$\lambda(lcm(p-1,q-1)) | exp + 1$，$\lambda$是Carmichael函数。</p>
+<p>根据Carmichael函数的性质</p>
+<p><img src="/../../images/2024RCTF/10.png"></p>
+<p>等价于$lcm(\lambda(p-1),\lambda(q-1)) | exp + 1$</p>
+<p>就是说，$exp + 1$即是$\lambda(p-1)$的倍数，也是$\lambda(q-1)$的倍数</p>
+<p>则$exp + 1$中某些因子乘起来，就刚好等于$\lambda(p-1)$。然后用$\lambda(p-1)$求p。同理求q</p>
+<p>问题就是怎么通过$\lambda(p-1)$构造出p,我们要想着如何方便构造出p</p>
+<p>我们假设$p-1 &#x3D; q_1q_2…q_k$，$q_i$是一些素数并且不重复</p>
+<p>然后我们假设$exp + 1$的因子为$r_1,r_2,…,r_k$</p>
+<p>我们想办法让$q_i$是若干个$r_i$相乘再加上1生成的</p>
+<p>即$q_i &#x3D; prod(r_1…r_i) + 1$(这样做的目的是为了方便计算lambda(p-1))</p>
+<p>由这样的$q$相乘得到p-1,这个时候计算$\lambda(p-1) &#x3D; \lambda(q_1q_2…q_k) &#x3D; r_1r_2…r_k$</p>
+<p>所以我们解题思路是，先通过$exp + 1$的因子，构造出一些素数，再通过这些素数来构造p，最后从中筛选出满足题目要求的p</p>
 <blockquote>
 <p>flag:RCTF{<em><strong>Euler’s_phi_where_secrets_twirl___Numbers_dance_in_cyclic_groups_swirl</strong></em>}</p>
 </blockquote>
@@ -493,7 +509,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">14:44</span>
+    <span title="站点阅读时长">14:45</span>
   </span>
 </div>
 <div class="busuanzi-count">
