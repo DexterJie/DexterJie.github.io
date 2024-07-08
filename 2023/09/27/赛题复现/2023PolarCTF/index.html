@@ -29,17 +29,17 @@
 <meta property="og:site_name" content="DexterJie&#39;Blog">
 <meta property="og:description" content="六道密码，五道是古典（讨厌古典）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dexterjie.github.io/2023/09/27/images/Ancient/14.png">
-<meta property="og:image" content="https://dexterjie.github.io/2023/09/27/images/2023PolarCTF/0.png">
-<meta property="og:image" content="https://dexterjie.github.io/2023/09/27/images/2023PolarCTF/1.png">
-<meta property="og:image" content="https://dexterjie.github.io/2023/09/27/images/Ancient/1.webp">
-<meta property="og:image" content="https://dexterjie.github.io/2023/09/27/images/Ancient/7.jpg">
+<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/14.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/2023PolarCTF/0.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/2023PolarCTF/1.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/1.webp">
+<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/7.jpg">
 <meta property="article:published_time" content="2023-09-27T08:02:34.000Z">
 <meta property="article:modified_time" content="2023-09-27T09:04:53.730Z">
 <meta property="article:author" content="DexterJie">
 <meta property="article:tag" content="Wp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dexterjie.github.io/2023/09/27/images/Ancient/14.png">
+<meta name="twitter:image" content="https://dexterjie.github.io/images/Ancient/14.png">
 
 
 <link rel="canonical" href="https://dexterjie.github.io/2023/09/27/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2023PolarCTF/">
@@ -295,45 +295,57 @@
     
     <div class="post-body" itemprop="articleBody"><p>六道密码，五道是古典（讨厌古典）</p>
 <span id="more"></span>
+
 <h1 id="天干地支"><a href="#天干地支" class="headerlink" title="天干地支"></a>天干地支</h1><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">小李某一天收到一条微信，微信中写了几个不同的年份</span><br><span class="line">          丁丑 丙子 戊辰 壬午 丁丑 丙子 戊辰 壬午 壬辰 壬辰 辛未 丙戌</span><br><span class="line">          微信的后面还写有“+甲子”，请解出这段密文。</span><br><span class="line">flag格式：flag&#123;XXX&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="../../images/Ancient/14.png" alt=""></p>
+
+<p><img src="/../../images/Ancient/14.png"></p>
 <p>把这些年份转为数字，分别得到：<code>14,13,5,19,14,13,5,19,29,29,8,23</code>，加上甲子，就是加60</p>
 <p>然后转ASCII码得到:<code>JIAOJIAOYYDS</code>，套上壳:<code>flag&#123;JIAOJIAOYYDS&#125;</code></p>
 <h1 id="全世界都在说中国话"><a href="#全世界都在说中国话" class="headerlink" title="全世界都在说中国话"></a>全世界都在说中国话</h1><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">663867570008258541046114143248220132000152072143</span><br><span class="line">时代在进步 中文也可以被翻译哦</span><br><span class="line">得到flag用MD532位小写加密并套上flag&#123;&#125;</span><br></pre></td></tr></table></figure>
+
 <p>中国电码转一下得到<code>这都不会的话就给你一脑拍</code></p>
 <p>md5加密后再套上壳：<code>flag&#123;679384ffaee1e8145a52408ac7ad6bfd&#125;</code></p>
 <h1 id="low-encryption-exponent-RSA"><a href="#low-encryption-exponent-RSA" class="headerlink" title="low encryption exponent RSA"></a>low encryption exponent RSA</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding = utf-8 -*-</span></span><br><span class="line"><span class="comment"># @software:PyCharm</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line">flag = <span class="string">b&#x27;***********************&#x27;</span></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">n = getRandomNBitInteger(<span class="number">2048</span>)</span><br><span class="line">e = <span class="number">5</span></span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"><span class="comment">#n=18049146130359556157811138499355569967231668855528566823643376144155931993553424757354835027829037263429007310779886281743425186527415596058004878860570474866413182148724803537036078612785180550377667299555519230603647447077725080756322343538156406080031959768393145744701092093127752647143419553963316375696232038952573236311522683541862835602321038621904842874356522524316864553501304106884213097353522958546518042728628006318129608745487662533959888992223736595503203451378533217004433230837006796341055201266431153548000348148960250455415972226546646460918890401484239320725539304914347952245606818833495867312063</span></span><br><span class="line"><span class="comment">#c=377041108412334062897923100149371833160065752130578483588828849399791858197434981428466047315212724764223394695011882740933537996983126187094472520344493047769519118482187945467176598341785927269390299847888131061799861412055502165865052720513992259109503509827127768615772091500352075827289290029872935215672798059068944088543667111296361405639896493856695176145088430237388172420390881291650155157688737470414069130558367036786376549227175617218017578125</span></span><br></pre></td></tr></table></figure>
+
 <p>小e，开个根号就行</p>
 <p>exp:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">n=</span><br><span class="line">c=</span><br><span class="line"></span><br><span class="line">m = gmpy2.iroot(c,<span class="number">5</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+
+
+
 <h1 id="眼见非实"><a href="#眼见非实" class="headerlink" title="眼见非实"></a>眼见非实</h1><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1111011111111011000110010101111111110010111011011110000110001101101110101110110111001100011000111100</span><br><span class="line">得出的结果用md5加密后套上flag&#123;&#125;</span><br></pre></td></tr></table></figure>
+
 <p><code>1 -&gt; A</code>,<code>0 -&gt; B</code>，再<a target="_blank" rel="noopener" href="https://wtool.com.cn/baconian.html">培根密码解密</a></p>
 <p><code>flag&#123;68e5987347d955690d9782edc531ddf3&#125;</code></p>
 <h1 id="小精灵来咯"><a href="#小精灵来咯" class="headerlink" title="小精灵来咯"></a>小精灵来咯</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">结果用MD532位大写加密并套上flag&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="../../images/2023PolarCTF/0.png" alt=""></p>
+
+<p><img src="/../../images/2023PolarCTF/0.png"></p>
 <p>啊，密码题搞个压缩包加密</p>
 <p>把右边的密文<code>eag&#39;expxwxj</code>，<code>key=itsme</code>，维吉尼亚解密得到<code>who&#39;stheelf</code></p>
 <p>docx文件里面是<strong>古精灵语</strong>密文</p>
 <p>码表来源<a target="_blank" rel="noopener" href="https://blog.csdn.net/Amherstieae/article/details/111134283">misc学习笔记2-图形密码-CSDN博客</a></p>
-<p><img src="../../images/2023PolarCTF/1.png" alt=""></p>
+<p><img src="/../../images/2023PolarCTF/1.png"></p>
 <p>对表</p>
-<p><img src="../../images/Ancient/1.webp" alt=""></p>
-<p><img src="../../images/Ancient/7.jpg" alt=""></p>
+<p><img src="/../../images/Ancient/1.webp"></p>
+<p><img src="/../../images/Ancient/7.jpg"></p>
 <p>得到<code>herec0mesthee1f</code>，MD5大写得到<code>flag&#123;08460AE514ACCC54E5D8D4B690A75D29&#125;</code></p>
 <h1 id="round"><a href="#round" class="headerlink" title="round"></a>round</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">这里有两串密码，来找找flag在哪吧</span><br><span class="line">（听说阿拉伯数字全世界通用哦）</span><br><span class="line"></span><br><span class="line">和谐民主和谐富强和谐民主和谐自由和谐富强和谐民主和谐自由和谐富强和谐文明和谐富强和谐民主和谐自由和谐富强和谐爱国和谐爱国和谐民主和谐富强和谐爱国</span><br><span class="line">和谐爱国和谐自由和谐文明和谐民主和谐富强和谐民主和谐富强和谐爱国和谐爱国和谐自由和谐民主和谐富强和谐爱国和谐爱国和谐文明和谐富强和谐民主和谐富强和谐爱</span><br><span class="line">国和谐爱国和谐自由和谐文明和谐富强和谐爱国和谐爱国和谐自由和谐文明和谐民主和谐富强和谐爱国和谐爱国和谐自由和谐文明和谐民主和谐富强和谐爱国和谐爱国和谐</span><br><span class="line">自由和谐文明和谐民主和谐富强和谐爱国和谐爱国和谐自由和谐文明和谐民主和谐富强和谐爱国和谐爱国和谐自由和谐文明和谐民主</span><br><span class="line"></span><br><span class="line">lqbehgfdajmopcikn</span><br><span class="line"></span><br><span class="line">将找到的字符串进行md5加密后套上flag&#123;&#125;即可</span><br></pre></td></tr></table></figure>
+
 <p>社会主义核心价值观解密得到<code>1014014020140881088421010884108820108842088421088421088421088421088421</code>，只有<code>0,1,2,4,8</code>，判断为云影加密</p>
 <p>云影解密后得到<code>AEEBEQWAURAVWWWWW</code></p>
 <p>再看另外一个文件</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">BRUEIFYRGBEUNVUICRHFU</span><br><span class="line">FYURGUAROINNIEURYVYRU</span><br><span class="line">E3BYUGDUWRNYUTFSRDE5W</span><br><span class="line">FURYGRUTGUTUNAWGDUIEB</span><br><span class="line">UYGIGNGIHFYBFYURGFURB</span><br><span class="line">TFRUBYFUVOVNERTWINDUE</span><br><span class="line">HUGRURBIGGNSUITIMTQEI</span><br><span class="line">GBUTNGUIJTINGIEGFURYU</span><br><span class="line">TYVCTYSAIBYEIFWIRHUGF</span><br><span class="line">TRTUBGUYTRGSONIUONRRI</span><br><span class="line">6YMUYTNYTIUWABRWBTESS</span><br><span class="line">BRUHGUFGTJNUBAFDEGTEF</span><br><span class="line">DHYEUBFYEYFTYUEBFIUBA</span><br><span class="line">CTBRTNUKMIWGRBEHSDDVC</span><br><span class="line">RUEBFUIRGFRBVXUAVTYEF</span><br><span class="line">YUGRTFBUKCZUIWEIHUEFB</span><br><span class="line">FRVRUIYUFRLNRUYGQEBYE</span><br></pre></td></tr></table></figure>
+
 <p><strong>托马斯杰斐逊 转轮密码</strong></p>
 <p>原理：给你一个密码表，n行的26个字母，key是 1 - n 的数列， 密文是 n 个英文字母，根据 key 找对应行的密码表，然后在密码表上找密文字母，以这个字母为开头，重新排序。</p>
 <p>官方wp（B站搜PolarCTF就能找到）有解释这个解密过程</p>
 <p>先把<code>lqbehgfdajmopcikn</code>转成数字得到：<code>12,17,2,5,8,7,6,4,1,10,13,15,16,3,9,11,14</code>，密文是<code>AEEBEQWAURAVWWWWW</code></p>
 <p>比如说第一个key是11，就要把第11行变为以A开头的串</p>
-<p><code>6YMUYTNYTIUWABRWBTESS</code> —&gt; <code>ABRWBTESS6YMUYTNYTIUW</code></p>
+<p><code>6YMUYTNYTIUWABRWBTESS</code> –&gt; <code>ABRWBTESS6YMUYTNYTIUW</code></p>
 <p>以此类推</p>
 <p>exp:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">text=&quot;&quot;</span><br><span class="line">code = [</span><br><span class="line">&quot;BRUEIFYRGBEUNVUICRHFU&quot;,</span><br><span class="line">&quot;FYURGUAROINNIEURYVYRU&quot;,</span><br><span class="line">&quot;E3BYUGDUWRNYUTFSRDE5W&quot;,</span><br><span class="line">&quot;FURYGRUTGUTUNAWGDUIEB&quot;,</span><br><span class="line">&quot;UYGIGNGIHFYBFYURGFURB&quot;,</span><br><span class="line">&quot;TFRUBYFUVOVNERTWINDUE&quot;,</span><br><span class="line">&quot;HUGRURBIGGNSUITIMTQEI&quot;,</span><br><span class="line">&quot;GBUTNGUIJTINGIEGFURYU&quot;,</span><br><span class="line">&quot;TYVCTYSAIBYEIFWIRHUGF&quot;,</span><br><span class="line">&quot;TRTUBGUYTRGSONIUONRRI&quot;,</span><br><span class="line">&quot;6YMUYTNYTIUWABRWBTESS&quot;,</span><br><span class="line">&quot;BRUHGUFGTJNUBAFDEGTEF&quot;,</span><br><span class="line">&quot;DHYEUBFYEYFTYUEBFIUBA&quot;,</span><br><span class="line">&quot;CTBRTNUKMIWGRBEHSDDVC&quot;,</span><br><span class="line">&quot;RUEBFUIRGFRBVXUAVTYEF&quot;,</span><br><span class="line">&quot;YUGRTFBUKCZUIWEIHUEFB&quot;,</span><br><span class="line">&quot;FRVRUIYUFRLNRUYGQEBYE&quot;</span><br><span class="line">]</span><br><span class="line">print(code)</span><br><span class="line">codetext=&quot;AEEBEQWAURAVWWWWW&quot;</span><br><span class="line">codenum = &quot;12,17,2,5,8,7,6,4,1,10,13,15,16,3,9,11,14&quot;</span><br><span class="line">codenum=codenum.split(&quot;,&quot;)#把这些数字都弄到一个里面去</span><br><span class="line">#print(codenum)</span><br><span class="line">a=0</span><br><span class="line">print(&quot;解密后的：&quot;)</span><br><span class="line">for i in codenum:</span><br><span class="line">    index=code[int(i)-1].index(codetext[a])</span><br><span class="line">    a=a+1</span><br><span class="line">    code[int(i)-1]=code[int(i)-1][index:]+code[int(i)-1][:index]</span><br><span class="line">    print(code[int(i)-1])</span><br><span class="line"></span><br><span class="line">#完成了变形了</span><br><span class="line"></span><br><span class="line">print(&quot;下面是每一列的&quot;)</span><br><span class="line">for i in range(len(code[0])):</span><br><span class="line">      str=&quot;&quot;</span><br><span class="line">      print(&quot;第&#123;&#125;列的是:&quot;.format(i),end=&quot;&quot;)</span><br><span class="line">      for j in codenum:</span><br><span class="line">          str+=code[int(j)-1][i]</span><br><span class="line">      print(str.lower())</span><br></pre></td></tr></table></figure>
+
 <p><code>flagisvucuuub3ayr</code></p>
 
     </div>
@@ -494,7 +506,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","cdn":"https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
