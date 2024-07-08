@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://dexterjie.github.io/images/%E6%9D%82/52.png">
 <meta property="og:image" content="https://dexterjie.github.io/images/%E6%9D%82/53.png">
 <meta property="article:published_time" content="2024-07-06T14:56:37.000Z">
-<meta property="article:modified_time" content="2024-07-08T08:24:55.704Z">
+<meta property="article:modified_time" content="2024-07-08T08:45:20.692Z">
 <meta property="article:author" content="DexterJie">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://dexterjie.github.io/images/%E6%9D%82/52.png">
@@ -238,7 +238,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-07-08 16:24:55" itemprop="dateModified" datetime="2024-07-08T16:24:55+08:00">2024-07-08</time>
+      <time title="修改时间：2024-07-08 16:45:20" itemprop="dateModified" datetime="2024-07-08T16:45:20+08:00">2024-07-08</time>
     </span>
 
   
@@ -289,7 +289,7 @@
     <div class="post-body" itemprop="articleBody"><p>这篇文章主要记录期末月做的一些赛题</p>
 <span id="more"></span>
 
-<p>$$<br>\begin{pmatrix}<br>test \<br>test<br>\end{pmatrix}<br>$$</p>
+
 <h1 id="R3CTF"><a href="#R3CTF" class="headerlink" title="R3CTF"></a>R3CTF</h1><h2 id="r0system"><a href="#r0system" class="headerlink" title="r0system"></a>r0system</h2><p>审计代码发现，可以自己注册个账号完成登录</p>
 <p>登录之后，在修改密码那里居然可以改所有用户的密码</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">R0System</span>(<span class="params">USERNAME</span>): </span><br><span class="line">    <span class="keyword">global</span> login_tag,PublicChannels</span><br><span class="line">    option = <span class="built_in">int</span>(<span class="built_in">input</span>((<span class="string">b&quot;Hello &quot;</span>+ USERNAME + <span class="string">b&quot;,do you need any services? &quot;</span>).decode()))</span><br><span class="line">    <span class="keyword">if</span> option == <span class="number">1</span>:</span><br><span class="line">        username     = <span class="built_in">bytes</span>.fromhex(<span class="built_in">input</span>(<span class="string">b&quot;Username[HEX]: &quot;</span>.decode())) </span><br><span class="line">        new_password = <span class="built_in">bytes</span>.fromhex(<span class="built_in">input</span>(<span class="string">b&quot;New Password[HEX]: &quot;</span>.decode()))</span><br><span class="line">        tag,msg = USER.reset_password(username,new_password)</span><br><span class="line">        <span class="built_in">print</span>(msg.decode())</span><br></pre></td></tr></table></figure>
