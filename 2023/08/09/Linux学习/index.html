@@ -29,12 +29,12 @@
 <meta property="og:site_name" content="DexterJie&#39;Blog">
 <meta property="og:description" content="每天学一点点">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dexterjie.github.io/images/Linux/0.png">
+<meta property="og:image" content="https://dexterjie.github.io/2023/08/09/images/Linux/0.png">
 <meta property="article:published_time" content="2023-08-09T09:20:30.000Z">
 <meta property="article:modified_time" content="2023-08-09T09:38:28.610Z">
 <meta property="article:author" content="DexterJie">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dexterjie.github.io/images/Linux/0.png">
+<meta name="twitter:image" content="https://dexterjie.github.io/2023/08/09/images/Linux/0.png">
 
 
 <link rel="canonical" href="https://dexterjie.github.io/2023/08/09/Linux%E5%AD%A6%E4%B9%A0/">
@@ -281,8 +281,7 @@
     
     <div class="post-body" itemprop="articleBody"><p>每天学一点点</p>
 <span id="more"></span>
-
-<h1 id="Linux系统的文件"><a href="#Linux系统的文件" class="headerlink" title="Linux系统的文件"></a>Linux系统的文件</h1><h2 id="Linux系统的文件目录结构"><a href="#Linux系统的文件目录结构" class="headerlink" title="Linux系统的文件目录结构"></a>Linux系统的文件目录结构</h2><p><img src="/../images/Linux/0.png"></p>
+<h1 id="Linux系统的文件"><a href="#Linux系统的文件" class="headerlink" title="Linux系统的文件"></a>Linux系统的文件</h1><h2 id="Linux系统的文件目录结构"><a href="#Linux系统的文件目录结构" class="headerlink" title="Linux系统的文件目录结构"></a>Linux系统的文件目录结构</h2><p><img src="../images/Linux/0.png" alt=""></p>
 <p><strong>bin</strong>：该目录中存储的是一些二进制文件，文件都是可以被运行的</p>
 <p><strong>dev</strong>：该目录中存放的都是一些外接设备，例如盘，其他的光盘等。在其中的外接设备是不能直接被使用的，需要<strong>挂载(类似windows下的分配盘符)</strong></p>
 <p><strong>etc</strong>：存储一些配置文件</p>
@@ -292,13 +291,13 @@
 <p><strong>sbin：</strong>全称super binary，该目录也是存储一些可以被执行的二进制文件，但是必须得有super权限的用户才能执行。</p>
 <p><strong>tmp：</strong>表示“临时”的，当系统运行时候产生的临时文件会在这个目录存着。</p>
 <p><strong>usr：</strong>存放的是用户自己安装的软件。类似于windows下的program files。</p>
-<p><strong>var：</strong>存放的程序&#x2F;系统的日志文件的目录。 </p>
+<p><strong>var：</strong>存放的程序/系统的日志文件的目录。 </p>
 <p><strong>Mnt</strong>：当外接设备需要挂载的时候，就需要挂载到mnt目录下。</p>
 <h2 id="Linux的文件类型"><a href="#Linux的文件类型" class="headerlink" title="Linux的文件类型"></a>Linux的文件类型</h2><h3 id="1-普通文件"><a href="#1-普通文件" class="headerlink" title="1.普通文件"></a>1.普通文件</h3><p>Linux中最多的一种文件类型, 包括 纯文本文件(ASCII)，二进制文件(binary)，数据格式的文件(data)，各种压缩文件。第一个属性为 [-]</p>
 <h3 id="2-目录文件"><a href="#2-目录文件" class="headerlink" title="2.目录文件"></a>2.目录文件</h3><p>就是目录， 能用 cd 命令进入的。第一个属性为 [d]，例如 [drwxrwxrw]</p>
-<h3 id="3-块设备文件"><a href="#3-块设备文件" class="headerlink" title="3.块设备文件"></a>3.块设备文件</h3><p>就是存储数据以供系统存取的接口设备，简单而言就是硬盘。例如一号硬盘的代码是 &#x2F;dev&#x2F;hda1等文件。第一个属性为 [b]</p>
+<h3 id="3-块设备文件"><a href="#3-块设备文件" class="headerlink" title="3.块设备文件"></a>3.块设备文件</h3><p>就是存储数据以供系统存取的接口设备，简单而言就是硬盘。例如一号硬盘的代码是 /dev/hda1等文件。第一个属性为 [b]</p>
 <h3 id="4-字符设备"><a href="#4-字符设备" class="headerlink" title="4.字符设备"></a>4.字符设备</h3><p>字符设备文件：即串行端口的接口设备，例如键盘、鼠标等等。第一个属性为 [c]</p>
-<h3 id="5-套接字文件"><a href="#5-套接字文件" class="headerlink" title="5.套接字文件"></a>5.套接字文件</h3><p>这类文件通常用在网络数据连接。可以启动一个程序来监听客户端的要求，客户端就可以通过套接字来进行数据通信。第一个属性为 [s]，最常在 &#x2F;var&#x2F;run目录中看到这种文件类型.</p>
+<h3 id="5-套接字文件"><a href="#5-套接字文件" class="headerlink" title="5.套接字文件"></a>5.套接字文件</h3><p>这类文件通常用在网络数据连接。可以启动一个程序来监听客户端的要求，客户端就可以通过套接字来进行数据通信。第一个属性为 [s]，最常在 /var/run目录中看到这种文件类型.</p>
 <h3 id="6-管道文件"><a href="#6-管道文件" class="headerlink" title="6.管道文件"></a>6.管道文件</h3><p>FIFO也是一种特殊的文件类型，它主要的目的是，解决多个程序同时存取一个文件所造成的错误。FIFO是first-in-first-out(先进先出)的缩写。第一个属性为 [p]</p>
 <h3 id="7-链接文件"><a href="#7-链接文件" class="headerlink" title="7.链接文件"></a>7.链接文件</h3><p>类似Windows下面的快捷方式。第一个属性为 [l]，例如 [lrwxrwxrw]</p>
 
@@ -457,7 +456,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","cdn":"https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

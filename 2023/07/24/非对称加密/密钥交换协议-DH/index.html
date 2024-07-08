@@ -29,8 +29,8 @@
 <meta property="og:site_name" content="DexterJie&#39;Blog">
 <meta property="og:description" content="简述密钥交换协议(DH)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dexterjie.github.io/images/DH/0.png">
-<meta property="og:image" content="https://dexterjie.github.io/images/DH/1.png">
+<meta property="og:image" content="https://dexterjie.github.io/2023/07/24/images/DH/0.png">
+<meta property="og:image" content="https://dexterjie.github.io/2023/07/24/images/DH/1.png">
 <meta property="article:published_time" content="2023-07-24T05:32:57.000Z">
 <meta property="article:modified_time" content="2023-08-26T02:15:49.518Z">
 <meta property="article:author" content="DexterJie">
@@ -38,7 +38,7 @@
 <meta property="article:tag" content="非对称加密">
 <meta property="article:tag" content="DH">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dexterjie.github.io/images/DH/0.png">
+<meta name="twitter:image" content="https://dexterjie.github.io/2023/07/24/images/DH/0.png">
 
 
 <link rel="canonical" href="https://dexterjie.github.io/2023/07/24/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E5%8D%8F%E8%AE%AE-DH/">
@@ -300,35 +300,32 @@
     
     <div class="post-body" itemprop="articleBody"><p>简述密钥交换协议(DH)</p>
 <span id="more"></span>
-
-
-
 <p>参考文章：</p>
-<p>[(8条消息) Diffie-Hellman密钥交换协议及其中间人攻击_Memories off的博客-CSDN博客](<a target="_blank" rel="noopener" href="https://blog.csdn.net/happy_single/article/details/106175275?ops_request_misc=&request_id=&biz_id=102&utm_term=%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E5%8D%8F%E8%AE%AE">https://blog.csdn.net/happy_single/article/details/106175275?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=密钥交换协议</a> 中间人攻击&amp;utm_medium&#x3D;distribute.pc_search_result.none-task-blog-2<del>all</del>sobaiduweb~default-0-106175275.142^v9^control,157^v4^new_style&amp;spm&#x3D;1018.2226.3001.4187)</p>
-<p><a target="_blank" rel="noopener" href="https://harry0597.com/2022/05/11/%E7%A6%BB%E6%95%A3%C2%B7DH%C2%B7Elgamal/">离散对数 ｜ DH ｜ ElGamal | Harry’s Blog (harry0597.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/happy_single/article/details/106175275?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=密钥交换协议 中间人攻击&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-106175275.142^v9^control,157^v4^new_style&amp;spm=1018.2226.3001.4187">(8条消息) Diffie-Hellman密钥交换协议及其中间人攻击_Memories off的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://harry0597.com/2022/05/11/离散·DH·Elgamal/">离散对数 ｜ DH ｜ ElGamal | Harry’s Blog (harry0597.com)</a></p>
 <p>密钥交换协议<strong>不是</strong>一种<strong>加密明文的算法</strong>，而是<strong>生成</strong>一个较为安全的<strong>密钥的算法</strong></p>
-<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p><img src="/../../images/DH/0.png"></p>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p><img src="../../images/DH/0.png" alt=""></p>
 <p><strong>Diffie-Hellman的安全性是基于离散对数求解的困难性的，然而，存在可能的中间人攻击，对Diffie-Hellman协议的安全性造成威胁。</strong></p>
-<h1 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h1><p><img src="/../../images/DH/1.png"></p>
+<h1 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h1><p><img src="../../images/DH/1.png" alt=""></p>
 <p><strong>简述一下攻击流程</strong></p>
-<p>$$<br>假设攻击人为Darth<br>$$</p>
-<p>$$<br>1.Darth截取了Alice发给Bob的公钥Y_A<br>$$</p>
-<p>$$<br>2.Darth选取了自己的私钥X_{D_1},并计算Y_{D_{1}}&#x3D;g^{X_{D_1}} \mod p<br>$$</p>
-<p>$$<br>3.Darth把Y_{D_{1}}发送给Bob，同时Darth计算\color{red}K_2&#x3D;Y_A^{X_{D_2}} &#x3D; g^{X_AX_{D_2}}\mod p<br>$$</p>
-<p>$$<br>4.Bob收到Darth发送的Y_{D_1},并计算\color{blue}K_1 &#x3D; Y_{D_1}^{X_B} &#x3D; g^{X_{D_1}X_B} \mod p<br>$$</p>
-<p>$$<br>5.Bob把Y_B发送给Alice<br>$$</p>
-<p>$$<br>6.Darth截取Y_B,并把Y_{D_2}发送欸Alice。Darth计算\color{blue}K_1 &#x3D; Y_{B}^{X_{D_1}} &#x3D; g^{X_B{X_{D_1}}} \mod p<br>$$</p>
-<p>$$<br>7.Alice收到Y_{D_2},并计算\color{red}K_2&#x3D;Y_{D_2}^{X_A} &#x3D; g^{X_{D_2}X_A}\mod p<br>$$</p>
-<p>$$<br>此时,Alice和Bob移位他们共享了密钥，但实际上却是:<br>$$</p>
-<p>$$<br>\color{red} Alice和Darth共享密钥K_2<br>$$</p>
-<p>$$<br>\color{blue} Bob和Darth共享密钥K_1<br>$$</p>
-<p>$$<br>接下来，Alice和Bob之间的通信将以下列方式泄密：<br>$$</p>
-<p>$$<br>1.Alice发送了一份加密的消息M:E(K_2,M),表示用密钥K_2对消息M加密<br>$$</p>
-<p>$$<br>2.Darth截获了该密文，并解密，知晓了M<br>$$</p>
-<p>$$<br>3.Darth把E(K_1,M)或者把E(K_1,M’)发送给Bob，其中M’是修改后的信息<br>$$</p>
-<p>$$<br>如果Darth把E(K_1,M)发送给Bob，表明他只是偷听消息，而没有进行修改<br>$$</p>
-<p>$$<br>如果Darth把E(K_1,M’)发送给Bob，说明他修改了Alice原本想传给Bob的消息<br>$$</p>
-
+<script type="math/tex; mode=display">
+假设攻击人为Darth</script><script type="math/tex; mode=display">
+1.Darth截取了Alice发给Bob的公钥Y_A</script><script type="math/tex; mode=display">
+2.Darth选取了自己的私钥X_{D_1},并计算Y_{D_{1}}=g^{X_{D_1}} \mod p</script><script type="math/tex; mode=display">
+3.Darth把Y_{D_{1}}发送给Bob，同时Darth计算\color{red}K_2=Y_A^{X_{D_2}} = g^{X_AX_{D_2}}\mod p</script><script type="math/tex; mode=display">
+4.Bob收到Darth发送的Y_{D_1},并计算\color{blue}K_1 = Y_{D_1}^{X_B} = g^{X_{D_1}X_B} \mod p</script><script type="math/tex; mode=display">
+5.Bob把Y_B发送给Alice</script><script type="math/tex; mode=display">
+6.Darth截取Y_B,并把Y_{D_2}发送欸Alice。Darth计算\color{blue}K_1 = Y_{B}^{X_{D_1}} = g^{X_B{X_{D_1}}} \mod p</script><script type="math/tex; mode=display">
+7.Alice收到Y_{D_2},并计算\color{red}K_2=Y_{D_2}^{X_A} = g^{X_{D_2}X_A}\mod p</script><script type="math/tex; mode=display">
+此时,Alice和Bob移位他们共享了密钥，但实际上却是:</script><script type="math/tex; mode=display">
+\color{red} Alice和Darth共享密钥K_2</script><script type="math/tex; mode=display">
+\color{blue} Bob和Darth共享密钥K_1</script><script type="math/tex; mode=display">
+接下来，Alice和Bob之间的通信将以下列方式泄密：</script><script type="math/tex; mode=display">
+1.Alice发送了一份加密的消息M:E(K_2,M),表示用密钥K_2对消息M加密</script><script type="math/tex; mode=display">
+2.Darth截获了该密文，并解密，知晓了M</script><script type="math/tex; mode=display">
+3.Darth把E(K_1,M)或者把E(K_1,M')发送给Bob，其中M'是修改后的信息</script><script type="math/tex; mode=display">
+如果Darth把E(K_1,M)发送给Bob，表明他只是偷听消息，而没有进行修改</script><script type="math/tex; mode=display">
+如果Darth把E(K_1,M')发送给Bob，说明他修改了Alice原本想传给Bob的消息</script>
     </div>
 
     
@@ -489,7 +486,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","cdn":"https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

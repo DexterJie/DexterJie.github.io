@@ -29,17 +29,17 @@
 <meta property="og:site_name" content="DexterJie&#39;Blog">
 <meta property="og:description" content="对古典密码学中代换密码做个粗浅的了解">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/0.png">
-<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/0.jpg">
-<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/1.png">
-<meta property="og:image" content="https://dexterjie.github.io/images/Ancient/0.jpg">
+<meta property="og:image" content="https://dexterjie.github.io/2023/07/10/images/Ancient/0.png">
+<meta property="og:image" content="https://dexterjie.github.io/2023/07/10/images/Ancient/0.jpg">
+<meta property="og:image" content="https://dexterjie.github.io/2023/07/10/images/Ancient/1.png">
+<meta property="og:image" content="https://dexterjie.github.io/2023/07/10/images/Ancient/0.jpg">
 <meta property="article:published_time" content="2023-07-10T12:16:58.000Z">
 <meta property="article:modified_time" content="2024-02-04T12:34:03.276Z">
 <meta property="article:author" content="DexterJie">
 <meta property="article:tag" content="古典密码">
 <meta property="article:tag" content="代换密码">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dexterjie.github.io/images/Ancient/0.png">
+<meta name="twitter:image" content="https://dexterjie.github.io/2023/07/10/images/Ancient/0.png">
 
 
 <link rel="canonical" href="https://dexterjie.github.io/2023/07/10/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81-%E4%BB%A3%E6%8D%A2%E5%AF%86%E7%A0%81/">
@@ -301,14 +301,12 @@
     
     <div class="post-body" itemprop="articleBody"><p>对古典密码学中代换密码做个粗浅的了解</p>
 <span id="more"></span>
-
-<p><img src="/../../images/Ancient/0.png"></p>
+<p><img src="../../images/Ancient/0.png" alt=""></p>
 <p><strong>代换密码分为单表代换和多表代换</strong></p>
 <h2 id="一、单表代换"><a href="#一、单表代换" class="headerlink" title="一、单表代换"></a>一、单表代换</h2><p><strong>在单表替换加密中，所有的加密方式几乎都有一个共性，那就是明密文一一对应。所以说，一般有以下两种方式来进行破解</strong></p>
 <h3 id="1-凯撒密码"><a href="#1-凯撒密码" class="headerlink" title="1.凯撒密码"></a>1.凯撒密码</h3><p>凯撒密码（Caesar）加密时会将明文中的 <strong>每个字母</strong> 都按照其在字母表中的顺序向后（或向前）移动固定数目（<strong>循环移动</strong>）作为密文</p>
 <p><strong>eg：偏移量为3</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">明文：ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br><span class="line">密文：DEFGHIJKLMNOPQRSTUVWXYZABC</span><br></pre></td></tr></table></figure>
-
 <p>根据偏移量的不同，还存在<strong>若干特定的恺撒密码名称</strong>：</p>
 <ul>
 <li>偏移量为 10： Avocat （A→K）</li>
@@ -318,32 +316,25 @@
 </ul>
 <p><strong>加密脚本:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt_caesar_cipher</span>(<span class="params">plaintext</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">shift</span>(<span class="params">text, n</span>):</span><br><span class="line">        result = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> text:</span><br><span class="line">            <span class="keyword">if</span> char.isalpha():</span><br><span class="line">                shift = <span class="built_in">ord</span>(char) + n</span><br><span class="line">                <span class="keyword">if</span> char.islower():</span><br><span class="line">                    <span class="keyword">if</span> shift &gt; <span class="built_in">ord</span>(<span class="string">&quot;z&quot;</span>):</span><br><span class="line">                        shift -= <span class="number">26</span></span><br><span class="line">                    <span class="keyword">elif</span> shift &lt; <span class="built_in">ord</span>(<span class="string">&quot;a&quot;</span>):</span><br><span class="line">                        shift += <span class="number">26</span></span><br><span class="line">                <span class="keyword">elif</span> char.isupper():</span><br><span class="line">                    <span class="keyword">if</span> shift &gt; <span class="built_in">ord</span>(<span class="string">&quot;Z&quot;</span>):</span><br><span class="line">                        shift -= <span class="number">26</span></span><br><span class="line">                    <span class="keyword">elif</span> shift &lt; <span class="built_in">ord</span>(<span class="string">&quot;A&quot;</span>):</span><br><span class="line">                        shift += <span class="number">26</span></span><br><span class="line">                result += <span class="built_in">chr</span>(shift)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result += char</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;尝试所有可能的位移：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">26</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;位移 <span class="subst">&#123;i&#125;</span>: <span class="subst">&#123;shift(plaintext, +i)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    plaintext = <span class="built_in">input</span>(<span class="string">&quot;请输入凯撒密码的明文：&quot;</span>)</span><br><span class="line">    encrypt_caesar_cipher(plaintext)</span><br></pre></td></tr></table></figure>
-
 <p><strong>解密脚本:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt_caesar_cipher</span>(<span class="params">ciphertext</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">shift</span>(<span class="params">text, n</span>):</span><br><span class="line">        result = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> text:</span><br><span class="line">            <span class="keyword">if</span> char.isalpha():</span><br><span class="line">                shift = <span class="built_in">ord</span>(char) + n</span><br><span class="line">                <span class="keyword">if</span> char.islower():</span><br><span class="line">                    <span class="keyword">if</span> shift &gt; <span class="built_in">ord</span>(<span class="string">&quot;z&quot;</span>):</span><br><span class="line">                        shift -= <span class="number">26</span></span><br><span class="line">                    <span class="keyword">elif</span> shift &lt; <span class="built_in">ord</span>(<span class="string">&quot;a&quot;</span>):</span><br><span class="line">                        shift += <span class="number">26</span></span><br><span class="line">                <span class="keyword">elif</span> char.isupper():</span><br><span class="line">                    <span class="keyword">if</span> shift &gt; <span class="built_in">ord</span>(<span class="string">&quot;Z&quot;</span>):</span><br><span class="line">                        shift -= <span class="number">26</span></span><br><span class="line">                    <span class="keyword">elif</span> shift &lt; <span class="built_in">ord</span>(<span class="string">&quot;A&quot;</span>):</span><br><span class="line">                        shift += <span class="number">26</span></span><br><span class="line">                result += <span class="built_in">chr</span>(shift)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result += char</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;尝试所有可能的位移：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">26</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;位移 <span class="subst">&#123;i&#125;</span>: <span class="subst">&#123;shift(ciphertext, -i)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    ciphertext = <span class="built_in">input</span>(<span class="string">&quot;请输入凯撒密码的密文：&quot;</span>)</span><br><span class="line">    decrypt_caesar_cipher(ciphertext)</span><br></pre></td></tr></table></figure>
-
-
-
 <h3 id="2-Atbash-Cipher"><a href="#2-Atbash-Cipher" class="headerlink" title="2.Atbash Cipher"></a>2.Atbash Cipher</h3><p>埃特巴什码(Atbash Cipher)，它使用字母表中的最后一个字母代表第一个字母，倒数第二个字母代表第二个字母。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">明文：A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</span><br><span class="line">密文：Z Y X W V U T S R Q P O N M L K J I H G F E D C B A</span><br></pre></td></tr></table></figure>
-
 <p>加密例子：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">明文：the quick brown fox jumps over the lazy dog</span><br><span class="line">密文：gsv jfrxp yildm ulc qfnkh levi gsv ozab wlt</span><br></pre></td></tr></table></figure>
-
 <p>工具：<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/classical-era/atbash-cipher/">实用密码学 (practicalcryptography.com)</a></p>
 <h3 id="3-简单替换密码"><a href="#3-简单替换密码" class="headerlink" title="3.简单替换密码"></a>3.简单替换密码</h3><p><strong>加密时，每个明文都有自己对应的密文，而且不是简单的移位，是混乱的。这也使得其破解难度要高于凯撒密码</strong></p>
 <p>eg:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">明文: abcdefghijklmnopqrstuvwxyz</span><br><span class="line">密钥: phqgiumeaylnofdxjkrcvstzwb</span><br><span class="line"></span><br><span class="line">a对应p,b对应h</span><br></pre></td></tr></table></figure>
-
 <p>一般用词频分析破解：<a target="_blank" rel="noopener" href="http://quipqiup.com/">quipqiup - cryptoquip and cryptogram solver</a></p>
-<h3 id="4-仿射密码"><a href="#4-仿射密码" class="headerlink" title="4.仿射密码"></a>4.仿射密码</h3><p>$$<br>加密函数：E(x) &#x3D; (ax+b) \mod m<br>$$</p>
-<p>$$<br>其中,x是明文通过某种数字得到的编码<br>$$</p>
-<p>$$<br>a,m满足gcd(a,m)&#x3D;1<br>$$</p>
-<p>$$<br>m是编码系统中字母的个数<br>$$</p>
-<p>$$<br>eg:如果以26字母表作为编码系统，则m&#x3D;26<br>$$</p>
-<p>$$<br>解密函数：D(x)&#x3D;a^{-1}(x-b)\mod m<br>$$</p>
-<p>$$<br>a^{-1}是模m的逆元<br>$$</p>
-<h2 id="二、多表代换"><a href="#二、多表代换" class="headerlink" title="二、多表代换"></a>二、多表代换</h2><h3 id="1-Playfair"><a href="#1-Playfair" class="headerlink" title="1.Playfair"></a>1.Playfair</h3><p>原理：</p>
+<h3 id="4-仿射密码"><a href="#4-仿射密码" class="headerlink" title="4.仿射密码"></a>4.仿射密码</h3><script type="math/tex; mode=display">
+加密函数：E(x) = (ax+b) \mod m</script><script type="math/tex; mode=display">
+其中,x是明文通过某种数字得到的编码</script><script type="math/tex; mode=display">
+a,m满足gcd(a,m)=1</script><script type="math/tex; mode=display">
+m是编码系统中字母的个数</script><script type="math/tex; mode=display">
+eg:如果以26字母表作为编码系统，则m=26</script><script type="math/tex; mode=display">
+解密函数：D(x)=a^{-1}(x-b)\mod m</script><script type="math/tex; mode=display">
+a^{-1}是模m的逆元</script><h2 id="二、多表代换"><a href="#二、多表代换" class="headerlink" title="二、多表代换"></a>二、多表代换</h2><h3 id="1-Playfair"><a href="#1-Playfair" class="headerlink" title="1.Playfair"></a>1.Playfair</h3><p>原理：</p>
 <ol>
 <li>选取一串英文字母，除去重复出现的字母，将剩下的字母逐个逐个加入 5 × 5 的矩阵内，剩下的空间由未加入的英文字母依 a-z 的顺序加入。注意，将 q 去除，或将 i 和 j 视作同一字。</li>
 <li>将要加密的明文分成两个一组。若组内的字母相同，将 X（或 Q）加到该组的第一个字母后，重新分组。若剩下一个字，也加入 X 。</li>
@@ -358,70 +349,72 @@
 <p><strong>exp:</strong></p>
 <p>以 playfair example 为密匙，得</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">P L A Y F</span><br><span class="line">I R E X M</span><br><span class="line">B C D G H</span><br><span class="line">K N O Q S</span><br><span class="line">T U V W Z</span><br></pre></td></tr></table></figure>
-
 <p><strong>要加密的讯息为 Hide the gold in the tree stump</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HI DE TH EG OL DI NT HE TR EX ES TU MP</span><br></pre></td></tr></table></figure>
-
 <p>加密后密文：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BM OD ZB XD NA BE KU DM UI XM MO UV IF</span><br></pre></td></tr></table></figure>
-
 <p><strong>加解密网站：</strong><a target="_blank" rel="noopener" href="http://www.metools.info/code/playfair_186.html">Playfair加密解密_普莱费尔加密解密-ME2在线工具 (metools.info)</a></p>
 <h3 id="2-Polybius"><a href="#2-Polybius" class="headerlink" title="2.Polybius"></a>2.Polybius</h3><p>Polybius 密码又称为棋盘密码</p>
 <p><strong>密码表长这样</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"></th>
-<th align="center">1</th>
-<th align="center">2</th>
-<th align="center">3</th>
-<th align="center">4</th>
-<th align="center">5</th>
+<th style="text-align:center"></th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">A</td>
-<td align="center">B</td>
-<td align="center">C</td>
-<td align="center">D</td>
-<td align="center">E</td>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">A</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">C</td>
+<td style="text-align:center">D</td>
+<td style="text-align:center">E</td>
 </tr>
 <tr>
-<td align="center">2</td>
-<td align="center">F</td>
-<td align="center">G</td>
-<td align="center">H</td>
-<td align="center">I&#x2F;J</td>
-<td align="center">K</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">F</td>
+<td style="text-align:center">G</td>
+<td style="text-align:center">H</td>
+<td style="text-align:center">I/J</td>
+<td style="text-align:center">K</td>
 </tr>
 <tr>
-<td align="center">3</td>
-<td align="center">L</td>
-<td align="center">M</td>
-<td align="center">N</td>
-<td align="center">O</td>
-<td align="center">P</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">L</td>
+<td style="text-align:center">M</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">P</td>
 </tr>
 <tr>
-<td align="center">4</td>
-<td align="center">Q</td>
-<td align="center">R</td>
-<td align="center">S</td>
-<td align="center">T</td>
-<td align="center">U</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">S</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">U</td>
 </tr>
 <tr>
-<td align="center">5</td>
-<td align="center">V</td>
-<td align="center">W</td>
-<td align="center">X</td>
-<td align="center">Y</td>
-<td align="center">Z</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">V</td>
+<td style="text-align:center">W</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Z</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>eg: HELLO加密后 23 15 31 31 34</strong></p>
 <p>另外有种变表：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -433,7 +426,8 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>A</td>
 <td>b</td>
 <td>t</td>
@@ -473,12 +467,15 @@
 <td>w</td>
 <td>y</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>应用这种密码表的加密方式叫<strong>ADFGX加密</strong></p>
 <p><strong>eg:HELLO 加密后得到 DD XF AG AG DF</strong></p>
 <h3 id="3-Vigenere"><a href="#3-Vigenere" class="headerlink" title="3.Vigenere"></a>3.Vigenere</h3><p>维吉尼亚密码（Vigenere）是使用一系列凯撒密码组成密码字母表的加密算法，属于多表密码的一种简单形式。</p>
-<p><img src="/../../images/Ancient/0.jpg"></p>
+<p><img src="../../images/Ancient/0.jpg" alt=""></p>
 <p><strong>eg:</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -497,7 +494,8 @@
 <th>e</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>密钥</td>
 <td>P</td>
 <td>o</td>
@@ -512,30 +510,26 @@
 <td>a</td>
 <td>r</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">明文：come greatwall</span><br><span class="line">密钥：crypto</span><br><span class="line"></span><br><span class="line">先把密钥变成和明文同样长度</span><br><span class="line">明文：comegreatwall</span><br><span class="line">密钥：cryptocryptoc</span><br><span class="line"></span><br><span class="line">然后查表，cc作为横纵坐标得到e</span><br><span class="line">加密后的密文为：efkt zferrltzn</span><br></pre></td></tr></table></figure>
-
 <p>解密网站：</p>
 <p><strong>未知密钥：<a target="_blank" rel="noopener" href="https://www.mygeocachingprofile.com/codebreaker.vigenerecipher.aspx">My Geocaching Profile.com - Vigenere Cipher Codebreaker</a></strong></p>
 <p><strong>已知密钥：<a target="_blank" rel="noopener" href="http://planetcalc.com/2468/">http://planetcalc.com/2468/</a></strong></p>
 <h4 id="GDOUCTF-2023-1z-Classic"><a href="#GDOUCTF-2023-1z-Classic" class="headerlink" title="[GDOUCTF 2023]1z Classic"></a>[GDOUCTF 2023]1z Classic</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> s</span><br><span class="line">s = s.lower()</span><br><span class="line">keyM = [?]</span><br><span class="line">l = <span class="built_in">len</span>(keyM)</span><br><span class="line"><span class="keyword">assert</span>(math.gcd(l,<span class="number">26</span>)==<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">chr</span>((<span class="built_in">ord</span>(s[i])*l-<span class="number">97</span>+(keyM[i % l]))%<span class="number">26</span>+<span class="number">97</span>),end=<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#..........</span></span><br></pre></td></tr></table></figure>
-
-<p>加密可以看错是类似于仿射密码：$y_i &#x3D; lx_i + k_i\mod 26$</p>
-<p>乘上$l^{-1}$得$y_il^{-1} &#x3D; x_i + k_il^{-1} \mod 26$</p>
+<p>加密可以看错是类似于仿射密码：$y_i = lx_i + k_i\mod 26$</p>
+<p>乘上$l^{-1}$得$y_il^{-1} = x_i + k_il^{-1} \mod 26$</p>
 <p>这就是标准的维吉尼亚密码了，题目给出$l$和$26$的关系</p>
 <p>解题思路是先爆破出$l$，再网站解密</p>
 <p>最后l为11</p>
 <p>明文为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flagwowyouareclassicmaster</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="4-Nihilist"><a href="#4-Nihilist" class="headerlink" title="4.Nihilist"></a>4.Nihilist</h3><p><strong>Nihilist 密码又称关键字密码：明文 + 关键字 &#x3D; 密文。</strong></p>
+<h3 id="4-Nihilist"><a href="#4-Nihilist" class="headerlink" title="4.Nihilist"></a>4.Nihilist</h3><p><strong>Nihilist 密码又称关键字密码：明文 + 关键字 = 密文。</strong></p>
 <p>首先利用密钥构造棋盘矩阵（类似 Polybius 密码），新建一个 5 × 5 矩阵，将字符不重复地依次填入矩阵 ，剩下部分按字母顺序填入 ，字母 i 和 j 等价</p>
 <p><strong>以关键字 helloworld 为例</strong></p>
 <p><strong>关键字导出的密码表如下</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -547,7 +541,8 @@
 <th>5</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>h</td>
 <td>e</td>
@@ -567,7 +562,7 @@
 <td>3</td>
 <td>f</td>
 <td>g</td>
-<td>i&#x2F;j</td>
+<td>i/j</td>
 <td>k</td>
 <td>m</td>
 </tr>
@@ -587,22 +582,22 @@
 <td>y</td>
 <td>z</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>将明文中的每个字母对应横纵坐标就是其密文，例如a加密后是23</strong></p>
-<h3 id="5-Hill"><a href="#5-Hill" class="headerlink" title="5.Hill"></a>5.Hill</h3><p><strong>希尔密码（Hill）使用每个字母在字母表中的顺序作为其对应的数字，即 A&#x3D;0，B&#x3D;1，C&#x3D;2 等等。然后将明文转化为 n 维向量，跟一个 n × n 的矩阵相乘，再将得出的结果模 26。注意用作加密的矩阵（即密匙）在mod26下必须是可逆的，否则就不可能解码。</strong></p>
+<h3 id="5-Hill"><a href="#5-Hill" class="headerlink" title="5.Hill"></a>5.Hill</h3><p><strong>希尔密码（Hill）使用每个字母在字母表中的顺序作为其对应的数字，即 A=0，B=1，C=2 等等。然后将明文转化为 n 维向量，跟一个 n × n 的矩阵相乘，再将得出的结果模 26。注意用作加密的矩阵（即密匙）在mod26下必须是可逆的，否则就不可能解码。</strong></p>
 <p><strong>只有矩阵的行列式和 26 互质，才是可逆的。</strong></p>
 <p>eg:</p>
-<p><img src="/../../images/Ancient/1.png"></p>
+<p><img src="../../images/Ancient/1.png" alt=""></p>
 <p><strong>在线解密工具</strong><a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/hill-cipher/">http://www.practicalcryptography.com/ciphers/hill-cipher/</a></p>
 <h3 id="6-Autokey-Cipher"><a href="#6-Autokey-Cipher" class="headerlink" title="6.Autokey Cipher"></a>6.Autokey Cipher</h3><p><strong>自动密钥密码（Autokey Cipher）也是多表替换密码，与维吉尼亚密码密码类似，但使用不同的方法生成密钥。</strong></p>
 <p><strong>自动密钥密码主要有两种，关键词自动密钥密码和原文自动密钥密码。</strong></p>
 <p><strong>以关键词自动密钥为例</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">明文：THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG</span><br><span class="line">关键词：CULTURE</span><br></pre></td></tr></table></figure>
-
 <p><strong>以用关键词开始，填充为与明文等长的密钥</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">明文：THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG</span><br><span class="line">关键词：CULTURE THE QUICK BROWN FOX JUMPS OVER THE</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../../images/Ancient/0.jpg"></p>
+<p><img src="../../images/Ancient/0.jpg" alt=""></p>
 <p><strong>和Vigenere同样的码表</strong></p>
 <p>加密后的密文为:<code>VBP JOZGD IVEQV HYY AIICX CSNL FWW ZVDP WVK</code></p>
 <p><strong>原文自动密钥密码，应该是密钥和明文一样进行加密</strong></p>
@@ -767,7 +762,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","cdn":"https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

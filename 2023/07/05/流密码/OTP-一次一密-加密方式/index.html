@@ -296,20 +296,19 @@
     
     <div class="post-body" itemprop="articleBody"><p><strong>简述一下OPT</strong></p>
 <span id="more"></span>
-
-
-
 <p><strong>OPT又叫一次一密加密方式</strong></p>
-<p>简单了解一下该加密方式：<br>$$<br>密文C &#x3D; 密钥K \oplus 明文M<br>$$<br>显而易见，解密方式即是：<br>$$<br>明文M &#x3D; 密钥K \oplus 密文C<br>$$<br><strong>需要注意的是，密钥是一个和密文等长的二进制字符串</strong></p>
+<p>简单了解一下该加密方式：</p>
+<script type="math/tex; mode=display">
+密文C = 密钥K \oplus 明文M</script><p>显而易见，解密方式即是：</p>
+<script type="math/tex; mode=display">
+明文M = 密钥K \oplus 密文C</script><p><strong>需要注意的是，密钥是一个和密文等长的二进制字符串</strong></p>
 <p>这里给出一道例题，来自LitCTF2023——隐晦的消息记录</p>
 <p>题目：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">出题人:6c73d5240a948c86981bc294814d</span><br><span class="line">某不知名收件人：收到消息attack at dawn</span><br><span class="line">出题人:xxxxxxxxxxxxxxxxxxxxxxxxxxxx</span><br><span class="line">某不知名收件人：收到消息Monday or Thur</span><br><span class="line">已知出题人和收件人手中的密钥相同，请解出出题人第二次发送的密文呢（16进制，字母小写，解得的结果记得要加上LitCTF&#123;&#125;哦。）</span><br></pre></td></tr></table></figure>
-
 <p>根据题目提示，知道这是OPT加密，了解一下原理之后就知道该加密方式是通过异或实现的</p>
 <p>只要把密文和密钥进行异或就能得到明文</p>
 <p><strong>首先把 <code>attack at dawn</code>转成16进制，再和<code>6c73d5240a948c86981bc294814d</code>进行异或，即可得到密钥，因为两次密钥相同，所以把<code>Monday or Thur</code>和密钥异或，就是我们要的密文</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ciphertext1 = <span class="number">0x6c73d5240a948c86981bc294814d</span>    <span class="comment">#   attack at dawn转16进制后</span></span><br><span class="line">plaintext1 = <span class="number">0x61747461636b206174206461776e</span></span><br><span class="line"></span><br><span class="line">key = ciphertext1 ^ plaintext1</span><br><span class="line"></span><br><span class="line"><span class="comment">#   key = 0xd07a14569fface7ec3ba6f5f623</span></span><br><span class="line"></span><br><span class="line">plaintext2 = <span class="number">0x4d6f6e646179206f722054687572</span>      <span class="comment">#  Monday or Thur转16进制后</span></span><br><span class="line"></span><br><span class="line">ciphertext2 = key ^ plaintext2</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(ciphertext2))</span><br><span class="line"></span><br><span class="line"><span class="comment">#NSSCTF&#123;4068cf2108868c889e1bf29d8351&#125;</span></span><br></pre></td></tr></table></figure>
-
 
     </div>
 
@@ -471,7 +470,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","cdn":"https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
