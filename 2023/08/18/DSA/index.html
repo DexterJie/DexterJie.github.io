@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/0.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/0.jpg">
+  <link rel="mask-icon" href="/images/0.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dexterjie.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="起一篇文章简单记录一下ECDSA的签名过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DSA数字签名">
+<meta property="og:url" content="https://dexterjie.github.io/2023/08/18/DSA/index.html">
+<meta property="og:site_name" content="DexterJie&#39;Blog">
+<meta property="og:description" content="起一篇文章简单记录一下ECDSA的签名过程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dexterjie.github.io/images/DSA/0.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/DSA/1.png">
+<meta property="og:image" content="https://dexterjie.github.io/images/DSA/2.png">
+<meta property="article:published_time" content="2023-08-18T06:12:04.000Z">
+<meta property="article:modified_time" content="2024-07-12T08:12:28.133Z">
+<meta property="article:author" content="DexterJie">
+<meta property="article:tag" content="签名">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dexterjie.github.io/images/DSA/0.png">
+
+
+<link rel="canonical" href="https://dexterjie.github.io/2023/08/18/DSA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dexterjie.github.io/2023/08/18/DSA/","path":"2023/08/18/DSA/","title":"DSA数字签名"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>DSA数字签名 | DexterJie'Blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="waline-five-mocha.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">DexterJie'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never Mind the Scandal and Liber!!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1456890009&auto=1&height=66"></iframe>
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DSA%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="nav-number">1.</span> <span class="nav-text">DSA数字签名</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90"><span class="nav-number">1.1.</span> <span class="nav-text">密钥生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%BE%E5%90%8D%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">签名过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">验证过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB"><span class="nav-number">1.4.</span> <span class="nav-text">攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E7%94%A8k"><span class="nav-number">1.4.1.</span> <span class="nav-text">复用k</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">1.5.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E5%A4%8D%E7%94%A8k%EF%BC%89%E9%95%BF%E5%9F%8E%E6%9D%AF-2022%E2%80%94%E2%80%94known-phi"><span class="nav-number">1.5.1.</span> <span class="nav-text">（复用k）长城杯 2022——known_phi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E7%BA%BF%E6%80%A7k%EF%BC%89NSSRound-1-Basic%E2%80%94%E2%80%94number-by-number"><span class="nav-number">1.5.2.</span> <span class="nav-text">（线性k）NSSRound#1 Basic——number_by_number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HZNUCTF-2023-preliminary-easyDSA"><span class="nav-number">1.5.3.</span> <span class="nav-text">[HZNUCTF 2023 preliminary]easyDSA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">推导</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ECDSA"><span class="nav-number">2.</span> <span class="nav-text">ECDSA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%BE%E5%90%8D%E8%BF%87%E7%A8%8B-1"><span class="nav-number">2.1.</span> <span class="nav-text">签名过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E8%BF%87%E7%A8%8B-1"><span class="nav-number">2.2.</span> <span class="nav-text">验证过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB-1"><span class="nav-number">2.3.</span> <span class="nav-text">攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98-1"><span class="nav-number">2.4.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E7%94%A8k-2024%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%AF%86%E7%A0%813"><span class="nav-number">2.4.1.</span> <span class="nav-text">(复用k)2024蓝桥杯密码3</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="DexterJie"
+      src="/images/0.jpg">
+  <p class="site-author-name" itemprop="name">DexterJie</p>
+  <div class="site-description" itemprop="description">一枚只会Crypto的菜鸡</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dexterjie.github.io/2023/08/18/DSA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/0.jpg">
+      <meta itemprop="name" content="DexterJie">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DexterJie'Blog">
+      <meta itemprop="description" content="一枚只会Crypto的菜鸡">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="DSA数字签名 | DexterJie'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DSA数字签名
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-18 14:12:04" itemprop="dateCreated datePublished" datetime="2023-08-18T14:12:04+08:00">2023-08-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-07-12 16:12:28" itemprop="dateModified" datetime="2024-07-12T16:12:28+08:00">2024-07-12</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/08/18/DSA/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/08/18/DSA/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>起一篇文章简单记录一下ECDSA的签名过程</p>
+<span id="more"></span>
+
+
+
+<p>椭圆曲线数字签名算法（ECDSA）是使用椭圆曲线密码（ECC）对数字签名算法（DSA）的模拟</p>
+<h1 id="DSA数字签名"><a href="#DSA数字签名" class="headerlink" title="DSA数字签名"></a>DSA数字签名</h1><h2 id="密钥生成"><a href="#密钥生成" class="headerlink" title="密钥生成"></a>密钥生成</h2><ol>
+<li>选择一个合适的哈希函数，一般选择SHA1</li>
+<li>选择密钥的长度$L$和$N$，</li>
+<li>选择$N$比特的素数$q$</li>
+<li>选择$L$比特的素数$p$，使得$p-1$是$q$的倍数</li>
+<li>选择满足$g^k \equiv 1 \mod p$的最小正整数$k$为$q$的g，就是在模$p$的前提下，$ord(g) &#x3D; q的g$</li>
+<li>选择私钥$x \in (0,q)$，计算$y\equiv g^x \mod p$</li>
+<li>公钥为$(p,q,g,y)$，私钥为$x$</li>
+</ol>
+<h2 id="签名过程"><a href="#签名过程" class="headerlink" title="签名过程"></a>签名过程</h2><ol>
+<li>选择随机整数$k(0,q)$作为临时密钥</li>
+<li>计算$r\equiv (g^k \mod p) \mod q$</li>
+<li>计算$s \equiv k^{-1}(H(m)+xr) \mod q$</li>
+</ol>
+<p>公开$(r,s)$，$H(m)$指哈希后的明文</p>
+<h2 id="验证过程"><a href="#验证过程" class="headerlink" title="验证过程"></a>验证过程</h2><ol>
+<li>计算$\omega \equiv s^{-1} \mod q$</li>
+<li>计算$\mu_1 \equiv H(m)×\omega \mod q$</li>
+<li>计算$\mu_2 \equiv r×\omega \mod q$</li>
+<li>计算$v \equiv (g^{\mu_1}y^{\mu_2}\mod p) \mod q$</li>
+<li>如果$v &#x3D; r$则验证成功</li>
+</ol>
+<p>$$<br>v \equiv g^{s^{-1}H(m)}\times g^{xrs^{-1}} \mod p \mod q\<br>v \equiv g^{H(m)s^{-1}+xrs^{-1}} \equiv g^{s^{-1}(H(m)+xr)} \equiv g^{k(H(m)+xr)^{-1}(H(m)+xr)} \equiv g^{k} \mod p \mod q<br>$$</p>
+<h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2><h3 id="复用k"><a href="#复用k" class="headerlink" title="复用k"></a>复用k</h3><p>如果两次签名用了同一个$k$，就可以进行攻击</p>
+<p>当$k$一样时，两个$r$是一样的</p>
+<p>则有</p>
+<p>$s_1 \equiv k^{-1}(H(m_1)+xr) \mod q$</p>
+<p>$s_2 \equiv k^{-1}(H(m_2)+xr) \mod q$</p>
+<p>两式相减得</p>
+<p>$(s_1-s_2) \equiv k^{-1}(H(m_1)-H(m_2)) \mod q$</p>
+<p>$k \equiv (s_1-s_2)^{-1}(H(m_1)-H(m_2)) \mod q$</p>
+<p>求出$k$后</p>
+<p>根据$s \equiv k^{-1}(H(m)+xr) \longrightarrow ks \equiv H(m)+xr \longrightarrow x\equiv (ks - H(m))r^{-1}\mod q$</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="（复用k）长城杯-2022——known-phi"><a href="#（复用k）长城杯-2022——known-phi" class="headerlink" title="（复用k）长城杯 2022——known_phi"></a>（复用k）长城杯 2022——known_phi</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> getPrime, bytes_to_long, inverse, long_to_bytes</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> DSA</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gen</span>(<span class="params">a</span>):</span><br><span class="line">    p = getPrime(a) </span><br><span class="line">    q = getPrime(a)</span><br><span class="line">    r = getPrime(a)</span><br><span class="line">    x = getPrime(a)</span><br><span class="line">    n = p*q*r*x</span><br><span class="line">    phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)*(r-<span class="number">1</span>)*(x-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> n, phi, [p, q, r, x]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sign</span>(<span class="params">m, k, x, p, q, g</span>):</span><br><span class="line">    hm = bytes_to_long(sha256(m).digest())</span><br><span class="line">    r = <span class="built_in">pow</span>(g, k, p) % q</span><br><span class="line">    s = (hm + x*r) * inverse(k, q) % q</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> r,s</span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">a = <span class="number">256</span></span><br><span class="line">x = bytes_to_long(flag)</span><br><span class="line"><span class="comment"># print(x)</span></span><br><span class="line"></span><br><span class="line">n, phi, n_factors = gen(a)</span><br><span class="line">n_factors = <span class="built_in">sorted</span>(n_factors)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;n = <span class="subst">&#123;n&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;phi = <span class="subst">&#123;phi&#125;</span>&#x27;</span>)</span><br><span class="line">m1 = long_to_bytes(n_factors[<span class="number">0</span>] + n_factors[<span class="number">3</span>])</span><br><span class="line">m2 = long_to_bytes(n_factors[<span class="number">1</span>] + n_factors[<span class="number">2</span>])</span><br><span class="line"><span class="comment"># print(f&#x27;m1 = &#123;m1&#125;&#x27;)</span></span><br><span class="line"><span class="comment"># print(f&#x27;m2 = &#123;m2&#125;&#x27;)</span></span><br><span class="line"></span><br><span class="line">key = DSA.generate(<span class="built_in">int</span>(<span class="number">2048</span>))</span><br><span class="line">q = key.q</span><br><span class="line">p = key.p</span><br><span class="line">g = key.g</span><br><span class="line"><span class="keyword">assert</span> q &gt; x</span><br><span class="line">k = random.randint(<span class="number">1</span>, q-<span class="number">1</span>)</span><br><span class="line">r1, s1 = sign(m1, k, x, p, q, g)</span><br><span class="line">r2, s2 = sign(m2, k, x, p, q, g)</span><br><span class="line"><span class="comment"># print(f&#x27;k = &#123;k&#125;&#x27;)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;q = <span class="subst">&#123;q&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;r1 = <span class="subst">&#123;r1&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;s1 = <span class="subst">&#123;s1&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;r2 = <span class="subst">&#123;r2&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;s2 = <span class="subst">&#123;s2&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">n = 104228256293611313959676852310116852553951496121352860038971098657350022997841589403091722735802150153734050783858816709247647536393314564077002364012463220999962114186339228164032217361145009468516448617173972835797623658266515762201804936729547278758839604969469770650218191574897316410254695420895895051693</span></span><br><span class="line"><span class="string">phi = 104228256293611313959676852310116852553951496121352860038971098657350022997837434645707418205268240995284026522165519145773852565112344453740579163420312890001524537570675468046604347184376661743552799809753709321949095844960227307733389258381950812717245522599433727311919405966404418872873961877021696812800</span></span><br><span class="line"><span class="string">q = 24513014442114004234202354110477737650785387286781126308169912007819</span></span><br><span class="line"><span class="string">r1 = 8881880595434882344509893789458546908449907797285477983407324325035</span></span><br><span class="line"><span class="string">s1 = 764450933738974696530033347966845551587903750431946039815672438603</span></span><br><span class="line"><span class="string">r2 = 8881880595434882344509893789458546908449907797285477983407324325035</span></span><br><span class="line"><span class="string">s2 = 22099482232399385060035569388467035727015978742301259782677969649659</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>已知$n,phi$，网上找个脚本把n分解之后，可以得到$m_1,m_2$。</p>
+<p>有了$m_1,m_2$即可求哈希后的值$h_1,h_2$</p>
+<p>求得$k \equiv (s_1-s_2)^{-1}(h_1-h_2) \mod q$</p>
+<p>最后求得$x\equiv (ks_1 - H_1)r_1^{-1}\mod q$</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n = </span><br><span class="line">phi = </span><br><span class="line">q = <span class="number">24513014442114004234202354110477737650785387286781126308169912007819</span></span><br><span class="line">r1 = <span class="number">8881880595434882344509893789458546908449907797285477983407324325035</span></span><br><span class="line">s1 = <span class="number">764450933738974696530033347966845551587903750431946039815672438603</span></span><br><span class="line">r2 = <span class="number">8881880595434882344509893789458546908449907797285477983407324325035</span></span><br><span class="line">s2 = <span class="number">22099482232399385060035569388467035727015978742301259782677969649659</span></span><br><span class="line"></span><br><span class="line">primes = <span class="built_in">sorted</span>(factorize_multi_prime(n,phi))</span><br><span class="line"></span><br><span class="line">m1 = long_to_bytes(primes[<span class="number">0</span>]+primes[<span class="number">3</span>])</span><br><span class="line">m2 = long_to_bytes(primes[<span class="number">1</span>]+primes[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">h1 = bytes_to_long(sha256(m1).digest())</span><br><span class="line">h2 = bytes_to_long(sha256(m2).digest())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">k = gmpy2.invert((s1-s2),q)*(h1-h2) % q</span><br><span class="line">r_ = gmpy2.invert(r1,q)</span><br><span class="line"></span><br><span class="line">d = ((k * s1) - h1)*r_ % q</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(d)))</span><br></pre></td></tr></table></figure>
+
+<h3 id="（线性k）NSSRound-1-Basic——number-by-number"><a href="#（线性k）NSSRound-1-Basic——number-by-number" class="headerlink" title="（线性k）NSSRound#1 Basic——number_by_number"></a>（线性k）NSSRound#1 Basic——number_by_number</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line">FLAG = <span class="string">b&#x27;******************&#x27;</span></span><br><span class="line"><span class="keyword">assert</span> FLAG.startswith(<span class="string">b&#x27;NSSCTF&#123;&#x27;</span>) <span class="keyword">and</span> FLAG.endswith(<span class="string">b&#x27;&#125;&#x27;</span>)</span><br><span class="line">FLAG = FLAG[<span class="number">7</span>:-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sign</span>(<span class="params">msg, pub, pri, k</span>):</span><br><span class="line">    (p,q,g,y) = pub</span><br><span class="line">    x = pri</span><br><span class="line">    r = <span class="built_in">int</span>(<span class="built_in">pow</span>(g, k, p) % q)</span><br><span class="line">    h = <span class="built_in">int</span>(hashlib.sha256(msg).digest().<span class="built_in">hex</span>(),<span class="number">16</span>)</span><br><span class="line">    s = <span class="built_in">int</span>((h + x * r) * invert(k, q) % q)</span><br><span class="line">    <span class="keyword">return</span> (r, s)</span><br><span class="line"></span><br><span class="line">p = <span class="number">12521300600879647215212622604478307167614802603722694432672492518732844280050451647647783544918670551333939947202324314036106883627652934658092246151569719841172139651756731975948641752941369320985906043813128667949407263418091261521078015038472125264708315959943830171678415621896727622381651264882655845219115471323352719455064712014904581019529062436850895982568432772820884304927292484611574315452532539622439874476205201585972439739033662281856954069390915294301650596122027017512657387126870291348326594014789938826560641601265413964203409968207292456857314148848395645091850604205535043035332961436498283695843</span></span><br><span class="line">q = <span class="number">89333150710898097819726085329049525002843220030438497258487456281988064920981</span></span><br><span class="line">g = <span class="number">4659169190462665152432024005060362819268084070474399613244522271693166269703240438309526888954293382169994621221386886590606442329876391429681914154130453072540079426475110538234340272617964838185872575922598867083747162403217264242469640383596415974818773608247780785279490355462362699968367544837511541267300331418420849521244364899679912282991493675152166261501255315036943693486335864565853496499243373834189894710718862409646613179068080762011713847012853815796678705445232715083564615906424779193638984542271665075749327914765645357163924702265124479067028868769369414557728443665123548337757950887923116453268</span></span><br><span class="line">x = bytes_to_long(FLAG)</span><br><span class="line">y = powmod(g, x, p)</span><br><span class="line"></span><br><span class="line">pub = (p,q,g,y)</span><br><span class="line">pri = x</span><br><span class="line"></span><br><span class="line">nonce = getPrime(<span class="number">64</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;y =&#x27;</span>, y)</span><br><span class="line"><span class="built_in">print</span>(sign(<span class="string">b&#x27;nssctfround#1&#x27;</span>, pub, pri, nonce))</span><br><span class="line"><span class="built_in">print</span>(sign(<span class="string">b&#x27;nssctfround#1&#x27;</span>, pub, pri, <span class="number">12345</span>*nonce + <span class="number">67890</span>))</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">y = 516079379252376231001717898324355848864109868582016554029703521946402522000955354396295307046881971504216991061930299508521161039333927590076006514531946316725453062373440451679354041777376121961468715242703413529070177041819221792817124111175287475946526246377103779752133378942603534385789689950337366490082828044596711426514502752548887337695502949798115745655734033592905036846835127551577851715558217775334831352232997052342694255476534837857477388530834954919414905007702912216496977764789386913244009912368937860550222726279524193115767983754873150853915852619223039800432272818237552774389220137762595332280</span></span><br><span class="line"><span class="string">(81900716895065212453759953296615257914462909922962929287345063257120550453427, 45144894416226080526306932143570511284754744855790908537643986192724824691890)</span></span><br><span class="line"><span class="string">(60471460394555700734359895323450929800168788093422384886037011624642263106556, 74754852228035293908666429128869604520827363733944834534730568060790683199921)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意到两次加密的信息是一致的，不同的是$k$，而且有$k’ &#x3D; ak+b$，其中$a&#x3D;12345,b&#x3D;67890$</p>
+<p>$\because r_1 \equiv (g^k \mod p) \mod q$，$s_1 \equiv k^{-1}(h + xr_1) \mod q$，$h$表示哈希后的<code>msg</code></p>
+<p>又已知$r_2 \equiv (g^{k’} \mod p) \mod q$，即$r_2 \equiv (g^{ak+b} \mod p) \mod q$</p>
+<p>$s_2 \equiv (ak+b)^{-1}(h+xr_2) \mod q$</p>
+<p>由</p>
+<p><img src="/../images/DSA/0.png"></p>
+<p>得</p>
+<p><img src="/../images/DSA/1.png"></p>
+<p>①式乘$r_2$，②式乘$r_1$得</p>
+<p><img src="/../images/DSA/2.png"></p>
+<p>然后两式相减得到$k(r_2s_1-ar_1s_2) \equiv h(r_2-r_1)-br_1s_2 \mod q$</p>
+<p>$\therefore k \equiv [h(r_2-r_1)+br_1s_2]×(r_2s_1-ar_1s_2)^{-1} \mod q$</p>
+<p>$x\equiv (ks - h)r^{-1}\mod q$</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">y = </span><br><span class="line">r1,s1 = (, )</span><br><span class="line">r2,s2 = (, )</span><br><span class="line">p = </span><br><span class="line">q = </span><br><span class="line">g = </span><br><span class="line">msg = <span class="string">b&#x27;&#x27;</span></span><br><span class="line">h = <span class="built_in">int</span>(hashlib.sha256(msg).digest().<span class="built_in">hex</span>(),<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">a = </span><br><span class="line">b = </span><br><span class="line"></span><br><span class="line">k = ((h*(r2 - r1) + b*r1*s2)*gmpy2.invert((r2*s1-a*r1*s2),q)) % q</span><br><span class="line"></span><br><span class="line">m1 = (k*s1 - h)*gmpy2.invert(r1,q) % q</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m1))</span><br><span class="line"></span><br><span class="line">k1 = a*k+b</span><br><span class="line"></span><br><span class="line">m2 = (k1*s2 - h)*gmpy2.invert(r2,q) % q</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m2))</span><br></pre></td></tr></table></figure>
+
+<h3 id="HZNUCTF-2023-preliminary-easyDSA"><a href="#HZNUCTF-2023-preliminary-easyDSA" class="headerlink" title="[HZNUCTF 2023 preliminary]easyDSA"></a>[HZNUCTF 2023 preliminary]easyDSA</h3><blockquote>
+<p>task.py</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> <span class="built_in">hash</span> <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> sage <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> secrets <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> invert</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dsa</span>(<span class="params">hmac, _pk, _sk, k</span>):</span><br><span class="line">    _p, _q, _g, _y = _pk</span><br><span class="line">    x = _sk</span><br><span class="line">    r = <span class="built_in">pow</span>(_g, k, _p) % _q</span><br><span class="line">    s = ((hmac + x * r) * invert(k, _q)) % _q</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(r), <span class="built_in">int</span>(s)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">m = <span class="built_in">int</span>(flag.<span class="built_in">hex</span>(), <span class="number">16</span>)</span><br><span class="line">p = getPrime(<span class="number">2048</span>)</span><br><span class="line">q = getPrime(<span class="number">256</span>)</span><br><span class="line">g = getRandomNBitInteger(<span class="number">2048</span>)</span><br><span class="line">y = <span class="built_in">pow</span>(g, m, p)</span><br><span class="line">pk = (p, q, g, y)</span><br><span class="line">sk = m</span><br><span class="line">hm1 = <span class="built_in">int</span>(SM3(default_hm1), <span class="number">16</span>)</span><br><span class="line">hm2 = <span class="built_in">int</span>(SM3(default_hm2), <span class="number">16</span>)</span><br><span class="line">nonce = getPrime(<span class="number">64</span>)</span><br><span class="line">xxxx = getPrime(<span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;(r1, s1) = <span class="subst">&#123;dsa(hm1, pk, sk, nonce)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;(r2, s2) = <span class="subst">&#123;dsa(hm1, pk, sk, nonce ** <span class="number">2</span> + xxxx)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;p = <span class="subst">&#123;p&#125;</span>\nq = <span class="subst">&#123;q&#125;</span>\ng = <span class="subst">&#123;g&#125;</span>\ny = <span class="subst">&#123;y&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># (r1, s1) = (, )</span></span><br><span class="line"><span class="comment"># (r2, s2) = (, )</span></span><br><span class="line"><span class="comment"># p = </span></span><br><span class="line"><span class="comment"># q = 69375998045163628324086568160767337544901252262545889505892695427466730978301</span></span><br><span class="line"><span class="comment"># g = </span></span><br><span class="line"><span class="comment"># y = </span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>hash.py</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long</span><br><span class="line"></span><br><span class="line">IV = <span class="number">0x7380166f4914b2b9172442d7da8a0600a96f30bc163138aae38dee4db0fb0e4e</span></span><br><span class="line">default_hm1 = <span class="string">b&#x27;HZNUCTFRound#1&#x27;</span></span><br><span class="line">default_hm2 = <span class="string">b&#x27;HZNUCTFRound#1&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">solve_k</span>(<span class="params">l</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">512</span>):</span><br><span class="line">        <span class="keyword">if</span> (l + <span class="number">1</span> + i - <span class="number">448</span>) % <span class="number">512</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">padding</span>(<span class="params">msg</span>):</span><br><span class="line">    l = <span class="built_in">len</span>(msg)</span><br><span class="line">    k = solve_k(l)</span><br><span class="line">    l64 = <span class="built_in">bin</span>(l)[<span class="number">2</span>:].rjust(<span class="number">64</span>, <span class="string">&#x27;0&#x27;</span>)  <span class="comment"># what if msg is too long, how?</span></span><br><span class="line">    <span class="comment"># so mention the condition in guideline of Algorithm</span></span><br><span class="line">    msg = msg + <span class="string">&#x27;1&#x27;</span> + <span class="string">&#x27;0&#x27;</span> * k + l64</span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">len</span>(msg) % <span class="number">512</span> == <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> msg, l, k</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">iteration</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ring_shift_left</span>(<span class="params">x, num</span>):</span><br><span class="line">    x = <span class="built_in">bin</span>(x)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)               <span class="comment"># shift in 32 bit, take care of it</span></span><br><span class="line">    x = <span class="built_in">int</span>(x[num:] + x[:num], <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">p0</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x ^ ring_shift_left(x, <span class="number">9</span>) ^ ring_shift_left(x, <span class="number">17</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">p1</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x ^ ring_shift_left(x, <span class="number">15</span>) ^ ring_shift_left(x, <span class="number">23</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">extending</span>(<span class="params">msg</span>):</span><br><span class="line">    WW = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(msg) // <span class="number">512</span>):</span><br><span class="line">        W = [<span class="string">&#x27;0&#x27;</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">132</span>)]</span><br><span class="line">        msgi = msg[i * <span class="number">512</span>:(i + <span class="number">1</span>) * <span class="number">512</span>]</span><br><span class="line">        <span class="comment"># 512 ====&gt; 16 * 32</span></span><br><span class="line">        <span class="keyword">for</span> ii <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(msgi) // <span class="number">32</span>):</span><br><span class="line">            W[ii] = msgi[ii * <span class="number">32</span>:(ii + <span class="number">1</span>) * <span class="number">32</span>]</span><br><span class="line">            <span class="keyword">assert</span> <span class="built_in">len</span>(W[ii]) == <span class="number">32</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>, <span class="number">68</span>):</span><br><span class="line">            <span class="comment"># how to xor word, change to number or bytes?</span></span><br><span class="line">            <span class="comment"># number, of course</span></span><br><span class="line">            W[j] = p1(<span class="built_in">int</span>(W[j - <span class="number">16</span>], <span class="number">2</span>) ^ <span class="built_in">int</span>(W[j - <span class="number">9</span>], <span class="number">2</span>) ^ ring_shift_left(<span class="built_in">int</span>(W[j - <span class="number">3</span>], <span class="number">2</span>), <span class="number">15</span>)) ^ \</span><br><span class="line">                   ring_shift_left(<span class="built_in">int</span>(W[j - <span class="number">13</span>], <span class="number">2</span>), <span class="number">7</span>) ^ <span class="built_in">int</span>(W[j - <span class="number">6</span>], <span class="number">2</span>)</span><br><span class="line">            W[j] = <span class="built_in">bin</span>(W[j])[<span class="number">2</span>:]</span><br><span class="line">            W[j] = W[j].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">68</span>, <span class="number">132</span>):</span><br><span class="line">            W[j] = <span class="built_in">int</span>(W[j - <span class="number">68</span>], <span class="number">2</span>) ^ <span class="built_in">int</span>(W[j - <span class="number">68</span> + <span class="number">4</span>], <span class="number">2</span>)</span><br><span class="line">            W[j] = <span class="built_in">bin</span>(W[j])[<span class="number">2</span>:]</span><br><span class="line">            W[j] = W[j].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        WW.append(W)</span><br><span class="line">    <span class="keyword">return</span> WW</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cons</span>(<span class="params">j</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> &lt;= j &lt;= <span class="number">15</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0x79cc4519</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="number">16</span> &lt;= j &lt;= <span class="number">63</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0x7a879d8a</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">bool_ff</span>(<span class="params">param, j</span>):</span><br><span class="line">    x, y, z = param</span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> &lt;= j &lt;= <span class="number">15</span>:</span><br><span class="line">        <span class="keyword">return</span> x ^ y ^ z</span><br><span class="line">    <span class="keyword">elif</span> <span class="number">16</span> &lt;= j &lt;= <span class="number">63</span>:</span><br><span class="line">        <span class="keyword">return</span> (x &amp; y) | (x &amp; z) | (y &amp; z)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">bool_gg</span>(<span class="params">param, j</span>):</span><br><span class="line">    x, y, z = param</span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> &lt;= j &lt;= <span class="number">15</span>:</span><br><span class="line">        <span class="keyword">return</span> x ^ y ^ z</span><br><span class="line">    <span class="keyword">elif</span> <span class="number">16</span> &lt;= j &lt;= <span class="number">63</span>:                <span class="comment"># take care of not</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(<span class="built_in">bin</span>(x)[<span class="number">2</span>:]) &lt; <span class="number">32</span>:</span><br><span class="line">            ans = <span class="string">&#x27;&#x27;</span></span><br><span class="line">            x = <span class="built_in">bin</span>(x)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">            y = <span class="built_in">bin</span>(y)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">            z = <span class="built_in">bin</span>(z)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">32</span>):</span><br><span class="line">                <span class="keyword">if</span> x[i] == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">                    ans += <span class="built_in">str</span>((<span class="built_in">int</span>(x[i], <span class="number">2</span>) &amp; <span class="built_in">int</span>(y[i], <span class="number">2</span>)) | (<span class="number">1</span> &amp; <span class="built_in">int</span>(z[i], <span class="number">2</span>)))</span><br><span class="line">                <span class="keyword">elif</span> x[i] == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                    ans += <span class="built_in">str</span>((<span class="built_in">int</span>(x[i], <span class="number">2</span>) &amp; <span class="built_in">int</span>(y[i], <span class="number">2</span>)) | (<span class="number">0</span> &amp; <span class="built_in">int</span>(z[i], <span class="number">2</span>)))</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">int</span>(ans, <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">len</span>(<span class="built_in">bin</span>(x)[<span class="number">2</span>:]) == <span class="number">32</span>:</span><br><span class="line">            <span class="keyword">return</span> (x &amp; y) | (~x &amp; z)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cf</span>(<span class="params">v, w</span>):</span><br><span class="line">    W, W_ = w[:<span class="number">68</span>], w[<span class="number">68</span>:]</span><br><span class="line">    <span class="comment"># for i in W:</span></span><br><span class="line">    <span class="comment">#     print(hex(int(i, 2)), end=&#x27; &#x27;)</span></span><br><span class="line">    <span class="comment"># for i in W_:</span></span><br><span class="line">    <span class="comment">#     print(hex(int(i, 2)), end=&#x27; &#x27;)</span></span><br><span class="line">    <span class="comment"># print()</span></span><br><span class="line">    v = <span class="built_in">bin</span>(v)[<span class="number">2</span>:].rjust(<span class="number">256</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">    A, B, C, D, E, F, G, H = [v[_ * <span class="number">32</span>:(_ + <span class="number">1</span>) * <span class="number">32</span>] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span> // <span class="number">32</span>)]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">64</span>):</span><br><span class="line">        <span class="comment"># be care of plus, it may surpass 32 bits</span></span><br><span class="line">        <span class="comment"># remember j mod 32, or output will be wrong</span></span><br><span class="line">        tmp = (ring_shift_left(<span class="built_in">int</span>(A, <span class="number">2</span>), <span class="number">12</span>) + <span class="built_in">int</span>(E, <span class="number">2</span>) + ring_shift_left(cons(j), j % <span class="number">32</span>)) &amp; <span class="number">0xffffffff</span></span><br><span class="line">        SS1 = ring_shift_left(tmp, <span class="number">7</span>)</span><br><span class="line">        SS1 = <span class="built_in">bin</span>(SS1)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        SS2 = <span class="built_in">int</span>(SS1, <span class="number">2</span>) ^ ring_shift_left(<span class="built_in">int</span>(A, <span class="number">2</span>), <span class="number">12</span>)</span><br><span class="line">        SS2 = <span class="built_in">bin</span>(SS2)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        tmp = (bool_ff([<span class="built_in">int</span>(A, <span class="number">2</span>), <span class="built_in">int</span>(B, <span class="number">2</span>), <span class="built_in">int</span>(C, <span class="number">2</span>)], j) + <span class="built_in">int</span>(D, <span class="number">2</span>) + <span class="built_in">int</span>(SS2, <span class="number">2</span>) + <span class="built_in">int</span>(W_[j], <span class="number">2</span>)) &amp; <span class="number">0xffffffff</span></span><br><span class="line">        TT1 = <span class="built_in">bin</span>(tmp)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        tmp = (bool_gg([<span class="built_in">int</span>(E, <span class="number">2</span>), <span class="built_in">int</span>(F, <span class="number">2</span>), <span class="built_in">int</span>(G, <span class="number">2</span>)], j) + <span class="built_in">int</span>(H, <span class="number">2</span>) + <span class="built_in">int</span>(SS1, <span class="number">2</span>) + <span class="built_in">int</span>(W[j], <span class="number">2</span>)) &amp; <span class="number">0xffffffff</span></span><br><span class="line">        TT2 = <span class="built_in">bin</span>(tmp)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        D = C.rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        C = ring_shift_left(<span class="built_in">int</span>(B, <span class="number">2</span>), <span class="number">9</span>)</span><br><span class="line">        C = <span class="built_in">bin</span>(C)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        B = A.rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        A = TT1.rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        H = G.rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        G = ring_shift_left(<span class="built_in">int</span>(F, <span class="number">2</span>), <span class="number">19</span>)</span><br><span class="line">        G = <span class="built_in">bin</span>(G)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        F = E.rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        E = p0(<span class="built_in">int</span>(TT2, <span class="number">2</span>))</span><br><span class="line">        E = <span class="built_in">bin</span>(E)[<span class="number">2</span>:].rjust(<span class="number">32</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># print(j, end=&#x27; &#x27;)</span></span><br><span class="line">        <span class="comment"># for i in [A, B, C, D, E, F, G, H]:</span></span><br><span class="line">        <span class="comment">#     print(hex(int(i, 2)), end=&#x27; &#x27;)</span></span><br><span class="line">        <span class="comment"># print()</span></span><br><span class="line">    ans = A + B + C + D + E + F + G + H</span><br><span class="line">    ans = <span class="built_in">int</span>(ans, <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">SM3</span>(<span class="params">msg</span>):</span><br><span class="line">    msg = bytes_to_long(msg)</span><br><span class="line">    <span class="keyword">if</span> msg.bit_length() % <span class="number">4</span> != <span class="number">0</span>:</span><br><span class="line">        msg = (<span class="number">4</span> - (msg.bit_length() % <span class="number">4</span>)) * <span class="string">&#x27;0&#x27;</span> + <span class="built_in">bin</span>(msg)[<span class="number">2</span>:]</span><br><span class="line">    msg, l, k = padding(msg)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># extend</span></span><br><span class="line">    W = extending(msg)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># iteration</span></span><br><span class="line">    vi = IV</span><br><span class="line">    n = (l + k + <span class="number">65</span>) // <span class="number">512</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        res = cf(vi, W[i])</span><br><span class="line">        vi = vi ^ res</span><br><span class="line"></span><br><span class="line">    <span class="comment"># compress</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">hex</span>(vi)[<span class="number">2</span>:]</span><br></pre></td></tr></table></figure>
+
+<p>hash这个文件很长，主要就是算<code>SM3</code></p>
+<h4 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h4><p>加密的明文是一样的，用$h$表示</p>
+<p>$k_2 &#x3D; k_1^2 + b$</p>
+<p>$r_1 \equiv (g^k \mod p) \mod q$，$s_1 \equiv k_1^{-1}(h+xr_1) \mod q$</p>
+<p>$r_2 \equiv (g^{k_1^2+b} \mod p) \mod q$，$s_2 \equiv (k_1^2+b)^{-1}(h+xr_2)\mod q$</p>
+<p>$\therefore s_1k_1 \equiv h+xr_1 \mod q$</p>
+<p>$s_2(k_1^2+b)\equiv h+xr_2 \mod q$</p>
+<p>所以</p>
+<p>$s_1r_2k_1 \equiv hr_2 + xr_1r_2 \mod q$</p>
+<p>$r_1s_2(k_1^2+b) \equiv hr_1 + xr_1r_2 \mod q$</p>
+<p>$(k_1^2-k_1+b)(s_2r_1 - s_1r_2) \equiv h(r_1-r_2) \mod q$</p>
+<p>两个未知量</p>
+<p>换个推导</p>
+<p>由$\therefore s_1k_1 \equiv h+xr_1 \mod q$和$s_2(k_1^2+b)\equiv h+xr_2 \mod q$得<br>$$<br>x \equiv (s_1k_1 -h)r_1^{-1} \mod q<br>$$<br>$$<br>x \equiv (s_2(k_1^2+b)-h)r_2^{-1} \mod q<br>$$</p>
+<p>通过$f(x) &#x3D; (s_2(k_1^2+\color{red}x\color{black})-h)r_2^{-1} - (s_1k_1-h)r_1^{-1} \mod q$</p>
+<p>先求出<code>h=19905280947443115569469777697852124038269468456842113763109865796452965095134</code></p>
+<p>二元copper求出$k_1,x$，即可求解</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">small_roots</span>(<span class="params">f, bounds, m=<span class="number">1</span>, d=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> d:</span><br><span class="line">        d = f.degree()</span><br><span class="line"></span><br><span class="line">    R = f.base_ring()</span><br><span class="line">    N = R.cardinality()</span><br><span class="line"></span><br><span class="line">    f /= f.coefficients().pop(<span class="number">0</span>)</span><br><span class="line">    f = f.change_ring(ZZ)</span><br><span class="line"></span><br><span class="line">    G = <span class="type">Sequence</span>([], f.parent())</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m + <span class="number">1</span>):</span><br><span class="line">        base = N ^ (m - i) * f ^ i</span><br><span class="line">        <span class="keyword">for</span> shifts <span class="keyword">in</span> itertools.product(<span class="built_in">range</span>(d), repeat=f.nvariables()):</span><br><span class="line">            g = base * prod(<span class="built_in">map</span>(power, f.variables(), shifts))</span><br><span class="line">            G.append(g)</span><br><span class="line"></span><br><span class="line">    B, monomials = G.coefficient_matrix()</span><br><span class="line">    monomials = vector(monomials)</span><br><span class="line"></span><br><span class="line">    factors = [monomial(*bounds) <span class="keyword">for</span> monomial <span class="keyword">in</span> monomials]</span><br><span class="line">    <span class="keyword">for</span> i, factor <span class="keyword">in</span> <span class="built_in">enumerate</span>(factors):</span><br><span class="line">        B.rescale_col(i, factor)</span><br><span class="line"></span><br><span class="line">    B = B.dense_matrix().LLL()</span><br><span class="line"></span><br><span class="line">    B = B.change_ring(QQ)</span><br><span class="line">    <span class="keyword">for</span> i, factor <span class="keyword">in</span> <span class="built_in">enumerate</span>(factors):</span><br><span class="line">        B.rescale_col(i, <span class="number">1</span> / factor)</span><br><span class="line"></span><br><span class="line">    H = <span class="type">Sequence</span>([], f.parent().change_ring(QQ))</span><br><span class="line">    <span class="keyword">for</span> h <span class="keyword">in</span> <span class="built_in">filter</span>(<span class="literal">None</span>, B * monomials):</span><br><span class="line">        H.append(h)</span><br><span class="line">        I = H.ideal()</span><br><span class="line">        <span class="keyword">if</span> I.dimension() == -<span class="number">1</span>:</span><br><span class="line">            H.pop()</span><br><span class="line">        <span class="keyword">elif</span> I.dimension() == <span class="number">0</span>:</span><br><span class="line">            roots = []</span><br><span class="line">            <span class="keyword">for</span> root <span class="keyword">in</span> I.variety(ring=ZZ):</span><br><span class="line">                root = <span class="built_in">tuple</span>(R(root[var]) <span class="keyword">for</span> var <span class="keyword">in</span> f.variables())</span><br><span class="line">                roots.append(root)</span><br><span class="line">            <span class="keyword">return</span> roots</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> []</span><br><span class="line"></span><br><span class="line">(r1, s1) = (<span class="number">43665657147136977892760835332544097729763754398125679419859037123212964274095</span>, <span class="number">11372107439153704547599978617809027960018057676066118055075660375442954789009</span>)</span><br><span class="line">(r2, s2) = (<span class="number">29184887007213204285288676779168140587575609668559831035949650649308618592275</span>, <span class="number">5011738292572181542092375902756977363590922060964162373234404450451520414798</span>)</span><br><span class="line">p = <span class="number">31961141251107494919420190534228520246958409864267239760354623819192809291490262139213317490432416411403367763443527530375117617196123131270496004125231254335150221348901335274505489844222882171272650010562960614279185073793274638651086760235178963210965828168433516820007716846876686795459738332444629111764967204355463398049697867061034126529189537688874999118692225915790053920062142349951686250122300061810240375783724631961234942175580462986265098353263395579346466921241016500821787793395554444982717141449909744838267161237273856377774256250949274635575801148994817767751541256849860886577256992383324866941911</span></span><br><span class="line">q = <span class="number">69375998045163628324086568160767337544901252262545889505892695427466730978301</span></span><br><span class="line">g = <span class="number">23095306638137759877487469277470910487928442296144598697677211337473146684728707820084075779044942034329888686699655576145455963231144004571165817481066424910959951439014314776050521403558035997997820617824839889597136772108383034876458141163933312284054415480674388788905935457149956424898637134087874179010376667509489926236214865373552518669840236207944772752416668193786003948717604980584661094548997197117467440864460714843246250800575997370964173558788145639802963655916833143883799542309432910222224223561677245110195809587171802538978009246887077924173034608600837785506594525481696000424121705524449481831586</span></span><br><span class="line">y = <span class="number">30195133393879069638917191223585579396119430591488890396938821804398771785068454607425044458865556053274470709839502680269466948174813926392729790863065933078609827279352860810689776644132512095691760326095517755483748554008211568781998662554432781285208646921699265866446498342049913829592480268053599307065979016922204438675164034767731708343084371572648019835171087671868322447023378942812010740490724160077164191297435291229504616686997442254543493394641023587237077429236872101951650325361004443988267286616139798736713430746804524113024341440435623834197278500144543476528466395780355874841379098027115073850819</span></span><br><span class="line">h = <span class="number">19905280947443115569469777697852124038269468456842113763109865796452965095134</span></span><br><span class="line"></span><br><span class="line">R.&lt;k,x&gt; = PolynomialRing(Zmod(q))</span><br><span class="line">f = (s2*(k^<span class="number">2</span>+x)-h)*<span class="built_in">int</span>(gmpy2.invert(r2,q)) - (s1*k-h)*<span class="built_in">int</span>(gmpy2.invert(r1,q))</span><br><span class="line">roots = small_roots(f,(<span class="number">2</span>^<span class="number">64</span>,<span class="number">2</span>^<span class="number">20</span>),m=<span class="number">1</span>,d=<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(roots)</span><br><span class="line"></span><br><span class="line">k,b = roots[<span class="number">0</span>]</span><br><span class="line">m = (s1*k-h)*gmpy2.invert(r1,q) % q</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(m)))</span><br></pre></td></tr></table></figure>
+
+<h1 id="ECDSA"><a href="#ECDSA" class="headerlink" title="ECDSA"></a>ECDSA</h1><h2 id="签名过程-1"><a href="#签名过程-1" class="headerlink" title="签名过程"></a>签名过程</h2><ol>
+<li>首先选择一条椭圆曲线$E_p(a,b)$，和基点$G$</li>
+<li>选择私钥$d,(d&lt;n)$，$n$是基点$G$的阶</li>
+<li>利用基点计算公钥$Q &#x3D; dG$，$Q$表示为$(Q_X,Q_Y)$并公开$Q$</li>
+<li>选择一个随机数$k,(k&lt;n)$，计算$R &#x3D; kG$，$R$表示为$(R_X,R_Y)$</li>
+<li>计算$r \equiv R_X \mod n$，如果$r &#x3D; 0$，则选取另一个$k$并重新计算</li>
+<li>计算明文$m$的哈希值，记为$H &#x3D; hash(m)$</li>
+<li>计算$s \equiv k^{-1}(H+rd)\mod n$</li>
+<li>如果$s&#x3D;0$，则选取另外一个$k$并重新计算</li>
+<li>输出签名$(r,s)$</li>
+</ol>
+<h2 id="验证过程-1"><a href="#验证过程-1" class="headerlink" title="验证过程"></a>验证过程</h2><ol>
+<li>计算整数$u_1 &#x3D; s^{-1}×H \mod n$</li>
+<li>计算整数$u_2 &#x3D;s^{-1}×r \mod n$</li>
+<li>计算点$R &#x3D; u_1G+u_2Q \mod n$</li>
+</ol>
+<p>证明验证过程的正确性</p>
+<p>$\because R &#x3D; u_1G + u_2Q \mod n \longrightarrow R &#x3D; u_1G+u_2dG &#x3D; (u_1+u_2d) \mod n$</p>
+<p>把$u_1,u_2$替换掉</p>
+<p>$\therefore R &#x3D; (s^{-1}H+s^{-1}rd)G \mod n$</p>
+<p>$\therefore R &#x3D; s^{-1}(H+rd)G \mod n$</p>
+<p>结合$s \equiv k ^{-1}(H+rd) \mod n$，我们能得到$s^{-1} \equiv k(H+rd)^{-1} \mod n$</p>
+<p>则$R &#x3D; k(H+rd)^{-1}×(H+rd) \mod n &#x3D; kG$</p>
+<p>与签名过程的$R&#x3D;kG$一致</p>
+<h2 id="攻击-1"><a href="#攻击-1" class="headerlink" title="攻击"></a>攻击</h2><p>如果使用同一个k，危险性很大，在此情况下，很容易反推出$d$</p>
+<p>我们需要两个哈希值$H_1,H_2$，两组签名$(r_1,s_1),(r_2,s_2)$，还有椭圆曲线的参数</p>
+<p>因为$R \equiv kG$，$r &#x3D; R_x \mod n$，如果$k$一样，则$r_1 &#x3D; r_2$</p>
+<p>$\because s \equiv k^{-1}(H+rd)$，$\therefore (s_1-s_2) \equiv k^{-1}(H_1-H_2) \mod n$</p>
+<p>两边同乘$k$得$k(s_1-s_2) \equiv H_1-H_2 \mod n$</p>
+<p>$\therefore k \equiv (s_1-s_2)^{-1}(H_1-H_2) \mod n$</p>
+<p>求出k之后，根据$s \equiv k^{-1}(H+rd) \longrightarrow ks \equiv H+rd \longrightarrow d \equiv (ks - H)r^{-1}\mod n$</p>
+<h2 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h2><h3 id="复用k-2024蓝桥杯密码3"><a href="#复用k-2024蓝桥杯密码3" class="headerlink" title="(复用k)2024蓝桥杯密码3"></a>(复用k)2024蓝桥杯密码3</h3><blockquote>
+<p>task.py</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ecdsa</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ecdsa_test</span>(<span class="params">dA,k</span>):</span><br><span class="line"></span><br><span class="line">    sk = ecdsa.SigningKey.from_secret_exponent(</span><br><span class="line">        secexp=dA,</span><br><span class="line">        curve=ecdsa.SECP256k1</span><br><span class="line">    )</span><br><span class="line">    sig1 = sk.sign(data=<span class="string">b&#x27;Hi.&#x27;</span>, k=k).<span class="built_in">hex</span>()</span><br><span class="line">    sig2 = sk.sign(data=<span class="string">b&#x27;hello.&#x27;</span>, k=k).<span class="built_in">hex</span>()</span><br><span class="line">    </span><br><span class="line">    r1 = <span class="built_in">int</span>(sig1[:<span class="number">64</span>], <span class="number">16</span>)</span><br><span class="line">    s1 = <span class="built_in">int</span>(sig1[<span class="number">64</span>:], <span class="number">16</span>)</span><br><span class="line">    s2 = <span class="built_in">int</span>(sig2[<span class="number">64</span>:], <span class="number">16</span>)</span><br><span class="line">    <span class="keyword">return</span> r1,s1,s2</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    n = <span class="number">0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141</span></span><br><span class="line">    a = random.randint(<span class="number">0</span>,n)</span><br><span class="line">    flag = <span class="string">&#x27;flag&#123;&#x27;</span> + <span class="built_in">str</span>(a) + <span class="string">&quot;&#125;&quot;</span></span><br><span class="line">    b = random.randint(<span class="number">0</span>,n)</span><br><span class="line">    <span class="built_in">print</span>(ecdsa_test(a,b))</span><br><span class="line"></span><br><span class="line"><span class="comment"># (4690192503304946823926998585663150874421527890534303129755098666293734606680, 111157363347893999914897601390136910031659525525419989250638426589503279490788, 74486305819584508240056247318325239805160339288252987178597122489325719901254)</span></span><br></pre></td></tr></table></figure>
+
+<p>首先阅读代码要知道这里的$a,b$分别就是私钥$d$和$k$</p>
+<p>曲线SECP256k1的参数是公开的，即<br>$$<br>y^2 \equiv x^3 + 7 \mod 115792089237316195423570985008687907852837564279074904382605163141518161494337<br>$$<br>也就是$a &#x3D; 0,b &#x3D; 7$</p>
+<p>$p &#x3D; 115792089237316195423570985008687907852837564279074904382605163141518161494337$</p>
+<p>题目考点是k的复用，这里比较关键的是知道下<code>sk.sign()</code>用的哈希函数是<code>sha1</code>，然后用上面k复用的思路即可得解</p>
+<blockquote>
+<p>exp.py</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ecdsa</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = <span class="number">115792089237316195423570985008687907852837564279074904382605163141518161494337</span></span><br><span class="line">a = <span class="number">0</span></span><br><span class="line">b = <span class="number">7</span></span><br><span class="line">order = ecdsa.SECP256k1.generator.order()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(order == p)</span><br><span class="line"></span><br><span class="line">m1 = <span class="string">b&quot;Hi.&quot;</span></span><br><span class="line">m2 = <span class="string">b&quot;hello.&quot;</span></span><br><span class="line">r1,s1,s2 = (<span class="number">4690192503304946823926998585663150874421527890534303129755098666293734606680</span>, <span class="number">111157363347893999914897601390136910031659525525419989250638426589503279490788</span>, <span class="number">74486305819584508240056247318325239805160339288252987178597122489325719901254</span>)</span><br><span class="line"></span><br><span class="line">h1 = bytes_to_long(sha1(m1).digest())</span><br><span class="line">h2 = bytes_to_long(sha1(m2).digest())</span><br><span class="line"></span><br><span class="line">k = gmpy2.invert((s1-s2),p)*(h1-h2) % p</span><br><span class="line">r_ = gmpy2.invert(r1,p)</span><br><span class="line"></span><br><span class="line">d = ((k * s1) - h1)*r_ % p</span><br><span class="line"></span><br><span class="line">flag = <span class="string">&quot;flag&#123;&quot;</span> + <span class="built_in">str</span>(d) + <span class="string">&quot;&#125;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># flag&#123;40355055231406097504270940121798355439363616832290875140843417522164091270174&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经到底啦！<i class="fa fa-paw"></i>-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>DexterJie
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://dexterjie.github.io/2023/08/18/DSA/" title="DSA数字签名">https://dexterjie.github.io/2023/08/18/DSA/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%AD%BE%E5%90%8D/" rel="tag"># 签名</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/02/%E8%83%8C%E5%8C%85%E5%AF%86%E7%A0%81/" rel="prev" title="背包密码">
+                  <i class="fa fa-chevron-left"></i> 背包密码
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/08/22/%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/2023WMCTF/" rel="next" title="2023WMCTF">
+                  2023WMCTF <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DexterJie</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">247k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:59</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>-->
+
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+<div class="busuanzi-count">
+  <script async src="/js/busuanzi.pure.mini.js"></script>
+  
+  <span class="site-uv" title="总访客量">
+    访客量<span id="busuanzi_value_site_uv"></span>
+  </span>
+
+  <span class="site-pv" title="总访问量">
+    经过<span id="busuanzi_value_site_pv"></span>次回眸与你相遇
+  </span>
+</div>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline-five-mocha.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":null,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2023/08/18/DSA/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right"},"mobile":{"show":true}});</script></body>
+
+</html>
